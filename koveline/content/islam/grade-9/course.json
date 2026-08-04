@@ -1,0 +1,15 @@
+{
+  "id": "grade-9",
+  "subjectId": "islam",
+  "title": "Grade 9 Islam",
+  "titleDhivehi": "ގްރޭޑް 9 އިސްލާމް",
+  "grade": 9,
+  "contentLang": "dv",
+  "credit": {
+    "english": "Iskandhar School — Islam Department",
+    "dhivehi": "އިސްކަންދަރު ސްކޫލް - އިސްލާމް ޑިޕާޓްމަންޓް",
+    "note": "All questions come from the school's Islam Q&A papers."
+  },
+  "order": 1,
+  "draft": false
+}

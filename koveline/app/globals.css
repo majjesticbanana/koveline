@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Bricolage Grotesque', sans-serif;
+  --font-body: 'Hanken Grotesk', system-ui, sans-serif;
+  /* --font-faruma is injected by next/font/local in app/layout.tsx */
+  --font-thaana: var(--font-faruma), 'Noto Sans Thaana', sans-serif;
+  --ring: rgba(18, 113, 107, 0.4);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #f6efe2;
+  color: #2a1f16;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* Texture layer, dial ~4: one warm radial glow + faint paper grain.
+   Fixed pseudo-element instead of background-attachment:fixed, which
+   forces scroll repaints on mobile Safari. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(820px 500px at 88% -6%, #fdf6e8 0%, rgba(253, 246, 232, 0) 60%),
+    radial-gradient(640px 420px at -6% 10%, #eef1e9 0%, rgba(238, 241, 233, 0) 55%);
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.thaana {
+  font-family: var(--font-thaana);
+  direction: rtl;
+  line-height: 1.95;
+}
+
+*:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+
+/* Annotation sweep — the coral underline that appears when an answer is
+   revealed. Width animates via the .swept class added on reveal. */
+.annotate {
+  display: block;
+  height: 3px;
+  width: 0;
+  border-radius: 3px;
+  background: #d65f45;
+  transition: width 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.annotate.swept { width: 100%; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .annotate.swept { width: 100%; }
+}

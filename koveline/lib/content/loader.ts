@@ -1,0 +1,127 @@
+/**
+ * Server-only content loader. Reads the content/ tree at build time and
+ * validates it against the schema — so a page can never render from data
+ * the validator would reject.
+ */
+import "server-only";
+import { readdirSync, readFileSync, statSync, existsSync } from "node:fs";
+import { join } from "node:path";
+import { cache } from "react";
+import {
+  Subject as SubjectSchema,
+  Course as CourseSchema,
+  Unit as UnitSchema,
+  FlashcardsResource as FlashcardsSchema,
+  type Subject,
+  type Course,
+  type Unit,
+  type FlashcardsResource,
+  resourceKey,
+} from "./schema";
+
+const ROOT = join(process.cwd(), "content");
+
+const dirs = (p: string) =>
+  existsSync(p)
+    ? readdirSync(p).filter((d) => !d.startsWith(".") && statSync(join(p, d)).isDirectory())
+    : [];
+
+const json = (p: string) => JSON.parse(readFileSync(p, "utf8"));
+
+export interface UnitEntry {
+  subject: Subject;
+  course: Course;
+  unit: Unit;
+  flashcards: FlashcardsResource;
+  /** e.g. /islam/grade-9/unit-1/flashcards */
+  href: string;
+  /** e.g. islam/grade-9/unit-1/flashcards — progress-storage key */
+  key: string;
+}
+
+export const loadContent = cache(() => {
+  const subjects: Subject[] = [];
+  const courses: Course[] = [];
+  const units: UnitEntry[] = [];
+
+  for (const sDir of dirs(ROOT)) {
+    const subject = SubjectSchema.parse(json(join(ROOT, sDir, "subject.json")));
+    subjects.push(subject);
+
+    for (const cDir of dirs(join(ROOT, sDir))) {
+      const course = CourseSchema.parse(json(join(ROOT, sDir, cDir, "course.json")));
+      courses.push(course);
+      if (course.draft) continue;
+
+      for (const uDir of dirs(join(ROOT, sDir, cDir))) {
+        const uPath = join(ROOT, sDir, cDir, uDir);
+        const unit = UnitSchema.parse(json(join(uPath, "unit.json")));
+        if (unit.draft) continue;
+        const fcPath = join(uPath, "flashcards.json");
+        if (!existsSync(fcPath)) continue;
+        const flashcards = FlashcardsSchema.parse(json(fcPath));
+        units.push({
+          subject,
+          course,
+          unit,
+          flashcards,
+          href: `/${subject.id}/${course.id}/${unit.id}/${flashcards.id}`,
+          key: resourceKey(subject.id, course.id, unit.id, flashcards.id),
+        });
+      }
+    }
+  }
+
+  subjects.sort((a, b) => a.order - b.order);
+  courses.sort((a, b) => a.order - b.order);
+  units.sort((a, b) => a.unit.number - b.unit.number);
+  return { subjects, courses, units };
+});
+
+export const getUnitEntry = (subject: string, course: string, unit: string, resource: string) =>
+  loadContent().units.find(
+    (e) =>
+      e.subject.id === subject &&
+      e.course.id === course &&
+      e.unit.id === unit &&
+      e.flashcards.id === resource,
+  );
+
+export const getCourseUnits = (subject: string, course: string) =>
+  loadContent().units.filter((e) => e.subject.id === subject && e.course.id === course);
+
+/** Lightweight summary for the home page — never includes card bodies. */
+export function homeSummary() {
+  const { units } = loadContent();
+  const islam = units.filter((e) => e.subject.id === "islam" && e.course.id === "grade-9");
+  return {
+    course: islam[0]?.course ?? null,
+    totals: {
+      units: islam.length,
+      questions: islam.reduce((n, e) => n + e.flashcards.cards.length, 0),
+      lessons: islam.reduce((n, e) => n + e.unit.lessons.length, 0),
+    },
+    units: islam.map((e) => ({
+      id: e.unit.id,
+      key: e.key,
+      href: e.href,
+      number: e.unit.number,
+      icon: e.unit.icon,
+      title: e.unit.title,
+      titleEnglish: e.unit.titleEnglish ?? "",
+      description: e.unit.description ?? "",
+      lessonCount: e.unit.lessons.length,
+      questionCount: e.flashcards.cards.length,
+    })),
+  };
+}
+export type HomeSummary = ReturnType<typeof homeSummary>;
+
+/** unit-id -> lesson-title -> lesson-id. Used by the client v2 migration. */
+export function v2LessonMap(): Record<string, Record<string, string>> {
+  const out: Record<string, Record<string, string>> = {};
+  for (const e of loadContent().units) {
+    out[e.unit.id] = Object.fromEntries(e.unit.lessons.map((l) => [l.title, l.id]));
+  }
+  return out;
+}
