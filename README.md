@@ -1,6 +1,6 @@
 # Koveline
 
-Free study resources from the Maldives — starting with Grade 9 Islam.
+Study resources from the Maldives — starting with Grade 9 Islam.
 Flip through real exam-prep questions, mark yourself honestly, and review
 what you missed.
 

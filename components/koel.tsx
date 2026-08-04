@@ -2,8 +2,9 @@
  * The Koveline koel and its flight line.
  *
  * The bird appears fully at meaningful moments only: navbar mark, deck
- * completion, and empty states. The flight line (curve ending in the coral
- * eye-dot) is the site's recurring signature and may appear more often.
+ * completion, and empty states. The flight line (curve ending in a coral
+ * dot) is the site's recurring signature and may appear more often. The
+ * bird itself is a featureless silhouette by design — no eye, no face.
  */
 
 export function KoelMark({
@@ -26,24 +27,23 @@ export function KoelMark({
     >
       {title && <title>{title}</title>}
       <path
-        d="M56 50 C 45 36, 28 25, 10 22 C 27 33, 39 45, 49 58 C 51 55, 53 52, 56 50 Z"
+        d="M54 50 C 43 38, 27 28, 9 24 C 25 34, 37 44, 47 57 C 49 54, 51 52, 54 50 Z"
         fill="currentColor"
         opacity="0.45"
       />
       <path
-        d="M103 27 L 92 25 C 86 24, 80 26, 76 30 L 69 36 C 61 42, 54 49, 48 57 C 40 68, 31 82, 20 100 C 34 85, 46 73, 55 63 C 61 57, 68 51, 75 46 L 85 39 C 89 36, 92 33, 94 30 Z"
+        d="M104 25 L 92 24 C 85 23.5, 78 26, 73 31 L 66 38 C 58 45, 51 53, 45 62 C 37 74, 28 88, 19 103 C 33 87, 45 74, 54 64 C 61 57, 68 51, 76 45 L 87 37 C 92 33.5, 96 30, 99 27.5 Z"
         fill="currentColor"
       />
       <path
-        d="M64 44 C 59 28, 48 12, 28 3 C 41 20, 50 37, 55 53 C 58 50, 61 47, 64 44 Z"
+        d="M67 42 C 62 27, 52 12, 33 2 C 45 17, 53 33, 57 50 C 60 47, 63 44, 67 42 Z"
         fill="currentColor"
       />
-      <circle cx="88" cy="29" r="4" fill="#d65f45" />
     </svg>
   );
 }
 
-/** Curved flight line ending in the coral eye-dot. Scales to its container. */
+/** Curved flight line ending in a coral dot. Scales to its container. */
 export function FlightLine({ className = "" }: { className?: string }) {
   return (
     <svg

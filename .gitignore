@@ -1,0 +1,10 @@
+# dependencies & build output
+node_modules/
+.next/
+out/
+
+# misc
+tsconfig.tsbuildinfo
+.DS_Store
+*.log
+.env*

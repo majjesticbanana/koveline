@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Koveline — How much do you really know?",
     short_name: "Koveline",
-    description: "Free study resources from the Maldives, starting with Grade 9 Islam.",
+    description: "Study resources from the Maldives, starting with Grade 9 Islam.",
     start_url: "/",
     display: "standalone",
     background_color: "#f6efe2",

@@ -20,14 +20,14 @@ export const metadata: Metadata = {
     template: "%s — Koveline",
   },
   description:
-    "Free study resources from the Maldives, starting with Grade 9 Islam. Flip through real exam-prep questions, mark yourself, and review what you missed.",
+    "Study resources from the Maldives, starting with Grade 9 Islam. Flip through real exam-prep questions, mark yourself, and review what you missed.",
   keywords: ["Koveline", "Maldives", "study", "flashcards", "Grade 9", "Islam", "Dhivehi"],
   applicationName: "Koveline",
   manifest: "/manifest.webmanifest",
   appleWebApp: { capable: true, title: "Koveline", statusBarStyle: "default" },
   openGraph: {
     title: "Koveline — How much do you really know?",
-    description: "Free study resources from the Maldives, starting with Grade 9 Islam.",
+    description: "Study resources from the Maldives, starting with Grade 9 Islam.",
     type: "website",
     siteName: "Koveline",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "Koveline" }],

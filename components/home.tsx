@@ -53,7 +53,7 @@ export function Home({
           <FlightLine className="h-4 w-full" />
         </div>
         <p className="mx-auto mt-4 max-w-[46ch] text-[1.06rem] font-medium text-cocoa">
-          Free study resources from the Maldives — starting with Grade&nbsp;9 Islam.
+          Study resources from the Maldives — starting with Grade&nbsp;9 Islam.
         </p>
 
         <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
@@ -113,19 +113,16 @@ export function Home({
             </Link>
           </div>
 
-          {/* weighted unit grid: the two biggest units span wider */}
+          {/* unit grid — even two-column */}
           <div className="grid gap-4 sm:grid-cols-2">
             {summary.units.map((u) => {
               const done = reviewed[u.key] ?? 0;
               const pct = u.questionCount ? Math.round((done / u.questionCount) * 100) : 0;
-              const big = u.questionCount >= 80;
               return (
                 <Link
                   key={u.id}
                   href={u.href}
-                  className={`group relative overflow-hidden rounded-card border border-line bg-surface p-[20px] transition-all duration-200 hover:-translate-y-[4px] hover:border-caramel hover:shadow-warm ${
-                    big ? "sm:col-span-2" : ""
-                  }`}
+                  className="group relative overflow-hidden rounded-card border border-line bg-surface p-[20px] transition-all duration-200 hover:-translate-y-[4px] hover:border-caramel hover:shadow-warm"
                 >
                   <span
                     className="absolute inset-y-0 left-0 w-1 origin-top scale-y-0 bg-teal transition-transform duration-300 group-hover:scale-y-100"
@@ -194,14 +191,6 @@ export function Home({
         </p>
       </section>
 
-      {/* ---- made to be useful ---- */}
-      <section className="mx-auto mt-8 max-w-[54ch] text-center">
-        <h2 className="font-display text-[1.05rem] font-extrabold">Made to be useful</h2>
-        <p className="mt-1.5 text-[0.92rem] leading-relaxed text-cocoa">
-          Koveline is a free project made by a Maldivian student — for personal learning, and for
-          anyone else who may benefit from it.
-        </p>
-      </section>
     </main>
   );
 }
