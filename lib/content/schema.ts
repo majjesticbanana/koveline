@@ -126,6 +126,12 @@ const ResourceBase = {
 export const Flashcard = z.object({
   id: LocalId,
   lessonId: LocalId,
+  /**
+   * Stimulus material the paper places before the question — a quoted verse,
+   * a hadith, or a scene-setting sentence. Kept separate so the question
+   * itself reads cleanly, and rendered smaller above it.
+   */
+  context: z.string().optional(),
   front: z.string().min(1),
   back: RichBody,
   /** Optional per-card language override. */

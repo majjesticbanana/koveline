@@ -6,6 +6,7 @@ import { isRtl } from "@/lib/rtl";
 import {
   readJSON, writeJSON, progressKey, rememberLastStudied, migrateV2Storage,
 } from "@/lib/storage";
+import { ChevronDown } from "lucide-react";
 import { RichBody } from "./rich-body";
 import {
   type Mode, type Mark, type Tone,
@@ -198,21 +199,34 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
   const lessonById = new Map(lessons.map((l) => [l.id, l]));
 
   const lessonFilter = lessons.length > 1 && (
-    <div className="mb-4 flex justify-center">
-      <select
-        value={lessonId}
-        onChange={(e) => changeLesson(e.target.value)}
-        aria-label="Study one lesson"
-        lang="dv"
-        className="thaana max-w-[280px] cursor-pointer rounded-full border border-line bg-surface px-3.5 py-2 text-right text-[0.95rem] font-semibold text-coffee-deep hover:border-caramel"
+    <div className="mb-4 flex items-center justify-center gap-2.5">
+      <label
+        htmlFor="lesson-filter"
+        className="font-display text-[0.72rem] font-extrabold uppercase tracking-[0.09em] text-cocoa"
       >
-        <option value={ALL}>All lessons ({cards.length})</option>
-        {lessons.map((l) => (
-          <option key={l.id} value={l.id}>
-            {l.title} ({cards.filter((c) => c.lessonId === l.id).length})
-          </option>
-        ))}
-      </select>
+        Lesson
+      </label>
+      <div className="relative min-w-0 max-w-[420px] flex-1 sm:flex-initial sm:w-[380px]">
+        <select
+          id="lesson-filter"
+          value={lessonId}
+          onChange={(e) => changeLesson(e.target.value)}
+          lang="dv"
+          dir="rtl"
+          className="thaana w-full cursor-pointer appearance-none truncate rounded-[12px] border border-line bg-surface py-2.5 pe-3.5 ps-9 text-right text-[1rem] font-semibold leading-tight text-coffee-deep shadow-warm-sm transition hover:border-caramel focus-visible:border-teal"
+        >
+          <option value={ALL}>ހުރިހާ ފިލާވަޅެއް ({cards.length})</option>
+          {lessons.map((l) => (
+            <option key={l.id} value={l.id}>
+              {l.title} ({cards.filter((c) => c.lessonId === l.id).length})
+            </option>
+          ))}
+        </select>
+        <ChevronDown
+          className="pointer-events-none absolute inset-y-0 my-auto h-4 w-4 text-caramel [inset-inline-start:12px]"
+          aria-hidden
+        />
+      </div>
     </div>
   );
 
@@ -350,6 +364,18 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
         />
 
         <div className="px-[22px] py-6">
+          {current?.context && (
+            <div
+              dir="rtl"
+              lang="dv"
+              className="thaana mb-3 rounded-[12px] border border-dashed border-line bg-cream/60 px-[16px] py-3 text-[0.98rem] leading-relaxed text-cocoa"
+            >
+              <span className="mb-1 block font-display text-[0.66rem] font-extrabold uppercase tracking-[0.1em] text-caramel" dir="ltr">
+                Context
+              </span>
+              {current.context}
+            </div>
+          )}
           <div
             dir={qRtl ? "rtl" : "ltr"}
             lang={qRtl ? "dv" : undefined}

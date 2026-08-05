@@ -4,7 +4,7 @@
   "icon": "⚖️",
   "title": "އިސްލާމީ ފިޤުހު",
   "titleEnglish": "Islamic Fiqh",
-  "description": "59 questions from the Grade 10 Islamic Fiqh paper.",
+  "description": "58 questions from the Grade 10 Islamic Fiqh paper.",
   "lessons": [
     {
       "id": "l1",
@@ -18,27 +18,27 @@
     },
     {
       "id": "l4",
-      "number": 4,
+      "number": 3,
       "title": "ޖިނާޔަތު"
     },
     {
       "id": "l5",
-      "number": 5,
+      "number": 4,
       "title": "ޤިޞާޞް އާއި ދިޔަ"
     },
     {
       "id": "l6",
-      "number": 6,
+      "number": 5,
       "title": "ބަނގުރަލާއި މަސްތުވާތަކެތި"
     },
     {
       "id": "l7",
-      "number": 7,
+      "number": 6,
       "title": "ޒިނޭއާއި ބަދުއަޚްލާޤީ ޢަމަލުތައް"
     },
     {
       "id": "l8",
-      "number": 8,
+      "number": 7,
       "title": "ވައްކަން"
     }
   ],
