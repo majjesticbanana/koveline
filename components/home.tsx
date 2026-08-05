@@ -42,6 +42,9 @@ export function Home({
 
   const { totals, course } = summary;
 
+  const totalReviewed = Object.values(reviewed).reduce((a, b) => a + b, 0);
+  const totalPct = totals.questions ? Math.round((totalReviewed / totals.questions) * 100) : 0;
+
   return (
     <main className="mx-auto max-w-[960px] px-[22px] pb-10">
       {/* ---- hero: compact, question-led ---- */}
@@ -104,6 +107,19 @@ export function Home({
               <p className="mt-1 text-[0.92rem] text-cocoa">
                 {totals.questions} questions · {totals.units} units · {totals.lessons} lessons
               </p>
+              {totalReviewed > 0 && (
+                <div className="mt-2.5 flex items-center gap-2.5">
+                  <div className="h-[5px] w-[140px] overflow-hidden rounded-full bg-latte">
+                    <i
+                      className="block h-full rounded-full bg-teal transition-[width] duration-500"
+                      style={{ width: `${totalPct}%` }}
+                    />
+                  </div>
+                  <span className="text-[0.8rem] font-bold text-teal-deep">
+                    {totalReviewed} of {totals.questions} reviewed
+                  </span>
+                </div>
+              )}
             </div>
             <Link
               href="/islam/grade-9/mixed"
