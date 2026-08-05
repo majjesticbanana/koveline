@@ -9,7 +9,7 @@ import { isRtl } from "@/lib/rtl";
 export function RichBody({ body, size = "base" }: { body: RichBodyT; size?: "base" | "sm" }) {
   const text = size === "sm" ? "text-[1.02rem]" : "text-[1.1rem]";
   const bullet =
-    "relative pe-0 ps-6 leading-relaxed before:absolute before:top-[0.7em] before:h-2 before:w-2 before:rounded-full before:bg-caramel before:[inset-inline-start:4px]";
+    "relative pe-0 ps-6 leading-relaxed before:absolute before:top-[0.7em] before:h-2 before:w-2 before:rounded-full before:bg-brass-deep before:[inset-inline-start:4px]";
 
   if (body.kind === "text") {
     const rtl = body.lang ? body.lang !== "en" : isRtl(body.value);
@@ -51,7 +51,7 @@ export function RichBody({ body, size = "base" }: { body: RichBodyT; size?: "bas
             <div
               dir={rtl ? "rtl" : "ltr"}
               lang={rtl ? "dv" : undefined}
-              className={`${rtl ? "thaana" : ""} mb-1.5 font-bold text-teal-deep`}
+              className={`${rtl ? "thaana" : ""} mb-1.5 font-bold text-sage-deep`}
             >
               {s.heading}
             </div>

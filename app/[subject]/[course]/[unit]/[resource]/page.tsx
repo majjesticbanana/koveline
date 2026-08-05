@@ -37,7 +37,7 @@ export default async function ResourcePage({ params }: { params: Params }) {
       <div className="flex items-center gap-3.5 pb-1 pt-6">
         <Link
           href="/#subjects"
-          className="inline-flex items-center gap-1.5 font-bold text-cocoa transition-colors hover:text-coffee"
+          className="inline-flex items-center gap-1.5 font-bold text-on-dark-dim transition-colors hover:text-brass"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden />
           All units
@@ -45,11 +45,11 @@ export default async function ResourcePage({ params }: { params: Params }) {
       </div>
 
       <div className="mb-4 mt-2 text-center">
-        <h1 lang="dv" dir="rtl" className="thaana text-[1.9rem] font-bold leading-snug">
+        <h1 lang="dv" dir="rtl" className="thaana text-[1.9rem] font-bold leading-snug text-on-dark">
           {e.unit.title}
         </h1>
-        <div className="mt-1 font-display font-semibold text-coffee">{e.unit.titleEnglish}</div>
-        <div className="mt-0.5 text-[0.86rem] font-bold text-cocoa">
+        <div className="mt-1 font-display font-semibold text-brass">{e.unit.titleEnglish}</div>
+        <div className="mt-0.5 text-[0.86rem] font-bold text-on-dark-dim">
           {e.course.title} · Unit {e.unit.number} · {e.flashcards.cards.length} questions
         </div>
       </div>

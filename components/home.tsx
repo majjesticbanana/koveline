@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Play } from "lucide-react";
 import type { HomeSummary } from "@/lib/content/loader";
-import { FlightLine } from "@/components/koel";
+import { FlightLine, KoelMark } from "@/components/koel";
 import {
   readJSON, progressKey, LAST_STUDIED_KEY, type LastStudied, migrateV2Storage,
 } from "@/lib/storage";
@@ -42,40 +42,49 @@ export function Home({
 
   return (
     <main className="mx-auto max-w-[960px] px-[22px] pb-10">
-      <section className="pb-10 pt-14 text-center sm:pt-16">
-        <h1 className="mx-auto max-w-[18ch] font-display text-[clamp(2rem,5.6vw,3.2rem)] font-extrabold leading-[1.1] tracking-tight">
+      <section className="pb-12 pt-16 text-center sm:pt-20">
+        <div className="mb-7 flex justify-center">
+          <span className="relative grid h-[104px] w-[104px] place-items-center rounded-[26px] bg-basalt-2 ring-1 ring-basalt-line">
+            <span
+              className="absolute -inset-6 -z-10 rounded-full bg-brass/10 blur-2xl"
+              aria-hidden
+            />
+            <KoelMark size={72} className="text-brass" title="The Koveline koel" />
+          </span>
+        </div>
+        <p className="mb-4 font-display text-[0.74rem] font-bold uppercase tracking-[0.16em] text-brass">
+          Grade 9 &amp; 10 · Islam
+        </p>
+        <h1 className="mx-auto max-w-[17ch] font-display text-[clamp(2rem,5.4vw,3.1rem)] font-bold leading-[1.08] tracking-tight text-on-dark">
           Questions worth sitting with.
         </h1>
-        <div className="mx-auto mt-3 w-[190px]">
-          <FlightLine className="h-4 w-full" />
-        </div>
-        <p className="mx-auto mt-4 max-w-[48ch] text-[1.06rem] font-medium text-cocoa">
+        <p className="mx-auto mt-4 max-w-[48ch] text-[1.04rem] text-on-dark-dim">
           Study resources from the Maldives — {summary.grand.questions} questions across
           Grade&nbsp;9 and Grade&nbsp;10 Islam.
         </p>
 
-        <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           {primary && (
             <Link
               href={primary.mixedHref}
-              className="inline-flex items-center gap-2 rounded-[14px] bg-teal px-6 py-3.5 font-extrabold text-white shadow-warm-sm transition hover:bg-teal-deep"
+              className="inline-flex items-center gap-2 rounded-[14px] bg-brass px-6 py-3.5 font-extrabold text-basalt shadow-warm-sm transition hover:bg-brass-deep"
             >
               Start studying <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           )}
           <a
             href="#subjects"
-            className="inline-flex items-center gap-2 rounded-[14px] border-[1.5px] border-line bg-surface px-6 py-3.5 font-extrabold text-coffee-deep transition hover:border-caramel"
+            className="inline-flex items-center gap-2 rounded-[14px] border border-basalt-line bg-basalt-2 px-6 py-3.5 font-extrabold text-on-dark transition hover:bg-basalt-3"
           >
             Choose a unit
           </a>
         </div>
 
         {last && (
-          <div className="mt-5 flex justify-center">
+          <div className="mt-6 flex justify-center">
             <Link
               href={last.href}
-              className="inline-flex items-center gap-2 rounded-full border border-teal-soft bg-teal-soft/70 px-5 py-2 text-[0.9rem] font-bold text-teal-deep transition hover:-translate-y-0.5 hover:shadow-warm-sm"
+              className="inline-flex items-center gap-2 rounded-full border border-sage/50 bg-sage/15 px-5 py-2 text-[0.9rem] font-bold text-sage-soft transition hover:bg-sage/25"
             >
               <Play className="h-4 w-4" aria-hidden /> Continue: {last.label}
             </Link>
@@ -87,31 +96,31 @@ export function Home({
         {summary.courses.map((c) => (
           <div
             key={`${c.subjectId}/${c.courseId}`}
-            className="rounded-[24px] border border-line bg-surface/70 p-5 shadow-warm-sm sm:p-7"
+            className="rounded-sheet border border-basalt-line bg-basalt-2/70 p-5 sm:p-7"
           >
             <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
               <div>
-                <div className="font-display text-[0.74rem] font-extrabold uppercase tracking-[0.1em] text-teal-deep">
+                <div className="font-display text-[0.72rem] font-bold uppercase tracking-[0.14em] text-brass">
                   Islam
                 </div>
                 <div className="flex flex-wrap items-baseline gap-x-3">
-                  <h2 className="font-display text-[1.6rem] font-extrabold tracking-tight">
+                  <h2 className="font-display text-[1.6rem] font-bold tracking-tight text-on-dark">
                     Grade {c.grade}
                   </h2>
                   {c.titleDhivehi && (
-                    <span lang="dv" dir="rtl" className="thaana text-[1.1rem] font-bold text-cocoa">
+                    <span lang="dv" dir="rtl" className="thaana text-[1.1rem] font-bold text-on-dark-dim">
                       {c.titleDhivehi}
                     </span>
                   )}
                 </div>
-                <p className="mt-1 text-[0.92rem] text-cocoa">
+                <p className="mt-1 text-[0.92rem] text-on-dark-dim">
                   {c.totals.questions} questions · {c.totals.units} units ·{" "}
                   {c.totals.lessons} lessons
                 </p>
               </div>
               <Link
                 href={c.mixedHref}
-                className="inline-flex items-center gap-2 rounded-[13px] border-[1.5px] border-teal bg-teal-soft/60 px-5 py-2.5 text-[0.92rem] font-extrabold text-teal-deep transition hover:bg-teal-soft"
+                className="inline-flex items-center gap-2 rounded-[13px] border border-brass/60 bg-brass/15 px-5 py-2.5 text-[0.92rem] font-extrabold text-brass transition hover:bg-brass hover:text-basalt"
               >
                 Study everything · {c.totals.questions}
               </Link>
@@ -125,24 +134,21 @@ export function Home({
                   <Link
                     key={u.key}
                     href={u.href}
-                    className="group relative overflow-hidden rounded-card border border-line bg-surface p-[20px] transition-all duration-200 hover:-translate-y-[4px] hover:border-caramel hover:shadow-warm"
+                    className="group relative overflow-hidden rounded-card border-b-[3px] border-brass bg-surface p-[20px] text-ink shadow-warm-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
                   >
-                    <span
-                      className="absolute inset-y-0 left-0 w-1 origin-top scale-y-0 bg-teal transition-transform duration-300 group-hover:scale-y-100"
-                      aria-hidden
-                    />
+
                     <div className="mb-3 flex items-center gap-3">
                       <span
-                        className="grid h-11 w-11 flex-shrink-0 place-items-center rounded-[13px] bg-latte text-[1.35rem]"
+                        className="grid h-11 w-11 flex-shrink-0 place-items-center rounded-[12px] bg-basalt font-display text-[1.15rem] font-bold text-brass"
                         aria-hidden
                       >
-                        {u.icon}
+                        {String(u.number).padStart(2, "0")}
                       </span>
-                      <div className="font-display text-[0.72rem] font-extrabold uppercase tracking-[0.1em] text-teal-deep">
+                      <div className="font-display text-[0.72rem] font-bold uppercase tracking-[0.12em] text-coffee">
                         Unit {u.number}
                       </div>
-                      <span className="ml-auto text-[0.82rem] font-bold text-cocoa">
-                        {u.questionCount} questions · {u.lessonCount} lessons
+                      <span className="ml-auto text-[0.78rem] font-semibold text-cocoa">
+                        {u.questionCount} Q · {u.lessonCount} L
                       </span>
                     </div>
                     <h3
@@ -153,28 +159,28 @@ export function Home({
                       {u.title}
                     </h3>
                     <div className="mb-3 flex items-baseline justify-between gap-3">
-                      <span className="font-display text-[0.95rem] font-bold text-coffee">
+                      <span className="font-display text-[0.95rem] font-bold text-coffee-deep">
                         {u.titleEnglish}
                       </span>
                       <ArrowRight
-                        className="h-4 w-4 flex-shrink-0 text-caramel transition-transform group-hover:translate-x-1"
+                        className="h-4 w-4 flex-shrink-0 text-brass-deep transition-transform group-hover:translate-x-1"
                         aria-hidden
                       />
                     </div>
                     {done > 0 ? (
                       <>
-                        <div className="h-[5px] overflow-hidden rounded-full bg-latte">
+                        <div className="h-[6px] overflow-hidden rounded-full bg-latte">
                           <i
-                            className="block h-full rounded-full bg-teal transition-[width] duration-500"
+                            className="block h-full rounded-full bg-sage transition-[width] duration-500"
                             style={{ width: `${pct}%` }}
                           />
                         </div>
-                        <div className="mt-1.5 text-[0.78rem] font-semibold text-cocoa">
+                        <div className="mt-1.5 text-[0.76rem] font-semibold text-cocoa">
                           {done} of {u.questionCount} reviewed
                         </div>
                       </>
                     ) : (
-                      <div className="text-[0.78rem] font-semibold text-cocoa/80">Not started</div>
+                      <div className="text-[0.76rem] font-semibold text-cocoa/75">Not started</div>
                     )}
                   </Link>
                 );
@@ -183,22 +189,22 @@ export function Home({
           </div>
         ))}
 
-        <p className="text-center text-[0.88rem] text-cocoa">
+        <p className="text-center text-[0.88rem] text-on-dark-dim">
           Koveline begins with Islam. Other subjects will be added as they are developed.
         </p>
       </section>
 
-      <section className="mt-12 rounded-card border-[1.5px] border-dashed border-caramel/60 bg-surface/70 p-7 text-center">
-        <div className="mb-2.5 font-display text-[0.74rem] font-extrabold uppercase tracking-[0.1em] text-teal-deep">
+      <section className="mt-12 rounded-card border border-dashed border-brass/45 bg-basalt-2/60 p-7 text-center">
+        <div className="mb-3 font-display text-[0.72rem] font-bold uppercase tracking-[0.14em] text-brass">
           Where the questions come from
         </div>
-        <div lang="dv" dir="rtl" className="thaana mb-0.5 text-[1.12rem] font-bold">
+        <div lang="dv" dir="rtl" className="thaana mb-0.5 text-[1.12rem] font-bold text-on-dark">
           އިސްކަންދަރު ސްކޫލް - އިސްލާމް ޑިޕާޓްމަންޓް
         </div>
-        <div className="text-[0.94rem] font-semibold text-cocoa">
+        <div className="text-[0.94rem] font-semibold text-on-dark-dim">
           Iskandhar School — Islam Department
         </div>
-        <p className="mx-auto mt-2.5 max-w-[52ch] text-[0.86rem] leading-relaxed text-cocoa">
+        <p className="mx-auto mt-2.5 max-w-[52ch] text-[0.86rem] leading-relaxed text-on-dark-dim">
           Every question and answer comes from the school&apos;s Islam Q&amp;A preparation papers,
           reproduced here as study material. They were not written by the site&apos;s creator.
         </p>

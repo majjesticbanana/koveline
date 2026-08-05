@@ -3,26 +3,24 @@
 @tailwind utilities;
 
 :root {
-  --font-display: 'Bricolage Grotesque', sans-serif;
+  --font-display: 'Sora', sans-serif;
   --font-body: 'Hanken Grotesk', system-ui, sans-serif;
-  /* --font-faruma is injected by next/font/local in app/layout.tsx */
   --font-thaana: var(--font-faruma), 'Noto Sans Thaana', sans-serif;
-  --ring: rgba(18, 113, 107, 0.4);
+  --ring: rgba(201, 151, 63, 0.55);
 }
 
 html { scroll-behavior: smooth; }
 
 body {
-  background-color: #f6efe2;
-  color: #2a1f16;
+  background-color: #161412;
+  color: #efe8db;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   position: relative;
 }
 
-/* Texture layer, dial ~4: one warm radial glow + faint paper grain.
-   Fixed pseudo-element instead of background-attachment:fixed, which
-   forces scroll repaints on mobile Safari. */
+/* Basalt ground: a warm ember glow so the dark never reads flat or blue,
+   plus faint grain. Fixed layer, so scrolling never repaints it. */
 body::before {
   content: "";
   position: fixed;
@@ -30,8 +28,8 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(820px 500px at 88% -6%, #fdf6e8 0%, rgba(253, 246, 232, 0) 60%),
-    radial-gradient(640px 420px at -6% 10%, #eef1e9 0%, rgba(238, 241, 233, 0) 55%);
+    radial-gradient(900px 560px at 88% -10%, #33291a 0%, rgba(51, 41, 26, 0) 62%),
+    radial-gradient(700px 460px at -6% 8%, #24241d 0%, rgba(36, 36, 29, 0) 58%);
 }
 body::after {
   content: "";
@@ -39,7 +37,7 @@ body::after {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.05;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -51,14 +49,12 @@ body::after {
 
 *:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
 
-/* Annotation sweep — the coral underline that appears when an answer is
-   revealed. Width animates via the .swept class added on reveal. */
 .annotate {
   display: block;
   height: 3px;
   width: 0;
   border-radius: 3px;
-  background: #d65f45;
+  background: #c9973f;
   transition: width 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .annotate.swept { width: 100%; }

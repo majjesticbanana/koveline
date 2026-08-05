@@ -190,8 +190,8 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
 
   if (!loaded) {
     return (
-      <div className="grid min-h-[200px] place-items-center rounded-card border border-line bg-surface">
-        <p className="text-cocoa">Loading your progress…</p>
+      <div className="grid min-h-[200px] place-items-center rounded-card border border-basalt-line bg-basalt-2">
+        <p className="text-on-dark-dim">Loading your progress…</p>
       </div>
     );
   }
@@ -202,7 +202,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
     <div className="mb-4 flex items-center justify-center gap-2.5">
       <label
         htmlFor="lesson-filter"
-        className="font-display text-[0.72rem] font-extrabold uppercase tracking-[0.09em] text-cocoa"
+        className="font-display text-[0.72rem] font-bold uppercase tracking-[0.12em] text-on-dark-dim"
       >
         Lesson
       </label>
@@ -213,7 +213,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
           onChange={(e) => changeLesson(e.target.value)}
           lang="dv"
           dir="rtl"
-          className="thaana w-full cursor-pointer appearance-none truncate rounded-[12px] border border-line bg-surface py-2.5 pe-3.5 ps-9 text-right text-[1rem] font-semibold leading-tight text-coffee-deep shadow-warm-sm transition hover:border-caramel focus-visible:border-teal"
+          className="thaana w-full cursor-pointer appearance-none truncate rounded-[12px] border border-basalt-line bg-basalt-2 py-2.5 pe-3.5 ps-9 text-right text-[1rem] font-semibold leading-tight text-on-dark transition hover:border-brass/60"
         >
           <option value={ALL}>ހުރިހާ ފިލާވަޅެއް ({cards.length})</option>
           {lessons.map((l) => (
@@ -223,7 +223,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
           ))}
         </select>
         <ChevronDown
-          className="pointer-events-none absolute inset-y-0 my-auto h-4 w-4 text-caramel [inset-inline-start:12px]"
+          className="pointer-events-none absolute inset-y-0 my-auto h-4 w-4 text-brass [inset-inline-start:12px]"
           aria-hidden
         />
       </div>
@@ -242,19 +242,19 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
           const s = status[q.id];
           const isCur = i === idx;
           const cls = isCur
-            ? "bg-teal border-teal text-white ring-2 ring-teal ring-offset-2 ring-offset-surface"
+            ? "bg-brass border-brass text-basalt"
             : s === "correct"
-            ? "bg-green-bg border-green-line text-green"
+            ? "bg-green/20 border-green/50 text-green-line"
             : s === "wrong"
-            ? "bg-red-bg border-red-line text-red"
-            : "bg-cream border-line text-cocoa";
+            ? "bg-red/20 border-red/50 text-red-line"
+            : "bg-basalt-3 border-basalt-line text-on-dark-dim hover:border-brass/60";
           return (
             <button
               key={q.id}
               onClick={() => goTo(i)}
               aria-label={`Question ${i + 1}${s ? ` — marked ${s}` : ""}`}
               aria-current={isCur ? "true" : undefined}
-              className={`grid aspect-square place-items-center rounded-[11px] border font-display text-base font-bold transition-transform hover:-translate-y-0.5 ${cls}`}
+              className={`grid aspect-square place-items-center rounded-[11px] border font-display text-[0.95rem] font-bold transition-transform hover:-translate-y-0.5 ${cls}`}
             >
               {i + 1}
             </button>
@@ -273,18 +273,18 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
       <div>
         {lessonFilter}
         <ModeBar mode={mode} wrongTotal={wrongTotal} onMode={changeMode} onReset={reset} />
-        <div className="rounded-card border border-line bg-surface p-10 text-center shadow-warm">
-          <h3 className="mb-2 font-display text-2xl font-extrabold">
+        <div className="rounded-card border border-basalt-line bg-basalt-2 p-10 text-center shadow-lift">
+          <h3 className="mb-2 font-display text-2xl font-bold text-on-dark">
             {isReview ? "Nothing to review" : "No questions here yet"}
           </h3>
-          <p className="mb-6 text-cocoa">
+          <p className="mb-6 text-on-dark-dim">
             {isReview
               ? "You haven't marked anything wrong. Go through the deck first."
               : "Pick another lesson, or study the whole unit."}
           </p>
           <button
             onClick={() => (isReview ? changeMode("sequential") : changeLesson(ALL))}
-            className="rounded-[14px] bg-teal px-6 py-3.5 font-extrabold text-white transition hover:bg-teal-deep"
+            className="rounded-[14px] bg-brass px-6 py-3.5 font-extrabold text-basalt transition hover:bg-brass-deep"
           >
             {isReview ? "Start the deck" : "Show all questions"}
           </button>
@@ -305,14 +305,14 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
             <>
               <button
                 onClick={reset}
-                className="rounded-[14px] bg-coffee px-6 py-3.5 font-extrabold text-white transition hover:brightness-110"
+                className="rounded-[14px] border border-basalt-line bg-basalt-3 px-6 py-3.5 font-extrabold text-on-dark transition hover:border-brass/60"
               >
                 Start over
               </button>
               {wrongTotal > 0 && (
                 <button
                   onClick={() => changeMode("wrongOnly")}
-                  className="rounded-[14px] bg-red px-6 py-3.5 font-extrabold text-white transition hover:brightness-110"
+                  className="rounded-[14px] border border-red/50 bg-red/20 px-6 py-3.5 font-extrabold text-red-line transition hover:bg-red/30"
                 >
                   Review wrong ({wrongTotal})
                 </button>
@@ -368,9 +368,9 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
             <div
               dir="rtl"
               lang="dv"
-              className="thaana mb-3 rounded-[12px] border border-dashed border-line bg-cream/60 px-[16px] py-3 text-[0.98rem] leading-relaxed text-cocoa"
+              className="thaana mb-3 rounded-[12px] border border-dashed border-line bg-cream px-[16px] py-3 text-[0.98rem] leading-relaxed text-cocoa"
             >
-              <span className="mb-1 block font-display text-[0.66rem] font-extrabold uppercase tracking-[0.1em] text-caramel" dir="ltr">
+              <span className="mb-1 block font-display text-[0.64rem] font-bold uppercase tracking-[0.14em] text-brass-deep" dir="ltr">
                 Context
               </span>
               {current.context}
@@ -379,14 +379,14 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
           <div
             dir={qRtl ? "rtl" : "ltr"}
             lang={qRtl ? "dv" : undefined}
-            className={`rounded-[14px] p-[18px] text-[1.3rem] font-semibold leading-relaxed transition-colors duration-300 ${
+            className={`rounded-[12px] p-[18px] text-[1.3rem] font-semibold leading-relaxed transition-colors duration-300 ${
               qRtl ? "thaana border-r-4" : "border-l-4"
             } ${
               tone === "correct"
-                ? "border-green bg-[#eef5e6]"
+                ? "border-green bg-[#eef4e2]"
                 : tone === "wrong"
-                ? "border-red bg-[#f8e9e3]"
-                : "border-coffee bg-[#f7efe2]"
+                ? "border-red bg-[#f7e7df]"
+                : "border-brass bg-brass-soft/45"
             }`}
           >
             {current?.front}
@@ -396,12 +396,12 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
           <span className={`annotate mt-2 ${showAnswer ? "swept" : ""}`} aria-hidden />
 
           {showAnswer && current && (
-            <div className="mt-[14px] animate-rise rounded-[14px] border-r-4 border-teal bg-teal-soft/60 p-[18px]">
+            <div className="mt-[14px] animate-rise rounded-[12px] border-r-4 border-sage bg-sage-soft p-[18px]">
               <div className="mb-2.5 flex items-baseline justify-between gap-3">
-                <span className="font-display text-[0.72rem] font-extrabold uppercase tracking-[0.08em] text-teal-deep">
+                <span className="font-display text-[0.72rem] font-bold uppercase tracking-[0.12em] text-sage-deep">
                   Answer
                 </span>
-                <span lang="dv" dir="rtl" className="thaana text-[0.85rem] font-bold text-teal-deep">
+                <span lang="dv" dir="rtl" className="thaana text-[0.85rem] font-bold text-sage-deep">
                   ޖަވާބު
                 </span>
               </div>

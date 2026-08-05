@@ -2,11 +2,11 @@ import { KoelMark } from "./koel";
 
 export function Footer() {
   return (
-    <footer className="mt-16 border-t border-line bg-cream/60">
-      <div className="mx-auto flex max-w-[960px] items-center justify-center gap-2.5 px-[22px] py-8 text-[0.86rem] text-cocoa">
-        <KoelMark size={18} className="text-cocoa" />
-        <span>
-          <b className="font-display text-coffee">Koveline</b> · made in the Maldives
+    <footer className="mt-16 border-t border-basalt-line">
+      <div className="mx-auto flex max-w-[980px] flex-col items-center gap-2 px-[22px] py-10 text-center">
+        <KoelMark size={30} className="text-brass/80" />
+        <span className="text-[0.86rem] text-on-dark-dim">
+          <b className="font-display font-bold text-on-dark">Koveline</b> · made in the Maldives
         </span>
       </div>
     </footer>

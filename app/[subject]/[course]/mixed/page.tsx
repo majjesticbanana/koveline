@@ -51,7 +51,7 @@ export default async function MixedPage({ params }: { params: Params }) {
       <div className="flex items-center gap-3.5 pb-1 pt-6">
         <Link
           href="/#subjects"
-          className="inline-flex items-center gap-1.5 font-bold text-cocoa transition-colors hover:text-coffee"
+          className="inline-flex items-center gap-1.5 font-bold text-on-dark-dim transition-colors hover:text-brass"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden />
           All units
@@ -59,8 +59,8 @@ export default async function MixedPage({ params }: { params: Params }) {
       </div>
 
       <div className="mb-4 mt-2 text-center">
-        <h1 className="font-display text-[1.9rem] font-extrabold leading-snug">Study everything</h1>
-        <div className="mt-0.5 text-[0.86rem] font-bold text-cocoa">
+        <h1 className="font-display text-[1.9rem] font-bold leading-snug text-on-dark">Study everything</h1>
+        <div className="mt-0.5 text-[0.86rem] font-bold text-on-dark-dim">
           {c.title} · every unit · {cards.length} questions
         </div>
       </div>
