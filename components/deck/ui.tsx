@@ -114,15 +114,6 @@ export function ModeBar({
   onMode: (m: Mode) => void;
   onReset: () => void;
 }) {
-  // Reset wipes every mark, so it asks twice: first tap arms it, second tap
-  // (within 3.5s) actually resets.
-  const [armed, setArmed] = useState(false);
-  useEffect(() => {
-    if (!armed) return;
-    const t = setTimeout(() => setArmed(false), 3500);
-    return () => clearTimeout(t);
-  }, [armed]);
-
   const base =
     "inline-flex items-center gap-2 rounded-[11px] border-[1.5px] px-[15px] py-2.5 text-[0.9rem] font-bold transition";
   const off = "border-line bg-surface text-coffee-deep hover:border-caramel";
@@ -138,19 +129,8 @@ export function ModeBar({
       <button onClick={() => onMode("wrongOnly")} className={`${base} ${mode === "wrongOnly" ? on : off}`} aria-pressed={mode === "wrongOnly"}>
         <AlertCircle className="h-4 w-4" aria-hidden /> Review wrong ({wrongTotal})
       </button>
-      <button
-        onClick={() => {
-          if (armed) { setArmed(false); onReset(); }
-          else setArmed(true);
-        }}
-        aria-label={armed ? "Tap again to erase all marks in this deck" : "Reset this deck"}
-        className={`${base} ${
-          armed
-            ? "border-red bg-red-bg text-red"
-            : "border-line bg-surface text-cocoa hover:border-caramel"
-        }`}
-      >
-        <RotateCcw className="h-4 w-4" aria-hidden /> {armed ? "Tap again to reset" : "Reset"}
+      <button onClick={onReset} className={`${base} border-line bg-surface text-cocoa hover:border-caramel`}>
+        <RotateCcw className="h-4 w-4" aria-hidden /> Reset
       </button>
     </div>
   );

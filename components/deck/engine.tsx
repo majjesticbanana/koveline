@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Flashcard, Lesson, RichBodyT } from "@/lib/content/schema";
 import { isRtl } from "@/lib/rtl";
 import {
@@ -168,31 +168,6 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
     resetView();
   };
 
-  // bring the answer (and the mark buttons under it) into view on reveal —
-  // on small screens they can sit below the fold
-  const answerRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!showAnswer) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    answerRef.current?.scrollIntoView({ block: "nearest", behavior: reduced ? "auto" : "smooth" });
-  }, [showAnswer]);
-
-  // touch: swipe the sheet left/right to move between questions
-  const touchRef = useRef<{ x: number; y: number } | null>(null);
-  const onTouchStart = (e: React.TouchEvent) => {
-    touchRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-  };
-  const onTouchEnd = (e: React.TouchEvent) => {
-    const start = touchRef.current;
-    touchRef.current = null;
-    if (!start) return;
-    const dx = e.changedTouches[0].clientX - start.x;
-    const dy = e.changedTouches[0].clientY - start.y;
-    if (Math.abs(dx) < 56 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
-    if (dx < 0) { if (idx < deck.length - 1) goNext(); }
-    else goPrev();
-  };
-
   // keyboard
   useEffect(() => {
     if (!loaded || complete || navOpen) return;
@@ -241,24 +216,12 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
     </div>
   );
 
-  const firstUnanswered = deck.findIndex((q) => !status[q.id]);
-
   const navigator = (
     <BottomSheet
       open={navOpen}
       onClose={() => setNavOpen(false)}
       title="Jump to a question"
       subtitle={<>{deck.length} questions · {counts.answered} answered</>}
-      headerExtra={
-        firstUnanswered >= 0 && counts.answered > 0 ? (
-          <button
-            onClick={() => goTo(firstUnanswered)}
-            className="mt-2.5 inline-flex items-center gap-1.5 rounded-full border border-teal-soft bg-teal-soft/70 px-3.5 py-1.5 text-[0.82rem] font-bold text-teal-deep transition hover:bg-teal-soft"
-          >
-            Jump to first unanswered · #{firstUnanswered + 1}
-          </button>
-        ) : null
-      }
     >
       <div className="grid gap-[9px] [grid-template-columns:repeat(auto-fill,minmax(54px,1fr))]">
         {deck.map((q, i) => {
@@ -368,7 +331,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
       <ProgressBar correct={counts.c} wrong={counts.w} total={deck.length} />
       <ModeBar mode={mode} wrongTotal={wrongTotal} onMode={changeMode} onReset={reset} />
 
-      <div className={sheetShell(tone)} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+      <div className={sheetShell(tone)}>
         <SheetHeader
           tone={tone}
           index={idx + 1}
@@ -407,7 +370,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
           <span className={`annotate mt-2 ${showAnswer ? "swept" : ""}`} aria-hidden />
 
           {showAnswer && current && (
-            <div ref={answerRef} className="mt-[14px] animate-rise rounded-[14px] border-r-4 border-teal bg-teal-soft/60 p-[18px]">
+            <div className="mt-[14px] animate-rise rounded-[14px] border-r-4 border-teal bg-teal-soft/60 p-[18px]">
               <div className="mb-2.5 flex items-baseline justify-between gap-3">
                 <span className="font-display text-[0.72rem] font-extrabold uppercase tracking-[0.08em] text-teal-deep">
                   Answer

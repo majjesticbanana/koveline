@@ -1,0 +1,16 @@
+{
+  "id": "unit-5",
+  "number": 5,
+  "icon": "🌙",
+  "title": "އިސްލާމީ ޘަޖާފަތް",
+  "titleEnglish": "Islamic Culture",
+  "description": "8 questions from the Grade 10 Islamic Culture paper.",
+  "lessons": [
+    {
+      "id": "l1",
+      "number": 1,
+      "title": "އިސްލާމްދީނަކީ މެދުމިނުގެ ދީނެއް"
+    }
+  ],
+  "draft": true
+}

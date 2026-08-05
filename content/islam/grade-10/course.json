@@ -5,6 +5,11 @@
   "titleDhivehi": "ގްރޭޑް 10 އިސްލާމް",
   "grade": 10,
   "contentLang": "dv",
+  "credit": {
+    "english": "Iskandhar School — Islam Department",
+    "dhivehi": "އިސްކަންދަރު ސްކޫލް - އިސްލާމް ޑިޕާޓްމަންޓް",
+    "note": "All questions come from the school's Islam Q&A papers."
+  },
   "order": 2,
-  "draft": true
+  "draft": false
 }

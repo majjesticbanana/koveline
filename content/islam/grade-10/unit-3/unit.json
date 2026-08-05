@@ -1,0 +1,51 @@
+{
+  "id": "unit-3",
+  "number": 3,
+  "icon": "⚖️",
+  "title": "އިސްލާމީ ފިޖުހު",
+  "titleEnglish": "Islamic Fiqh",
+  "description": "28 questions from the Grade 10 Islamic Fiqh paper.",
+  "lessons": [
+    {
+      "id": "l1",
+      "number": 1,
+      "title": "ޙައްދު"
+    },
+    {
+      "id": "l2",
+      "number": 2,
+      "title": "ތައުޒީރު"
+    },
+    {
+      "id": "l3",
+      "number": 3,
+      "title": "ޖިނާޔަތު"
+    },
+    {
+      "id": "l4",
+      "number": 4,
+      "title": "ޤިޞާޞް އާއި ދިޔަ"
+    },
+    {
+      "id": "l5",
+      "number": 5,
+      "title": "ބަނގުރަލާއި މަސްތުވާތަކެތި"
+    },
+    {
+      "id": "l6",
+      "number": 6,
+      "title": "ޒިނޭއާއި ބަދުއަޚްލާޤީ ޢަމަލުތައް"
+    },
+    {
+      "id": "l7",
+      "number": 7,
+      "title": "ވައްކަން"
+    },
+    {
+      "id": "l8",
+      "number": 8,
+      "title": "ފޭރުން"
+    }
+  ],
+  "draft": false
+}

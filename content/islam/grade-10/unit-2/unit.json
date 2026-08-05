@@ -1,0 +1,21 @@
+{
+  "id": "unit-2",
+  "number": 2,
+  "icon": "📖",
+  "title": "ޙަދީޘް ޖިލްމު",
+  "titleEnglish": "Hadith Studies",
+  "description": "5 questions from the Grade 10 Hadith Studies paper.",
+  "lessons": [
+    {
+      "id": "l1",
+      "number": 1,
+      "title": "ވަޟުޢީ ހަދީޘް"
+    },
+    {
+      "id": "l2",
+      "number": 2,
+      "title": "ޙަދީޘް ރިވާކުރުމުގައި މަޝްހޫރު ޞަޙާބީން"
+    }
+  ],
+  "draft": true
+}

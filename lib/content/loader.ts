@@ -93,26 +93,46 @@ export const getCourseUnits = (subject: string, course: string) =>
 /** Lightweight summary for the home page — never includes card bodies. */
 export function homeSummary() {
   const { units } = loadContent();
-  const islam = units.filter((e) => e.subject.id === "islam" && e.course.id === "grade-9");
+  const byCourse = new Map<string, UnitEntry[]>();
+  for (const e of units) {
+    const k = `${e.subject.id}/${e.course.id}`;
+    byCourse.set(k, [...(byCourse.get(k) ?? []), e]);
+  }
+  const courses = [...byCourse.values()]
+    .filter((list) => list.length > 0)
+    .map((list) => ({
+      subjectId: list[0].subject.id,
+      courseId: list[0].course.id,
+      title: list[0].course.title,
+      titleDhivehi: list[0].course.titleDhivehi ?? "",
+      grade: list[0].course.grade ?? 0,
+      order: list[0].course.order,
+      mixedHref: `/${list[0].subject.id}/${list[0].course.id}/mixed`,
+      totals: {
+        units: list.length,
+        questions: list.reduce((n, e) => n + e.flashcards.cards.length, 0),
+        lessons: list.reduce((n, e) => n + e.unit.lessons.length, 0),
+      },
+      units: list.map((e) => ({
+        id: e.unit.id,
+        key: e.key,
+        href: e.href,
+        number: e.unit.number,
+        icon: e.unit.icon,
+        title: e.unit.title,
+        titleEnglish: e.unit.titleEnglish ?? "",
+        lessonCount: e.unit.lessons.length,
+        questionCount: e.flashcards.cards.length,
+      })),
+    }))
+    .sort((a, b) => a.order - b.order);
+
   return {
-    course: islam[0]?.course ?? null,
-    totals: {
-      units: islam.length,
-      questions: islam.reduce((n, e) => n + e.flashcards.cards.length, 0),
-      lessons: islam.reduce((n, e) => n + e.unit.lessons.length, 0),
+    courses,
+    grand: {
+      questions: courses.reduce((n, c) => n + c.totals.questions, 0),
+      units: courses.reduce((n, c) => n + c.totals.units, 0),
     },
-    units: islam.map((e) => ({
-      id: e.unit.id,
-      key: e.key,
-      href: e.href,
-      number: e.unit.number,
-      icon: e.unit.icon,
-      title: e.unit.title,
-      titleEnglish: e.unit.titleEnglish ?? "",
-      description: e.unit.description ?? "",
-      lessonCount: e.unit.lessons.length,
-      questionCount: e.flashcards.cards.length,
-    })),
   };
 }
 export type HomeSummary = ReturnType<typeof homeSummary>;
