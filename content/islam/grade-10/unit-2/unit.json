@@ -2,9 +2,9 @@
   "id": "unit-2",
   "number": 2,
   "icon": "📖",
-  "title": "ޙަދީޘް ޖިލްމު",
+  "title": "ޙަދީޘް ޢިލްމު",
   "titleEnglish": "Hadith Studies",
-  "description": "5 questions from the Grade 10 Hadith Studies paper.",
+  "description": "32 questions from the Grade 10 Hadith Studies paper.",
   "lessons": [
     {
       "id": "l1",
@@ -15,7 +15,32 @@
       "id": "l2",
       "number": 2,
       "title": "ޙަދީޘް ރިވާކުރުމުގައި މަޝްހޫރު ޞަޙާބީން"
+    },
+    {
+      "id": "l3",
+      "number": 3,
+      "title": "ތާބިއީންނާއި އަތުބާއުއްތާބިޢީން"
+    },
+    {
+      "id": "l4",
+      "number": 4,
+      "title": "ކެއިން ބުއިމުގައި އިސްރާފްނުކުރުން"
+    },
+    {
+      "id": "l5",
+      "number": 5,
+      "title": "ކުރާ ޢަމަލުގައި ފަރުވާތެރިވުން"
+    },
+    {
+      "id": "l6",
+      "number": 6,
+      "title": "ރޯދައިގެ މަތިވެރިކަން"
+    },
+    {
+      "id": "l7",
+      "number": 7,
+      "title": "މުސްލިމުން އެއްބަޔަކު އަނެއްބަޔަކާ ތަޅާފޮޅުމުން ލިބޭގެއްލުން"
     }
   ],
-  "draft": true
+  "draft": false
 }

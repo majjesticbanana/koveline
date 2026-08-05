@@ -2,9 +2,9 @@
   "id": "unit-1",
   "number": 1,
   "icon": "🕌",
-  "title": "އިސްލާމީ އަޖީދާ",
+  "title": "އިސްލާމީ ޢަޤީދާ",
   "titleEnglish": "Aqeedah",
-  "description": "29 questions from the Grade 10 Aqeedah paper.",
+  "description": "46 questions from the Grade 10 Aqeedah paper.",
   "lessons": [
     {
       "id": "l1",
@@ -17,19 +17,9 @@
       "title": "ޝަހާދަތުގެ ދެކަލިމައިގެ ޝަރުޠުތައް"
     },
     {
-      "id": "l3",
-      "number": 3,
-      "title": "އާޚިރަތްދުވަހަށް އީމާންވުން"
-    },
-    {
       "id": "l4",
       "number": 4,
       "title": "ޤިޔާމަތްދުވަހުގެ ޢަލާމާތްތައް"
-    },
-    {
-      "id": "l5",
-      "number": 5,
-      "title": "ސުވަރުގެއާއި ނަރަކަ"
     },
     {
       "id": "l6",

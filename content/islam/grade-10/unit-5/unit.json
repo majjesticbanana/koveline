@@ -2,15 +2,30 @@
   "id": "unit-5",
   "number": 5,
   "icon": "🌙",
-  "title": "އިސްލާމީ ޘަޖާފަތް",
+  "title": "އިސްލާމީ ޘަޤާފަތް",
   "titleEnglish": "Islamic Culture",
-  "description": "8 questions from the Grade 10 Islamic Culture paper.",
+  "description": "34 questions from the Grade 10 Islamic Culture paper.",
   "lessons": [
     {
       "id": "l1",
       "number": 1,
       "title": "އިސްލާމްދީނަކީ މެދުމިނުގެ ދީނެއް"
+    },
+    {
+      "id": "l2",
+      "number": 2,
+      "title": "މިޒަމާނުގައި މުސްލިމުނަށް ކުރިމަތިވެފައިވާ ގޮންޖެހުންތައް"
+    },
+    {
+      "id": "l3",
+      "number": 3,
+      "title": "ފިކުރީ މަޛަހަބުތައް"
+    },
+    {
+      "id": "l4",
+      "number": 4,
+      "title": "ފިކުރީ ހަނގުރާމަ"
     }
   ],
-  "draft": true
+  "draft": false
 }
