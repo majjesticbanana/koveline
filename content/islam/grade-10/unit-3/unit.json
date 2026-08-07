@@ -4,7 +4,7 @@
   "icon": "⚖️",
   "title": "އިސްލާމީ ފިޤުހު",
   "titleEnglish": "Islamic Fiqh",
-  "description": "58 questions from the Grade 10 Islamic Fiqh paper.",
+  "description": "94 questions from the Grade 10 Islamic Fiqh paper.",
   "lessons": [
     {
       "id": "l1",
@@ -17,29 +17,40 @@
       "title": "ޙައްދު"
     },
     {
-      "id": "l4",
+      "id": "l3",
       "number": 3,
+      "title": "ތަޢުޒީރު"
+    },
+    {
+      "id": "l4",
+      "number": 4,
       "title": "ޖިނާޔަތު"
     },
     {
       "id": "l5",
-      "number": 4,
-      "title": "ޤިޞާޞް އާއި ދިޔަ"
+      "number": 5,
+      "title": "ޤިޞާޞް އާއި ދިޔަ",
+      "titleEnglish": "Qisas & Diya — source lessons 5–6"
     },
     {
       "id": "l6",
-      "number": 5,
+      "number": 7,
       "title": "ބަނގުރަލާއި މަސްތުވާތަކެތި"
     },
     {
       "id": "l7",
-      "number": 6,
+      "number": 8,
       "title": "ޒިނޭއާއި ބަދުއަޚްލާޤީ ޢަމަލުތައް"
     },
     {
       "id": "l8",
-      "number": 7,
+      "number": 9,
       "title": "ވައްކަން"
+    },
+    {
+      "id": "l10",
+      "number": 10,
+      "title": "ފޭރުން"
     }
   ],
   "draft": false

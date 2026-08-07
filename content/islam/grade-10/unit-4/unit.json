@@ -4,7 +4,7 @@
   "icon": "🏛️",
   "title": "އިސްލާމީ ތާރީޗް",
   "titleEnglish": "Islamic History",
-  "description": "24 questions from the Grade 10 Islamic History paper.",
+  "description": "41 questions from the Grade 10 Islamic History & Civilization paper.",
   "lessons": [
     {
       "id": "l1",
@@ -12,5 +12,5 @@
       "title": "އިސްލާމީ ތާރީޗް"
     }
   ],
-  "draft": true
+  "draft": false
 }
