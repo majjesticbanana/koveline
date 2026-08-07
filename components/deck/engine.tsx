@@ -222,13 +222,13 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
   };
 
   const lessonFilter = lessons.length > 1 && (
-    <div className="mb-5">
+    <div className="lesson-filter mb-5">
       <div className="lesson-switcher mx-auto grid w-full max-w-[560px] grid-cols-[46px_minmax(0,1fr)_46px] overflow-hidden rounded-panel border border-line bg-surface">
         <button
           type="button"
           onClick={() => stepLesson(-1)}
           disabled={activeLessonIndex === 0}
-          className="grid min-h-[72px] place-items-center border-r border-line text-cocoa transition hover:bg-raised hover:text-caramel disabled:cursor-default disabled:opacity-25 disabled:hover:bg-transparent disabled:hover:text-cocoa"
+          className="lesson-step grid min-h-[72px] place-items-center border-r border-line text-cocoa transition hover:bg-raised hover:text-caramel disabled:cursor-default disabled:opacity-25 disabled:hover:bg-transparent disabled:hover:text-cocoa"
           aria-label="Previous lesson"
         >
           <ChevronLeft className="h-5 w-5" aria-hidden />
@@ -236,7 +236,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
         <button
           type="button"
           onClick={() => { setNavOpen(false); setLessonOpen(true); }}
-          className="group min-w-0 px-4 py-2.5 text-center transition hover:bg-raised/80"
+          className="lesson-current group min-w-0 px-4 py-2.5 text-center transition hover:bg-raised/80"
           aria-haspopup="dialog"
           aria-expanded={lessonOpen}
         >
@@ -255,7 +255,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
           type="button"
           onClick={() => stepLesson(1)}
           disabled={activeLessonIndex === lessonOptions.length - 1}
-          className="grid min-h-[72px] place-items-center border-l border-line text-cocoa transition hover:bg-raised hover:text-caramel disabled:cursor-default disabled:opacity-25 disabled:hover:bg-transparent disabled:hover:text-cocoa"
+          className="lesson-step grid min-h-[72px] place-items-center border-l border-line text-cocoa transition hover:bg-raised hover:text-caramel disabled:cursor-default disabled:opacity-25 disabled:hover:bg-transparent disabled:hover:text-cocoa"
           aria-label="Next lesson"
         >
           <ChevronRight className="h-5 w-5" aria-hidden />
@@ -271,7 +271,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
       title="Choose a lesson"
       subtitle={<>{cards.length} questions across {lessons.length} lessons</>}
     >
-      <div className="mx-auto grid w-full max-w-[680px] gap-2">
+      <div className="lesson-picker-grid mx-auto grid w-full max-w-[680px] gap-2">
         {lessonOptions.map((option, i) => {
           const selected = option.id === lessonId;
           return (
@@ -313,14 +313,14 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
       open={navOpen}
       onClose={() => setNavOpen(false)}
       title="Jump to a question"
-      subtitle={<>{deck.length} questions · {counts.answered} answered</>}
+      subtitle={<>Question {idx + 1} of {deck.length} · {counts.c} right · {counts.w} wrong</>}
     >
-      <div className="grid gap-[9px] [grid-template-columns:repeat(auto-fill,minmax(54px,1fr))]">
+      <div className="question-nav-grid grid gap-2.5">
         {deck.map((q, i) => {
           const s = status[q.id];
           const isCur = i === idx;
           const cls = isCur
-            ? "bg-teal border-teal text-accent-ink"
+            ? "question-nav-current border-ink bg-[rgba(247,232,223,.08)] text-ink"
             : s === "correct"
             ? "bg-green-bg border-green-line text-green"
             : s === "wrong"
@@ -332,7 +332,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
               onClick={() => goTo(i)}
               aria-label={`Question ${i + 1}${s ? ` — marked ${s}` : ""}`}
               aria-current={isCur ? "true" : undefined}
-              className={`grid aspect-square place-items-center rounded-[11px] border font-display text-[0.95rem] font-bold transition-transform hover:-translate-y-0.5 ${cls}`}
+              className={`question-nav-button grid aspect-square place-items-center rounded-[11px] border font-display text-[0.95rem] font-bold transition ${cls}`}
             >
               {i + 1}
             </button>
@@ -396,7 +396,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
   const lesson = current ? lessonById.get(current.lessonId) : undefined;
 
   return (
-    <div>
+    <div className="deck-engine">
       {lessonFilter}
 
       <StatBar
@@ -406,7 +406,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
         wrong={counts.w}
         onOpenNav={() => { setLessonOpen(false); setNavOpen(true); }}
       />
-      <ProgressBar correct={counts.c} wrong={counts.w} total={deck.length} />
+      <ProgressBar marks={deck.map((q) => status[q.id])} index={idx} />
       <ModeBar mode={mode} wrongTotal={wrongTotal} onMode={changeMode} onReset={reset} />
 
       <div className={sheetShell(tone)}>
@@ -418,7 +418,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
           lessonTitle={current?.unitBadge?.lessonTitle ?? lesson?.title}
         />
 
-        <div key={current?.id} className="animate-question-in px-5 py-5 sm:px-6">
+        <div key={current?.id} className="study-question-body animate-question-in px-5 py-5 sm:px-6">
           {current?.context && (
             <div
               dir="rtl"
@@ -432,7 +432,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
           <div
             dir={qRtl ? "rtl" : "ltr"}
             lang={qRtl ? "dv" : undefined}
-            className={`${qRtl ? "thaana" : ""} text-[1.35rem] font-semibold leading-relaxed sm:text-[1.45rem]`}
+            className={`study-question-text ${qRtl ? "thaana" : ""} text-[1.35rem] font-semibold leading-relaxed sm:text-[1.45rem]`}
           >
             {current?.front}
           </div>
@@ -440,7 +440,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
           <span className={`annotate mt-3 ${showAnswer ? "swept" : ""}`} aria-hidden />
 
           {showAnswer && current && (
-            <div className="answer-reveal mt-4 border-t border-line pt-4">
+            <div className="study-answer answer-reveal mt-4 border-t border-line pt-4">
               <div className="mb-2 flex items-baseline justify-between gap-3">
                 <span className="text-[0.68rem] font-extrabold uppercase tracking-[0.12em] text-teal-deep">
                   Answer
@@ -479,7 +479,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
           )}
         </MobileActionBar>
       )}
-      <div className="h-24 sm:hidden" aria-hidden />
+      <div className="mobile-action-spacer h-24 sm:hidden" aria-hidden />
 
       <KbdHints />
       {lessonPicker}

@@ -33,8 +33,8 @@ export default async function ResourcePage({ params }: { params: Params }) {
   if (!e) notFound();
 
   return (
-    <main className="mx-auto max-w-[720px] px-[22px] pb-16">
-      <div className="flex items-center gap-3.5 pb-1 pt-6">
+    <main className="resource-page mx-auto max-w-[720px] px-[22px] pb-16">
+      <div className="resource-breadcrumb flex items-center gap-3.5 pb-1 pt-6">
         <Link
           href="/#subjects"
           className="inline-flex items-center gap-1.5 font-bold text-cocoa transition-colors hover:text-coffee"
@@ -44,12 +44,12 @@ export default async function ResourcePage({ params }: { params: Params }) {
         </Link>
       </div>
 
-      <div className="mb-4 mt-2 text-center">
-        <h1 lang="dv" dir="rtl" className="thaana text-[1.8rem] font-bold leading-snug">
+      <div className="resource-heading mb-4 mt-2 text-center">
+        <h1 lang="dv" dir="rtl" className="resource-title thaana text-[1.8rem] font-bold leading-snug">
           {e.unit.title}
         </h1>
-        <div className="mt-0.5 font-display font-semibold text-coffee">{e.unit.titleEnglish}</div>
-        <div className="mt-0.5 text-[0.84rem] font-semibold text-cocoa">
+        <div className="resource-title-en mt-0.5 font-display font-semibold text-coffee">{e.unit.titleEnglish}</div>
+        <div className="resource-meta mt-0.5 text-[0.84rem] font-semibold text-cocoa">
           {e.course.title} · Unit {e.unit.number} · {e.flashcards.cards.length} questions
         </div>
       </div>

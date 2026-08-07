@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Check, X, Save } from "lucide-react";
 import { KoelMark } from "@/components/koel";
 
@@ -41,7 +42,7 @@ export function StatBar({
   onOpenNav: () => void;
 }) {
   return (
-    <div className="mb-3 flex flex-wrap items-center justify-center gap-2 text-[0.85rem]">
+    <div className="study-statbar mb-3 flex flex-wrap items-center justify-center gap-2 text-[0.85rem]">
       <button
         onClick={onOpenNav}
         className="glass-control inline-flex items-center gap-1.5 rounded-ctl border px-3 py-1.5 font-semibold text-coffee-deep transition hover:border-teal/60"
@@ -66,20 +67,46 @@ export function StatBar({
   );
 }
 
-export function ProgressBar({ correct, wrong, total }: { correct: number; wrong: number; total: number }) {
-  const cPct = total ? (correct / total) * 100 : 0;
-  const wPct = total ? (wrong / total) * 100 : 0;
+export function ProgressBar({
+  marks, index,
+}: {
+  /** Statuses in the *current deck order*. Random mode therefore follows the shuffled order. */
+  marks: Array<Mark | undefined>;
+  /** Zero-based position in the current deck order. */
+  index: number;
+}) {
+  const total = marks.length;
+  const safeIndex = total ? Math.min(Math.max(index, 0), total - 1) : 0;
+  const markerPct = total ? ((safeIndex + 0.5) / total) * 100 : 0;
+
   return (
     <div
-      className="mb-4 flex h-[6px] overflow-hidden rounded-full bg-latte"
+      className="question-progress relative mb-4 h-[6px] overflow-visible rounded-full bg-latte"
       role="progressbar"
-      aria-valuenow={Math.round(cPct + wPct)}
-      aria-valuemin={0}
-      aria-valuemax={100}
-      aria-label="Progress through this deck"
+      aria-valuenow={total ? safeIndex + 1 : 0}
+      aria-valuemin={total ? 1 : 0}
+      aria-valuemax={total}
+      aria-valuetext={total ? `Question ${safeIndex + 1} of ${total}` : "No questions"}
+      aria-label="Current position in this deck"
     >
-      <i className="block h-full bg-green transition-[width] duration-500" style={{ width: `${cPct}%` }} />
-      <i className="block h-full bg-red transition-[width] duration-500" style={{ width: `${wPct}%` }} />
+      <div className="absolute inset-0 flex overflow-hidden rounded-full" aria-hidden>
+        {marks.map((mark, i) => (
+          <i
+            // Index is intentional: this bar represents positions in this session order.
+            key={i}
+            className={`block h-full min-w-0 flex-1 transition-colors duration-300 ${
+              mark === "correct" ? "bg-green" : mark === "wrong" ? "bg-red" : "bg-transparent"
+            }`}
+          />
+        ))}
+      </div>
+      {total > 0 && (
+        <i
+          aria-hidden
+          className="pointer-events-none absolute top-1/2 z-10 h-[12px] w-[2px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow-[0_0_7px_rgba(255,255,255,.58)] transition-[left] duration-300"
+          style={{ left: `${markerPct}%` }}
+        />
+      )}
     </div>
   );
 }
@@ -108,11 +135,11 @@ export function ModeBar({
   );
   const hasWrong = wrongTotal > 0;
   return (
-    <div className="mb-4 flex flex-wrap items-center justify-center gap-2.5">
+    <div className="study-modebar mb-4 flex flex-wrap items-center justify-center gap-2.5">
       <div
         role="group"
         aria-label="Question order"
-        className="glass-control flex overflow-hidden rounded-ctl border"
+        className="order-segment glass-control flex overflow-hidden rounded-ctl border"
       >
         {segBtn("sequential", "In order")}
         <span className="w-px bg-line" aria-hidden />
@@ -122,7 +149,7 @@ export function ModeBar({
         onClick={() => hasWrong && onMode("wrongOnly")}
         disabled={!hasWrong}
         aria-pressed={mode === "wrongOnly"}
-        className={`rounded-ctl border px-3.5 py-1.5 text-[0.84rem] font-bold transition ${
+        className={`review-mode rounded-ctl border px-3.5 py-1.5 text-[0.84rem] font-bold transition ${
           mode === "wrongOnly"
             ? "border-red bg-red-bg text-red shadow-[inset_0_0_0_1px_rgba(238,138,128,.20)]"
             : hasWrong
@@ -136,7 +163,7 @@ export function ModeBar({
         onClick={() => {
           if (window.confirm("Reset all progress in this deck? This can't be undone.")) onReset();
         }}
-        className="px-2 py-1.5 text-[0.8rem] font-semibold text-cocoa underline-offset-2 transition hover:text-red hover:underline"
+        className="reset-mode px-2 py-1.5 text-[0.8rem] font-semibold text-cocoa underline-offset-2 transition hover:text-red hover:underline"
       >
         Reset
       </button>
@@ -168,7 +195,7 @@ export function ContextLine({
 }) {
   return (
     <div
-      className={`flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b border-line px-5 py-3 transition-colors duration-300 ${
+      className={`study-context-line flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b border-line px-5 py-3 transition-colors duration-300 ${
         tone === "correct" ? "bg-green-bg/70" : tone === "wrong" ? "bg-red-bg/70" : "bg-deep/25"
       }`}
     >
@@ -239,41 +266,43 @@ export function BottomSheet({
     };
   }, [mounted, open, onClose]);
 
-  if (!mounted) return null;
+  if (!mounted || typeof document === "undefined") return null;
 
-  return (
+  return createPortal(
     <>
       <div
         onClick={onClose}
         aria-hidden
-        className={`fixed inset-0 z-[60] bg-deep/75 transition-opacity duration-300 ${shown ? "opacity-100" : "opacity-0"}`}
+        className={`bottom-sheet-backdrop fixed inset-0 z-[80] transition-opacity duration-300 ${shown ? "is-shown" : ""}`}
       />
       <div
         ref={sheetRef}
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className={`glass-panel fixed inset-x-0 bottom-0 z-[70] flex max-h-[80vh] flex-col rounded-t-panel border-t shadow-[0_-18px_44px_-20px_rgba(0,0,0,.55)] transition-transform duration-300 sm:bottom-4 sm:left-1/2 sm:right-auto sm:w-[min(760px,calc(100vw-32px))] sm:-translate-x-1/2 sm:rounded-panel sm:border ${shown ? "translate-y-0" : "translate-y-full"}`}
-        style={{ transitionTimingFunction: "cubic-bezier(.22,1,.36,1)" }}
+        className={`bottom-sheet glass-panel fixed z-[90] flex flex-col ${shown ? "is-shown" : ""}`}
       >
-        <div className="border-b border-line px-5 pb-3 pt-4">
-          <div className="mx-auto mb-3 h-[4px] w-[44px] rounded-full bg-line" aria-hidden />
-          <div className="flex items-center justify-between">
-            <h3 className="font-display text-[1.15rem] font-bold">{title}</h3>
+        <div className="bottom-sheet-head border-b border-line px-4 pb-3 pt-3 sm:px-5 sm:pt-4">
+          <div className="bottom-sheet-handle mx-auto mb-2.5 h-[4px] w-[44px] rounded-full bg-line sm:mb-3" aria-hidden />
+          <div className="flex items-center justify-between gap-3">
+            <div className="min-w-0">
+              <h3 className="truncate font-display text-[1.08rem] font-bold sm:text-[1.15rem]">{title}</h3>
+              {subtitle && <div className="mt-0.5 truncate text-[0.76rem] text-cocoa sm:text-[0.82rem]">{subtitle}</div>}
+            </div>
             <button
               ref={closeRef}
               onClick={onClose}
-              className="grid h-9 w-9 place-items-center rounded-ctl text-cocoa hover:bg-raised hover:text-coffee"
+              className="grid h-10 w-10 shrink-0 place-items-center rounded-ctl text-cocoa transition hover:bg-raised hover:text-coffee"
               aria-label="Close navigator"
             >
               <X className="h-5 w-5" aria-hidden />
             </button>
           </div>
-          {subtitle && <div className="mt-0.5 text-[0.82rem] text-cocoa">{subtitle}</div>}
         </div>
-        <div className="overflow-y-auto px-5 pb-6 pt-4">{children}</div>
+        <div className="bottom-sheet-body overflow-y-auto overscroll-contain px-4 pb-[calc(1.25rem+env(safe-area-inset-bottom))] pt-3 sm:px-5 sm:pb-6 sm:pt-4">{children}</div>
       </div>
-    </>
+    </>,
+    document.body,
   );
 }
 
@@ -285,7 +314,7 @@ export function NavLegend() {
   );
   return (
     <div className="mt-4 flex flex-wrap gap-4 border-t border-line pt-3.5 text-[0.78rem] font-semibold text-cocoa">
-      <L swatch="bg-teal border-teal" label="Current" />
+      <L swatch="bg-[rgba(247,232,223,.08)] border-ink" label="Current" />
       <L swatch="bg-green-bg border-green-line" label="Right" />
       <L swatch="bg-red-bg border-red-line" label="Wrong" />
       <L swatch="bg-cream border-line" label="Not answered" />
@@ -406,7 +435,7 @@ export function NextButton({ isLast, onClick }: { isLast: boolean; onClick: () =
 export function MobileActionBar({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className="glass-panel fixed inset-x-0 bottom-0 z-30 border-t px-4 pt-2.5 sm:hidden"
+      className="mobile-action-bar glass-panel fixed inset-x-0 bottom-0 z-30 border-t px-3 pt-2.5 sm:hidden"
       style={{ paddingBottom: "calc(0.625rem + env(safe-area-inset-bottom))" }}
     >
       <div className="mx-auto flex max-w-[480px] items-center justify-center gap-2.5 [&>div]:mt-0 [&>div]:flex-1 [&_button]:w-full">

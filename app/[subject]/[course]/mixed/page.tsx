@@ -52,8 +52,8 @@ export default async function MixedPage({ params }: { params: Params }) {
   });
 
   return (
-    <main className="mx-auto max-w-[720px] px-[22px] pb-16">
-      <div className="flex items-center gap-3.5 pb-1 pt-6">
+    <main className="resource-page mx-auto max-w-[720px] px-[22px] pb-16">
+      <div className="resource-breadcrumb flex items-center gap-3.5 pb-1 pt-6">
         <Link
           href="/#subjects"
           className="inline-flex items-center gap-1.5 font-bold text-cocoa transition-colors hover:text-coffee"
@@ -63,9 +63,9 @@ export default async function MixedPage({ params }: { params: Params }) {
         </Link>
       </div>
 
-      <div className="mb-4 mt-2 text-center">
-        <h1 className="font-display text-[1.8rem] font-extrabold leading-snug">Study everything</h1>
-        <div className="mt-0.5 text-[0.84rem] font-semibold text-cocoa">
+      <div className="resource-heading mb-4 mt-2 text-center">
+        <h1 className="resource-title font-display text-[1.8rem] font-extrabold leading-snug">Study everything</h1>
+        <div className="resource-meta mt-0.5 text-[0.84rem] font-semibold text-cocoa">
           {c.title} · every unit · {cards.length} questions
         </div>
       </div>

@@ -399,3 +399,264 @@ button:active, a[role="button"]:active { transform: scale(.985); }
   .hero-flight-dot { opacity: 1; animation: none !important; }
   .home-hero-mark, .home-hero-orbit, .home-hero-stat { transition: none !important; }
 }
+
+/* --------------------------------------------------------------------------
+   Study overlays + mobile composition
+   The picker is portalled to <body>, so it cannot be clipped or positioned by
+   a transformed study ancestor. On phones it behaves as a real bottom sheet;
+   on larger screens it becomes a contained floating panel.
+   -------------------------------------------------------------------------- */
+.bottom-sheet-backdrop {
+  background: rgba(17, 7, 5, .78);
+  opacity: 0;
+  pointer-events: none;
+}
+.bottom-sheet-backdrop.is-shown {
+  opacity: 1;
+  pointer-events: auto;
+}
+.bottom-sheet {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: min(84dvh, 760px);
+  overflow: hidden;
+  border-top: 1px solid var(--line-strong);
+  border-radius: 18px 18px 0 0;
+  transform: translate3d(0, 102%, 0);
+  transition: transform 300ms cubic-bezier(.22,1,.36,1);
+  will-change: transform;
+  box-shadow: 0 -18px 48px -20px rgba(0,0,0,.62);
+}
+.bottom-sheet.is-shown { transform: translate3d(0, 0, 0); }
+.bottom-sheet-head {
+  flex: 0 0 auto;
+  background: rgba(41,21,15,.96);
+}
+.bottom-sheet-body {
+  min-height: 0;
+  -webkit-overflow-scrolling: touch;
+}
+.question-nav-grid {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+.question-nav-button {
+  min-width: 0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.018);
+}
+.question-nav-button:hover { transform: translateY(-1px); }
+.question-nav-current {
+  box-shadow: inset 0 0 0 1px rgba(247,232,223,.34), 0 0 0 1px rgba(247,232,223,.05);
+}
+
+@media (min-width: 640px) {
+  .bottom-sheet {
+    left: 50%;
+    right: auto;
+    bottom: 16px;
+    width: min(760px, calc(100vw - 32px));
+    border: 1px solid var(--line-strong);
+    border-radius: 16px;
+    transform: translate3d(-50%, calc(100% + 32px), 0);
+  }
+  .bottom-sheet.is-shown { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Phones are recomposed rather than merely shrinking the desktop layout. */
+@media (max-width: 639px) {
+  html { scroll-padding-top: 56px; }
+
+  /* Reduce expensive full-screen compositing on phones. */
+  body {
+    background-image:
+      radial-gradient(620px 420px at 88% -8%, rgba(61,34,25,.40), transparent 66%),
+      linear-gradient(180deg, var(--bg-upper) 0, var(--bg) 28rem, var(--bg) 100%);
+  }
+  .glass-panel {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,.055), transparent 25%, transparent 72%, rgba(255,255,255,.018)),
+      rgba(41,21,15,.96);
+  }
+  .glass-control::before { display: none; }
+  [data-tilt] { transform: none !important; }
+  [data-tilt]::before { display: none; }
+
+  .site-navbar { box-shadow: 0 8px 24px rgba(17,7,5,.18); }
+  .site-navbar-inner {
+    height: 56px;
+    padding-inline: 14px;
+  }
+  .site-brand { gap: 8px; }
+  .site-brand svg { width: 26px !important; height: 26px !important; }
+  .site-wordmark { font-size: 1.08rem !important; }
+  .nav-study-cta {
+    padding: .48rem .68rem !important;
+    border-radius: 9px;
+    font-size: .75rem !important;
+  }
+
+  .resource-page {
+    max-width: none;
+    padding-inline: 14px !important;
+    padding-bottom: 2.25rem !important;
+  }
+  .resource-breadcrumb {
+    padding-top: .8rem !important;
+    font-size: .8rem;
+  }
+  .resource-heading {
+    margin-top: .15rem !important;
+    margin-bottom: .75rem !important;
+  }
+  .resource-title {
+    font-size: 1.5rem !important;
+    line-height: 1.55 !important;
+  }
+  .resource-title-en { font-size: .9rem; }
+  .resource-meta { font-size: .73rem !important; }
+
+  .lesson-filter { margin-bottom: .7rem !important; }
+  .lesson-switcher {
+    grid-template-columns: 40px minmax(0,1fr) 40px !important;
+    border-radius: 12px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+  }
+  .lesson-step { min-height: 58px !important; }
+  .lesson-step svg { width: 17px; height: 17px; }
+  .lesson-current { padding: .38rem .55rem !important; }
+  .lesson-current > span:first-child {
+    font-size: .58rem !important;
+    letter-spacing: .1em !important;
+  }
+  .lesson-current > span:nth-child(2) {
+    margin-top: 0 !important;
+    font-size: .98rem !important;
+    line-height: 1.75 !important;
+  }
+  .lesson-current > span:last-child { display: none; }
+
+  .study-statbar {
+    margin-bottom: .45rem !important;
+    gap: .4rem !important;
+    flex-wrap: nowrap !important;
+  }
+  .study-statbar > * {
+    min-height: 36px;
+    padding: .4rem .62rem !important;
+    font-size: .75rem !important;
+    white-space: nowrap;
+  }
+  .study-statbar > button { flex: 0 1 auto; }
+
+  .question-progress {
+    height: 5px !important;
+    margin-bottom: .8rem !important;
+  }
+  .question-progress > i:last-child {
+    width: 2px !important;
+    height: 13px !important;
+  }
+
+  .study-modebar {
+    display: grid !important;
+    grid-template-columns: minmax(0,1fr) auto;
+    gap: .45rem !important;
+    margin-bottom: .8rem !important;
+  }
+  .order-segment {
+    grid-column: 1 / -1;
+    width: 100%;
+    display: grid !important;
+    grid-template-columns: minmax(0,1fr) 1px minmax(0,1fr);
+  }
+  .order-segment button {
+    min-height: 40px;
+    padding: .5rem .75rem !important;
+    font-size: .77rem !important;
+  }
+  .review-mode {
+    width: 100%;
+    min-height: 40px;
+    padding: .5rem .7rem !important;
+    font-size: .76rem !important;
+  }
+  .reset-mode {
+    min-height: 40px;
+    padding: .5rem .55rem !important;
+    font-size: .74rem !important;
+  }
+
+  .study-sheet {
+    border-radius: 14px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+  }
+  .study-sheet.sheet-correct { box-shadow: inset 3px 0 0 rgba(114,157,121,.82), 0 10px 30px rgba(0,0,0,.12); }
+  .study-sheet.sheet-wrong { box-shadow: inset 4px 0 0 rgba(226,111,100,.95), 0 10px 30px rgba(0,0,0,.12); }
+  .study-context-line {
+    gap: .2rem .65rem !important;
+    padding: .58rem .85rem !important;
+  }
+  .study-context-line > span:first-child { font-size: .62rem !important; }
+  .study-context-line > span:last-child {
+    max-width: 52%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: .76rem !important;
+  }
+  .study-question-body { padding: .95rem .95rem 1rem !important; }
+  .study-question-text {
+    font-size: 1.18rem !important;
+    line-height: 1.95 !important;
+  }
+  .study-answer {
+    margin-top: .75rem !important;
+    padding-top: .75rem !important;
+  }
+  .study-answer .thaana { line-height: 1.9; }
+
+  .mobile-action-bar {
+    background: rgba(31,15,11,.985) !important;
+    border-color: var(--line-strong) !important;
+    box-shadow: 0 -10px 30px rgba(0,0,0,.28);
+    padding-inline: 12px !important;
+  }
+  .mobile-action-bar button {
+    min-height: 48px;
+    font-size: .86rem;
+  }
+  .mobile-action-spacer { height: 5.5rem !important; }
+
+  .bottom-sheet {
+    max-height: 86dvh;
+    border-radius: 18px 18px 0 0;
+  }
+  .bottom-sheet-head { padding-inline: 14px !important; }
+  .bottom-sheet-body { padding-inline: 14px !important; }
+  .bottom-sheet-handle { width: 38px; }
+  .question-nav-grid {
+    grid-template-columns: repeat(5, minmax(0,1fr));
+    gap: 8px !important;
+  }
+  .question-nav-button {
+    border-radius: 10px !important;
+    font-size: .86rem !important;
+  }
+  .lesson-picker-grid { gap: 7px !important; }
+  .lesson-choice {
+    grid-template-columns: 40px minmax(0,1fr) 58px !important;
+    gap: 7px !important;
+    padding: .55rem .65rem !important;
+    border-radius: 11px !important;
+  }
+  .lesson-choice > span:first-child { font-size: .68rem !important; }
+  .lesson-choice > span:last-child { font-size: .69rem !important; }
+  .lesson-choice .thaana { font-size: .9rem !important; line-height: 1.65; }
+
+  /* No hover-only motion on touch layouts. */
+  .unit-motion:hover,
+  .question-nav-button:hover,
+  .glass-primary:hover { transform: none; box-shadow: none; }
+}
