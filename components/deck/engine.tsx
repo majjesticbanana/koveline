@@ -174,13 +174,34 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
   // keyboard
   useEffect(() => {
     if (!navOpen) return;
-    const t = window.setTimeout(() => {
-      document.querySelector<HTMLElement>('[data-current-question="true"]')?.scrollIntoView({
-        block: "center",
-        inline: "nearest",
+
+    // Keep the current question visible *inside the navigator only*. Using
+    // scrollIntoView here can move the page/viewport as well, which is what
+    // made the mobile picker feel offset and unstable.
+    let raf1 = 0;
+    let raf2 = 0;
+    raf1 = window.requestAnimationFrame(() => {
+      raf2 = window.requestAnimationFrame(() => {
+        const body = document.querySelector<HTMLElement>(".question-nav-dialog-body");
+        const currentButton = body?.querySelector<HTMLElement>('[data-current-question="true"]');
+        if (!body || !currentButton) return;
+
+        const bodyRect = body.getBoundingClientRect();
+        const currentRect = currentButton.getBoundingClientRect();
+        const target =
+          body.scrollTop +
+          (currentRect.top - bodyRect.top) -
+          body.clientHeight / 2 +
+          currentRect.height / 2;
+
+        body.scrollTo({ top: Math.max(0, target), behavior: "auto" });
       });
-    }, 340);
-    return () => window.clearTimeout(t);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(raf1);
+      window.cancelAnimationFrame(raf2);
+    };
   }, [navOpen, idx]);
 
   useEffect(() => {
@@ -325,6 +346,8 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
       onClose={() => setNavOpen(false)}
       title="Jump to a question"
       subtitle={<>Question {idx + 1} of {deck.length} · {counts.c} right · {counts.w} wrong</>}
+      variant="dialog"
+      bodyClassName="question-nav-dialog-body"
     >
       <div className="question-nav-grid grid gap-2.5">
         {deck.map((q, i) => {

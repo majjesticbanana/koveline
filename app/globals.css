@@ -916,3 +916,166 @@ button:active, a[role="button"]:active { transform: scale(.985); }
     box-shadow: inset 0 0 0 1px rgba(247,232,223,.20) !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Jump-to-question rebuild — centered by the viewport, never by the deck.
+   This intentionally overrides the generic bottom-sheet positioning.
+   -------------------------------------------------------------------------- */
+.bottom-sheet.bottom-sheet-dialog {
+  left: 50% !important;
+  right: auto !important;
+  top: 50% !important;
+  bottom: auto !important;
+  width: min(520px, calc(100vw - 32px)) !important;
+  max-width: 520px !important;
+  max-height: min(76dvh, 640px) !important;
+  border: 1px solid var(--line-strong) !important;
+  border-radius: 18px !important;
+  transform: translate3d(-50%, -47%, 0) scale(.985) !important;
+  transform-origin: center !important;
+  box-shadow: 0 22px 70px rgba(0,0,0,.46) !important;
+  contain: layout paint !important;
+}
+.bottom-sheet.bottom-sheet-dialog.is-shown {
+  transform: translate3d(-50%, -50%, 0) scale(1) !important;
+}
+.question-nav-dialog-body {
+  min-height: 0;
+  overflow-x: hidden !important;
+  overscroll-behavior: contain;
+}
+
+@media (max-width: 639px) {
+  /* Center the entire study column in the physical viewport. */
+  .resource-page {
+    width: 100% !important;
+    max-width: 430px !important;
+    margin-inline: auto !important;
+    padding-inline: 15px !important;
+  }
+  .deck-engine {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-inline: auto !important;
+  }
+
+  /* Lesson control should read as secondary navigation. */
+  .lesson-filter {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+  .lesson-switcher {
+    width: min(100%, 286px) !important;
+    margin-inline: auto !important;
+    grid-template-columns: 34px minmax(0,1fr) 34px !important;
+  }
+  .lesson-step,
+  .lesson-current {
+    min-height: 46px !important;
+  }
+
+  /* Rebuilt Jump to Question: a centered dialog, not a bottom drawer. */
+  .bottom-sheet.bottom-sheet-dialog {
+    left: 50% !important;
+    right: auto !important;
+    top: 50% !important;
+    bottom: auto !important;
+    width: min(420px, calc(100vw - 24px)) !important;
+    max-width: calc(100vw - 24px) !important;
+    max-height: min(72dvh, 590px) !important;
+    border-radius: 16px !important;
+    transform: translate3d(-50%, -47%, 0) scale(.985) !important;
+  }
+  .bottom-sheet.bottom-sheet-dialog.is-shown {
+    transform: translate3d(-50%, -50%, 0) scale(1) !important;
+  }
+  .bottom-sheet.bottom-sheet-dialog .bottom-sheet-handle {
+    display: none !important;
+  }
+  .bottom-sheet.bottom-sheet-dialog .bottom-sheet-head {
+    padding: .78rem .82rem .66rem !important;
+  }
+  .bottom-sheet.bottom-sheet-dialog .bottom-sheet-body {
+    padding: .72rem .82rem calc(.82rem + env(safe-area-inset-bottom)) !important;
+  }
+  .question-nav-dialog-body .question-nav-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    width: 100% !important;
+    margin-inline: auto !important;
+  }
+  .question-nav-dialog-body .question-nav-button {
+    width: 100% !important;
+    min-width: 0 !important;
+    aspect-ratio: 1 / 1 !important;
+  }
+
+  /* Keep the main controls visually centered as a single composition. */
+  .study-statbar,
+  .study-modebar {
+    width: 100% !important;
+    margin-inline: auto !important;
+  }
+  .order-segment {
+    width: min(100%, 262px) !important;
+  }
+  .study-sheet {
+    width: 100% !important;
+    margin-inline: auto !important;
+  }
+  .mobile-action-bar > div {
+    width: min(100%, 400px) !important;
+    margin-inline: auto !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Jump-to-question v3 — structural centering.
+   The dialog lives inside a full-viewport grid stage, so no parent transform,
+   scrollbar width, deck width, or bottom-sheet rule can shift it sideways.
+   -------------------------------------------------------------------------- */
+.question-dialog-stage {
+  padding:
+    max(12px, env(safe-area-inset-top))
+    max(12px, env(safe-area-inset-right))
+    max(12px, env(safe-area-inset-bottom))
+    max(12px, env(safe-area-inset-left));
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+.question-dialog-stage.is-shown { opacity: 1; }
+.question-dialog {
+  pointer-events: auto;
+  width: min(520px, 100%);
+  max-height: min(76dvh, 640px);
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
+  box-shadow: 0 22px 70px rgba(0,0,0,.46);
+  transform: translate3d(0, 8px, 0) scale(.985);
+  opacity: .985;
+  transition: transform 220ms cubic-bezier(.22,1,.36,1), opacity 180ms ease;
+  contain: layout paint;
+}
+.question-dialog.is-shown {
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+}
+
+@media (max-width: 639px) {
+  .question-dialog-stage {
+    padding-inline: 12px;
+    padding-top: max(12px, env(safe-area-inset-top));
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+  .question-dialog {
+    width: min(420px, 100%);
+    max-height: min(72dvh, 590px);
+    border-radius: 16px;
+  }
+  .question-dialog .bottom-sheet-handle { display: none !important; }
+  .question-dialog .bottom-sheet-head { padding: .78rem .82rem .66rem !important; }
+  .question-dialog .bottom-sheet-body { padding: .72rem .82rem .82rem !important; }
+}

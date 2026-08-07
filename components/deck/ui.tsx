@@ -217,13 +217,15 @@ export function ContextLine({
 const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
 export function BottomSheet({
-  open, onClose, title, subtitle, children,
+  open, onClose, title, subtitle, children, variant = "sheet", bodyClassName = "",
 }: {
   open: boolean;
   onClose: () => void;
   title: string;
   subtitle?: React.ReactNode;
   children: React.ReactNode;
+  variant?: "sheet" | "dialog";
+  bodyClassName?: string;
 }) {
   const [mounted, setMounted] = useState(false);
   const [shown, setShown] = useState(false);
@@ -269,6 +271,35 @@ export function BottomSheet({
 
   if (!mounted || typeof document === "undefined") return null;
 
+  const panel = (
+    <div
+      ref={sheetRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label={title}
+      className={`${variant === "dialog" ? "question-dialog" : "bottom-sheet fixed"} glass-panel z-[90] flex flex-col ${shown ? "is-shown" : ""}`}
+    >
+      <div className="bottom-sheet-head border-b border-line px-4 pb-3 pt-3 sm:px-5 sm:pt-4">
+        <div className="bottom-sheet-handle mx-auto mb-2.5 h-[4px] w-[44px] rounded-full bg-line sm:mb-3" aria-hidden />
+        <div className="flex items-center justify-between gap-3">
+          <div className="min-w-0">
+            <h3 className="truncate font-display text-[1.08rem] font-bold sm:text-[1.15rem]">{title}</h3>
+            {subtitle && <div className="mt-0.5 truncate text-[0.76rem] text-cocoa sm:text-[0.82rem]">{subtitle}</div>}
+          </div>
+          <button
+            ref={closeRef}
+            onClick={onClose}
+            className="grid h-10 w-10 shrink-0 place-items-center rounded-ctl text-cocoa transition hover:bg-raised hover:text-coffee"
+            aria-label="Close navigator"
+          >
+            <X className="h-5 w-5" aria-hidden />
+          </button>
+        </div>
+      </div>
+      <div className={`bottom-sheet-body overflow-y-auto overscroll-contain px-4 pb-[calc(1.25rem+env(safe-area-inset-bottom))] pt-3 sm:px-5 sm:pb-6 sm:pt-4 ${bodyClassName}`}>{children}</div>
+    </div>
+  );
+
   return createPortal(
     <>
       <div
@@ -276,32 +307,11 @@ export function BottomSheet({
         aria-hidden
         className={`bottom-sheet-backdrop fixed inset-0 z-[80] transition-opacity duration-300 ${shown ? "is-shown" : ""}`}
       />
-      <div
-        ref={sheetRef}
-        role="dialog"
-        aria-modal="true"
-        aria-label={title}
-        className={`bottom-sheet glass-panel fixed z-[90] flex flex-col ${shown ? "is-shown" : ""}`}
-      >
-        <div className="bottom-sheet-head border-b border-line px-4 pb-3 pt-3 sm:px-5 sm:pt-4">
-          <div className="bottom-sheet-handle mx-auto mb-2.5 h-[4px] w-[44px] rounded-full bg-line sm:mb-3" aria-hidden />
-          <div className="flex items-center justify-between gap-3">
-            <div className="min-w-0">
-              <h3 className="truncate font-display text-[1.08rem] font-bold sm:text-[1.15rem]">{title}</h3>
-              {subtitle && <div className="mt-0.5 truncate text-[0.76rem] text-cocoa sm:text-[0.82rem]">{subtitle}</div>}
-            </div>
-            <button
-              ref={closeRef}
-              onClick={onClose}
-              className="grid h-10 w-10 shrink-0 place-items-center rounded-ctl text-cocoa transition hover:bg-raised hover:text-coffee"
-              aria-label="Close navigator"
-            >
-              <X className="h-5 w-5" aria-hidden />
-            </button>
-          </div>
+      {variant === "dialog" ? (
+        <div className={`question-dialog-stage fixed inset-0 z-[90] grid place-items-center ${shown ? "is-shown" : ""}`}>
+          {panel}
         </div>
-        <div className="bottom-sheet-body overflow-y-auto overscroll-contain px-4 pb-[calc(1.25rem+env(safe-area-inset-bottom))] pt-3 sm:px-5 sm:pb-6 sm:pt-4">{children}</div>
-      </div>
+      ) : panel}
     </>,
     document.body,
   );
