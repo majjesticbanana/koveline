@@ -243,7 +243,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
           const s = status[q.id];
           const isCur = i === idx;
           const cls = isCur
-            ? "bg-teal border-teal text-white"
+            ? "bg-teal border-teal text-accent-ink"
             : s === "correct"
             ? "bg-green-bg border-green-line text-green"
             : s === "wrong"
@@ -285,7 +285,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
           </p>
           <button
             onClick={() => (isReview ? changeMode("sequential") : changeLesson(ALL))}
-            className="rounded-ctl bg-teal px-6 py-3 font-bold text-white transition hover:bg-teal-deep"
+            className="rounded-ctl bg-teal px-6 py-3 font-bold text-accent-ink transition hover:bg-teal-deep hover:-translate-y-px"
           >
             {isReview ? "Start the deck" : "Show all questions"}
           </button>
@@ -330,7 +330,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
       <ProgressBar correct={counts.c} wrong={counts.w} total={deck.length} />
       <ModeBar mode={mode} wrongTotal={wrongTotal} onMode={changeMode} onReset={reset} />
 
-      <div className={sheetShell(tone)}>
+      <div data-tilt="" className={sheetShell(tone)}>
         <ContextLine
           tone={tone}
           index={idx + 1}
@@ -339,12 +339,12 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
           lessonTitle={current?.unitBadge?.lessonTitle ?? lesson?.title}
         />
 
-        <div className="px-5 py-5 sm:px-6">
+        <div key={current?.id} className="animate-question-in px-5 py-5 sm:px-6">
           {current?.context && (
             <div
               dir="rtl"
               lang="dv"
-              className="thaana mb-3 rounded-ctl border border-dashed border-line bg-cream/70 px-4 py-2.5 text-[0.95rem] leading-relaxed text-cocoa"
+              className="thaana mb-3 rounded-ctl border border-dashed border-line bg-deep/30 px-4 py-2.5 text-[0.95rem] leading-relaxed text-cocoa"
             >
               {current.context}
             </div>
@@ -361,7 +361,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
           <span className={`annotate mt-3 ${showAnswer ? "swept" : ""}`} aria-hidden />
 
           {showAnswer && current && (
-            <div className="mt-4 animate-rise border-t border-line pt-4">
+            <div className="answer-reveal mt-4 border-t border-line pt-4">
               <div className="mb-2 flex items-baseline justify-between gap-3">
                 <span className="text-[0.68rem] font-extrabold uppercase tracking-[0.12em] text-teal-deep">
                   Answer

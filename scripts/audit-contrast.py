@@ -21,7 +21,7 @@ def utils(prop):
 
 TXT = {k: v for k, v in utils("color").items() if k.startswith("text-")}
 BG = {k: v for k, v in utils("background-color").items() if k.startswith("bg-")}
-BODY_COLOR, BODY_BG = "#2a1f16", "#f6efe2"   # keep in sync with globals.css
+BODY_COLOR, BODY_BG = "#f7e8df", "#190c09"   # keep in sync with globals.css
 
 def lum(v):
     m = re.match(r'#([0-9a-f]{6})', v)

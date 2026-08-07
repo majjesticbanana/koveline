@@ -42,7 +42,7 @@ export function Home({
   return (
     <main className="mx-auto max-w-[880px] px-5 pb-10">
       {/* ---- hero: compact, per Sol #7 ---- */}
-      <section className="pb-12 pt-12 text-center sm:pt-14">
+      <section className="relative pb-12 pt-12 text-center sm:pt-14">
         <p className="mb-3 text-[0.72rem] font-extrabold uppercase tracking-[0.16em] text-teal-deep">
           Grade 9 &amp; 10 · Islam
         </p>
@@ -66,21 +66,21 @@ export function Home({
           {loaded && last ? (
             <Link
               href={last.href}
-              className="inline-flex items-center gap-2 rounded-ctl bg-teal px-6 py-3 font-bold text-white transition hover:bg-teal-deep"
+              className="glass-control glass-primary inline-flex items-center gap-2 rounded-ctl border px-6 py-3 font-bold transition duration-200 hover:-translate-y-px"
             >
               <Play className="h-4 w-4" aria-hidden /> Continue: {last.label}
             </Link>
           ) : (
             <a
               href="#subjects"
-              className="inline-flex items-center gap-2 rounded-ctl bg-teal px-6 py-3 font-bold text-white transition hover:bg-teal-deep"
+              className="glass-control glass-primary inline-flex items-center gap-2 rounded-ctl border px-6 py-3 font-bold transition duration-200 hover:-translate-y-px"
             >
               Start studying <ArrowRight className="h-4 w-4" aria-hidden />
             </a>
           )}
           <a
             href="#subjects"
-            className="inline-flex items-center gap-2 rounded-ctl border border-line-strong bg-surface px-6 py-3 font-bold text-coffee-deep transition hover:border-caramel"
+            className="glass-control inline-flex items-center gap-2 rounded-ctl border px-6 py-3 font-bold text-coffee-deep transition hover:border-teal/70 hover:-translate-y-px"
           >
             Choose a unit
           </a>
@@ -108,7 +108,7 @@ export function Home({
                 </div>
                 <Link
                   href={c.mixedHref}
-                  className="inline-flex items-center gap-1.5 rounded-ctl border border-teal/50 px-4 py-2 text-[0.88rem] font-bold text-teal-deep transition hover:bg-teal-soft"
+                  className="glass-control inline-flex items-center gap-1.5 rounded-ctl border px-4 py-2 text-[0.88rem] font-bold text-teal-deep transition hover:border-teal/70"
                 >
                   Study everything · {c.totals.questions}
                 </Link>
@@ -124,7 +124,7 @@ export function Home({
                     <Link
                       key={u.key}
                       href={u.href}
-                      className="group relative overflow-hidden rounded-card border border-line bg-surface px-5 py-4 transition-colors hover:border-line-strong hover:bg-[#fbf5e8]"
+                      data-tilt="" className="unit-motion group relative overflow-hidden rounded-card border border-line bg-surface px-5 py-4 hover:border-line-strong hover:bg-hover"
                     >
                       {/* oversized margin number, low contrast (Sol #4) */}
                       <span
@@ -161,7 +161,7 @@ export function Home({
                               <span className="text-[0.76rem] font-bold text-teal-deep">Complete</span>
                             ) : (
                               <>
-                                <div className="h-[3px] overflow-hidden rounded-full bg-latte">
+                                <div className="h-[3px] overflow-hidden rounded-full bg-raised">
                                   <i
                                     className="block h-full rounded-full bg-teal transition-[width] duration-500"
                                     style={{ width: `${pct}%` }}
@@ -191,7 +191,7 @@ export function Home({
       </div>
 
       {/* ---- provenance, quiet (Sol #17); no personal note (owner ruling) ---- */}
-      <section className="mt-14 border-l-2 border-caramel/70 py-1 pl-5">
+      <section className="mt-14 border-l-2 border-line-strong py-1 pl-5">
         <div className="text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-cocoa">
           Source material
         </div>

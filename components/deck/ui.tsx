@@ -12,7 +12,7 @@ export type Tone = "" | "correct" | "wrong";
 
 export function Kbd({ children }: { children: React.ReactNode }) {
   return (
-    <kbd className="rounded-md bg-latte px-1.5 py-0.5 font-display text-[0.74rem] font-bold">
+    <kbd className="rounded-md border border-line bg-raised px-1.5 py-0.5 font-display text-[0.74rem] font-bold text-coffee">
       {children}
     </kbd>
   );
@@ -44,7 +44,7 @@ export function StatBar({
     <div className="mb-3 flex flex-wrap items-center justify-center gap-2 text-[0.85rem]">
       <button
         onClick={onOpenNav}
-        className="inline-flex items-center gap-1.5 rounded-ctl border border-line bg-surface px-3 py-1.5 font-semibold text-coffee-deep transition hover:border-caramel"
+        className="glass-control inline-flex items-center gap-1.5 rounded-ctl border px-3 py-1.5 font-semibold text-coffee-deep transition hover:border-teal/60"
         aria-label={`Open the question navigator — question ${index} of ${total}`}
       >
         Question <b className="font-display">{index}</b>
@@ -100,7 +100,7 @@ export function ModeBar({
       onClick={() => onMode(m)}
       aria-pressed={seg === m}
       className={`px-3.5 py-1.5 text-[0.84rem] font-bold transition ${
-        seg === m ? "bg-teal text-white" : "text-coffee-deep hover:bg-latte/60"
+        seg === m ? "bg-teal text-accent-ink" : "text-coffee-deep hover:bg-raised"
       }`}
     >
       {label}
@@ -112,7 +112,7 @@ export function ModeBar({
       <div
         role="group"
         aria-label="Question order"
-        className="flex overflow-hidden rounded-ctl border border-line bg-surface"
+        className="glass-panel flex overflow-hidden rounded-ctl border"
       >
         {segBtn("sequential", "In order")}
         <span className="w-px bg-line" aria-hidden />
@@ -124,7 +124,7 @@ export function ModeBar({
         aria-pressed={mode === "wrongOnly"}
         className={`rounded-ctl border px-3.5 py-1.5 text-[0.84rem] font-bold transition ${
           mode === "wrongOnly"
-            ? "border-red bg-red text-white"
+            ? "border-red bg-red text-cream"
             : hasWrong
             ? "border-red-line bg-red-bg text-red hover:border-red"
             : "cursor-not-allowed border-line bg-surface text-cocoa/50"
@@ -147,12 +147,12 @@ export function ModeBar({
 /* ---------- the study sheet ---------- */
 
 export function sheetShell(tone: Tone) {
-  return `animate-fade overflow-hidden rounded-panel border transition-colors duration-300 ${
+  return `study-sheet animate-fade overflow-hidden rounded-panel border transition-colors duration-300 ${
     tone === "correct"
-      ? "border-green-line bg-[#f7faf0]"
+      ? "sheet-correct border-green-line bg-green-bg"
       : tone === "wrong"
-      ? "border-red-line bg-[#fbf2ed]"
-      : "border-line bg-surface"
+      ? "sheet-wrong border-red-line bg-red-bg"
+      : "sheet-neutral border-line bg-surface"
   }`;
 }
 
@@ -169,7 +169,7 @@ export function ContextLine({
   return (
     <div
       className={`flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b border-line px-5 py-3 transition-colors duration-300 ${
-        tone === "correct" ? "bg-green-bg/60" : tone === "wrong" ? "bg-red-bg/60" : "bg-cream/60"
+        tone === "correct" ? "bg-green-bg/70" : tone === "wrong" ? "bg-red-bg/70" : "bg-deep/25"
       }`}
     >
       <span className="text-[0.7rem] font-extrabold uppercase tracking-[0.12em] text-cocoa">
@@ -253,7 +253,7 @@ export function BottomSheet({
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className={`fixed inset-x-0 bottom-0 z-50 flex max-h-[80vh] flex-col rounded-t-panel border-t border-line bg-surface shadow-[0_-18px_44px_-20px_rgba(42,31,22,.4)] transition-transform duration-300 ${shown ? "translate-y-0" : "translate-y-full"}`}
+        className={`glass-panel fixed inset-x-0 bottom-0 z-50 flex max-h-[80vh] flex-col rounded-t-panel border-t shadow-[0_-18px_44px_-20px_rgba(0,0,0,.55)] transition-transform duration-300 ${shown ? "translate-y-0" : "translate-y-full"}`}
         style={{ transitionTimingFunction: "cubic-bezier(.22,1,.36,1)" }}
       >
         <div className="border-b border-line px-5 pb-3 pt-4">
@@ -263,7 +263,7 @@ export function BottomSheet({
             <button
               ref={closeRef}
               onClick={onClose}
-              className="grid h-9 w-9 place-items-center rounded-ctl text-cocoa hover:bg-black/5 hover:text-coffee"
+              className="grid h-9 w-9 place-items-center rounded-ctl text-cocoa hover:bg-raised hover:text-coffee"
               aria-label="Close navigator"
             >
               <X className="h-5 w-5" aria-hidden />
@@ -322,7 +322,7 @@ export function CompleteCard({
         {wrong > 0 && (
           <button
             onClick={onReviewWrong}
-            className="rounded-ctl bg-teal px-6 py-3 font-bold text-white transition hover:bg-teal-deep"
+            className="rounded-ctl bg-teal px-6 py-3 font-bold text-accent-ink transition hover:bg-teal-deep hover:-translate-y-px"
           >
             Review {wrong}
           </button>
@@ -331,8 +331,8 @@ export function CompleteCard({
           onClick={onRestart}
           className={`rounded-ctl px-6 py-3 font-bold transition ${
             wrong > 0
-              ? "border border-line-strong bg-surface text-coffee-deep hover:border-caramel"
-              : "bg-teal text-white hover:bg-teal-deep"
+              ? "glass-control border text-coffee-deep hover:border-teal/60"
+              : "bg-teal text-accent-ink hover:bg-teal-deep"
           }`}
         >
           Study again
@@ -355,7 +355,7 @@ export function RevealButton({ onClick }: { onClick: () => void }) {
     <div className="mt-5 flex justify-center">
       <button
         onClick={onClick}
-        className="rounded-ctl bg-teal px-7 py-3 font-bold text-white transition hover:bg-teal-deep active:translate-y-px"
+        className="rounded-ctl bg-teal px-7 py-3 font-bold text-accent-ink transition hover:bg-teal-deep hover:-translate-y-px active:translate-y-px"
       >
         Reveal answer
       </button>
@@ -370,7 +370,7 @@ export function MarkButtons({ status, onMark }: { status?: Mark; onMark: (correc
         onClick={() => onMark(false)}
         aria-pressed={status === "wrong"}
         className={`inline-flex items-center gap-2 rounded-ctl border px-5 py-2.5 font-bold transition ${
-          status === "wrong" ? "border-red bg-red text-white" : "border-red-line bg-red-bg text-red hover:border-red"
+          status === "wrong" ? "border-red bg-red text-cream" : "border-red-line bg-red-bg text-red hover:border-red"
         }`}
       >
         <X className="h-4 w-4" aria-hidden /> Got it wrong
@@ -379,7 +379,7 @@ export function MarkButtons({ status, onMark }: { status?: Mark; onMark: (correc
         onClick={() => onMark(true)}
         aria-pressed={status === "correct"}
         className={`inline-flex items-center gap-2 rounded-ctl border px-5 py-2.5 font-bold transition ${
-          status === "correct" ? "border-green bg-green text-white" : "border-green-line bg-green-bg text-green hover:border-green"
+          status === "correct" ? "border-green bg-green text-cream" : "border-green-line bg-green-bg text-green hover:border-green"
         }`}
       >
         <Check className="h-4 w-4" aria-hidden /> Got it right
@@ -393,7 +393,7 @@ export function NextButton({ isLast, onClick }: { isLast: boolean; onClick: () =
     <div className="mt-4 flex justify-center">
       <button
         onClick={onClick}
-        className="rounded-ctl border border-line-strong bg-surface px-6 py-2.5 font-bold text-coffee-deep transition hover:border-caramel"
+        className="glass-control rounded-ctl border px-6 py-2.5 font-bold text-coffee-deep transition hover:border-teal/60"
       >
         {isLast ? "See how you did" : "Next question →"}
       </button>
@@ -406,7 +406,7 @@ export function NextButton({ isLast, onClick }: { isLast: boolean; onClick: () =
 export function MobileActionBar({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-surface/95 px-4 pt-2.5 backdrop-blur sm:hidden"
+      className="glass-panel fixed inset-x-0 bottom-0 z-30 border-t px-4 pt-2.5 sm:hidden"
       style={{ paddingBottom: "calc(0.625rem + env(safe-area-inset-bottom))" }}
     >
       <div className="mx-auto flex max-w-[480px] items-center justify-center gap-2.5 [&>div]:mt-0 [&>div]:flex-1 [&_button]:w-full">

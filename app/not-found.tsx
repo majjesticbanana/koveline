@@ -12,7 +12,7 @@ export default function NotFound() {
         <p className="mt-2 text-cocoa">This page doesn&apos;t exist. Back to the questions.</p>
         <Link
           href="/"
-          className="mt-6 inline-block rounded-ctl bg-teal px-6 py-3 font-bold text-white transition hover:bg-teal-deep"
+          className="mt-6 inline-block rounded-ctl bg-teal px-6 py-3 font-bold text-accent-ink transition hover:bg-teal-deep hover:-translate-y-px"
         >
           Back to Koveline
         </Link>

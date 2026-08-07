@@ -1,3 +1,5 @@
+> **2026-08-07 visual update:** the old cream/teal system in parts of this handoff is superseded by `DESIGN-DIRECTION.md`. The current canonical direction is **Mahogany × Rust + restrained glass**, with an eyeless/featureless Koveli mark. Grade 10 is now present as well.
+
 # Koveline v3 — what changed and what's yours to do
 
 ## Done in this drop

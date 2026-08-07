@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { SwRegister } from "@/components/sw-register";
+import { AmbientMotion } from "@/components/ambient-motion";
 import "./globals.css";
 
 const faruma = localFont({
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
   keywords: ["Koveline", "Maldives", "study", "flashcards", "Grade 9", "Islam", "Dhivehi"],
   applicationName: "Koveline",
   manifest: "/manifest.webmanifest",
-  appleWebApp: { capable: true, title: "Koveline", statusBarStyle: "default" },
+  appleWebApp: { capable: true, title: "Koveline", statusBarStyle: "black-translucent" },
   openGraph: {
     title: "Koveline — How much do you really know?",
     description: "Study resources from the Maldives — Grade 9 and Grade 10 Islam.",
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f6efe2",
+  themeColor: "#190c09",
   width: "device-width",
   initialScale: 1,
 };
@@ -55,10 +56,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans">
         <a
           href="#main"
-          className="absolute left-3 top-3 z-[100] -translate-y-24 rounded-ctl bg-teal px-4 py-2 font-bold text-white transition-transform focus:translate-y-0"
+          className="absolute left-3 top-3 z-[100] -translate-y-24 rounded-ctl bg-teal px-4 py-2 font-bold text-accent-ink transition-transform focus:translate-y-0"
         >
           Skip to content
         </a>
+        <AmbientMotion />
         <Navbar />
         <div id="main">{children}</div>
         <Footer />

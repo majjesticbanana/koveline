@@ -6,38 +6,45 @@
   --font-display: 'Bricolage Grotesque', sans-serif;
   --font-body: 'Hanken Grotesk', system-ui, sans-serif;
   --font-thaana: var(--font-faruma), 'Noto Sans Thaana', sans-serif;
-  --ring: rgba(18, 113, 107, 0.45);
+
+  /* Mahogany × Rust */
+  --bg: #190c09;
+  --bg-upper: #21110d;
+  --deep: #110705;
+  --surface: #29150f;
+  --raised: #331b14;
+  --hover: #43271d;
+  --text: #f7e8df;
+  --text-2: #dcc7bc;
+  --muted: #b19489;
+  --line: #4a2921;
+  --line-strong: #66382d;
+  --ember: #c66340;
+  --ember-bright: #e48662;
+  --sage: #729d79;
+  --sage-bright: #9bc1a0;
+  --brick: #b65752;
+  --brick-bright: #dc7a70;
+  --ring: rgba(228, 134, 98, 0.56);
+  --mx: 50vw;
+  --my: 25vh;
+  --scroll-progress: 0%;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; background: var(--bg); }
 
 body {
-  background-color: #f6efe2;
-  color: #2a1f16;
+  background-color: var(--bg);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.022' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(470px 350px at var(--mx) var(--my), rgba(198,99,64,.052), transparent 72%),
+    radial-gradient(900px 600px at 90% -10%, rgba(61,34,25,.52), transparent 65%),
+    radial-gradient(720px 520px at -8% 38%, rgba(67,39,29,.18), transparent 70%),
+    linear-gradient(180deg, var(--bg-upper) 0, var(--bg) 34rem, var(--bg) 100%);
+  color: var(--text);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   position: relative;
-}
-
-/* One warm glow + barely-there grain. Fixed layer: no scroll repaints. */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(820px 500px at 88% -6%, #fdf6e8 0%, rgba(253, 246, 232, 0) 60%),
-    radial-gradient(640px 420px at -6% 10%, #eef1e9 0%, rgba(238, 241, 233, 0) 55%);
-}
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 .thaana {
@@ -48,16 +55,117 @@ body::after {
 
 *:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
 
-/* coral annotation sweep on reveal — hero flight-line's echo, used once */
+/* Scroll progress is a tiny kinetic signature. */
+.koveline-scroll-progress {
+  position: fixed;
+  inset: 0 auto auto 0;
+  z-index: 100;
+  height: 2px;
+  width: var(--scroll-progress);
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--ember), var(--ember-bright));
+  box-shadow: 0 0 16px rgba(198,99,64,.22);
+  transition: width 80ms linear;
+}
+
+/* Restrained glass: interaction material, not content material. */
+.glass-control,
+.glass-panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.085), transparent 24%, transparent 72%, rgba(255,255,255,.025)),
+    rgba(41,21,15,.66);
+  border-color: rgba(102,56,45,.72) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.12);
+  backdrop-filter: blur(18px) saturate(1.12);
+}
+
+.glass-control::before {
+  content: "";
+  position: absolute;
+  top: -55%;
+  left: -58%;
+  width: 48%;
+  height: 210%;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent);
+  transform: rotate(18deg);
+  transition: left .55s cubic-bezier(.22,.8,.25,1);
+}
+.glass-control:hover::before { left: 112%; }
+
+/* Cursor-reactive cards. JS only updates the variables; CSS owns the motion. */
+[data-tilt] {
+  --rx: 0deg;
+  --ry: 0deg;
+  --cx: 50%;
+  --cy: 50%;
+  transform: perspective(820px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 150ms linear, border-color 220ms ease, background-color 220ms ease, box-shadow 220ms ease;
+  will-change: transform;
+}
+[data-tilt]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(260px circle at var(--cx) var(--cy), rgba(198,99,64,.055), transparent 64%);
+  transition: opacity 220ms ease;
+}
+[data-tilt]:hover::before { opacity: 1; }
+
+.unit-motion::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--ember), var(--ember-bright));
+  transition: transform .34s cubic-bezier(.22,.8,.25,1);
+}
+.unit-motion:hover::after { transform: scaleX(1); }
+.unit-motion:hover { box-shadow: 0 14px 38px rgba(0,0,0,.14); }
+
+/* Flight line / reveal line: ember while neutral, semantic once marked. */
 .annotate {
   display: block;
-  height: 3px;
+  height: 2px;
   width: 0;
   border-radius: 3px;
-  background: #d65f45;
-  transition: width 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+  background: linear-gradient(90deg, var(--ember), var(--ember-bright));
+  transition: width .34s cubic-bezier(.22,.8,.25,1), background .28s ease;
 }
 .annotate.swept { width: 100%; }
+.study-sheet.sheet-correct .annotate { background: linear-gradient(90deg, var(--sage), var(--sage-bright)); }
+.study-sheet.sheet-wrong .annotate { background: linear-gradient(90deg, var(--brick), var(--brick-bright)); }
+
+.study-sheet {
+  box-shadow: 0 18px 52px rgba(0,0,0,.16);
+}
+.study-sheet.sheet-correct {
+  box-shadow: inset 3px 0 0 rgba(114,157,121,.82), 0 18px 52px rgba(0,0,0,.16);
+}
+.study-sheet.sheet-wrong {
+  box-shadow: inset 3px 0 0 rgba(182,87,82,.86), 0 18px 52px rgba(0,0,0,.16);
+}
+
+.answer-reveal {
+  animation: answer-reveal .22s cubic-bezier(.22,.8,.25,1);
+  transform-origin: top;
+}
+@keyframes answer-reveal {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* A tiny press response; never bouncy. */
+button:active, a[role="button"]:active { transform: scale(.985); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -65,5 +173,23 @@ body::after {
     transition: none !important;
     scroll-behavior: auto !important;
   }
+  [data-tilt] { transform: none !important; }
   .annotate.swept { width: 100%; }
+  .koveline-scroll-progress { display: none; }
+}
+
+/* Strongest restrained-glass control: warmth lives in the edge/light, not a large orange slab. */
+.glass-primary {
+  color: var(--text);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.10), transparent 26%, transparent 72%, rgba(255,255,255,.025)),
+    linear-gradient(180deg, rgba(198,99,64,.16), rgba(41,21,15,.70));
+  border-color: rgba(198,99,64,.70) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 8px 30px rgba(0,0,0,.16);
+}
+.glass-primary:hover {
+  border-color: rgba(228,134,98,.90) !important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.12), transparent 26%, transparent 72%, rgba(255,255,255,.03)),
+    linear-gradient(180deg, rgba(198,99,64,.22), rgba(41,21,15,.74));
 }

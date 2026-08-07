@@ -35,7 +35,7 @@ export function KoelMark({
   );
 }
 
-/** Curved flight line ending in a coral dot. Scales to its container. */
+/** Curved flight line ending in a brighter ember point. Scales to its container. */
 export function FlightLine({ className = "" }: { className?: string }) {
   return (
     <svg
@@ -47,12 +47,12 @@ export function FlightLine({ className = "" }: { className?: string }) {
     >
       <path
         d="M2 12 C 60 4, 130 4, 186 10"
-        stroke="#12716b"
+        stroke="var(--ember)"
         strokeWidth="3"
         strokeLinecap="round"
         fill="none"
       />
-      <circle cx="192" cy="10" r="4.5" fill="#d65f45" />
+      <circle cx="192" cy="10" r="4.5" fill="var(--ember-bright)" />
     </svg>
   );
 }
