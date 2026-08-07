@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { Check, X, Save } from "lucide-react";
+import { Check, X, Save, Grid3X3 } from "lucide-react";
 import { KoelMark } from "@/components/koel";
 
 export type Mode = "random" | "sequential" | "wrongOnly";
@@ -45,9 +45,10 @@ export function StatBar({
     <div className="study-statbar mb-3 flex flex-wrap items-center justify-center gap-2 text-[0.85rem]">
       <button
         onClick={onOpenNav}
-        className="glass-control inline-flex items-center gap-1.5 rounded-ctl border px-3 py-1.5 font-semibold text-coffee-deep transition hover:border-teal/60"
+        className="question-jump-trigger glass-control inline-flex items-center gap-1.5 rounded-ctl border px-3 py-1.5 font-semibold text-coffee-deep transition hover:border-teal/60"
         aria-label={`Open the question navigator — question ${index} of ${total}`}
       >
+        <Grid3X3 className="question-jump-icon h-3.5 w-3.5 text-cocoa" aria-hidden />
         Question <b className="font-display">{index}</b>
         <span className="text-cocoa">/ {total}</span>
       </button>
@@ -103,7 +104,7 @@ export function ProgressBar({
       {total > 0 && (
         <i
           aria-hidden
-          className="pointer-events-none absolute top-1/2 z-10 h-[12px] w-[2px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow-[0_0_7px_rgba(255,255,255,.58)] transition-[left] duration-300"
+          className="question-progress-current pointer-events-none absolute top-1/2 z-10 h-[12px] w-[2px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white transition-[left] duration-300"
           style={{ left: `${markerPct}%` }}
         />
       )}
@@ -384,7 +385,7 @@ export function RevealButton({ onClick }: { onClick: () => void }) {
     <div className="mt-5 flex justify-center">
       <button
         onClick={onClick}
-        className="rounded-ctl bg-teal px-7 py-3 font-bold text-accent-ink transition hover:bg-teal-deep hover:-translate-y-px active:translate-y-px"
+        className="reveal-action rounded-ctl bg-teal px-7 py-3 font-bold text-accent-ink transition hover:bg-teal-deep hover:-translate-y-px active:translate-y-px"
       >
         Reveal answer
       </button>
@@ -398,7 +399,7 @@ export function MarkButtons({ status, onMark }: { status?: Mark; onMark: (correc
       <button
         onClick={() => onMark(false)}
         aria-pressed={status === "wrong"}
-        className={`inline-flex items-center gap-2 rounded-ctl border px-5 py-2.5 font-bold transition ${
+        className={`mark-action inline-flex items-center gap-2 rounded-ctl border px-5 py-2.5 font-bold transition ${
           status === "wrong" ? "border-red bg-red text-cream" : "border-red-line bg-red-bg text-red hover:border-red"
         }`}
       >
@@ -407,7 +408,7 @@ export function MarkButtons({ status, onMark }: { status?: Mark; onMark: (correc
       <button
         onClick={() => onMark(true)}
         aria-pressed={status === "correct"}
-        className={`inline-flex items-center gap-2 rounded-ctl border px-5 py-2.5 font-bold transition ${
+        className={`mark-action inline-flex items-center gap-2 rounded-ctl border px-5 py-2.5 font-bold transition ${
           status === "correct" ? "border-green bg-green text-cream" : "border-green-line bg-green-bg text-green hover:border-green"
         }`}
       >
@@ -422,7 +423,7 @@ export function NextButton({ isLast, onClick }: { isLast: boolean; onClick: () =
     <div className="mt-4 flex justify-center">
       <button
         onClick={onClick}
-        className="glass-control rounded-ctl border px-6 py-2.5 font-bold text-coffee-deep transition hover:border-teal/60"
+        className="next-action glass-control rounded-ctl border px-6 py-2.5 font-bold text-coffee-deep transition hover:border-teal/60"
       >
         {isLast ? "See how you did" : "Next question →"}
       </button>

@@ -173,6 +173,17 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
 
   // keyboard
   useEffect(() => {
+    if (!navOpen) return;
+    const t = window.setTimeout(() => {
+      document.querySelector<HTMLElement>('[data-current-question="true"]')?.scrollIntoView({
+        block: "center",
+        inline: "nearest",
+      });
+    }, 340);
+    return () => window.clearTimeout(t);
+  }, [navOpen, idx]);
+
+  useEffect(() => {
     if (!loaded || complete || navOpen || lessonOpen) return;
     const onKey = (e: KeyboardEvent) => {
       const el = e.target as HTMLElement | null;
@@ -332,6 +343,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
               onClick={() => goTo(i)}
               aria-label={`Question ${i + 1}${s ? ` — marked ${s}` : ""}`}
               aria-current={isCur ? "true" : undefined}
+              data-current-question={isCur ? "true" : undefined}
               className={`question-nav-button grid aspect-square place-items-center rounded-[11px] border font-display text-[0.95rem] font-bold transition ${cls}`}
             >
               {i + 1}

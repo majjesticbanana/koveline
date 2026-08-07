@@ -660,3 +660,259 @@ button:active, a[role="button"]:active { transform: scale(.985); }
   .question-nav-button:hover,
   .glass-primary:hover { transform: none; box-shadow: none; }
 }
+
+/* --------------------------------------------------------------------------
+   Mobile refinement v2 — tighter study hierarchy and a robust Jump to Question
+   panel. The question navigator is a portalled viewport sheet; it must never
+   inherit the width/transform of the study column.
+   -------------------------------------------------------------------------- */
+.question-progress-current {
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+@media (max-width: 639px) {
+  /* Course heading: keep context, spend less of the first viewport on it. */
+  .resource-breadcrumb {
+    padding-top: .62rem !important;
+    padding-bottom: 0 !important;
+  }
+  .resource-heading {
+    margin-top: 0 !important;
+    margin-bottom: .58rem !important;
+  }
+  .resource-title {
+    font-size: 1.36rem !important;
+    line-height: 1.42 !important;
+  }
+  .resource-title-en {
+    margin-top: 0 !important;
+    font-size: .84rem !important;
+  }
+  .resource-meta {
+    margin-top: 0 !important;
+    font-size: .69rem !important;
+  }
+
+  /* Lesson switching is secondary navigation, not the dominant box. */
+  .lesson-filter {
+    margin-bottom: .55rem !important;
+  }
+  .lesson-switcher {
+    width: min(100%, 318px) !important;
+    grid-template-columns: 36px minmax(0,1fr) 36px !important;
+    border-radius: 11px !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.02) !important;
+  }
+  .lesson-step {
+    min-height: 49px !important;
+  }
+  .lesson-step svg {
+    width: 15px !important;
+    height: 15px !important;
+  }
+  .lesson-current {
+    min-height: 49px !important;
+    padding: .23rem .45rem !important;
+  }
+  .lesson-current > span:first-child {
+    font-size: .53rem !important;
+    line-height: 1.1 !important;
+    letter-spacing: .09em !important;
+  }
+  .lesson-current > span:nth-child(2) {
+    margin-top: -.02rem !important;
+    font-size: .82rem !important;
+    line-height: 1.55 !important;
+  }
+
+  /* Question position is the primary utility. Correct/wrong are supporting data. */
+  .study-statbar {
+    margin-bottom: .42rem !important;
+    gap: .34rem !important;
+  }
+  .study-statbar > * {
+    min-height: 34px !important;
+    padding: .35rem .54rem !important;
+    font-size: .72rem !important;
+    border-radius: 9px !important;
+  }
+  .question-jump-trigger {
+    padding-inline: .65rem !important;
+  }
+  .question-jump-icon {
+    width: 12px !important;
+    height: 12px !important;
+    opacity: .78;
+  }
+
+  /* The bar is a quiet timeline. The current marker is ivory, crisp, and unlit. */
+  .question-progress {
+    height: 4px !important;
+    margin: .16rem 0 .72rem !important;
+  }
+  .question-progress-current {
+    width: 2px !important;
+    height: 11px !important;
+    border-radius: 1px !important;
+    box-shadow: none !important;
+  }
+
+  /* Order is compact; review/reset stop reading as two more giant cards. */
+  .study-modebar {
+    display: grid !important;
+    grid-template-columns: auto auto !important;
+    justify-content: center !important;
+    align-items: center !important;
+    column-gap: .42rem !important;
+    row-gap: .28rem !important;
+    margin-bottom: .72rem !important;
+  }
+  .order-segment {
+    grid-column: 1 / -1 !important;
+    justify-self: center !important;
+    width: min(100%, 274px) !important;
+    border-radius: 10px !important;
+  }
+  .order-segment button {
+    min-height: 36px !important;
+    padding: .4rem .68rem !important;
+    font-size: .73rem !important;
+  }
+  .review-mode,
+  .reset-mode {
+    width: auto !important;
+    min-height: 32px !important;
+    padding: .28rem .5rem !important;
+    font-size: .69rem !important;
+  }
+  .review-mode {
+    border-color: transparent !important;
+    background: transparent !important;
+  }
+  .review-mode:not(:disabled) {
+    color: var(--brick-bright) !important;
+  }
+  .review-mode:disabled {
+    color: var(--muted) !important;
+    opacity: .46 !important;
+  }
+  .reset-mode {
+    color: var(--muted) !important;
+  }
+
+  /* Paper-like question area: one composed surface, not nested rounded boxes. */
+  .study-sheet {
+    border-radius: 12px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.10) !important;
+  }
+  .study-context-line {
+    background: transparent !important;
+    padding: .5rem .72rem !important;
+  }
+  .study-context-line > span:first-child {
+    font-size: .59rem !important;
+    letter-spacing: .105em !important;
+  }
+  .study-context-line > span:last-child {
+    max-width: 49% !important;
+    font-size: .7rem !important;
+  }
+  .study-question-body {
+    padding: .78rem .78rem .9rem !important;
+  }
+  .study-question-text {
+    font-size: 1.12rem !important;
+    line-height: 1.88 !important;
+  }
+  .study-answer {
+    margin-top: .65rem !important;
+    padding-top: .68rem !important;
+  }
+
+  /* The action area fades out of the page instead of forming another dark box. */
+  .mobile-action-bar {
+    border: 0 !important;
+    background: linear-gradient(180deg, rgba(25,12,9,0) 0%, rgba(25,12,9,.88) 28%, rgba(25,12,9,.99) 62%) !important;
+    box-shadow: none !important;
+    padding: 1.05rem 12px calc(.62rem + env(safe-area-inset-bottom)) !important;
+  }
+  .mobile-action-bar > div {
+    max-width: 390px !important;
+  }
+  .mobile-action-bar .reveal-action {
+    width: min(78vw, 292px) !important;
+    min-height: 49px !important;
+    margin-inline: auto !important;
+    border: 1px solid rgba(228,134,98,.58) !important;
+    border-radius: 999px !important;
+    color: var(--text) !important;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,.09), transparent 27%, transparent 72%, rgba(255,255,255,.02)),
+      linear-gradient(180deg, rgba(198,99,64,.30), rgba(41,21,15,.96)) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.09), 0 8px 22px rgba(0,0,0,.16) !important;
+    font-size: .84rem !important;
+  }
+  .mobile-action-bar .mark-action,
+  .mobile-action-bar .next-action {
+    min-height: 46px !important;
+    border-radius: 12px !important;
+    font-size: .8rem !important;
+  }
+  .mobile-action-spacer {
+    height: 5rem !important;
+  }
+
+  /* Robust viewport-bounded Jump to Question / lesson sheet. */
+  .bottom-sheet {
+    left: max(9px, env(safe-area-inset-left)) !important;
+    right: max(9px, env(safe-area-inset-right)) !important;
+    bottom: max(8px, env(safe-area-inset-bottom)) !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: min(78dvh, calc(100dvh - 72px)) !important;
+    border: 1px solid var(--line-strong) !important;
+    border-radius: 16px !important;
+    transform: translate3d(0, calc(100% + 18px), 0) !important;
+    contain: layout paint !important;
+  }
+  .bottom-sheet.is-shown {
+    transform: translate3d(0, 0, 0) !important;
+  }
+  .bottom-sheet-head {
+    padding: .65rem .8rem .58rem !important;
+  }
+  .bottom-sheet-handle {
+    width: 34px !important;
+    height: 3px !important;
+    margin-bottom: .45rem !important;
+  }
+  .bottom-sheet-head h3 {
+    font-size: 1rem !important;
+  }
+  .bottom-sheet-head button {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  .bottom-sheet-body {
+    overflow-x: hidden !important;
+    padding: .65rem .8rem calc(.8rem + env(safe-area-inset-bottom)) !important;
+  }
+  .question-nav-grid {
+    width: 100% !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 7px !important;
+  }
+  .question-nav-button {
+    width: 100% !important;
+    min-width: 0 !important;
+    aspect-ratio: 1 / 1 !important;
+    border-radius: 9px !important;
+    font-size: .82rem !important;
+    transform: none !important;
+  }
+  .question-nav-current {
+    border-color: rgba(247,232,223,.9) !important;
+    box-shadow: inset 0 0 0 1px rgba(247,232,223,.20) !important;
+  }
+}
