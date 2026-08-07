@@ -33,9 +33,9 @@ const config: Config = {
         green: "#9bc1a0",
         "green-bg": "#1d251d",
         "green-line": "#49634e",
-        red: "#dc7a70",
-        "red-bg": "#2b1716",
-        "red-line": "#70403b",
+        red: "#ee8a80",
+        "red-bg": "#351918",
+        "red-line": "#8f4a45",
       },
       fontFamily: {
         display: ["var(--font-display)", "sans-serif"],

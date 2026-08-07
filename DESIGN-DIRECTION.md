@@ -65,3 +65,11 @@ The page should feel alive while interacting and calm when idle.
 - English site shell; Dhivehi prominent within Islam content
 - the flight line uses ember → brighter ember
 - numerical unit identity; no mosque/crescent/emoji visual shorthand
+
+## Performance + semantic-state refinement
+
+- Wrong/review is intentionally more legible than the first Hybrid pass: deeper brick wash `#351918`, stronger brick border `#8F4A45`, bright semantic label `#EE8A80`. It must remain clearly separate from neutral mahogany and from the ember brand accent.
+- The pointer ambient effect is a translated fixed compositor layer. Do not reintroduce a cursor-positioned gradient into `body.background`; that repaints too much of the viewport.
+- Pointer/scroll updates are `requestAnimationFrame` throttled.
+- Small `.glass-control` elements do not use `backdrop-filter`; translucency + specular edge is enough. Blur is reserved for `.glass-panel` and reduced to 12px.
+- Scroll progress animates with `transform: scaleX()` rather than width.

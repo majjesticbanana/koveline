@@ -112,7 +112,7 @@ export function ModeBar({
       <div
         role="group"
         aria-label="Question order"
-        className="glass-panel flex overflow-hidden rounded-ctl border"
+        className="glass-control flex overflow-hidden rounded-ctl border"
       >
         {segBtn("sequential", "In order")}
         <span className="w-px bg-line" aria-hidden />

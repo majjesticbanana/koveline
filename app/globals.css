@@ -26,9 +26,7 @@
   --brick: #b65752;
   --brick-bright: #dc7a70;
   --ring: rgba(228, 134, 98, 0.56);
-  --mx: 50vw;
-  --my: 25vh;
-  --scroll-progress: 0%;
+  --scroll-progress: 0;
 }
 
 html { scroll-behavior: smooth; background: var(--bg); }
@@ -37,7 +35,6 @@ body {
   background-color: var(--bg);
   background-image:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.022' filter='url(%23n)'/%3E%3C/svg%3E"),
-    radial-gradient(470px 350px at var(--mx) var(--my), rgba(198,99,64,.052), transparent 72%),
     radial-gradient(900px 600px at 90% -10%, rgba(61,34,25,.52), transparent 65%),
     radial-gradient(720px 520px at -8% 38%, rgba(67,39,29,.18), transparent 70%),
     linear-gradient(180deg, var(--bg-upper) 0, var(--bg) 34rem, var(--bg) 100%);
@@ -55,17 +52,35 @@ body {
 
 *:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
 
+/* Compositor-friendly pointer warmth: moving this small fixed layer is much cheaper
+   than repainting the body's full background gradient on every pointermove. */
+.koveline-pointer-glow {
+  position: fixed;
+  z-index: 0;
+  left: -170px;
+  top: -170px;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+  background: radial-gradient(circle, rgba(198,99,64,.050) 0%, rgba(198,99,64,.022) 34%, transparent 70%);
+}
+.koveline-pointer-glow[hidden] { display: none; }
+
 /* Scroll progress is a tiny kinetic signature. */
 .koveline-scroll-progress {
   position: fixed;
   inset: 0 auto auto 0;
   z-index: 100;
   height: 2px;
-  width: var(--scroll-progress);
+  width: 100vw;
   pointer-events: none;
+  transform: scaleX(var(--scroll-progress));
+  transform-origin: left;
+  will-change: transform;
   background: linear-gradient(90deg, var(--ember), var(--ember-bright));
   box-shadow: 0 0 16px rgba(198,99,64,.22);
-  transition: width 80ms linear;
 }
 
 /* Restrained glass: interaction material, not content material. */
@@ -76,10 +91,15 @@ body {
   overflow: hidden;
   background:
     linear-gradient(135deg, rgba(255,255,255,.085), transparent 24%, transparent 72%, rgba(255,255,255,.025)),
-    rgba(41,21,15,.66);
+    rgba(41,21,15,.74);
   border-color: rgba(102,56,45,.72) !important;
-  -webkit-backdrop-filter: blur(18px) saturate(1.12);
-  backdrop-filter: blur(18px) saturate(1.12);
+}
+
+/* Blur only larger floating panels. Small controls fake glass with translucency/specular
+   so a page full of buttons does not create many expensive backdrop-filter layers. */
+.glass-panel {
+  -webkit-backdrop-filter: blur(12px) saturate(1.08);
+  backdrop-filter: blur(12px) saturate(1.08);
 }
 
 .glass-control::before {
@@ -103,9 +123,9 @@ body {
   --cx: 50%;
   --cy: 50%;
   transform: perspective(820px) rotateX(var(--rx)) rotateY(var(--ry));
-  transition: transform 150ms linear, border-color 220ms ease, background-color 220ms ease, box-shadow 220ms ease;
-  will-change: transform;
+  transition: transform 120ms linear, border-color 220ms ease, background-color 220ms ease, box-shadow 220ms ease;
 }
+[data-tilt]:hover { will-change: transform; }
 [data-tilt]::before {
   content: "";
   position: absolute;
@@ -152,8 +172,12 @@ body {
   box-shadow: inset 3px 0 0 rgba(114,157,121,.82), 0 18px 52px rgba(0,0,0,.16);
 }
 .study-sheet.sheet-wrong {
-  box-shadow: inset 3px 0 0 rgba(182,87,82,.86), 0 18px 52px rgba(0,0,0,.16);
+  border-color: #8f4a45 !important;
+  background-color: #351918 !important;
+  box-shadow: inset 4px 0 0 rgba(220,92,82,.92), 0 18px 52px rgba(0,0,0,.16);
 }
+.study-sheet.sheet-wrong .text-cocoa { color: #cfa19b; }
+.study-sheet.sheet-wrong .text-coffee { color: #f1d5d0; }
 
 .answer-reveal {
   animation: answer-reveal .22s cubic-bezier(.22,.8,.25,1);
@@ -175,7 +199,7 @@ button:active, a[role="button"]:active { transform: scale(.985); }
   }
   [data-tilt] { transform: none !important; }
   .annotate.swept { width: 100%; }
-  .koveline-scroll-progress { display: none; }
+  .koveline-scroll-progress, .koveline-pointer-glow { display: none; }
 }
 
 /* Strongest restrained-glass control: warmth lives in the edge/light, not a large orange slab. */

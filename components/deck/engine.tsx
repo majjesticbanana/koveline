@@ -330,7 +330,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
       <ProgressBar correct={counts.c} wrong={counts.w} total={deck.length} />
       <ModeBar mode={mode} wrongTotal={wrongTotal} onMode={changeMode} onReset={reset} />
 
-      <div data-tilt="" className={sheetShell(tone)}>
+      <div className={sheetShell(tone)}>
         <ContextLine
           tone={tone}
           index={idx + 1}
