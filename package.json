@@ -2,14 +2,15 @@
   "name": "koveline",
   "version": "3.0.0-alpha.1",
   "private": true,
-  "description": "Koveline — study resources for Maldivian students",
+  "description": "Koveline \u2014 study resources for Maldivian students",
   "scripts": {
     "dev": "next dev",
     "prebuild": "npm run validate",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "validate": "tsx scripts/validate-content.ts"
+    "validate": "tsx scripts/validate-content.ts",
+    "audit:contrast": "python3 scripts/audit-contrast.py"
   },
   "dependencies": {
     "lucide-react": "^0.544.0",
