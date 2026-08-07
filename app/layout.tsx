@@ -20,14 +20,14 @@ export const metadata: Metadata = {
     template: "%s — Koveline",
   },
   description:
-    "Study resources from the Maldives, starting with Grade 9 Islam. Flip through real exam-prep questions, mark yourself, and review what you missed.",
+    "Study resources from the Maldives. Practice 613 real exam-prep questions across Grade 9 and Grade 10 Islam, mark yourself, and review what you missed.",
   keywords: ["Koveline", "Maldives", "study", "flashcards", "Grade 9", "Islam", "Dhivehi"],
   applicationName: "Koveline",
   manifest: "/manifest.webmanifest",
   appleWebApp: { capable: true, title: "Koveline", statusBarStyle: "default" },
   openGraph: {
     title: "Koveline — How much do you really know?",
-    description: "Study resources from the Maldives, starting with Grade 9 Islam.",
+    description: "Study resources from the Maldives — Grade 9 and Grade 10 Islam.",
     type: "website",
     siteName: "Koveline",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "Koveline" }],
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#161412",
+  themeColor: "#f6efe2",
   width: "device-width",
   initialScale: 1,
 };
@@ -48,14 +48,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Noto+Sans+Thaana:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Noto+Sans+Thaana:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
       </head>
       <body className="font-sans">
         <a
           href="#main"
-          className="absolute left-3 top-3 z-[100] -translate-y-24 rounded-xl bg-brass px-4 py-2 font-bold text-basalt transition-transform focus:translate-y-0"
+          className="absolute left-3 top-3 z-[100] -translate-y-24 rounded-ctl bg-teal px-4 py-2 font-bold text-white transition-transform focus:translate-y-0"
         >
           Skip to content
         </a>

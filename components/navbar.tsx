@@ -3,26 +3,18 @@ import { KoelMark } from "./koel";
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-30 border-b border-basalt-line bg-basalt/85 backdrop-blur-md">
-      <div className="mx-auto flex h-[68px] max-w-[980px] items-center justify-between px-[22px]">
-        <Link href="/" className="group flex items-center gap-3" aria-label="Koveline home">
-          <span className="grid h-[42px] w-[42px] place-items-center rounded-[12px] bg-basalt-2 ring-1 ring-basalt-line transition-colors group-hover:bg-basalt-3">
-            <KoelMark size={30} className="text-brass" />
-          </span>
-          <span className="font-display text-[1.4rem] font-bold tracking-tight text-on-dark">
-            Kove<span className="text-brass">line</span>
+    <header className="sticky top-0 z-30 border-b border-line bg-cream/85 backdrop-blur-md">
+      <div className="mx-auto flex h-[62px] max-w-[960px] items-center justify-between px-[20px]">
+        <Link href="/" className="flex items-center gap-2.5" aria-label="Koveline home">
+          <KoelMark size={30} className="text-ink" />
+          <span className="font-display text-[1.3rem] font-extrabold tracking-tight text-ink">
+            Kove<span className="text-coffee">line</span>
           </span>
         </Link>
-        <nav className="flex items-center gap-[18px]" aria-label="Main">
+        <nav className="flex items-center gap-4" aria-label="Main">
           <Link
             href="/#subjects"
-            className="text-[0.94rem] font-semibold text-on-dark-dim transition-colors hover:text-on-dark"
-          >
-            Subjects
-          </Link>
-          <Link
-            href="/islam/grade-9/mixed"
-            className="rounded-full bg-brass px-4 py-1.5 text-[0.88rem] font-bold text-basalt transition hover:bg-brass-deep"
+            className="rounded-ctl bg-teal px-4 py-2 text-[0.88rem] font-bold text-white transition hover:bg-teal-deep"
           >
             Start studying
           </Link>

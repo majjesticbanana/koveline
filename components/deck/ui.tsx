@@ -1,21 +1,18 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import {
-  Check, X, Shuffle, ListOrdered, AlertCircle, RotateCcw, Save,
-  ChevronLeft, ChevronRight,
-} from "lucide-react";
-import { KoelMark, FlightLine } from "@/components/koel";
+import { useEffect, useRef, useState } from "react";
+import { Check, X, Save } from "lucide-react";
+import { KoelMark } from "@/components/koel";
 
 export type Mode = "random" | "sequential" | "wrongOnly";
 export type Mark = "correct" | "wrong";
 export type Tone = "" | "correct" | "wrong";
 
-/* ---------- tiny bits ---------- */
+/* ---------- small bits ---------- */
 
 export function Kbd({ children }: { children: React.ReactNode }) {
   return (
-    <kbd className="rounded-md border border-basalt-line bg-basalt-2 px-1.5 py-0.5 font-display text-[0.74rem] font-bold text-on-dark-dim">
+    <kbd className="rounded-md bg-latte px-1.5 py-0.5 font-display text-[0.74rem] font-bold">
       {children}
     </kbd>
   );
@@ -23,31 +20,16 @@ export function Kbd({ children }: { children: React.ReactNode }) {
 
 export function KbdHints() {
   return (
-    <p className="mt-4 hidden text-center text-[0.78rem] text-on-dark-dim sm:block">
-      <Kbd>Space</Kbd> reveal / next · <Kbd>←</Kbd> <Kbd>→</Kbd> move · <Kbd>R</Kbd>/<Kbd>W</Kbd> mark
-      · <Kbd>Esc</Kbd> close
+    <p className="mt-4 hidden text-center text-[0.76rem] text-cocoa sm:block">
+      <Kbd>Space</Kbd> reveal / next · <Kbd>←</Kbd> <Kbd>→</Kbd> move · <Kbd>1</Kbd> right ·{" "}
+      <Kbd>2</Kbd> wrong · <Kbd>Esc</Kbd> close
+      <span className="mx-2 opacity-50">·</span>
+      <Save className="mb-0.5 inline h-3 w-3 opacity-70" aria-hidden /> saves on this device
     </p>
   );
 }
 
-export function SaveHint() {
-  return (
-    <div className="mb-4 flex items-center justify-center gap-1.5 text-[0.78rem] text-on-dark-dim">
-      <Save className="h-3 w-3 opacity-70" aria-hidden /> Progress saves on this device
-    </div>
-  );
-}
-
-function Legend({ swatch, label }: { swatch: string; label: string }) {
-  return (
-    <span className="flex items-center gap-2">
-      <span className={`h-4 w-4 rounded-[5px] border ${swatch}`} aria-hidden />
-      {label}
-    </span>
-  );
-}
-
-/* ---------- stat bar + progress ---------- */
+/* ---------- utility row: quiet, recedes (Sol #20) ---------- */
 
 export function StatBar({
   index, total, correct, wrong, onOpenNav,
@@ -59,28 +41,26 @@ export function StatBar({
   onOpenNav: () => void;
 }) {
   return (
-    <div className="mb-4 flex flex-wrap justify-center gap-[10px]">
+    <div className="mb-3 flex flex-wrap items-center justify-center gap-2 text-[0.85rem]">
       <button
         onClick={onOpenNav}
-        className="inline-flex items-center gap-2.5 rounded-[13px] border border-basalt-line bg-basalt-2 px-4 py-2.5 font-semibold text-on-dark transition hover:border-brass/60"
+        className="inline-flex items-center gap-1.5 rounded-ctl border border-line bg-surface px-3 py-1.5 font-semibold text-coffee-deep transition hover:border-caramel"
         aria-label={`Open the question navigator — question ${index} of ${total}`}
       >
-        <span className="text-[0.9rem] text-on-dark-dim">Question</span>
-        <span className="font-display font-bold text-brass">{index}</span>
-        <span className="text-on-dark-dim">/</span>
-        <span className="font-bold">{total}</span>
+        Question <b className="font-display">{index}</b>
+        <span className="text-cocoa">/ {total}</span>
       </button>
       <span
-        className="inline-flex items-center gap-2 rounded-[13px] border border-green/45 bg-green/15 px-4 py-2.5 font-display font-bold text-green-line"
+        className="inline-flex items-center gap-1 rounded-ctl border border-green-line bg-green-bg px-3 py-1.5 font-semibold text-green"
         aria-label={`${correct} marked right`}
       >
-        <Check className="h-4 w-4" aria-hidden /> {correct}
+        <Check className="h-3.5 w-3.5" aria-hidden /> {correct}
       </span>
       <span
-        className="inline-flex items-center gap-2 rounded-[13px] border border-red/45 bg-red/15 px-4 py-2.5 font-display font-bold text-red-line"
+        className="inline-flex items-center gap-1 rounded-ctl border border-red-line bg-red-bg px-3 py-1.5 font-semibold text-red"
         aria-label={`${wrong} marked wrong`}
       >
-        <X className="h-4 w-4" aria-hidden /> {wrong}
+        <X className="h-3.5 w-3.5" aria-hidden /> {wrong}
       </span>
     </div>
   );
@@ -91,20 +71,20 @@ export function ProgressBar({ correct, wrong, total }: { correct: number; wrong:
   const wPct = total ? (wrong / total) * 100 : 0;
   return (
     <div
-      className="mb-[18px] flex h-[8px] overflow-hidden rounded-full bg-basalt-3"
+      className="mb-4 flex h-[6px] overflow-hidden rounded-full bg-latte"
       role="progressbar"
       aria-valuenow={Math.round(cPct + wPct)}
       aria-valuemin={0}
       aria-valuemax={100}
       aria-label="Progress through this deck"
     >
-      <i className="block h-full bg-teal transition-[width] duration-500" style={{ width: `${cPct}%` }} />
+      <i className="block h-full bg-green transition-[width] duration-500" style={{ width: `${cPct}%` }} />
       <i className="block h-full bg-red transition-[width] duration-500" style={{ width: `${wPct}%` }} />
     </div>
   );
 }
 
-/* ---------- mode bar ---------- */
+/* ---------- mode controls: segmented order + review + demoted reset ---------- */
 
 export function ModeBar({
   mode, wrongTotal, onMode, onReset,
@@ -114,112 +94,107 @@ export function ModeBar({
   onMode: (m: Mode) => void;
   onReset: () => void;
 }) {
-  const base =
-    "inline-flex items-center gap-2 rounded-[11px] border px-[15px] py-2.5 text-[0.9rem] font-bold transition";
-  const off = "border-basalt-line bg-basalt-2 text-on-dark hover:border-brass/60";
-  const on = "border-brass bg-brass text-basalt";
+  const seg = mode === "wrongOnly" ? null : mode; // segmented shows order only
+  const segBtn = (m: "random" | "sequential", label: string) => (
+    <button
+      onClick={() => onMode(m)}
+      aria-pressed={seg === m}
+      className={`px-3.5 py-1.5 text-[0.84rem] font-bold transition ${
+        seg === m ? "bg-teal text-white" : "text-coffee-deep hover:bg-latte/60"
+      }`}
+    >
+      {label}
+    </button>
+  );
+  const hasWrong = wrongTotal > 0;
   return (
-    <div className="mb-[18px] flex flex-wrap justify-center gap-[9px]" role="group" aria-label="Study mode">
-      <button onClick={() => onMode("random")} className={`${base} ${mode === "random" ? on : off}`} aria-pressed={mode === "random"}>
-        <Shuffle className="h-4 w-4" aria-hidden /> Random
+    <div className="mb-4 flex flex-wrap items-center justify-center gap-2.5">
+      <div
+        role="group"
+        aria-label="Question order"
+        className="flex overflow-hidden rounded-ctl border border-line bg-surface"
+      >
+        {segBtn("sequential", "In order")}
+        <span className="w-px bg-line" aria-hidden />
+        {segBtn("random", "Random")}
+      </div>
+      <button
+        onClick={() => hasWrong && onMode("wrongOnly")}
+        disabled={!hasWrong}
+        aria-pressed={mode === "wrongOnly"}
+        className={`rounded-ctl border px-3.5 py-1.5 text-[0.84rem] font-bold transition ${
+          mode === "wrongOnly"
+            ? "border-red bg-red text-white"
+            : hasWrong
+            ? "border-red-line bg-red-bg text-red hover:border-red"
+            : "cursor-not-allowed border-line bg-surface text-cocoa/50"
+        }`}
+      >
+        Review wrong{hasWrong ? ` (${wrongTotal})` : ""}
       </button>
-      <button onClick={() => onMode("sequential")} className={`${base} ${mode === "sequential" ? on : off}`} aria-pressed={mode === "sequential"}>
-        <ListOrdered className="h-4 w-4" aria-hidden /> In order
-      </button>
-      <button onClick={() => onMode("wrongOnly")} className={`${base} ${mode === "wrongOnly" ? on : off}`} aria-pressed={mode === "wrongOnly"}>
-        <AlertCircle className="h-4 w-4" aria-hidden /> Review wrong ({wrongTotal})
-      </button>
-      <button onClick={onReset} className={`${base} border-basalt-line bg-basalt-2 text-on-dark-dim hover:border-brass/60`}>
-        <RotateCcw className="h-4 w-4" aria-hidden /> Reset
+      <button
+        onClick={() => {
+          if (window.confirm("Reset all progress in this deck? This can't be undone.")) onReset();
+        }}
+        className="px-2 py-1.5 text-[0.8rem] font-semibold text-cocoa underline-offset-2 transition hover:text-red hover:underline"
+      >
+        Reset
       </button>
     </div>
   );
 }
 
-/* ---------- study sheet chrome ---------- */
+/* ---------- the study sheet ---------- */
 
 export function sheetShell(tone: Tone) {
-  return `animate-fade overflow-hidden rounded-card border-b-[3px] text-ink shadow-lift transition-colors duration-300 ${
+  return `animate-fade overflow-hidden rounded-panel border transition-colors duration-300 ${
     tone === "correct"
-      ? "border-green bg-[#f2f6e9]"
+      ? "border-green-line bg-[#f7faf0]"
       : tone === "wrong"
-      ? "border-red bg-[#f8ebe4]"
-      : "border-brass bg-surface"
+      ? "border-red-line bg-[#fbf2ed]"
+      : "border-line bg-surface"
   }`;
 }
 
-export function SheetHeader({
-  tone, index, total, stamp, canPrev, canNext, onPrev, onNext,
+/** Context line above the question: UNIT · LESSON · position (Sol #20, #24). */
+export function ContextLine({
+  tone, index, total, unitLabel, lessonTitle,
 }: {
   tone: Tone;
   index: number;
   total: number;
-  stamp: React.ReactNode;
-  canPrev: boolean;
-  canNext: boolean;
-  onPrev: () => void;
-  onNext: () => void;
+  unitLabel?: string;
+  lessonTitle?: string;
 }) {
-  const navBtn =
-    "grid h-[34px] w-[34px] place-items-center rounded-[9px] text-cocoa hover:bg-black/5 hover:text-coffee disabled:opacity-30 disabled:hover:bg-transparent";
   return (
     <div
-      className={`flex items-center justify-between border-b border-line px-[18px] py-3.5 transition-colors duration-300 ${
-        tone === "correct" ? "bg-green-bg" : tone === "wrong" ? "bg-red-bg" : "bg-brass-soft/70"
+      className={`flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b border-line px-5 py-3 transition-colors duration-300 ${
+        tone === "correct" ? "bg-green-bg/60" : tone === "wrong" ? "bg-red-bg/60" : "bg-cream/60"
       }`}
     >
-      <div className="flex items-center gap-1.5">
-        <button onClick={onPrev} disabled={!canPrev} className={navBtn} aria-label="Previous question">
-          <ChevronLeft className="h-[18px] w-[18px]" aria-hidden />
-        </button>
-        <span
-          className={`font-display text-[0.8rem] font-bold uppercase tracking-[0.1em] ${
-            tone === "correct" ? "text-green" : tone === "wrong" ? "text-red" : "text-coffee-deep"
-          }`}
-        >
-          Question {String(index).padStart(2, "0")}
-          <span className="opacity-50"> / {total}</span>
+      <span className="text-[0.7rem] font-extrabold uppercase tracking-[0.12em] text-cocoa">
+        {unitLabel ? `${unitLabel} · ` : ""}Question {index} of {total}
+      </span>
+      {lessonTitle && (
+        <span lang="dv" dir="rtl" className="thaana text-[0.86rem] font-semibold text-coffee">
+          {lessonTitle}
         </span>
-        <button onClick={onNext} disabled={!canNext} className={navBtn} aria-label="Next question">
-          <ChevronRight className="h-[18px] w-[18px]" aria-hidden />
-        </button>
-      </div>
-      {stamp}
+      )}
     </div>
   );
 }
 
-/** Stamp-style badge for the sheet header (lesson or unit). */
-export function Stamp({ children, rtl = false }: { children: React.ReactNode; rtl?: boolean }) {
-  return (
-    <span
-      dir={rtl ? "rtl" : undefined}
-      lang={rtl ? "dv" : undefined}
-      className={`${rtl ? "thaana" : "font-display"} rounded-[9px] border border-dashed border-brass-deep/70 bg-white/50 px-3 py-1.5 text-[0.8rem] font-semibold text-coffee-deep`}
-    >
-      {children}
-    </span>
-  );
-}
+/* ---------- bottom sheet navigator (focus-trapped) ---------- */
 
-/* ---------- bottom sheet navigator ---------- */
+const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
-const FOCUSABLE =
-  'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-
-/**
- * Mounted only while open (plus its exit transition), so its contents are
- * never in the tab order when closed. Traps focus while open and restores
- * it to the trigger on close.
- */
 export function BottomSheet({
-  open, onClose, title, subtitle, children, headerExtra,
+  open, onClose, title, subtitle, children,
 }: {
   open: boolean;
   onClose: () => void;
   title: string;
   subtitle?: React.ReactNode;
-  headerExtra?: React.ReactNode;
   children: React.ReactNode;
 }) {
   const [mounted, setMounted] = useState(false);
@@ -245,26 +220,16 @@ export function BottomSheet({
     closeRef.current?.focus();
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-        return;
-      }
+      if (e.key === "Escape") return onClose();
       if (e.key !== "Tab" || !sheetRef.current) return;
-      const els = Array.from(
-        sheetRef.current.querySelectorAll<HTMLElement>(FOCUSABLE),
-      ).filter((el) => !el.hasAttribute("disabled"));
-      if (els.length === 0) return;
-      const first = els[0];
-      const last = els[els.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
+      const els = Array.from(sheetRef.current.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
+        (el) => !el.hasAttribute("disabled"),
+      );
+      if (!els.length) return;
+      const first = els[0], last = els[els.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     };
     window.addEventListener("keydown", onKey);
     return () => {
@@ -281,103 +246,116 @@ export function BottomSheet({
       <div
         onClick={onClose}
         aria-hidden
-        className={`fixed inset-0 z-40 bg-ink/50 transition-opacity duration-300 ${shown ? "opacity-100" : "opacity-0"}`}
+        className={`fixed inset-0 z-40 bg-ink/45 transition-opacity duration-300 ${shown ? "opacity-100" : "opacity-0"}`}
       />
       <div
         ref={sheetRef}
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className={`fixed inset-x-0 bottom-0 z-50 flex max-h-[80vh] flex-col rounded-t-sheet border-t border-basalt-line bg-basalt-2 text-on-dark shadow-[0_-20px_50px_-20px_rgba(0,0,0,.8)] transition-transform duration-300 ${shown ? "translate-y-0" : "translate-y-full"}`}
+        className={`fixed inset-x-0 bottom-0 z-50 flex max-h-[80vh] flex-col rounded-t-panel border-t border-line bg-surface shadow-[0_-18px_44px_-20px_rgba(42,31,22,.4)] transition-transform duration-300 ${shown ? "translate-y-0" : "translate-y-full"}`}
         style={{ transitionTimingFunction: "cubic-bezier(.22,1,.36,1)" }}
       >
-        <div className="border-b border-basalt-line px-5 pb-3 pt-4">
-          <div className="mx-auto mb-3 h-[5px] w-[46px] rounded-full bg-basalt-line" aria-hidden />
+        <div className="border-b border-line px-5 pb-3 pt-4">
+          <div className="mx-auto mb-3 h-[4px] w-[44px] rounded-full bg-line" aria-hidden />
           <div className="flex items-center justify-between">
-            <h3 className="font-display text-[1.2rem] font-bold">{title}</h3>
+            <h3 className="font-display text-[1.15rem] font-bold">{title}</h3>
             <button
               ref={closeRef}
               onClick={onClose}
-              className="grid h-9 w-9 place-items-center rounded-lg text-on-dark-dim hover:bg-white/10 hover:text-on-dark"
+              className="grid h-9 w-9 place-items-center rounded-ctl text-cocoa hover:bg-black/5 hover:text-coffee"
               aria-label="Close navigator"
             >
               <X className="h-5 w-5" aria-hidden />
             </button>
           </div>
-          {subtitle && <div className="mt-1 text-[0.84rem] text-on-dark-dim">{subtitle}</div>}
-          {headerExtra}
+          {subtitle && <div className="mt-0.5 text-[0.82rem] text-cocoa">{subtitle}</div>}
         </div>
-        <div className="overflow-y-auto px-5 pb-6 pt-[18px]">{children}</div>
+        <div className="overflow-y-auto px-5 pb-6 pt-4">{children}</div>
       </div>
     </>
   );
 }
 
 export function NavLegend() {
+  const L = ({ swatch, label }: { swatch: string; label: string }) => (
+    <span className="flex items-center gap-1.5">
+      <span className={`h-3.5 w-3.5 rounded-[4px] border ${swatch}`} aria-hidden /> {label}
+    </span>
+  );
   return (
-    <div className="mt-[18px] flex flex-wrap gap-4 border-t border-basalt-line pt-4 text-[0.8rem] font-semibold text-on-dark-dim">
-      <Legend swatch="bg-brass border-brass" label="Current" />
-      <Legend swatch="bg-green/25 border-green/50" label="Right" />
-      <Legend swatch="bg-red/25 border-red/50" label="Wrong" />
-      <Legend swatch="bg-basalt-3 border-basalt-line" label="Not answered" />
+    <div className="mt-4 flex flex-wrap gap-4 border-t border-line pt-3.5 text-[0.78rem] font-semibold text-cocoa">
+      <L swatch="bg-teal border-teal" label="Current" />
+      <L swatch="bg-green-bg border-green-line" label="Right" />
+      <L swatch="bg-red-bg border-red-line" label="Wrong" />
+      <L swatch="bg-cream border-line" label="Not answered" />
     </div>
   );
 }
 
-/* ---------- completion (a koel moment) ---------- */
+/* ---------- completion: useful, not celebratory (Sol #28) ---------- */
 
 export function CompleteCard({
-  correct, wrong, total, actions,
+  correct, wrong, total, onReviewWrong, onRestart, homeHref,
 }: {
   correct: number;
   wrong: number;
   total: number;
-  actions: React.ReactNode;
+  onReviewWrong: () => void;
+  onRestart: () => void;
+  homeHref: string;
 }) {
-  const score = total ? Math.round((correct / total) * 100) : 0;
   return (
-    <div className="relative animate-rise overflow-hidden rounded-card border border-basalt-line bg-basalt-2 p-10 text-center text-on-dark shadow-lift">
+    <div className="animate-rise rounded-panel border border-line bg-surface p-8 text-center">
       <div className="flex justify-center">
-        <KoelMark size={76} className="text-brass" title="The Koveline koel" />
+        <KoelMark size={28} className="text-cocoa" />
       </div>
-      <h3 className="mb-1 mt-4 font-display text-[1.8rem] font-bold text-on-dark">You made it through.</h3>
-      <p className="mb-5 text-[0.95rem] text-on-dark-dim">
-        {wrong > 0
-          ? `${wrong} question${wrong === 1 ? "" : "s"} to look at again — that's where the marks are.`
-          : correct === total && total > 0
-          ? "Every question, marked right. Come back tomorrow and see if it holds."
-          : "Mark yourself honestly and the review list does the rest."}
+      <h3 className="mt-3 font-display text-[1.5rem] font-extrabold">
+        {total} reviewed
+      </h3>
+      <p className="mt-1 text-[0.95rem] text-cocoa">
+        <b className="text-green">{correct} right</b>
+        <span className="mx-2 opacity-50">·</span>
+        <b className="text-red">{wrong} to review</b>
       </p>
-      <div className="mx-auto mb-6 w-40">
-        <FlightLine className="h-4 w-full" />
+      <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+        {wrong > 0 && (
+          <button
+            onClick={onReviewWrong}
+            className="rounded-ctl bg-teal px-6 py-3 font-bold text-white transition hover:bg-teal-deep"
+          >
+            Review {wrong}
+          </button>
+        )}
+        <button
+          onClick={onRestart}
+          className={`rounded-ctl px-6 py-3 font-bold transition ${
+            wrong > 0
+              ? "border border-line-strong bg-surface text-coffee-deep hover:border-caramel"
+              : "bg-teal text-white hover:bg-teal-deep"
+          }`}
+        >
+          Study again
+        </button>
+        <a
+          href={homeHref}
+          className="px-3 py-3 text-[0.9rem] font-semibold text-cocoa underline-offset-2 hover:text-coffee hover:underline"
+        >
+          Back to units
+        </a>
       </div>
-      <div className="mb-7 flex flex-wrap justify-center gap-[34px]">
-        <DoneStat value={correct} label="Right" color="text-green-line" />
-        <DoneStat value={wrong} label="Wrong" color="text-red-line" />
-        <DoneStat value={`${score}%`} label="Score" color="text-brass" />
-      </div>
-      <div className="flex flex-wrap justify-center gap-3">{actions}</div>
     </div>
   );
 }
 
-function DoneStat({ value, label, color }: { value: string | number; label: string; color: string }) {
-  return (
-    <div>
-      <b className={`block font-display text-[2.2rem] font-bold leading-none ${color}`}>{value}</b>
-      <span className="text-[0.76rem] font-bold uppercase tracking-wide text-on-dark-dim">{label}</span>
-    </div>
-  );
-}
-
-/* ---------- controls ---------- */
+/* ---------- actions ---------- */
 
 export function RevealButton({ onClick }: { onClick: () => void }) {
   return (
-    <div className="mt-[22px] flex justify-center">
+    <div className="mt-5 flex justify-center">
       <button
         onClick={onClick}
-        className="inline-flex items-center gap-2 rounded-[14px] bg-brass px-7 py-3.5 font-extrabold text-basalt shadow-warm-sm transition hover:bg-brass-deep active:translate-y-px"
+        className="rounded-ctl bg-teal px-7 py-3 font-bold text-white transition hover:bg-teal-deep active:translate-y-px"
       >
         Reveal answer
       </button>
@@ -387,12 +365,12 @@ export function RevealButton({ onClick }: { onClick: () => void }) {
 
 export function MarkButtons({ status, onMark }: { status?: Mark; onMark: (correct: boolean) => void }) {
   return (
-    <div className="mt-5 flex flex-wrap justify-center gap-[11px]">
+    <div className="mt-4 flex flex-wrap justify-center gap-2.5">
       <button
         onClick={() => onMark(false)}
         aria-pressed={status === "wrong"}
-        className={`inline-flex items-center gap-2 rounded-[13px] border px-[22px] py-3 font-extrabold transition ${
-          status === "wrong" ? "border-red bg-red text-white" : "border-red/50 bg-red/15 text-red-line hover:bg-red/25"
+        className={`inline-flex items-center gap-2 rounded-ctl border px-5 py-2.5 font-bold transition ${
+          status === "wrong" ? "border-red bg-red text-white" : "border-red-line bg-red-bg text-red hover:border-red"
         }`}
       >
         <X className="h-4 w-4" aria-hidden /> Got it wrong
@@ -400,8 +378,8 @@ export function MarkButtons({ status, onMark }: { status?: Mark; onMark: (correc
       <button
         onClick={() => onMark(true)}
         aria-pressed={status === "correct"}
-        className={`inline-flex items-center gap-2 rounded-[13px] border px-[22px] py-3 font-extrabold transition ${
-          status === "correct" ? "border-green bg-green text-white" : "border-green/50 bg-green/15 text-green-line hover:bg-green/25"
+        className={`inline-flex items-center gap-2 rounded-ctl border px-5 py-2.5 font-bold transition ${
+          status === "correct" ? "border-green bg-green text-white" : "border-green-line bg-green-bg text-green hover:border-green"
         }`}
       >
         <Check className="h-4 w-4" aria-hidden /> Got it right
@@ -412,13 +390,28 @@ export function MarkButtons({ status, onMark }: { status?: Mark; onMark: (correc
 
 export function NextButton({ isLast, onClick }: { isLast: boolean; onClick: () => void }) {
   return (
-    <div className="mt-5 flex justify-center">
+    <div className="mt-4 flex justify-center">
       <button
         onClick={onClick}
-        className="inline-flex items-center gap-2 rounded-[14px] border border-basalt-line bg-basalt-3 px-7 py-3.5 font-extrabold text-on-dark transition hover:border-brass/60"
+        className="rounded-ctl border border-line-strong bg-surface px-6 py-2.5 font-bold text-coffee-deep transition hover:border-caramel"
       >
         {isLast ? "See how you did" : "Next question →"}
       </button>
+    </div>
+  );
+}
+
+/* ---------- sticky mobile action bar (Sol #25) ---------- */
+
+export function MobileActionBar({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-surface/95 px-4 pt-2.5 backdrop-blur sm:hidden"
+      style={{ paddingBottom: "calc(0.625rem + env(safe-area-inset-bottom))" }}
+    >
+      <div className="mx-auto flex max-w-[480px] items-center justify-center gap-2.5 [&>div]:mt-0 [&>div]:flex-1 [&_button]:w-full">
+        {children}
+      </div>
     </div>
   );
 }

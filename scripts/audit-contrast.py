@@ -21,7 +21,7 @@ def utils(prop):
 
 TXT = {k: v for k, v in utils("color").items() if k.startswith("text-")}
 BG = {k: v for k, v in utils("background-color").items() if k.startswith("bg-")}
-BODY_COLOR, BODY_BG = "#efe8db", "#161412"   # keep in sync with globals.css
+BODY_COLOR, BODY_BG = "#2a1f16", "#f6efe2"   # keep in sync with globals.css
 
 def lum(v):
     m = re.match(r'#([0-9a-f]{6})', v)
@@ -47,6 +47,10 @@ for page in glob.glob(".next/server/app/**/*.html", recursive=True):
     for el in soup.find_all(True):
         t = el.find(string=True, recursive=False)
         if not t or len(t.strip()) < 2:
+            continue
+        # decorative text (aria-hidden anywhere up the chain) is exempt —
+        # e.g. the oversized margin unit numbers, which have a visible twin
+        if any((n.get("aria-hidden") == "true") for n in [el] + list(el.parents) if hasattr(n, "get")):
             continue
         color, bg = BODY_COLOR, BODY_BG
         chain = [el] + list(el.parents)

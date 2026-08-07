@@ -3,24 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --font-display: 'Sora', sans-serif;
+  --font-display: 'Bricolage Grotesque', sans-serif;
   --font-body: 'Hanken Grotesk', system-ui, sans-serif;
   --font-thaana: var(--font-faruma), 'Noto Sans Thaana', sans-serif;
-  --ring: rgba(201, 151, 63, 0.55);
+  --ring: rgba(18, 113, 107, 0.45);
 }
 
 html { scroll-behavior: smooth; }
 
 body {
-  background-color: #161412;
-  color: #efe8db;
+  background-color: #f6efe2;
+  color: #2a1f16;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   position: relative;
 }
 
-/* Basalt ground: a warm ember glow so the dark never reads flat or blue,
-   plus faint grain. Fixed layer, so scrolling never repaints it. */
+/* One warm glow + barely-there grain. Fixed layer: no scroll repaints. */
 body::before {
   content: "";
   position: fixed;
@@ -28,8 +27,8 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(900px 560px at 88% -10%, #33291a 0%, rgba(51, 41, 26, 0) 62%),
-    radial-gradient(700px 460px at -6% 8%, #24241d 0%, rgba(36, 36, 29, 0) 58%);
+    radial-gradient(820px 500px at 88% -6%, #fdf6e8 0%, rgba(253, 246, 232, 0) 60%),
+    radial-gradient(640px 420px at -6% 10%, #eef1e9 0%, rgba(238, 241, 233, 0) 55%);
 }
 body::after {
   content: "";
@@ -37,25 +36,26 @@ body::after {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.05;
+  opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 .thaana {
   font-family: var(--font-thaana);
   direction: rtl;
-  line-height: 1.95;
+  line-height: 2;
 }
 
 *:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
 
+/* coral annotation sweep on reveal — hero flight-line's echo, used once */
 .annotate {
   display: block;
   height: 3px;
   width: 0;
   border-radius: 3px;
-  background: #c9973f;
-  transition: width 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  background: #d65f45;
+  transition: width 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .annotate.swept { width: 100%; }
 

@@ -132,6 +132,7 @@ export function homeSummary() {
     grand: {
       questions: courses.reduce((n, c) => n + c.totals.questions, 0),
       units: courses.reduce((n, c) => n + c.totals.units, 0),
+      lessons: courses.reduce((n, c) => n + c.totals.lessons, 0),
     },
   };
 }

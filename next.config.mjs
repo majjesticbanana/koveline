@@ -7,6 +7,7 @@ const OLD_UNITS = {
 const nextConfig = {
   async redirects() {
     return [
+      { source: "/quizzes", destination: "/", permanent: true },
       { source: "/quizzes/grade9-islam", destination: "/#subjects", permanent: true },
       { source: "/definitions", destination: "/", permanent: true },
       ...Object.entries(OLD_UNITS).map(([oldId, newId]) => ({

@@ -38,20 +38,25 @@ export default async function MixedPage({ params }: { params: Params }) {
   const c = units[0].course;
 
   // Every card from every unit, ids prefixed so they stay unique.
-  const cards: DeckCard[] = units.flatMap((e) =>
-    e.flashcards.cards.map((card) => ({
+  const cards: DeckCard[] = units.flatMap((e) => {
+    const lessonTitle = new Map(e.unit.lessons.map((l) => [l.id, l.title]));
+    return e.flashcards.cards.map((card) => ({
       ...card,
       id: `${e.unit.id}:${card.id}`,
-      unitBadge: { number: e.unit.number, titleEnglish: e.unit.titleEnglish ?? e.unit.id },
-    })),
-  );
+      unitBadge: {
+        number: e.unit.number,
+        titleEnglish: e.unit.titleEnglish ?? e.unit.id,
+        lessonTitle: lessonTitle.get(card.lessonId),
+      },
+    }));
+  });
 
   return (
     <main className="mx-auto max-w-[720px] px-[22px] pb-16">
       <div className="flex items-center gap-3.5 pb-1 pt-6">
         <Link
           href="/#subjects"
-          className="inline-flex items-center gap-1.5 font-bold text-on-dark-dim transition-colors hover:text-brass"
+          className="inline-flex items-center gap-1.5 font-bold text-cocoa transition-colors hover:text-coffee"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden />
           All units
@@ -59,8 +64,8 @@ export default async function MixedPage({ params }: { params: Params }) {
       </div>
 
       <div className="mb-4 mt-2 text-center">
-        <h1 className="font-display text-[1.9rem] font-bold leading-snug text-on-dark">Study everything</h1>
-        <div className="mt-0.5 text-[0.86rem] font-bold text-on-dark-dim">
+        <h1 className="font-display text-[1.8rem] font-extrabold leading-snug">Study everything</h1>
+        <div className="mt-0.5 text-[0.84rem] font-semibold text-cocoa">
           {c.title} · every unit · {cards.length} questions
         </div>
       </div>
