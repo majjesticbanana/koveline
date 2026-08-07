@@ -73,3 +73,12 @@ The page should feel alive while interacting and calm when idle.
 - Pointer/scroll updates are `requestAnimationFrame` throttled.
 - Small `.glass-control` elements do not use `backdrop-filter`; translucency + specular edge is enough. Blur is reserved for `.glass-panel` and reduced to 12px.
 - Scroll progress animates with `transform: scaleX()` rather than width.
+
+## Study UI refinement — August 2026
+
+- Sticky navbar is fully opaque so page-level breadcrumbs/content scroll underneath and disappear cleanly instead of showing through the header.
+- Lesson selection is no longer a native dropdown. It is a centered, symmetrical lesson navigator with previous/next controls and a focused bottom-sheet lesson picker.
+- The active study-order mode is intentionally quieter than the primary action; ember is now an interaction highlight rather than a large filled block.
+- Wrong-state contrast is one step stronger: deeper brick wash, stronger border, and a clear semantic edge while remaining restrained.
+- Mobile action controls hide while either the question navigator or lesson picker is open.
+- Bottom sheets use a dark overlay and become centered floating panels on desktop.

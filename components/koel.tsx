@@ -56,3 +56,27 @@ export function FlightLine({ className = "" }: { className?: string }) {
     </svg>
   );
 }
+/** Larger hero flight path. The curve is intentionally separate from the bird so the
+ * mark stays reusable; together they imply a Koveli moving along the "line". */
+export function HeroFlightLine({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 330 94"
+      preserveAspectRatio="none"
+      className={className}
+      aria-hidden
+      style={{ display: "block", overflow: "visible" }}
+    >
+      <path
+        className="hero-flight-path"
+        d="M8 72 C82 18 178 20 296 58"
+        fill="none"
+        stroke="var(--ember)"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <circle className="hero-flight-dot" cx="308" cy="61" r="5" fill="var(--ember-bright)" />
+    </svg>
+  );
+}
+

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Play } from "lucide-react";
 import type { HomeSummary } from "@/lib/content/loader";
-import { FlightLine } from "@/components/koel";
+import { HeroFlightLine, KoelMark } from "@/components/koel";
 import {
   readJSON, progressKey, LAST_STUDIED_KEY, type LastStudied, migrateV2Storage,
 } from "@/lib/storage";
@@ -40,50 +40,53 @@ export function Home({
   }, []);
 
   return (
-    <main className="mx-auto max-w-[880px] px-5 pb-10">
-      {/* ---- hero: compact, per Sol #7 ---- */}
-      <section className="relative pb-12 pt-12 text-center sm:pt-14">
-        <p className="mb-3 text-[0.72rem] font-extrabold uppercase tracking-[0.16em] text-teal-deep">
-          Grade 9 &amp; 10 · Islam
-        </p>
-        <h1 className="mx-auto max-w-[16ch] font-display text-[clamp(2rem,5.4vw,3rem)] font-extrabold leading-[1.08] tracking-tight">
-          Questions worth sitting with.
-        </h1>
-        <div className="mx-auto mt-3 w-[190px]">
-          <FlightLine className="h-4 w-full" />
-        </div>
-        {/* real spaces + interpunct separators; unambiguous for crawlers (Sol #8) */}
-        <p className="mx-auto mt-4 max-w-[52ch] text-[1.02rem] text-cocoa">
-          Study resources from the Maldives.{" "}
-          <span className="whitespace-nowrap font-semibold text-coffee">
-            {summary.grand.questions} questions
-          </span>{" "}
-          · {summary.grand.lessons} lessons · {summary.grand.units} units
-        </p>
+    <main className="mx-auto max-w-[980px] px-5 pb-10">
+      {/* Hero intentionally carries more visual identity than the content sections below. */}
+      <section className="home-hero">
+        <div className="home-hero-copy">
+          <p className="home-hero-kicker">Grade 9 &amp; 10 · Islam</p>
+          <h1 className="home-hero-title">Questions worth sitting with.</h1>
+          <p className="home-hero-body">
+            A free learning project made in the Maldives.
+            <span className="font-semibold text-coffee"> Study, reveal, self-mark, and return to what you missed.</span>
+          </p>
 
-        <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-          {/* context-aware primary CTA (Sol #1): continue if progress exists */}
-          {loaded && last ? (
-            <Link
-              href={last.href}
-              className="glass-control glass-primary inline-flex items-center gap-2 rounded-ctl border px-6 py-3 font-bold transition duration-200 hover:-translate-y-px"
-            >
-              <Play className="h-4 w-4" aria-hidden /> Continue: {last.label}
-            </Link>
-          ) : (
+          <div className="home-hero-actions">
+            {loaded && last ? (
+              <Link
+                href={last.href}
+                className="glass-control glass-primary inline-flex items-center gap-2 rounded-ctl border px-6 py-3 font-bold transition duration-200 hover:-translate-y-px"
+              >
+                <Play className="h-4 w-4" aria-hidden /> Continue: {last.label}
+              </Link>
+            ) : (
+              <a
+                href="#subjects"
+                className="glass-control glass-primary inline-flex items-center gap-2 rounded-ctl border px-6 py-3 font-bold transition duration-200 hover:-translate-y-px"
+              >
+                Start studying <ArrowRight className="h-4 w-4" aria-hidden />
+              </a>
+            )}
             <a
               href="#subjects"
-              className="glass-control glass-primary inline-flex items-center gap-2 rounded-ctl border px-6 py-3 font-bold transition duration-200 hover:-translate-y-px"
+              className="glass-control inline-flex items-center gap-2 rounded-ctl border px-6 py-3 font-bold text-coffee-deep transition hover:border-teal/70 hover:-translate-y-px"
             >
-              Start studying <ArrowRight className="h-4 w-4" aria-hidden />
+              Choose a unit
             </a>
-          )}
-          <a
-            href="#subjects"
-            className="glass-control inline-flex items-center gap-2 rounded-ctl border px-6 py-3 font-bold text-coffee-deep transition hover:border-teal/70 hover:-translate-y-px"
-          >
-            Choose a unit
-          </a>
+          </div>
+        </div>
+
+        <div className="home-hero-art" aria-hidden>
+          <div className="home-hero-orbit">
+            <i />
+            <i />
+          </div>
+          <KoelMark size={150} className="home-hero-mark" />
+          <HeroFlightLine className="home-hero-flight" />
+          <div className="home-hero-stat glass-panel">
+            <strong>{summary.grand.questions}</strong>
+            <span>questions across Islam</span>
+          </div>
         </div>
       </section>
 

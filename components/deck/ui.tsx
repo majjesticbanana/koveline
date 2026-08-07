@@ -100,7 +100,7 @@ export function ModeBar({
       onClick={() => onMode(m)}
       aria-pressed={seg === m}
       className={`px-3.5 py-1.5 text-[0.84rem] font-bold transition ${
-        seg === m ? "bg-teal text-accent-ink" : "text-coffee-deep hover:bg-raised"
+        seg === m ? "bg-[rgba(198,99,64,.16)] text-caramel shadow-[inset_0_0_0_1px_rgba(198,99,64,.24)]" : "text-coffee-deep hover:bg-raised"
       }`}
     >
       {label}
@@ -124,7 +124,7 @@ export function ModeBar({
         aria-pressed={mode === "wrongOnly"}
         className={`rounded-ctl border px-3.5 py-1.5 text-[0.84rem] font-bold transition ${
           mode === "wrongOnly"
-            ? "border-red bg-red text-cream"
+            ? "border-red bg-red-bg text-red shadow-[inset_0_0_0_1px_rgba(238,138,128,.20)]"
             : hasWrong
             ? "border-red-line bg-red-bg text-red hover:border-red"
             : "cursor-not-allowed border-line bg-surface text-cocoa/50"
@@ -246,14 +246,14 @@ export function BottomSheet({
       <div
         onClick={onClose}
         aria-hidden
-        className={`fixed inset-0 z-40 bg-ink/45 transition-opacity duration-300 ${shown ? "opacity-100" : "opacity-0"}`}
+        className={`fixed inset-0 z-[60] bg-deep/75 transition-opacity duration-300 ${shown ? "opacity-100" : "opacity-0"}`}
       />
       <div
         ref={sheetRef}
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className={`glass-panel fixed inset-x-0 bottom-0 z-50 flex max-h-[80vh] flex-col rounded-t-panel border-t shadow-[0_-18px_44px_-20px_rgba(0,0,0,.55)] transition-transform duration-300 ${shown ? "translate-y-0" : "translate-y-full"}`}
+        className={`glass-panel fixed inset-x-0 bottom-0 z-[70] flex max-h-[80vh] flex-col rounded-t-panel border-t shadow-[0_-18px_44px_-20px_rgba(0,0,0,.55)] transition-transform duration-300 sm:bottom-4 sm:left-1/2 sm:right-auto sm:w-[min(760px,calc(100vw-32px))] sm:-translate-x-1/2 sm:rounded-panel sm:border ${shown ? "translate-y-0" : "translate-y-full"}`}
         style={{ transitionTimingFunction: "cubic-bezier(.22,1,.36,1)" }}
       >
         <div className="border-b border-line px-5 pb-3 pt-4">

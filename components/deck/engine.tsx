@@ -6,7 +6,7 @@ import { isRtl } from "@/lib/rtl";
 import {
   readJSON, writeJSON, progressKey, rememberLastStudied, migrateV2Storage,
 } from "@/lib/storage";
-import { ChevronDown } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronsUpDown } from "lucide-react";
 import { RichBody } from "./rich-body";
 import {
   type Mode, type Mark, type Tone,
@@ -66,6 +66,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
   const [showAnswer, setShowAnswer] = useState(false);
   const [complete, setComplete] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
+  const [lessonOpen, setLessonOpen] = useState(false);
 
   const buildDeck = useCallback(
     (m: Mode, les: string, st: Status): DeckCard[] => {
@@ -172,7 +173,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
 
   // keyboard
   useEffect(() => {
-    if (!loaded || complete || navOpen) return;
+    if (!loaded || complete || navOpen || lessonOpen) return;
     const onKey = (e: KeyboardEvent) => {
       const el = e.target as HTMLElement | null;
       if (el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.tagName === "SELECT" || el.isContentEditable)) return;
@@ -187,7 +188,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [loaded, complete, navOpen, showAnswer, idx, deck.length, goNext, goPrev, mark]);
+  }, [loaded, complete, navOpen, lessonOpen, showAnswer, idx, deck.length, goNext, goPrev, mark]);
 
   if (!loaded) {
     return (
@@ -199,36 +200,112 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
 
   const lessonById = new Map(lessons.map((l) => [l.id, l]));
 
+  const lessonOptions = [
+    { id: ALL, title: "ހުރިހާ ފިލާވަޅެއް", label: "All lessons", count: cards.length },
+    ...lessons.map((l, i) => ({
+      id: l.id,
+      title: l.title,
+      label: `Lesson ${i + 1}`,
+      count: cards.filter((c) => c.lessonId === l.id).length,
+    })),
+  ];
+  const activeLessonIndex = Math.max(0, lessonOptions.findIndex((o) => o.id === lessonId));
+  const activeLesson = lessonOptions[activeLessonIndex];
+  const stepLesson = (delta: number) => {
+    const next = activeLessonIndex + delta;
+    if (next < 0 || next >= lessonOptions.length) return;
+    changeLesson(lessonOptions[next].id);
+  };
+  const chooseLesson = (id: string) => {
+    changeLesson(id);
+    setLessonOpen(false);
+  };
+
   const lessonFilter = lessons.length > 1 && (
-    <div className="mb-4 flex items-center justify-center gap-2.5">
-      <label
-        htmlFor="lesson-filter"
-        className="text-[0.72rem] font-extrabold uppercase tracking-[0.12em] text-cocoa"
-      >
-        Lesson
-      </label>
-      <div className="relative min-w-0 max-w-[420px] flex-1 sm:flex-initial sm:w-[380px]">
-        <select
-          id="lesson-filter"
-          value={lessonId}
-          onChange={(e) => changeLesson(e.target.value)}
-          lang="dv"
-          dir="rtl"
-          className="thaana w-full cursor-pointer appearance-none truncate rounded-ctl border border-line bg-surface py-2.5 pe-3.5 ps-9 text-right text-[1rem] font-semibold leading-tight text-coffee-deep transition hover:border-caramel"
+    <div className="mb-5">
+      <div className="lesson-switcher mx-auto grid w-full max-w-[560px] grid-cols-[46px_minmax(0,1fr)_46px] overflow-hidden rounded-panel border border-line bg-surface">
+        <button
+          type="button"
+          onClick={() => stepLesson(-1)}
+          disabled={activeLessonIndex === 0}
+          className="grid min-h-[72px] place-items-center border-r border-line text-cocoa transition hover:bg-raised hover:text-caramel disabled:cursor-default disabled:opacity-25 disabled:hover:bg-transparent disabled:hover:text-cocoa"
+          aria-label="Previous lesson"
         >
-          <option value={ALL}>ހުރިހާ ފިލާވަޅެއް ({cards.length})</option>
-          {lessons.map((l) => (
-            <option key={l.id} value={l.id}>
-              {l.title} ({cards.filter((c) => c.lessonId === l.id).length})
-            </option>
-          ))}
-        </select>
-        <ChevronDown
-          className="pointer-events-none absolute inset-y-0 my-auto h-4 w-4 text-caramel [inset-inline-start:12px]"
-          aria-hidden
-        />
+          <ChevronLeft className="h-5 w-5" aria-hidden />
+        </button>
+        <button
+          type="button"
+          onClick={() => { setNavOpen(false); setLessonOpen(true); }}
+          className="group min-w-0 px-4 py-2.5 text-center transition hover:bg-raised/80"
+          aria-haspopup="dialog"
+          aria-expanded={lessonOpen}
+        >
+          <span className="flex items-center justify-center gap-1.5 text-[0.66rem] font-extrabold uppercase tracking-[0.13em] text-cocoa">
+            {lessonId === ALL ? "All lessons" : `${activeLesson.label} of ${lessons.length}`}
+            <ChevronsUpDown className="h-3 w-3 text-caramel opacity-80 transition-transform group-hover:-translate-y-px" aria-hidden />
+          </span>
+          <span lang="dv" dir="rtl" className="thaana mt-0.5 block truncate text-[1.08rem] font-semibold text-coffee-deep">
+            {activeLesson.title}
+          </span>
+          <span className="mt-0.5 block text-[0.72rem] font-semibold text-cocoa">
+            {activeLesson.count} questions
+          </span>
+        </button>
+        <button
+          type="button"
+          onClick={() => stepLesson(1)}
+          disabled={activeLessonIndex === lessonOptions.length - 1}
+          className="grid min-h-[72px] place-items-center border-l border-line text-cocoa transition hover:bg-raised hover:text-caramel disabled:cursor-default disabled:opacity-25 disabled:hover:bg-transparent disabled:hover:text-cocoa"
+          aria-label="Next lesson"
+        >
+          <ChevronRight className="h-5 w-5" aria-hidden />
+        </button>
       </div>
     </div>
+  );
+
+  const lessonPicker = lessons.length > 1 && (
+    <BottomSheet
+      open={lessonOpen}
+      onClose={() => setLessonOpen(false)}
+      title="Choose a lesson"
+      subtitle={<>{cards.length} questions across {lessons.length} lessons</>}
+    >
+      <div className="mx-auto grid w-full max-w-[680px] gap-2">
+        {lessonOptions.map((option, i) => {
+          const selected = option.id === lessonId;
+          return (
+            <button
+              key={option.id}
+              type="button"
+              onClick={() => chooseLesson(option.id)}
+              aria-pressed={selected}
+              className={`lesson-choice grid w-full grid-cols-[54px_minmax(0,1fr)_72px] items-center gap-3 rounded-card border px-3 py-3 text-left transition ${
+                selected
+                  ? "border-teal bg-[rgba(198,99,64,.12)] shadow-[inset_3px_0_0_rgba(228,134,98,.78)]"
+                  : "border-line bg-surface hover:border-line-strong hover:bg-raised"
+              }`}
+            >
+              <span className={`font-display text-[0.76rem] font-extrabold tracking-[0.08em] ${selected ? "text-caramel" : "text-cocoa"}`}>
+                {i === 0 ? "ALL" : String(i).padStart(2, "0")}
+              </span>
+              <span className="min-w-0 text-center">
+                <span lang="dv" dir="rtl" className="thaana block truncate text-[1rem] font-semibold text-coffee-deep">
+                  {option.title}
+                </span>
+                <span className="mt-0.5 block text-[0.68rem] font-bold uppercase tracking-[0.09em] text-cocoa">
+                  {option.label}
+                </span>
+              </span>
+              <span className={`text-right text-[0.76rem] font-bold ${selected ? "text-caramel" : "text-cocoa"}`}>
+                {option.count}
+                <span className="block text-[0.62rem] font-semibold opacity-70">questions</span>
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </BottomSheet>
   );
 
   const navigator = (
@@ -290,6 +367,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
             {isReview ? "Start the deck" : "Show all questions"}
           </button>
         </div>
+        {lessonPicker}
         {navigator}
       </div>
     );
@@ -306,6 +384,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
           onRestart={reset}
           homeHref="/#subjects"
         />
+        {lessonPicker}
         {navigator}
       </div>
     );
@@ -325,7 +404,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
         total={deck.length}
         correct={counts.c}
         wrong={counts.w}
-        onOpenNav={() => setNavOpen(true)}
+        onOpenNav={() => { setLessonOpen(false); setNavOpen(true); }}
       />
       <ProgressBar correct={counts.c} wrong={counts.w} total={deck.length} />
       <ModeBar mode={mode} wrongTotal={wrongTotal} onMode={changeMode} onReset={reset} />
@@ -389,7 +468,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
       </div>
 
       {/* sticky action area on phones (Sol #25) */}
-      {!navOpen && (
+      {!navOpen && !lessonOpen && (
         <MobileActionBar>
           {!showAnswer ? (
             <RevealButton onClick={() => setShowAnswer(true)} />
@@ -403,6 +482,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
       <div className="h-24 sm:hidden" aria-hidden />
 
       <KbdHints />
+      {lessonPicker}
       {navigator}
     </div>
   );
