@@ -183,11 +183,6 @@ export function Home({
                 })}
               </div>
 
-              {c.courseId === "grade-10" && (
-                <p className="mt-3 text-[0.8rem] text-cocoa">
-                  Unit 4 · Islamic History is being prepared and will be added soon.
-                </p>
-              )}
             </div>
           </section>
         ))}

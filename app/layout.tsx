@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s — Koveline",
   },
   description:
-    "Study resources from the Maldives. Practice 613 real exam-prep questions across Grade 9 and Grade 10 Islam, mark yourself, and review what you missed.",
+    "Study resources from the Maldives. Practice 722 real exam-prep questions across Grade 9 and Grade 10 Islam, mark yourself, and review what you missed.",
   keywords: ["Koveline", "Maldives", "study", "flashcards", "Grade 9", "Islam", "Dhivehi"],
   applicationName: "Koveline",
   manifest: "/manifest.webmanifest",
