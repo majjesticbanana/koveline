@@ -2,9 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Play } from "lucide-react";
-import type { HomeSummary } from "@/lib/content/loader";
+import { ArrowRight, CalendarDays, Eye, Play } from "lucide-react";
+import type { DailyQuestion, HomeSummary } from "@/lib/content/loader";
 import { HeroFlightLine, KoelMark } from "@/components/koel";
+import { RichBody } from "@/components/deck/rich-body";
+import { isRtl } from "@/lib/rtl";
+import siteCopy from "@/content/site-copy.json";
 import {
   readJSON, progressKey, LAST_STUDIED_KEY, type LastStudied, migrateV2Storage,
 } from "@/lib/storage";
@@ -17,12 +20,68 @@ function reviewedCount(key: string, validIds: string[]): number {
   return Object.keys(s).filter((id) => ok.has(id)).length;
 }
 
+function QuestionOfTheDay({ qotd }: { qotd: DailyQuestion }) {
+  const [revealed, setRevealed] = useState(false);
+  const rtl = qotd.card.lang ? qotd.card.lang !== "en" : isRtl(qotd.card.front);
+  const dateLabel = new Intl.DateTimeFormat("en-GB", {
+    day: "numeric", month: "short", timeZone: "Indian/Maldives",
+  }).format(new Date(`${qotd.dateKey}T12:00:00+05:00`));
+
+  return (
+    <section className="qotd-section" aria-labelledby="qotd-title">
+      <div className="qotd-meta-row">
+        <div>
+          <div className="qotd-kicker">
+            <CalendarDays className="h-3.5 w-3.5" aria-hidden />
+            {siteCopy.home.questionOfTheDay.label}
+          </div>
+          <h2 id="qotd-title" className="qotd-heading">{siteCopy.home.questionOfTheDay.heading}</h2>
+        </div>
+        <span className="qotd-date">{dateLabel}</span>
+      </div>
+
+      <div className={`qotd-card ${revealed ? "is-revealed" : ""}`}>
+        <div className="qotd-source">
+          Grade {qotd.grade} · Unit {qotd.unitNumber} · {qotd.unitTitleEnglish}
+        </div>
+        {qotd.card.context && (
+          <p lang="dv" dir="rtl" className="thaana qotd-context">{qotd.card.context}</p>
+        )}
+        <p
+          lang={rtl ? (qotd.card.lang ?? "dv") : qotd.card.lang}
+          dir={rtl ? "rtl" : "ltr"}
+          className={`${rtl ? "thaana" : ""} qotd-question`}
+        >
+          {qotd.card.front}
+        </p>
+
+        {!revealed ? (
+          <button type="button" onClick={() => setRevealed(true)} className="qotd-reveal glass-control">
+            <Eye className="h-4 w-4" aria-hidden /> {siteCopy.home.questionOfTheDay.revealAnswer}
+          </button>
+        ) : (
+          <div className="qotd-answer" aria-live="polite">
+            <div className="qotd-answer-label">{siteCopy.home.questionOfTheDay.answerLabel}</div>
+            <RichBody body={qotd.card.back} size="sm" />
+          </div>
+        )}
+
+        <div className="qotd-foot">
+          <span lang="dv" dir="rtl" className="thaana">{qotd.lesson?.title ?? qotd.unitTitle}</span>
+          <Link href={qotd.href}>{siteCopy.home.questionOfTheDay.studyUnit} <ArrowRight className="h-3.5 w-3.5" aria-hidden /></Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function Home({
-  summary, cardIds, v2LessonMap,
+  summary, cardIds, v2LessonMap, qotd,
 }: {
   summary: HomeSummary;
   cardIds: Record<string, string[]>;
   v2LessonMap: Record<string, Record<string, string>>;
+  qotd: DailyQuestion | null;
 }) {
   const [reviewed, setReviewed] = useState<Record<string, number>>({});
   const [last, setLast] = useState<LastStudied | null>(null);
@@ -44,11 +103,11 @@ export function Home({
       {/* Hero intentionally carries more visual identity than the content sections below. */}
       <section className="home-hero">
         <div className="home-hero-copy">
-          <p className="home-hero-kicker">Grade 9 &amp; 10 · Islam</p>
-          <h1 className="home-hero-title">Questions worth sitting with.</h1>
+          <p className="home-hero-kicker">{siteCopy.home.hero.kicker}</p>
+          <h1 className="home-hero-title">{siteCopy.home.hero.title}</h1>
           <p className="home-hero-body">
-            A free learning project made in the Maldives.
-            <span className="font-semibold text-coffee"> Study, reveal, self-mark, and return to what you missed.</span>
+            {siteCopy.home.hero.intro}
+            <span className="font-semibold text-coffee"> {siteCopy.home.hero.emphasis}</span>
           </p>
 
           <div className="home-hero-actions">
@@ -57,21 +116,21 @@ export function Home({
                 href={last.href}
                 className="glass-control glass-primary inline-flex items-center gap-2 rounded-ctl border px-6 py-3 font-bold transition duration-200 hover:-translate-y-px"
               >
-                <Play className="h-4 w-4" aria-hidden /> Continue: {last.label}
+                <Play className="h-4 w-4" aria-hidden /> {siteCopy.home.hero.continuePrefix} {last.label}
               </Link>
             ) : (
               <a
                 href="#subjects"
                 className="glass-control glass-primary inline-flex items-center gap-2 rounded-ctl border px-6 py-3 font-bold transition duration-200 hover:-translate-y-px"
               >
-                Start studying <ArrowRight className="h-4 w-4" aria-hidden />
+                {siteCopy.home.hero.startStudying} <ArrowRight className="h-4 w-4" aria-hidden />
               </a>
             )}
             <a
               href="#subjects"
               className="glass-control inline-flex items-center gap-2 rounded-ctl border px-6 py-3 font-bold text-coffee-deep transition hover:border-teal/70 hover:-translate-y-px"
             >
-              Choose a unit
+              {siteCopy.home.hero.chooseUnit}
             </a>
           </div>
         </div>
@@ -85,10 +144,12 @@ export function Home({
           <HeroFlightLine className="home-hero-flight" />
           <div className="home-hero-stat glass-panel">
             <strong>{summary.grand.questions}</strong>
-            <span>questions across Islam</span>
+            <span>{siteCopy.home.hero.questionStat}</span>
           </div>
         </div>
       </section>
+
+      {qotd && <QuestionOfTheDay qotd={qotd} />}
 
       {/* ---- grade chapters (Sol #5): rules + whitespace, not cards-in-cards ---- */}
       <div id="subjects" className="scroll-mt-20">
@@ -191,15 +252,14 @@ export function Home({
       {/* ---- provenance, quiet (Sol #17); no personal note (owner ruling) ---- */}
       <section className="mt-14 border-l-2 border-line-strong py-1 pl-5">
         <div className="text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-cocoa">
-          Source material
+          {siteCopy.home.sourceMaterial.label}
         </div>
         <div lang="dv" dir="rtl" className="thaana mt-1.5 w-fit text-[1.05rem] font-bold">
-          އިސްކަންދަރު ސްކޫލް - އިސްލާމް ޑިޕާޓްމަންޓް
+          {siteCopy.home.sourceMaterial.nameDhivehi}
         </div>
-        <div className="text-[0.9rem] font-semibold text-coffee">Iskandhar School — Islam Department</div>
+        <div className="text-[0.9rem] font-semibold text-coffee">{siteCopy.home.sourceMaterial.nameEnglish}</div>
         <p className="mt-1.5 max-w-[58ch] text-[0.84rem] leading-relaxed text-cocoa">
-          Every question and answer comes from the school&apos;s Islam Q&amp;A preparation papers,
-          reproduced here as study material. They were not written by the site&apos;s creator.
+          {siteCopy.home.sourceMaterial.note}
         </p>
       </section>
     </main>

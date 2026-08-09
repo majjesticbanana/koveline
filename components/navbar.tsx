@@ -2,8 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { BookOpen, ChevronDown, FileText, Layers3 } from "lucide-react";
+import { BookOpen, ChevronDown, FileText, Layers3, ListChecks } from "lucide-react";
 import { KoelMark } from "./koel";
+import siteCopy from "@/content/site-copy.json";
 
 type MenuName = "explore" | null;
 
@@ -34,13 +35,13 @@ export function Navbar() {
   return (
     <header className="site-navbar sticky top-0 z-50 border-b border-line bg-cream shadow-[0_8px_28px_rgba(17,7,5,.22)]">
       <div className="site-navbar-inner mx-auto flex h-[64px] max-w-[960px] items-center justify-between px-[20px]">
-        <Link href="/" className="site-brand group flex items-center gap-2.5" aria-label="Koveline home">
+        <Link href="/" className="site-brand group flex items-center gap-2.5" aria-label={`${siteCopy.brand.name} home`}>
           <KoelMark
             size={30}
             className="text-ink transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
           />
           <span className="site-wordmark font-display text-[1.3rem] font-extrabold tracking-tight text-ink">
-            Kove<span className="text-teal">line</span>
+            {siteCopy.brand.wordmarkStart}<span className="text-teal">{siteCopy.brand.wordmarkAccent}</span>
           </span>
         </Link>
 
@@ -53,7 +54,7 @@ export function Navbar() {
               aria-expanded={open === "explore"}
               onClick={() => setOpen((value) => (value === "explore" ? null : "explore"))}
             >
-              Explore
+              {siteCopy.navigation.explore}
               <ChevronDown
                 className={`h-3.5 w-3.5 transition-transform duration-200 ${open === "explore" ? "rotate-180" : ""}`}
                 aria-hidden
@@ -63,21 +64,21 @@ export function Navbar() {
             <div
               className={`nav-dropdown glass-panel ${open === "explore" ? "is-open" : ""}`}
               role="menu"
-              aria-label="Explore Koveline"
+              aria-label={siteCopy.navigation.exploreAria}
             >
               <div className="nav-dropdown-intro">
-                <span>Explore Koveline</span>
-                <p>Move between subjects and resources without turning the homepage into a directory.</p>
+                <span>{siteCopy.navigation.introTitle}</span>
+                <p>{siteCopy.navigation.introBody}</p>
               </div>
 
               <div className="nav-dropdown-section">
-                <div className="nav-dropdown-label">Subjects</div>
+                <div className="nav-dropdown-label">{siteCopy.navigation.subjectsLabel}</div>
                 <div className="nav-subject-card">
                   <div className="nav-subject-head">
                     <span className="nav-dropdown-icon"><BookOpen className="h-4 w-4" aria-hidden /></span>
                     <div>
                       <strong>Islam</strong>
-                      <span>Current subject</span>
+                      <span>{siteCopy.navigation.currentSubject}</span>
                     </div>
                   </div>
                   <div className="nav-course-grid">
@@ -99,15 +100,15 @@ export function Navbar() {
                 <div className="nav-future-row" aria-disabled="true">
                   <span className="nav-dropdown-icon"><Layers3 className="h-4 w-4" aria-hidden /></span>
                   <div>
-                    <strong>More subjects</strong>
-                    <span>The menu is ready to grow as you add them.</span>
+                    <strong>{siteCopy.navigation.moreSubjectsTitle}</strong>
+                    <span>{siteCopy.navigation.moreSubjectsBody}</span>
                   </div>
-                  <span className="nav-status-pill">Soon</span>
+                  <span className="nav-status-pill">{siteCopy.navigation.soon}</span>
                 </div>
               </div>
 
               <div className="nav-dropdown-section nav-resources-section">
-                <div className="nav-dropdown-label">Resources</div>
+                <div className="nav-dropdown-label">{siteCopy.navigation.resourcesLabel}</div>
                 <Link
                   href="/past-papers"
                   role="menuitem"
@@ -116,10 +117,22 @@ export function Navbar() {
                 >
                   <span className="nav-dropdown-icon"><FileText className="h-4 w-4" aria-hidden /></span>
                   <div>
-                    <strong>Past Papers</strong>
-                    <span>Browse by grade and year as papers are added.</span>
+                    <strong>{siteCopy.navigation.pastPapersTitle}</strong>
+                    <span>{siteCopy.navigation.pastPapersBody}</span>
                   </div>
-                  <span className="nav-status-pill">Soon</span>
+                  <span className="nav-status-pill">{siteCopy.navigation.soon}</span>
+                </Link>
+                <Link
+                  href="/test"
+                  role="menuitem"
+                  className="nav-resource-row"
+                  onClick={() => setOpen(null)}
+                >
+                  <span className="nav-dropdown-icon"><ListChecks className="h-4 w-4" aria-hidden /></span>
+                  <div>
+                    <strong>{siteCopy.navigation.customTestTitle}</strong>
+                    <span>{siteCopy.navigation.customTestBody}</span>
+                  </div>
                 </Link>
                 <Link
                   href="/#subjects"
@@ -129,8 +142,8 @@ export function Navbar() {
                 >
                   <span className="nav-dropdown-icon"><BookOpen className="h-4 w-4" aria-hidden /></span>
                   <div>
-                    <strong>Question banks</strong>
-                    <span>Jump straight into the current study sets.</span>
+                    <strong>{siteCopy.navigation.questionBanksTitle}</strong>
+                    <span>{siteCopy.navigation.questionBanksBody}</span>
                   </div>
                 </Link>
               </div>
@@ -141,7 +154,7 @@ export function Navbar() {
             href="/#subjects"
             className="nav-study-cta glass-control rounded-ctl border px-4 py-2 text-[0.88rem] font-bold text-ink transition hover:border-teal/70"
           >
-            Start studying
+            {siteCopy.navigation.startStudying}
           </Link>
         </nav>
       </div>

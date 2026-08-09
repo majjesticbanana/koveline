@@ -19,7 +19,7 @@ import {
 
 export interface DeckCard extends Flashcard {
   /** Present on mixed-deck cards: which unit this card came from. */
-  unitBadge?: { number: number; titleEnglish: string; lessonTitle?: string };
+  unitBadge?: { grade?: number; number: number; titleEnglish: string; lessonTitle?: string };
 }
 
 export interface DeckProps {
@@ -31,6 +31,10 @@ export interface DeckProps {
   lastStudied: { href: string; label: string };
   /** unit-id -> lesson-title -> lesson-id, for the one-time v2 migration. */
   v2LessonMap: Record<string, Record<string, string>>;
+  /** Defaults for ephemeral/custom decks. */
+  initialMode?: "random" | "sequential";
+  freshStart?: boolean;
+  rememberAsLastStudied?: boolean;
 }
 
 type Status = Record<string, Mark>;
@@ -54,7 +58,10 @@ function shuffle<T>(a: T[]): T[] {
   return r;
 }
 
-export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMap }: DeckProps) {
+export function DeckEngine({
+  cards, lessons, storageKey, lastStudied, v2LessonMap,
+  initialMode = "sequential", freshStart = false, rememberAsLastStudied = true,
+}: DeckProps) {
   const KEY = progressKey(storageKey);
 
   const [loaded, setLoaded] = useState(false);
@@ -82,10 +89,10 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
   useEffect(() => {
     migrateV2Storage(v2LessonMap);
 
-    const s = readJSON<Saved>(KEY) ?? {};
+    const s = freshStart ? {} : (readJSON<Saved>(KEY) ?? {});
     const savedStatus: Status = s.status && typeof s.status === "object" ? s.status : {};
     const savedMode: Mode =
-      s.mode && ["random", "sequential", "wrongOnly"].includes(s.mode) ? s.mode : "sequential";
+      s.mode && ["random", "sequential", "wrongOnly"].includes(s.mode) ? s.mode : initialMode;
     const savedLesson =
       typeof s.lessonId === "string" &&
       (s.lessonId === ALL || lessons.some((l) => l.id === s.lessonId))
@@ -101,15 +108,15 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
       const expected = buildDeck(savedMode, savedLesson, savedStatus).length;
       if (restored.length === s.orderIds.length && restored.length === expected) d = restored;
     }
-    if (!d) d = buildDeck(savedMode, savedLesson, savedStatus);
+    const finalDeck = d ?? buildDeck(savedMode, savedLesson, savedStatus);
 
     setStatus(savedStatus);
     setMode(savedMode);
     setLessonId(savedLesson);
-    setDeck(d);
-    setIdx(Math.min(Math.max(typeof s.idx === "number" ? s.idx : 0, 0), Math.max(d.length - 1, 0)));
+    setDeck(finalDeck);
+    setIdx(Math.min(Math.max(typeof s.idx === "number" ? s.idx : 0, 0), Math.max(finalDeck.length - 1, 0)));
     setLoaded(true);
-    rememberLastStudied(lastStudied);
+    if (rememberAsLastStudied) rememberLastStudied(lastStudied);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -449,7 +456,7 @@ export function DeckEngine({ cards, lessons, storageKey, lastStudied, v2LessonMa
           tone={tone}
           index={idx + 1}
           total={deck.length}
-          unitLabel={current?.unitBadge ? `Unit ${current.unitBadge.number} · ${current.unitBadge.titleEnglish}` : undefined}
+          unitLabel={current?.unitBadge ? `${current.unitBadge.grade ? `Grade ${current.unitBadge.grade} · ` : ""}Unit ${current.unitBadge.number} · ${current.unitBadge.titleEnglish}` : undefined}
           lessonTitle={current?.unitBadge?.lessonTitle ?? lesson?.title}
         />
 

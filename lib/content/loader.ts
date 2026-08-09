@@ -146,3 +146,68 @@ export function v2LessonMap(): Record<string, Record<string, string>> {
   }
   return out;
 }
+
+/** A deterministic daily question, keyed to Maldives time (UTC+5). */
+export function questionOfTheDay(now = new Date()) {
+  const { units } = loadContent();
+  const pool = units.flatMap((e) => {
+    const lessonById = new Map(e.unit.lessons.map((l) => [l.id, l]));
+    return e.flashcards.cards.map((card) => ({
+      card,
+      subjectId: e.subject.id,
+      courseId: e.course.id,
+      grade: e.course.grade ?? 0,
+      unitNumber: e.unit.number,
+      unitTitle: e.unit.title,
+      unitTitleEnglish: e.unit.titleEnglish ?? e.unit.id,
+      lesson: lessonById.get(card.lessonId),
+      href: e.href,
+    }));
+  });
+
+  if (pool.length === 0) return null;
+
+  // Use the Maldives calendar date even when the server itself runs in UTC.
+  const maldives = new Date(now.getTime() + 5 * 60 * 60 * 1000);
+  const dateKey = maldives.toISOString().slice(0, 10);
+
+  // Small stable FNV-1a-style hash: same date -> same question for everyone.
+  let hash = 2166136261;
+  for (const ch of `koveline:${dateKey}`) {
+    hash ^= ch.charCodeAt(0);
+    hash = Math.imul(hash, 16777619);
+  }
+  const picked = pool[(hash >>> 0) % pool.length];
+  return { ...picked, dateKey };
+}
+export type DailyQuestion = NonNullable<ReturnType<typeof questionOfTheDay>>;
+
+/** Full card catalogue used only on the tucked-away custom-test page. */
+export function customTestCatalog() {
+  return loadContent().units.map((e) => {
+    const lessonById = new Map(e.unit.lessons.map((l) => [l.id, l.title]));
+    return {
+      key: e.key,
+      subjectId: e.subject.id,
+      courseId: e.course.id,
+      courseTitle: e.course.title,
+      grade: e.course.grade ?? 0,
+      unitId: e.unit.id,
+      unitNumber: e.unit.number,
+      title: e.unit.title,
+      titleEnglish: e.unit.titleEnglish ?? e.unit.id,
+      cards: e.flashcards.cards.map((card) => ({
+        ...card,
+        id: `${e.course.id}:${e.unit.id}:${card.id}`,
+        unitBadge: {
+          grade: e.course.grade ?? 0,
+          number: e.unit.number,
+          titleEnglish: e.unit.titleEnglish ?? e.unit.id,
+          lessonTitle: lessonById.get(card.lessonId),
+        },
+      })),
+    };
+  });
+}
+export type CustomTestCatalog = ReturnType<typeof customTestCatalog>;
+

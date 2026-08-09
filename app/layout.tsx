@@ -4,6 +4,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { SwRegister } from "@/components/sw-register";
 import { AmbientMotion } from "@/components/ambient-motion";
+import siteCopy from "@/content/site-copy.json";
 import "./globals.css";
 
 const faruma = localFont({
@@ -17,21 +18,20 @@ const faruma = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.koveline.com"),
   title: {
-    default: "Koveline — How much do you really know?",
-    template: "%s — Koveline",
+    default: siteCopy.metadata.siteTitle,
+    template: `%s — ${siteCopy.brand.name}`,
   },
-  description:
-    "Study resources from the Maldives. Practice 722 real exam-prep questions across Grade 9 and Grade 10 Islam, mark yourself, and review what you missed.",
+  description: siteCopy.metadata.description,
   keywords: ["Koveline", "Maldives", "study", "flashcards", "Grade 9", "Islam", "Dhivehi"],
-  applicationName: "Koveline",
+  applicationName: siteCopy.brand.name,
   manifest: "/manifest.webmanifest",
-  appleWebApp: { capable: true, title: "Koveline", statusBarStyle: "black-translucent" },
+  appleWebApp: { capable: true, title: siteCopy.brand.name, statusBarStyle: "black-translucent" },
   openGraph: {
-    title: "Koveline — How much do you really know?",
-    description: "Study resources from the Maldives — Grade 9 and Grade 10 Islam.",
+    title: siteCopy.metadata.siteTitle,
+    description: siteCopy.metadata.openGraphDescription,
     type: "website",
-    siteName: "Koveline",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Koveline" }],
+    siteName: siteCopy.brand.name,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: siteCopy.brand.name }],
   },
   twitter: { card: "summary_large_image" },
 };
@@ -58,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="#main"
           className="absolute left-3 top-3 z-[100] -translate-y-24 rounded-ctl bg-teal px-4 py-2 font-bold text-accent-ink transition-transform focus:translate-y-0"
         >
-          Skip to content
+          {siteCopy.system.skipToContent}
         </a>
         <AmbientMotion />
         <Navbar />

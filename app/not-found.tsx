@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { KoelMark } from "@/components/koel";
+import siteCopy from "@/content/site-copy.json";
 
 export default function NotFound() {
   return (
@@ -8,13 +9,13 @@ export default function NotFound() {
         <div className="flex justify-center">
           <KoelMark size={56} className="text-cocoa" />
         </div>
-        <h1 className="mt-4 font-display text-3xl font-extrabold">Nothing here</h1>
-        <p className="mt-2 text-cocoa">This page doesn&apos;t exist. Back to the questions.</p>
+        <h1 className="mt-4 font-display text-3xl font-extrabold">{siteCopy.system.notFoundTitle}</h1>
+        <p className="mt-2 text-cocoa">{siteCopy.system.notFoundBody}</p>
         <Link
           href="/"
           className="mt-6 inline-block rounded-ctl bg-teal px-6 py-3 font-bold text-accent-ink transition hover:bg-teal-deep hover:-translate-y-px"
         >
-          Back to Koveline
+          {siteCopy.system.notFoundCta}
         </Link>
       </div>
     </main>

@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
+import siteCopy from "@/content/site-copy.json";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Koveline — How much do you really know?",
-    short_name: "Koveline",
-    description: "Study resources from the Maldives — Grade 9 and Grade 10 Islam.",
+    name: siteCopy.metadata.siteTitle,
+    short_name: siteCopy.brand.name,
+    description: siteCopy.metadata.manifestDescription,
     start_url: "/",
     display: "standalone",
     background_color: "#190c09",
