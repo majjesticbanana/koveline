@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { SwRegister } from "@/components/sw-register";
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div id="main">{children}</div>
         <Footer />
         <SwRegister />
+        <Analytics />
       </body>
     </html>
   );
