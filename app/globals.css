@@ -1942,11 +1942,6 @@ button:active, a[role="button"]:active { transform: scale(.985); }
 .settings-reset:hover { border-color: var(--brick); color: var(--brick-bright) }
 .settings-note { margin-top: 10px; color: var(--muted); font-size: .7rem; text-align: center }
 
-/* Contact sits quietly under the footer line; underlined only on hover so it
-   reads as an offer rather than a call to action. */
-.footer-contact { color: var(--muted); text-underline-offset: 3px; }
-.footer-contact:hover { color: var(--ember-bright); text-decoration: underline; }
-
 .settings-contact {
   display: grid;
   gap: 3px;
@@ -1964,3 +1959,67 @@ button:active, a[role="button"]:active { transform: scale(.985); }
   word-break: break-all;
 }
 .settings-contact a:hover { text-decoration: underline; }
+
+/* ---------------------------------------------------------------- *
+ * Footer contact band
+ *
+ * Sized between body copy and the hero: big enough that the offer is
+ * unmissable, small enough that it never competes with the questions.
+ * No filled button, no accent panel — the invitation is carried by type
+ * and space, and the only colour is on the address itself.
+ * ---------------------------------------------------------------- */
+.site-footer { margin-top: 5rem; border-top: 1px solid var(--line); }
+
+.footer-contact-band {
+  max-width: 620px;
+  margin-inline: auto;
+  padding: 4rem 20px 3rem;
+  text-align: center;
+}
+.footer-contact-eyebrow {
+  color: var(--muted);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.footer-contact-body {
+  margin: .9rem auto 0;
+  max-width: 42ch;
+  color: var(--text);
+  font-size: clamp(1.02rem, 2.2vw, 1.22rem);
+  font-weight: 500;
+  line-height: 1.55;
+  letter-spacing: -.005em;
+  text-wrap: balance;
+}
+.footer-contact-link {
+  display: inline-block;
+  margin-top: 1.4rem;
+  padding-bottom: .3rem;
+  border-bottom: 2px solid var(--ember);
+  color: var(--ember-bright);
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+  font-weight: 800;
+  letter-spacing: -.01em;
+  word-break: break-word;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+.footer-contact-link:hover { color: var(--text); border-color: var(--text); }
+
+.footer-base {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  max-width: 960px;
+  margin-inline: auto;
+  padding: 1.4rem 20px 2.2rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .84rem;
+}
+@media (max-width: 520px) {
+  .footer-contact-band { padding: 3rem 20px 2.4rem; }
+}

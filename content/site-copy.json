@@ -5,8 +5,7 @@
     "wordmarkStart": "Kove",
     "wordmarkAccent": "line",
     "footerLine": "made in the Maldives",
-    "contactEmail": "yoonus.am@outlook.com",
-    "contactLabel": "Feedback or corrections"
+    "contactEmail": "yoonus.am@outlook.com"
   },
   "metadata": {
     "siteTitle": "Koveline",
@@ -86,5 +85,9 @@
     "errorBody": "Your progress is saved on this device.",
     "reload": "Reload",
     "skipToContent": "Skip to content"
+  },
+  "contact": {
+    "eyebrow": "Feedback",
+    "body": "If a question is wrong, or there's something that would make studying easier, tell me and I'll try to fix it."
   }
 }
