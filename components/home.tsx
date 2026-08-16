@@ -100,16 +100,10 @@ export function Home({
 
   return (
     <main className="mx-auto max-w-[980px] px-5 pb-10">
-      {/* Hero intentionally carries more visual identity than the content sections below. */}
       <section className="home-hero">
         <div className="home-hero-copy">
           <p className="home-hero-kicker">{siteCopy.home.hero.kicker}</p>
           <h1 className="home-hero-title">{siteCopy.home.hero.title}</h1>
-          <p className="home-hero-body">
-            {siteCopy.home.hero.intro}
-            <span className="font-semibold text-coffee"> {siteCopy.home.hero.emphasis}</span>
-          </p>
-
           <div className="home-hero-actions">
             {loaded && last ? (
               <Link
@@ -153,7 +147,7 @@ export function Home({
 
       {/* ---- grade chapters (Sol #5): rules + whitespace, not cards-in-cards ---- */}
       <div id="subjects" className="scroll-mt-20">
-        {summary.courses.map((c, ci) => (
+        {summary.grades.map((c, ci) => (
           <section key={`${c.subjectId}/${c.courseId}`} className={ci > 0 ? "mt-14" : ""}>
             <div className="border-t border-line pt-8">
               <div className="mb-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
@@ -244,6 +238,80 @@ export function Home({
                 })}
               </div>
 
+            </div>
+          </section>
+        ))}
+
+        {/* ---- collections: courses that are not a single school grade ---- */}
+        {summary.collections.map((col) => (
+          <section key={col.id} className="mt-14">
+            <div className="border-t border-line pt-8">
+              <div className="mb-6">
+                <div className="text-[0.7rem] font-extrabold uppercase tracking-[0.16em] text-teal-deep">
+                  {col.title}
+                </div>
+                {col.titleDhivehi && (
+                  <h2 lang="dv" dir="rtl" className="thaana mt-1 text-[1.7rem] font-bold leading-snug">
+                    {col.titleDhivehi}
+                  </h2>
+                )}
+                <p className="mt-0.5 text-[0.9rem] text-cocoa">
+                  {col.totals.questions > 0
+                    ? `${col.totals.questions} questions · ${col.courses.length} sets`
+                    : `${col.courses.length} sets · being prepared`}
+                </p>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-3">
+                {col.courses.map((c) => {
+                  const ready = c.totals.questions > 0;
+                  const inner = (
+                    <>
+                      <div className="mb-1.5 flex items-baseline justify-between gap-3">
+                        <span className="text-[0.7rem] font-extrabold uppercase tracking-[0.12em] text-cocoa">
+                          {c.scopeLabel}
+                        </span>
+                        {ready && (
+                          <span className="text-[0.78rem] font-semibold text-cocoa">
+                            {c.totals.questions} questions
+                          </span>
+                        )}
+                      </div>
+                      {c.titleDhivehi && (
+                        <h3 lang="dv" dir="rtl" className="thaana text-right text-[1.3rem] font-bold leading-[1.7]">
+                          {c.titleDhivehi}
+                        </h3>
+                      )}
+                      <div className="mt-1 flex items-baseline justify-between gap-3">
+                        <span className="font-display text-[0.9rem] font-semibold text-coffee">
+                          {c.title}
+                        </span>
+                        {ready ? (
+                          <ArrowRight className="h-4 w-4 flex-shrink-0 text-caramel" aria-hidden />
+                        ) : (
+                          <span className="text-[0.74rem] font-semibold text-cocoa/70">Soon</span>
+                        )}
+                      </div>
+                    </>
+                  );
+                  return ready ? (
+                    <Link
+                      key={c.courseId}
+                      href={c.mixedHref}
+                      className="group rounded-card border border-line bg-surface px-5 py-4 transition-colors hover:border-line-strong hover:bg-hover"
+                    >
+                      {inner}
+                    </Link>
+                  ) : (
+                    <div
+                      key={c.courseId}
+                      className="rounded-card border border-dashed border-line bg-surface/50 px-5 py-4 opacity-70"
+                    >
+                      {inner}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </section>
         ))}

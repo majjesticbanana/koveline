@@ -2,7 +2,7 @@
   "name": "koveline",
   "version": "3.0.0-alpha.1",
   "private": true,
-  "description": "Koveline \u2014 study resources for Maldivian students",
+  "description": "Koveline — study resources for Maldivian students",
   "scripts": {
     "dev": "next dev",
     "prebuild": "npm run validate",
@@ -13,6 +13,7 @@
     "audit:contrast": "python3 scripts/audit-contrast.py"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "lucide-react": "^0.544.0",
     "next": "^16.2.10",
     "react": "^19.2.0",

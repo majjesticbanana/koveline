@@ -106,6 +106,10 @@ export function homeSummary() {
       title: list[0].course.title,
       titleDhivehi: list[0].course.titleDhivehi ?? "",
       grade: list[0].course.grade ?? 0,
+      collection: list[0].course.collection ?? "",
+      collectionTitle: list[0].course.collectionTitle ?? "",
+      collectionTitleDhivehi: list[0].course.collectionTitleDhivehi ?? "",
+      scopeLabel: list[0].course.scopeLabel ?? "",
       order: list[0].course.order,
       mixedHref: `/${list[0].subject.id}/${list[0].course.id}/mixed`,
       totals: {
@@ -127,8 +131,53 @@ export function homeSummary() {
     }))
     .sort((a, b) => a.order - b.order);
 
+  /** Grade chapters keep their existing treatment. */
+  const grades = courses.filter((c) => !c.collection);
+
+  /**
+   * Everything else groups into named collections, rendered after the grades.
+   * Courses with no published units yet still appear (as "Soon"), so a
+   * collection can be announced while its content is being prepared.
+   */
+  const withUnits = new Set(courses.map((c) => c.courseId));
+  const empty = loadContent()
+    .courses.filter((c) => c.collection && !withUnits.has(c.id))
+    .map((c) => ({
+      subjectId: c.subjectId,
+      courseId: c.id,
+      title: c.title,
+      titleDhivehi: c.titleDhivehi ?? "",
+      grade: c.grade ?? 0,
+      collection: c.collection ?? "",
+      collectionTitle: c.collectionTitle ?? "",
+      collectionTitleDhivehi: c.collectionTitleDhivehi ?? "",
+      scopeLabel: c.scopeLabel ?? "",
+      order: c.order,
+      mixedHref: `/${c.subjectId}/${c.id}/mixed`,
+      totals: { units: 0, questions: 0, lessons: 0 },
+      units: [] as (typeof courses)[number]["units"],
+    }));
+
+  const collectionMap = new Map<string, typeof courses>();
+  for (const c of [...courses, ...empty].filter((x) => x.collection)) {
+    collectionMap.set(c.collection, [...(collectionMap.get(c.collection) ?? []), c]);
+  }
+  const collections = [...collectionMap.entries()].map(([id, list]) => ({
+    id,
+    title: list[0].collectionTitle || id,
+    titleDhivehi: list[0].collectionTitleDhivehi || "",
+    order: Math.min(...list.map((c) => c.order)),
+    courses: list,
+    totals: {
+      questions: list.reduce((n, c) => n + c.totals.questions, 0),
+      units: list.reduce((n, c) => n + c.totals.units, 0),
+    },
+  })).sort((a, b) => a.order - b.order);
+
   return {
     courses,
+    grades,
+    collections,
     grand: {
       questions: courses.reduce((n, c) => n + c.totals.questions, 0),
       units: courses.reduce((n, c) => n + c.totals.units, 0),
@@ -192,6 +241,14 @@ export function customTestCatalog() {
       courseId: e.course.id,
       courseTitle: e.course.title,
       grade: e.course.grade ?? 0,
+      /** Stable group id + label so collections sit beside the grades. */
+      groupId: e.course.collection ? `c:${e.course.collection}` : `g:${e.course.grade ?? 0}`,
+      groupLabel: e.course.collection
+        ? e.course.collectionTitle || e.course.collection
+        : `Grade ${e.course.grade ?? 0}`,
+      groupOrder: e.course.collection ? 100 + e.course.order : (e.course.grade ?? 0),
+      scopeLabel: e.course.scopeLabel ?? "",
+      targets: e.course.targets ?? [],
       unitId: e.unit.id,
       unitNumber: e.unit.number,
       title: e.unit.title,

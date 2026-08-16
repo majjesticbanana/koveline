@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { BookOpen, ChevronDown, FileText, Layers3, ListChecks } from "lucide-react";
+import { BookOpen, ChevronDown, ListChecks } from "lucide-react";
 import { KoelMark } from "./koel";
 import siteCopy from "@/content/site-copy.json";
 
@@ -66,11 +66,6 @@ export function Navbar() {
               role="menu"
               aria-label={siteCopy.navigation.exploreAria}
             >
-              <div className="nav-dropdown-intro">
-                <span>{siteCopy.navigation.introTitle}</span>
-                <p>{siteCopy.navigation.introBody}</p>
-              </div>
-
               <div className="nav-dropdown-section">
                 <div className="nav-dropdown-label">{siteCopy.navigation.subjectsLabel}</div>
                 <div className="nav-subject-card">
@@ -97,31 +92,10 @@ export function Navbar() {
                   </div>
                 </div>
 
-                <div className="nav-future-row" aria-disabled="true">
-                  <span className="nav-dropdown-icon"><Layers3 className="h-4 w-4" aria-hidden /></span>
-                  <div>
-                    <strong>{siteCopy.navigation.moreSubjectsTitle}</strong>
-                    <span>{siteCopy.navigation.moreSubjectsBody}</span>
-                  </div>
-                  <span className="nav-status-pill">{siteCopy.navigation.soon}</span>
-                </div>
               </div>
 
               <div className="nav-dropdown-section nav-resources-section">
                 <div className="nav-dropdown-label">{siteCopy.navigation.resourcesLabel}</div>
-                <Link
-                  href="/past-papers"
-                  role="menuitem"
-                  className="nav-resource-row"
-                  onClick={() => setOpen(null)}
-                >
-                  <span className="nav-dropdown-icon"><FileText className="h-4 w-4" aria-hidden /></span>
-                  <div>
-                    <strong>{siteCopy.navigation.pastPapersTitle}</strong>
-                    <span>{siteCopy.navigation.pastPapersBody}</span>
-                  </div>
-                  <span className="nav-status-pill">{siteCopy.navigation.soon}</span>
-                </Link>
                 <Link
                   href="/test"
                   role="menuitem"

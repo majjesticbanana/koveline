@@ -1,14 +1,17 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Check, ListChecks, Shuffle, X } from "lucide-react";
+import { readJSON, writeJSON, progressKey } from "@/lib/storage";
 import type { CustomTestCatalog } from "@/lib/content/loader";
 import type { DeckCard } from "@/components/deck/engine";
 import { DeckEngine } from "@/components/deck/engine";
 import siteCopy from "@/content/site-copy.json";
 
-type CountChoice = 10 | 20 | 50 | "all";
 type OrderChoice = "random" | "sequential";
+type SourceChoice = "all" | "unseen" | "wrong";
+
+const PREFS_KEY = "koveline:v3:test-prefs";
 
 type Session = {
   id: string;
@@ -35,18 +38,71 @@ export function TestBuilder({
   v2LessonMap: Record<string, Record<string, string>>;
 }) {
   const [selected, setSelected] = useState<Set<string>>(new Set());
-  const [count, setCount] = useState<CountChoice>(20);
+  /** null = every question in scope; otherwise the slider's value. */
+  const [count, setCount] = useState<number | null>(20);
   const [order, setOrder] = useState<OrderChoice>("random");
+  const [source, setSource] = useState<SourceChoice>("all");
+  const [marks, setMarks] = useState<Record<string, "correct" | "wrong">>({});
   const [session, setSession] = useState<Session | null>(null);
+  const [restored, setRestored] = useState(false);
 
-  const grades = useMemo(() => {
-    const map = new Map<number, CustomTestCatalog>();
-    for (const unit of catalog) map.set(unit.grade, [...(map.get(unit.grade) ?? []), unit]);
-    return [...map.entries()].sort(([a], [b]) => a - b);
+  /* Read saved marks once, so "questions I got wrong" can span every deck. */
+  useEffect(() => {
+    const all: Record<string, "correct" | "wrong"> = {};
+    for (const unit of catalog) {
+      const saved = readJSON<{ status?: Record<string, "correct" | "wrong"> }>(progressKey(unit.key));
+      if (!saved?.status) continue;
+      // progress is keyed by the unit's own card ids; the catalog prefixes them
+      for (const [cardId, mark] of Object.entries(saved.status)) {
+        all[`${unit.courseId}:${unit.unitId}:${cardId}`] = mark;
+      }
+    }
+    setMarks(all);
+
+    const prefs = readJSON<{ units?: string[]; count?: number | null; order?: OrderChoice }>(PREFS_KEY);
+    if (prefs) {
+      const live = new Set(catalog.map((u) => u.key));
+      if (prefs.units) setSelected(new Set(prefs.units.filter((k) => live.has(k))));
+      if (prefs.count !== undefined) setCount(prefs.count);
+      if (prefs.order) setOrder(prefs.order);
+    }
+    setRestored(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  /* Remember the setup so the next test starts where this one left off. */
+  useEffect(() => {
+    if (!restored) return;
+    writeJSON(PREFS_KEY, { units: [...selected], count, order });
+  }, [selected, count, order, restored]);
+
+  const groups = useMemo(() => {
+    const map = new Map<string, CustomTestCatalog>();
+    for (const unit of catalog) map.set(unit.groupId, [...(map.get(unit.groupId) ?? []), unit]);
+    return [...map.entries()]
+      .map(([id, units]) => ({ id, label: units[0].groupLabel, order: units[0].groupOrder, units }))
+      .sort((a, b) => a.order - b.order);
   }, [catalog]);
 
   const chosenUnits = useMemo(() => catalog.filter((u) => selected.has(u.key)), [catalog, selected]);
-  const available = chosenUnits.reduce((sum, unit) => sum + unit.cards.length, 0);
+
+  /** Every card in the chosen units, narrowed by the source filter. */
+  const pool = useMemo(() => {
+    const cards = chosenUnits.flatMap((unit) => unit.cards) as DeckCard[];
+    if (source === "wrong") return cards.filter((c) => marks[c.id] === "wrong");
+    if (source === "unseen") return cards.filter((c) => !marks[c.id]);
+    return cards;
+  }, [chosenUnits, source, marks]);
+
+  const available = pool.length;
+  const wrongInScope = useMemo(
+    () => chosenUnits.flatMap((u) => u.cards).filter((c) => marks[c.id] === "wrong").length,
+    [chosenUnits, marks],
+  );
+
+  /** Slider tops out at the scope, and "all" is the top of the track. */
+  const sliderMax = Math.max(1, available);
+  const effectiveCount = count === null ? available : Math.min(count, available);
 
   const toggleUnit = (key: string) => {
     setSelected((current) => {
@@ -57,7 +113,7 @@ export function TestBuilder({
     });
   };
 
-  const toggleGrade = (grade: number, units: CustomTestCatalog) => {
+  const toggleGroup = (units: CustomTestCatalog) => {
     setSelected((current) => {
       const next = new Set(current);
       const allSelected = units.every((unit) => next.has(unit.key));
@@ -67,9 +123,8 @@ export function TestBuilder({
   };
 
   const startTest = () => {
-    if (!chosenUnits.length) return;
-    const pool = chosenUnits.flatMap((unit) => unit.cards) as DeckCard[];
-    const target = count === "all" ? pool.length : Math.min(count, pool.length);
+    if (!pool.length) return;
+    const target = effectiveCount;
     // Random mode samples across the whole selected scope, not just the first units.
     const cards = order === "random" ? shuffled(pool).slice(0, target) : pool.slice(0, target);
     setSession({
@@ -135,21 +190,21 @@ export function TestBuilder({
         </div>
 
         <div className="test-grade-stack">
-          {grades.map(([grade, units]) => {
+          {groups.map(({ id, label, units }) => {
             const selectedCount = units.filter((unit) => selected.has(unit.key)).length;
             const allSelected = selectedCount === units.length;
             const gradeQuestions = units.reduce((sum, unit) => sum + unit.cards.length, 0);
             return (
-              <div key={grade} className="test-grade-block">
+              <div key={id} className="test-grade-block">
                 <button
                   type="button"
-                  onClick={() => toggleGrade(grade, units)}
+                  onClick={() => toggleGroup(units)}
                   className={`test-grade-toggle ${allSelected ? "is-selected" : ""}`}
                   aria-pressed={allSelected}
                 >
                   <span className="test-check">{allSelected ? <Check className="h-4 w-4" aria-hidden /> : null}</span>
                   <span>
-                    <strong>Grade {grade}</strong>
+                    <strong>{label}</strong>
                     <small>{gradeQuestions} questions · {units.length} units</small>
                   </span>
                   <em>{selectedCount}/{units.length}</em>
@@ -192,19 +247,53 @@ export function TestBuilder({
 
         <div className="test-options-grid">
           <div>
-            <div className="test-option-label">{siteCopy.customTest.questionsLabel}</div>
-            <div className="test-segment" role="group" aria-label="Number of questions">
-              {([10, 20, 50, "all"] as CountChoice[]).map((value) => (
+            <div className="test-option-label">
+              {siteCopy.customTest.questionsLabel}
+              <span className="test-count-value">
+                {available === 0 ? "—" : count === null ? `All ${available}` : effectiveCount}
+              </span>
+            </div>
+            <input
+              type="range"
+              className="test-slider"
+              min={1}
+              max={sliderMax}
+              step={1}
+              value={count === null ? sliderMax : Math.min(count, sliderMax)}
+              disabled={available === 0}
+              onChange={(e) => {
+                const v = Number(e.target.value);
+                setCount(v >= sliderMax ? null : v);
+              }}
+              aria-label="Number of questions"
+              aria-valuetext={count === null ? `All ${available} questions` : `${effectiveCount} questions`}
+            />
+            <div className="test-slider-scale">
+              <span>1</span>
+              <span>{available || 0}</span>
+            </div>
+            <div className="test-quick-row">
+              {[10, 20, 50].map((n) => (
                 <button
                   type="button"
-                  key={String(value)}
-                  onClick={() => setCount(value)}
-                  aria-pressed={count === value}
-                  className={count === value ? "is-selected" : ""}
+                  key={n}
+                  disabled={available < n}
+                  onClick={() => setCount(n)}
+                  aria-pressed={count === n}
+                  className={count === n ? "is-selected" : ""}
                 >
-                  {value === "all" ? siteCopy.customTest.allLabel : value}
+                  {n}
                 </button>
               ))}
+              <button
+                type="button"
+                disabled={available === 0}
+                onClick={() => setCount(null)}
+                aria-pressed={count === null}
+                className={count === null ? "is-selected" : ""}
+              >
+                {siteCopy.customTest.allLabel}
+              </button>
             </div>
           </div>
 
@@ -220,20 +309,46 @@ export function TestBuilder({
             </div>
           </div>
         </div>
+          <div>
+            <div className="test-option-label">Draw from</div>
+            <div className="test-segment" role="group" aria-label="Which questions to include">
+              <button type="button" onClick={() => setSource("all")} aria-pressed={source === "all"} className={source === "all" ? "is-selected" : ""}>
+                All
+              </button>
+              <button type="button" onClick={() => setSource("unseen")} aria-pressed={source === "unseen"} className={source === "unseen" ? "is-selected" : ""}>
+                Not yet seen
+              </button>
+              <button
+                type="button"
+                onClick={() => setSource("wrong")}
+                disabled={wrongInScope === 0}
+                aria-pressed={source === "wrong"}
+                className={source === "wrong" ? "is-selected" : ""}
+              >
+                Got wrong{wrongInScope ? ` (${wrongInScope})` : ""}
+              </button>
+            </div>
+          </div>
         <p className="test-option-note">{siteCopy.customTest.sizeNote}</p>
       </section>
 
       <div className="test-build-bar">
         <div>
           <strong>{chosenUnits.length ? `${chosenUnits.length} units selected` : siteCopy.customTest.emptySelection}</strong>
-          <span>{available ? `${available} questions available` : siteCopy.customTest.gradeMixHint}</span>
+          <span>
+            {available
+              ? `${effectiveCount} of ${available} available`
+              : chosenUnits.length
+              ? "No questions match that filter"
+              : siteCopy.customTest.gradeMixHint}
+          </span>
         </div>
         {chosenUnits.length > 0 && (
           <button type="button" className="test-clear" onClick={() => setSelected(new Set())}>
             <X className="h-3.5 w-3.5" aria-hidden /> {siteCopy.customTest.clear}
           </button>
         )}
-        <button type="button" className="test-start glass-control glass-primary" disabled={!chosenUnits.length} onClick={startTest}>
+        <button type="button" className="test-start glass-control glass-primary" disabled={!available} onClick={startTest}>
           {siteCopy.customTest.build}
         </button>
       </div>

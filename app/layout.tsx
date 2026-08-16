@@ -4,6 +4,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { SwRegister } from "@/components/sw-register";
 import { AmbientMotion } from "@/components/ambient-motion";
+import { Analytics } from "@vercel/analytics/next";
 import siteCopy from "@/content/site-copy.json";
 import "./globals.css";
 
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div id="main">{children}</div>
         <Footer />
         <SwRegister />
+        <Analytics />
       </body>
     </html>
   );

@@ -2,14 +2,14 @@
   "id": "unit-4",
   "number": 4,
   "icon": "🏛️",
-  "title": "އިސްލާމީ ތާރީޗް",
+  "title": "އިސްލާމީ ތާރީޚް",
   "titleEnglish": "Islamic History",
   "description": "41 questions from the Grade 10 Islamic History & Civilization paper.",
   "lessons": [
     {
       "id": "l1",
       "number": 1,
-      "title": "އިސްލާމީ ތާރީޗް"
+      "title": "އިސްލާމީ ތާރީޚް"
     }
   ],
   "draft": false

@@ -80,6 +80,23 @@ export const Course = z.object({
   title: z.string().min(1),
   titleDhivehi: z.string().optional(),
   grade: z.number().int().min(1).max(12).optional(),
+  /**
+   * Optional grouping for courses that are not a single school grade —
+   * e.g. the Deyha & Daleels collection, which spans Grade 9 and 10.
+   * Courses sharing a collection render as one section on the home page,
+   * below the grade chapters.
+   */
+  collection: Slug.optional(),
+  collectionTitle: z.string().optional(),
+  collectionTitleDhivehi: z.string().optional(),
+  /** Short label shown on the card inside a collection ("Grade 9", "Both grades"). */
+  scopeLabel: z.string().optional(),
+  /**
+   * Topic tags this course can contribute to a Target Test — a future mode
+   * that assembles a deck from weak areas rather than whole units. Declared
+   * now so content can be tagged as it is added; nothing consumes it yet.
+   */
+  targets: z.array(Slug).optional(),
   /** Default language of this course's content; drives lang/dir on render. */
   contentLang: Lang.default("dv"),
   credit: Credit.optional(),
@@ -102,6 +119,8 @@ export const Unit = z.object({
   title: z.string().min(1),
   titleEnglish: z.string().optional(),
   description: z.string().optional(),
+  /** Target-Test topic tags. Declared now, consumed later. */
+  targets: z.array(Slug).optional(),
   lessons: z.array(Lesson).min(1),
   draft: z.boolean().default(false),
 });

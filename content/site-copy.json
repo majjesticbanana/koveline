@@ -1,24 +1,21 @@
 {
-  "_editingNote": "Koveline site copy lives here. Edit text VALUES only; keep the JSON keys and punctuation structure intact. Quiz questions, lesson content, subject data, and study-engine controls intentionally live elsewhere.",
+  "_editingNote": "Edit text values only; keep the keys.",
   "brand": {
     "name": "Koveline",
     "wordmarkStart": "Kove",
     "wordmarkAccent": "line",
-    "tagline": "How much do you really know?",
-    "footerLine": "made by Yoonus"
+    "footerLine": "made in the Maldives"
   },
   "metadata": {
-    "siteTitle": "Koveline — How much do you really know?",
-    "description": "Study resources for Islam. Practice 722 real exam-prep questions across Grade 9 and Grade 10 Islam, mark yourself, and review what you missed.",
-    "openGraphDescription": "Study resources made in the Maldives — Grade 9 and Grade 10 Islam.",
-    "manifestDescription": "Study resources made in the Maldives — Grade 9 and Grade 10 Islam."
+    "siteTitle": "Koveline",
+    "description": "722 questions across Grade 9 and Grade 10 Islam. Reveal, mark yourself, and review what you missed.",
+    "openGraphDescription": "Grade 9 and Grade 10 Islam questions, from the Maldives.",
+    "manifestDescription": "Grade 9 and Grade 10 Islam questions, from the Maldives."
   },
   "home": {
     "hero": {
       "kicker": "Grade 9 & 10 · Islam",
       "title": "Questions worth sitting with.",
-      "intro": "A free learning project made in the Maldives.",
-      "emphasis": "Study, reveal, self-mark, and return to what you missed.",
       "startStudying": "Start studying",
       "chooseUnit": "Choose a unit",
       "continuePrefix": "Continue:",
@@ -26,7 +23,7 @@
     },
     "questionOfTheDay": {
       "label": "Question of the Day",
-      "heading": "One question. No warm-up.",
+      "heading": "One question, picked for today.",
       "revealAnswer": "Reveal answer",
       "answerLabel": "Answer",
       "studyUnit": "Study this unit"
@@ -35,48 +32,31 @@
       "label": "Source material",
       "nameDhivehi": "އިސްކަންދަރު ސްކޫލް - އިސްލާމް ޑިޕާޓްމަންޓް",
       "nameEnglish": "Iskandhar School — Islam Department",
-      "note": "Every question and answer comes from the school's Islam Q&A preparation papers, reproduced here as study material. They were not written by me."
+      "note": "Every question and answer comes from the school's Islam Q&A preparation papers."
     }
   },
   "navigation": {
     "explore": "Explore",
     "exploreAria": "Explore Koveline",
-    "introTitle": "Explore Koveline",
-    "introBody": "Move between subjects and resources without turning the homepage into a directory.",
     "subjectsLabel": "Subjects",
     "currentSubject": "Current subject",
-    "moreSubjectsTitle": "More subjects",
-    "moreSubjectsBody": "The menu is ready to grow as you add them.",
-    "soon": "Soon",
     "resourcesLabel": "Resources",
-    "pastPapersTitle": "Past Papers",
-    "pastPapersBody": "Browse by grade and year as papers are added.",
     "customTestTitle": "Custom test",
-    "customTestBody": "Pick grades and units for one focused test.",
+    "customTestBody": "Pick the units and the length.",
     "questionBanksTitle": "Question banks",
-    "questionBanksBody": "Jump straight into the current study sets.",
+    "questionBanksBody": "Grade 9 and Grade 10 units.",
     "startStudying": "Start studying"
-  },
-  "pastPapers": {
-    "metaTitle": "Past Papers",
-    "metaDescription": "Past papers on Koveline, organised by grade and year as they are added.",
-    "backHome": "Home",
-    "eyebrow": "Resources",
-    "title": "Past Papers",
-    "intro": "This section is ready for past papers, but none have been added yet. When they are, they can be organised by subject, grade, year, and paper without changing the navigation again.",
-    "cardEyebrow": "Past papers",
-    "empty": "No papers added yet."
   },
   "customTest": {
     "metaTitle": "Custom test",
-    "metaDescription": "Build a Koveline test from specific Grade 9 and Grade 10 Islam units.",
+    "metaDescription": "Build a test from chosen Grade 9 and Grade 10 Islam units.",
     "backHome": "Home",
     "sessionKicker": "Custom test",
-    "sessionTitle": "Your selected question set",
+    "sessionTitle": "Your test",
     "changeSelection": "Change selection",
-    "builderKicker": "Build a test",
-    "builderTitle": "Pick exactly what goes in.",
-    "builderIntro": "Mix units from different grades, then choose how large the test should be. Nothing here changes your normal unit progress.",
+    "builderKicker": "Custom test",
+    "builderTitle": "Build a test",
+    "builderIntro": "Mix units from either grade. This does not change your unit progress.",
     "scopeTitle": "Choose grades & units",
     "shapeTitle": "Shape the test",
     "questionsLabel": "Questions",
@@ -84,7 +64,7 @@
     "randomLabel": "Random",
     "sequentialLabel": "In order",
     "allLabel": "All",
-    "sizeNote": "If your selected units contain fewer questions than the chosen size, Koveline uses all available questions.",
+    "sizeNote": "Slide to the end for all of them.",
     "emptySelection": "Choose at least one unit",
     "gradeMixHint": "Grade 9 and Grade 10 can be mixed",
     "clear": "Clear",
@@ -98,10 +78,10 @@
   },
   "system": {
     "notFoundTitle": "Nothing here",
-    "notFoundBody": "This page doesn't exist. Back to the questions.",
+    "notFoundBody": "This page doesn't exist.",
     "notFoundCta": "Back to Koveline",
     "errorTitle": "Something broke",
-    "errorBody": "Your progress is saved on this device. Try loading the page again.",
+    "errorBody": "Your progress is saved on this device.",
     "reload": "Reload",
     "skipToContent": "Skip to content"
   }

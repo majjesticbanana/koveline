@@ -1,7 +1,7 @@
 /* Koveline service worker — full offline for a fully static site.
    Bump VERSION to invalidate old caches on deploy. */
-const VERSION = "koveline-v3.0.1";
-const CORE = ["/", "/islam/grade-9/mixed", "/islam/grade-10/mixed", "/past-papers", "/manifest.webmanifest", "/icon-192.png", "/icon-512.png"];
+const VERSION = "koveline-v6.0.0";
+const CORE = ["/", "/islam/grade-9/mixed", "/islam/grade-10/mixed", "/manifest.webmanifest", "/icon-192.png", "/icon-512.png"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(VERSION).then((c) => c.addAll(CORE)).then(() => self.skipWaiting()));
