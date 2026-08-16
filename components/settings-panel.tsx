@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Settings2, X, Check } from "lucide-react";
 import { THEMES, useSettings, type Settings } from "@/lib/settings";
+import siteCopy from "@/content/site-copy.json";
 
 const FOCUSABLE = 'button, [href], input, select, [tabindex]:not([tabindex="-1"])';
 
@@ -224,6 +225,11 @@ export function SettingsPanel() {
               <p className="settings-note">
                 Settings and study progress are saved on this device only.
               </p>
+
+              <div className="settings-contact">
+                <strong>Spotted a mistake, or want something added?</strong>
+                <a href={`mailto:${siteCopy.brand.contactEmail}`}>{siteCopy.brand.contactEmail}</a>
+              </div>
             </div>
           </div>
         </>

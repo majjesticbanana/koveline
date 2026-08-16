@@ -1941,3 +1941,26 @@ button:active, a[role="button"]:active { transform: scale(.985); }
 }
 .settings-reset:hover { border-color: var(--brick); color: var(--brick-bright) }
 .settings-note { margin-top: 10px; color: var(--muted); font-size: .7rem; text-align: center }
+
+/* Contact sits quietly under the footer line; underlined only on hover so it
+   reads as an offer rather than a call to action. */
+.footer-contact { color: var(--muted); text-underline-offset: 3px; }
+.footer-contact:hover { color: var(--ember-bright); text-decoration: underline; }
+
+.settings-contact {
+  display: grid;
+  gap: 3px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+.settings-contact strong { color: var(--text-2); font-size: .78rem; font-weight: 700; }
+.settings-contact a {
+  color: var(--ember-bright);
+  font-size: .82rem;
+  font-weight: 800;
+  text-underline-offset: 3px;
+  word-break: break-all;
+}
+.settings-contact a:hover { text-decoration: underline; }
