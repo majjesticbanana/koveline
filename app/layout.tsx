@@ -61,6 +61,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           {siteCopy.system.skipToContent}
         </a>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var s=JSON.parse(localStorage.getItem('koveline:v3:settings')||'{}');var d=document.documentElement;d.dataset.theme=s.theme||'mahogany';d.dataset.perf=s.performance?'on':'off';d.dataset.motion=s.performance?'off':(s.motion||'full');if(s.thaanaScale)d.style.setProperty('--thaana-scale',s.thaanaScale/100);}catch(e){}",
+          }}
+        />
         <AmbientMotion />
         <Navbar />
         <div id="main">{children}</div>

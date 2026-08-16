@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 :root {
+  --ambient-rgb: 198, 99, 64;
+  --ambient-2-rgb: 114, 157, 121;
   --font-display: 'Bricolage Grotesque', sans-serif;
   --font-body: 'Hanken Grotesk', system-ui, sans-serif;
   --font-thaana: var(--font-faruma), 'Noto Sans Thaana', sans-serif;
@@ -29,6 +31,85 @@
   --scroll-progress: 0;
 }
 
+
+/* ---------------------------------------------------------------- *
+ * Themes. Every surface reads these tokens, so a theme is only a
+ * variable swap — no component knows which theme is active.
+ * ---------------------------------------------------------------- */
+html[data-theme="basalt"] {
+  --ambient-rgb: 201, 151, 63; --ambient-2-rgb: 125, 154, 114;
+  --bg: #161412; --bg-upper: #1d1a16; --deep: #100e0c;
+  --surface: #232019; --raised: #2c281f; --hover: #35301f;
+  --text: #f4efe4; --text-2: #d7cfc0; --muted: #a89c8a;
+  --line: #3b3529; --line-strong: #564d3c;
+  --ember: #c9973f; --ember-bright: #e0b264;
+  --sage: #7d9a72; --sage-bright: #a3bf99;
+  --brick: #c9705c; --brick-bright: #e09681;
+  --ring: rgba(224, 178, 100, .55);
+}
+html[data-theme="lagoon"] {
+  --ambient-rgb: 224, 122, 82; --ambient-2-rgb: 111, 176, 141;
+  --bg: #07211f; --bg-upper: #0b2a27; --deep: #041817;
+  --surface: #0d312e; --raised: #124039; --hover: #175048;
+  --text: #eaf5f1; --text-2: #c4ded7; --muted: #8fb3ac;
+  --line: #1b4a44; --line-strong: #2a6a60;
+  --ember: #e07a52; --ember-bright: #f09b76;
+  --sage: #6fb08d; --sage-bright: #9ad0b0;
+  --brick: #e0796c; --brick-bright: #f09c8f;
+  --ring: rgba(240, 155, 118, .55);
+}
+html[data-theme="paper"] {
+  --ambient-rgb: 180, 86, 47; --ambient-2-rgb: 70, 112, 63;
+  --bg: #f6efe2; --bg-upper: #fbf5ea; --deep: #ece2d0;
+  --surface: #fdfaf3; --raised: #f2e9d8; --hover: #ece0c9;
+  --text: #2a1f16; --text-2: #4a3a2c; --muted: #6f5443;
+  --line: #dcc9ab; --line-strong: #c3ab83;
+  --ember: #a34c27; --ember-bright: #8a3d1a;
+  --sage: #46703f; --sage-bright: #35592f;
+  --brick: #a8422c; --brick-bright: #8c3421;
+  --ring: rgba(180, 86, 47, .5);
+}
+/* The light theme needs a lighter grain and no dark-lifting gradients. */
+html[data-theme="paper"] body {
+  background-image:
+    radial-gradient(900px 600px at 90% -10%, rgba(255,255,255,.7), transparent 65%),
+    radial-gradient(720px 520px at -8% 38%, rgba(236,226,208,.5), transparent 70%),
+    linear-gradient(180deg, var(--bg-upper) 0, var(--bg) 34rem, var(--bg) 100%);
+}
+html[data-theme="paper"] .glass-panel,
+html[data-theme="paper"] .glass-control {
+  background-color: rgba(253, 250, 243, .82);
+}
+
+/* ---------------------------------------------------------------- *
+ * Performance mode + motion preference.
+ * ---------------------------------------------------------------- */
+html[data-perf="on"] .glass-panel,
+html[data-perf="on"] .glass-control {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background-color: var(--surface) !important;
+}
+html[data-perf="on"] * {
+  box-shadow: none !important;
+}
+html[data-perf="on"] body { background-image: none; background-color: var(--bg); }
+
+html[data-motion="off"] *,
+html[data-motion="off"] *::before,
+html[data-motion="off"] *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+html[data-motion="off"] .koveline-aurora,
+html[data-motion="reduced"] .koveline-aurora,
+html[data-perf="on"] .koveline-aurora { display: none; }
+
+/* Thaana scale is user-controlled and applies to Dhivehi only. */
+:root { --thaana-scale: 1; }
+.thaana { font-size: calc(1em * var(--thaana-scale)); }
+
 html { scroll-behavior: smooth; background: var(--bg); }
 
 body {
@@ -54,19 +135,43 @@ body {
 
 /* Compositor-friendly pointer warmth: moving this small fixed layer is much cheaper
    than repainting the body's full background gradient on every pointermove. */
-.koveline-pointer-glow {
+/* Ambient warmth that drifts on its own rather than chasing the cursor.
+   Two large, very low-opacity blobs on long offset loops — a compositor-only
+   animation (transform + opacity), so it costs nothing per frame. */
+.koveline-aurora {
   position: fixed;
+  inset: 0;
   z-index: 0;
-  left: -170px;
-  top: -170px;
-  width: 340px;
-  height: 340px;
-  border-radius: 50%;
   pointer-events: none;
-  will-change: transform;
-  background: radial-gradient(circle, rgba(198,99,64,.050) 0%, rgba(198,99,64,.022) 34%, transparent 70%);
+  overflow: hidden;
 }
-.koveline-pointer-glow[hidden] { display: none; }
+.koveline-aurora i {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  filter: blur(60px);
+  will-change: transform, opacity;
+}
+.koveline-aurora i:nth-child(1) {
+  width: 46vmax; height: 46vmax;
+  top: -14vmax; right: -10vmax;
+  background: radial-gradient(circle, rgba(var(--ambient-rgb), .10), transparent 70%);
+  animation: aurora-a 34s ease-in-out infinite;
+}
+.koveline-aurora i:nth-child(2) {
+  width: 38vmax; height: 38vmax;
+  bottom: -16vmax; left: -12vmax;
+  background: radial-gradient(circle, rgba(var(--ambient-2-rgb), .085), transparent 70%);
+  animation: aurora-b 46s ease-in-out infinite;
+}
+@keyframes aurora-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: .85; }
+  50%      { transform: translate3d(-7vmax, 5vmax, 0) scale(1.14); opacity: 1; }
+}
+@keyframes aurora-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.06); opacity: .7; }
+  50%      { transform: translate3d(6vmax, -4vmax, 0) scale(1); opacity: .95; }
+}
 
 /* Scroll progress is a tiny kinetic signature. */
 .koveline-scroll-progress {
@@ -1668,3 +1773,171 @@ button:active, a[role="button"]:active { transform: scale(.985); }
 @media (prefers-reduced-motion: reduce) {
   .qotd-answer { animation: none; }
 }
+
+/* ---------------------------------------------------------------- *
+ * Settings
+ * ---------------------------------------------------------------- */
+.settings-trigger {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--text-2);
+  transition: color 160ms ease, border-color 160ms ease;
+}
+.settings-trigger:hover { color: var(--ember-bright); border-color: var(--line-strong); }
+
+.settings-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: rgba(0, 0, 0, .5);
+  animation: fade-in 180ms ease;
+}
+@keyframes fade-in { from { opacity: 0 } to { opacity: 1 } }
+
+.settings-panel {
+  position: fixed;
+  z-index: 80;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  max-height: 86vh;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+  border-radius: 18px 18px 0 0;
+  animation: settings-in 260ms cubic-bezier(.22, 1, .36, 1);
+}
+@keyframes settings-in { from { transform: translateY(14px); opacity: 0 } to { transform: none; opacity: 1 } }
+@media (min-width: 720px) {
+  .settings-panel {
+    right: 50%;
+    bottom: 50%;
+    left: auto;
+    width: min(520px, 92vw);
+    transform: translate(50%, 50%);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+  }
+  @keyframes settings-in {
+    from { transform: translate(50%, calc(50% + 12px)); opacity: 0 }
+    to { transform: translate(50%, 50%); opacity: 1 }
+  }
+}
+
+.settings-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid var(--line);
+}
+.settings-head h2 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; }
+.settings-head button {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  color: var(--muted);
+}
+.settings-head button:hover { background: var(--hover); color: var(--text); }
+
+.settings-body { overflow-y: auto; padding: 14px 18px 22px; }
+.settings-group-label {
+  margin: 14px 0 8px;
+  color: var(--muted);
+  font-size: .64rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.settings-group-label:first-child { margin-top: 0; }
+
+.settings-themes { display: grid; gap: 8px; }
+.settings-theme {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--surface);
+  text-align: left;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+.settings-theme:hover { border-color: var(--line-strong); background: var(--hover); }
+.settings-theme.is-selected { border-color: var(--ember); background: rgba(198, 99, 64, .10); }
+.settings-theme-swatch { display: flex; flex-shrink: 0; gap: 3px; }
+.settings-theme-swatch i { width: 13px; height: 26px; border-radius: 3px; }
+.settings-theme-copy { display: grid; gap: 1px; min-width: 0; }
+.settings-theme-copy strong { font-size: .92rem; font-weight: 800; }
+.settings-theme-copy span { color: var(--muted); font-size: .74rem; }
+.settings-theme-tick { flex-shrink: 0; margin-left: auto; color: var(--ember-bright); }
+
+/* Swatches show each theme's real colours, not the active theme's. */
+.settings-theme[data-theme-preview="mahogany"] i[data-swatch="bg"] { background: #190c09 }
+.settings-theme[data-theme-preview="mahogany"] i[data-swatch="surface"] { background: #29150f }
+.settings-theme[data-theme-preview="mahogany"] i[data-swatch="accent"] { background: #c66340 }
+.settings-theme[data-theme-preview="basalt"] i[data-swatch="bg"] { background: #161412 }
+.settings-theme[data-theme-preview="basalt"] i[data-swatch="surface"] { background: #232019 }
+.settings-theme[data-theme-preview="basalt"] i[data-swatch="accent"] { background: #c9973f }
+.settings-theme[data-theme-preview="lagoon"] i[data-swatch="bg"] { background: #07211f }
+.settings-theme[data-theme-preview="lagoon"] i[data-swatch="surface"] { background: #0d312e }
+.settings-theme[data-theme-preview="lagoon"] i[data-swatch="accent"] { background: #e07a52 }
+.settings-theme[data-theme-preview="paper"] i[data-swatch="bg"] { background: #f6efe2 }
+.settings-theme[data-theme-preview="paper"] i[data-swatch="surface"] { background: #fdfaf3 }
+.settings-theme[data-theme-preview="paper"] i[data-swatch="accent"] { background: #b4562f }
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.settings-row:last-of-type { border-bottom: 0 }
+.settings-row-copy { display: grid; gap: 2px; min-width: 150px; flex: 1 }
+.settings-row-copy strong { font-size: .92rem; font-weight: 800 }
+.settings-row-copy span { color: var(--muted); font-size: .74rem; line-height: 1.4 }
+
+.settings-segment {
+  display: flex;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+}
+.settings-segment button {
+  min-height: 36px;
+  padding: .4rem .7rem;
+  border-right: 1px solid var(--line);
+  color: var(--text-2);
+  font-size: .76rem;
+  font-weight: 800;
+  transition: background 150ms ease, color 150ms ease;
+}
+.settings-segment button:last-child { border-right: 0 }
+.settings-segment button:hover { background: var(--hover) }
+.settings-segment button.is-selected { color: var(--ember-bright); background: rgba(198, 99, 64, .13) }
+
+.settings-reset {
+  margin-top: 18px;
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  color: var(--text-2);
+  font-size: .8rem;
+  font-weight: 800;
+  transition: border-color 150ms ease, color 150ms ease;
+}
+.settings-reset:hover { border-color: var(--brick); color: var(--brick-bright) }
+.settings-note { margin-top: 10px; color: var(--muted); font-size: .7rem; text-align: center }

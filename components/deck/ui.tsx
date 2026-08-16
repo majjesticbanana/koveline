@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Check, X, Save, Grid3X3 } from "lucide-react";
 import { KoelMark } from "@/components/koel";
+import { readSettings } from "@/lib/settings";
 
 export type Mode = "random" | "sequential" | "wrongOnly";
 export type Mark = "correct" | "wrong";
@@ -162,7 +163,8 @@ export function ModeBar({
       </button>
       <button
         onClick={() => {
-          if (window.confirm("Reset all progress in this deck? This can't be undone.")) onReset();
+          const ask = readSettings().confirmReset;
+          if (!ask || window.confirm("Reset all progress in this deck? This can't be undone.")) onReset();
         }}
         className="reset-mode px-2 py-1.5 text-[0.8rem] font-semibold text-cocoa underline-offset-2 transition hover:text-red hover:underline"
       >

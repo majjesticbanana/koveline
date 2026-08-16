@@ -1,26 +1,36 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 /**
- * Low-cost ambient motion.
- * Pointer work is rAF-throttled; the ambient glow is a translated compositor layer,
- * not a full-page background repaint. Tilt is only calculated for the active card.
+ * Ambient layer + scroll signature.
+ *
+ * The pointer-following glow is gone: a static gradient dragged around by the
+ * cursor read as a flashlight, did nothing on touch devices, and cost a
+ * listener on every move. The warmth now drifts on its own in CSS
+ * (`.koveline-aurora`) as a compositor-only animation, so it is alive without
+ * costing a frame.
+ *
+ * This component keeps only what genuinely needs JavaScript: the scroll
+ * progress ratio, and the small tilt on the active card. Both are
+ * rAF-throttled and both stand down under reduced motion or performance mode.
  */
 export function AmbientMotion() {
-  const glowRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     const root = document.documentElement;
-    const glow = glowRef.current;
     const fine = window.matchMedia("(pointer: fine)").matches;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /** Settings are on <html>; re-read per event so changes apply instantly. */
+    const motionOff = () =>
+      root.dataset.perf === "on" || root.dataset.motion === "off" || prefersReduced;
+    const tiltAllowed = () => fine && !motionOff() && root.dataset.motion !== "reduced";
 
     let active: HTMLElement | null = null;
     let pointerFrame = 0;
     let scrollFrame = 0;
-    let lastX = window.innerWidth / 2;
-    let lastY = window.innerHeight / 3;
+    let lastX = 0;
+    let lastY = 0;
     let pointerTarget: EventTarget | null = null;
 
     const resetActive = () => {
@@ -32,25 +42,23 @@ export function AmbientMotion() {
 
     const paintPointer = () => {
       pointerFrame = 0;
-
-      if (glow && fine && !reduced) {
-        glow.style.transform = `translate3d(${Math.round(lastX)}px, ${Math.round(lastY)}px, 0)`;
+      if (!tiltAllowed()) {
+        resetActive();
+        return;
       }
-
-      if (!fine || reduced) return;
-
-      const target = (pointerTarget as HTMLElement | null)?.closest?.("[data-tilt]") as HTMLElement | null;
+      const target = (pointerTarget as HTMLElement | null)?.closest?.(
+        "[data-tilt]",
+      ) as HTMLElement | null;
       if (target !== active) {
         resetActive();
         active = target;
       }
       if (!target) return;
-
       const r = target.getBoundingClientRect();
       const x = Math.min(1, Math.max(0, (lastX - r.left) / r.width));
       const y = Math.min(1, Math.max(0, (lastY - r.top) / r.height));
-      target.style.setProperty("--ry", `${((x - .5) * .52).toFixed(3)}deg`);
-      target.style.setProperty("--rx", `${((.5 - y) * .52).toFixed(3)}deg`);
+      target.style.setProperty("--ry", `${((x - 0.5) * 0.52).toFixed(3)}deg`);
+      target.style.setProperty("--rx", `${((0.5 - y) * 0.52).toFixed(3)}deg`);
       target.style.setProperty("--cx", `${(x * 100).toFixed(1)}%`);
       target.style.setProperty("--cy", `${(y * 100).toFixed(1)}%`);
     };
@@ -65,22 +73,19 @@ export function AmbientMotion() {
     const paintScroll = () => {
       scrollFrame = 0;
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      const ratio = max > 0 ? window.scrollY / max : 0;
-      root.style.setProperty("--scroll-progress", ratio.toFixed(4));
+      root.style.setProperty("--scroll-progress", (max > 0 ? window.scrollY / max : 0).toFixed(4));
     };
-
     const onScroll = () => {
       if (!scrollFrame) scrollFrame = requestAnimationFrame(paintScroll);
     };
-
     const onPointerOut = (e: PointerEvent) => {
       if (!(e.relatedTarget as Node | null)) resetActive();
     };
 
-    if (!fine || reduced) glow?.setAttribute("hidden", "");
-
-    window.addEventListener("pointermove", onPointer, { passive: true });
-    window.addEventListener("pointerout", onPointerOut, { passive: true });
+    if (fine) {
+      window.addEventListener("pointermove", onPointer, { passive: true });
+      window.addEventListener("pointerout", onPointerOut, { passive: true });
+    }
     window.addEventListener("scroll", onScroll, { passive: true });
     paintScroll();
 
@@ -96,7 +101,10 @@ export function AmbientMotion() {
 
   return (
     <>
-      <div ref={glowRef} className="koveline-pointer-glow" aria-hidden />
+      <div className="koveline-aurora" aria-hidden>
+        <i />
+        <i />
+      </div>
       <div className="koveline-scroll-progress" aria-hidden />
     </>
   );
