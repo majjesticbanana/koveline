@@ -1968,12 +1968,12 @@ button:active, a[role="button"]:active { transform: scale(.985); }
  * No filled button, no accent panel — the invitation is carried by type
  * and space, and the only colour is on the address itself.
  * ---------------------------------------------------------------- */
-.site-footer { margin-top: 5rem; border-top: 1px solid var(--line); }
+.site-footer { margin-top: 3.5rem; border-top: 1px solid var(--line); }
 
 .footer-contact-band {
-  max-width: 620px;
+  max-width: 660px;
   margin-inline: auto;
-  padding: 4rem 20px 3rem;
+  padding: 2.4rem 20px 2rem;
   text-align: center;
 }
 .footer-contact-eyebrow {
@@ -1984,23 +1984,23 @@ button:active, a[role="button"]:active { transform: scale(.985); }
   text-transform: uppercase;
 }
 .footer-contact-body {
-  margin: .9rem auto 0;
-  max-width: 42ch;
-  color: var(--text);
-  font-size: clamp(1.02rem, 2.2vw, 1.22rem);
+  margin: .55rem auto 0;
+  max-width: 56ch;
+  color: var(--text-2);
+  font-size: clamp(.94rem, 1.6vw, 1.02rem);
   font-weight: 500;
-  line-height: 1.55;
+  line-height: 1.5;
   letter-spacing: -.005em;
   text-wrap: balance;
 }
 .footer-contact-link {
   display: inline-block;
-  margin-top: 1.4rem;
-  padding-bottom: .3rem;
+  margin-top: .95rem;
+  padding-bottom: .18rem;
   border-bottom: 2px solid var(--ember);
   color: var(--ember-bright);
   font-family: var(--font-display);
-  font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+  font-size: clamp(.98rem, 1.9vw, 1.1rem);
   font-weight: 800;
   letter-spacing: -.01em;
   word-break: break-word;
@@ -2015,11 +2015,11 @@ button:active, a[role="button"]:active { transform: scale(.985); }
   gap: .6rem;
   max-width: 960px;
   margin-inline: auto;
-  padding: 1.4rem 20px 2.2rem;
+  padding: 1rem 20px 1.5rem;
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: .84rem;
 }
 @media (max-width: 520px) {
-  .footer-contact-band { padding: 3rem 20px 2.4rem; }
+  .footer-contact-band { padding: 2rem 20px 1.7rem; }
 }
