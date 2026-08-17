@@ -20,8 +20,17 @@ future non-grade collection appears beside the grades automatically.
 
 ## Analytics
 
-`@vercel/analytics` is mounted in `app/layout.tsx`. It only reports from a
-Vercel deployment; nothing in dev.
+Two independent trackers, both mounted in `app/layout.tsx`:
+
+- **Vercel Analytics** (`@vercel/analytics`) — only reports from a Vercel
+  deployment; nothing in dev.
+- **Umami** — loaded via `next/script` with `strategy="afterInteractive"`,
+  which matches the `defer` in Umami's own snippet and keeps it off the
+  critical path. The site id lives in the tag.
+
+The service worker ignores cross-origin requests, so neither script is
+cached or intercepted. Ad blockers will stop both; that is expected and
+means real numbers will read lower than raw traffic.
 
 ## Settings
 

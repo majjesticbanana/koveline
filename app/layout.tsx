@@ -5,6 +5,7 @@ import { Footer } from "@/components/footer";
 import { SwRegister } from "@/components/sw-register";
 import { AmbientMotion } from "@/components/ambient-motion";
 import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 import siteCopy from "@/content/site-copy.json";
 import "./globals.css";
 
@@ -73,6 +74,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <SwRegister />
         <Analytics />
+        <Script
+          src="https://cloud.umami.is/script.js"
+          data-website-id="3a278324-ffa5-4a33-8f2b-44d2edac0ba1"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

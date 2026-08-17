@@ -1,0 +1,19 @@
+{
+  "id": "unit-1",
+  "number": 1,
+  "icon": "📖",
+  "title": "އިސްލާމީ ޢަޤީދާ",
+  "titleEnglish": "Aqeedah",
+  "description": "Sample of 5 questions from the Deyha paper.",
+  "lessons": [
+    {
+      "id": "l1",
+      "number": 1,
+      "title": "އިސްލާމީ ޢަޤީދާ"
+    }
+  ],
+  "targets": [
+    "deyha"
+  ],
+  "draft": true
+}

@@ -1,0 +1,22 @@
+{
+  "id": "dheyha-9",
+  "subjectId": "islam",
+  "title": "Deyha — Grade 9",
+  "titleDhivehi": "ދޭހަ - ގްރޭޑް 9",
+  "contentLang": "dv",
+  "collection": "deyha-daleels",
+  "collectionTitle": "Deyha & Daleels",
+  "collectionTitleDhivehi": "ދޭހަ އަދި ދަލީލު",
+  "scopeLabel": "Grade 9",
+  "targets": [
+    "deyha",
+    "grade-9"
+  ],
+  "credit": {
+    "english": "Iskandhar School — Islam Department",
+    "dhivehi": "އިސްކަންދަރު ސްކޫލް - އިސްލާމް ޑިޕާޓްމަންޓް",
+    "note": "From the school's Deyha study paper."
+  },
+  "order": 3,
+  "draft": true
+}
