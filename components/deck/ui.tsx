@@ -105,7 +105,7 @@ export function ProgressBar({
       {total > 0 && (
         <i
           aria-hidden
-          className="question-progress-current pointer-events-none absolute top-1/2 z-10 h-[12px] w-[2px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white transition-[left] duration-300"
+          className="question-progress-current pointer-events-none absolute top-1/2 z-10 h-[12px] w-[2px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-ink transition-[left] duration-300"
           style={{ left: `${markerPct}%` }}
         />
       )}
@@ -129,7 +129,7 @@ export function ModeBar({
       onClick={() => onMode(m)}
       aria-pressed={seg === m}
       className={`px-3.5 py-1.5 text-[0.84rem] font-bold transition ${
-        seg === m ? "bg-[rgba(198,99,64,.16)] text-caramel shadow-[inset_0_0_0_1px_rgba(198,99,64,.24)]" : "text-coffee-deep hover:bg-raised"
+        seg === m ? "bg-teal/[.15] text-caramel shadow-[inset_0_0_0_1px_rgb(var(--accent-rgb)/.24)]" : "text-coffee-deep hover:bg-raised"
       }`}
     >
       {label}
@@ -153,7 +153,7 @@ export function ModeBar({
         aria-pressed={mode === "wrongOnly"}
         className={`review-mode rounded-ctl border px-3.5 py-1.5 text-[0.84rem] font-bold transition ${
           mode === "wrongOnly"
-            ? "border-red bg-red-bg text-red shadow-[inset_0_0_0_1px_rgba(238,138,128,.20)]"
+            ? "border-red bg-red-bg text-red shadow-[inset_0_0_0_1px_rgb(var(--negative-rgb)/.20)]"
             : hasWrong
             ? "border-red-line bg-red-bg text-red hover:border-red"
             : "cursor-not-allowed border-line bg-surface text-cocoa/50"
@@ -327,7 +327,7 @@ export function NavLegend() {
   );
   return (
     <div className="mt-4 flex flex-wrap gap-4 border-t border-line pt-3.5 text-[0.78rem] font-semibold text-cocoa">
-      <L swatch="bg-[rgba(247,232,223,.08)] border-ink" label="Current" />
+      <L swatch="bg-ink/[.08] border-ink" label="Current" />
       <L swatch="bg-green-bg border-green-line" label="Right" />
       <L swatch="bg-red-bg border-red-line" label="Wrong" />
       <L swatch="bg-cream border-line" label="Not answered" />

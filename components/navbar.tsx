@@ -34,7 +34,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className="site-navbar sticky top-0 z-50 border-b border-line bg-cream shadow-[0_8px_28px_rgba(17,7,5,.22)]">
+    <header className="site-navbar sticky top-0 z-50 border-b border-line bg-cream">
       <div className="site-navbar-inner mx-auto flex h-[64px] max-w-[960px] items-center justify-between px-[20px]">
         <Link href="/" className="site-brand group flex items-center gap-2.5" aria-label={`${siteCopy.brand.name} home`}>
           <KoelMark

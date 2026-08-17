@@ -9,10 +9,41 @@ import { useCallback, useEffect, useState } from "react";
  * ------------------------------------------------------------------ */
 
 export const THEMES = [
-  { id: "mahogany", name: "Mahogany", note: "The default — warm espresso and ember." },
-  { id: "basalt", name: "Basalt", note: "Cooler charcoal with a brass accent." },
-  { id: "lagoon", name: "Lagoon", note: "Deep teal, the colour of the shallows." },
-  { id: "paper", name: "Paper", note: "Light cream, for bright rooms and daylight." },
+  {
+    id: "mahogany",
+    name: "Mahogany",
+    note: "Warm espresso, ivory and restrained rust.",
+    mode: "Dark",
+    browserColor: "#190c09",
+  },
+  {
+    id: "graphite",
+    name: "Graphite",
+    note: "Cool charcoal with a soft steel-blue accent.",
+    mode: "Dark",
+    browserColor: "#11161c",
+  },
+  {
+    id: "moss",
+    name: "Moss",
+    note: "Deep olive-green with a muted bronze accent.",
+    mode: "Dark",
+    browserColor: "#0f1712",
+  },
+  {
+    id: "mulberry",
+    name: "Mulberry",
+    note: "Quiet plum with dusty rose, never neon purple.",
+    mode: "Dark",
+    browserColor: "#171116",
+  },
+  {
+    id: "ivory",
+    name: "Ivory",
+    note: "Warm off-white with walnut for daylight studying.",
+    mode: "Light",
+    browserColor: "#f3efe7",
+  },
 ] as const;
 
 export type ThemeId = (typeof THEMES)[number]["id"];
@@ -25,7 +56,7 @@ export type Settings = {
   performance: boolean;
   /** Thaana can run small on dense answers; this scales only Dhivehi. */
   thaanaScale: 100 | 110 | 125;
-  /** Reveal the answer with the spacebar without also advancing. */
+  /** Ask before clearing a deck's saved progress. */
   confirmReset: boolean;
 };
 
@@ -39,20 +70,38 @@ export const DEFAULTS: Settings = {
 
 export const SETTINGS_KEY = "koveline:v3:settings";
 
+const THEME_IDS = new Set<string>(THEMES.map((theme) => theme.id));
+const LEGACY_THEME_MAP: Record<string, ThemeId> = {
+  basalt: "graphite",
+  lagoon: "moss",
+  paper: "ivory",
+};
+
+function normaliseTheme(value: unknown): ThemeId {
+  if (typeof value !== "string") return DEFAULTS.theme;
+  if (THEME_IDS.has(value)) return value as ThemeId;
+  return LEGACY_THEME_MAP[value] ?? DEFAULTS.theme;
+}
+
 export function applySettings(s: Settings) {
   const el = document.documentElement;
-  el.dataset.theme = s.theme;
+  const theme = normaliseTheme(s.theme);
+  el.dataset.theme = theme;
   el.dataset.motion = s.performance ? "off" : s.motion;
   el.dataset.perf = s.performance ? "on" : "off";
   el.style.setProperty("--thaana-scale", String(s.thaanaScale / 100));
+
+  const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+  const themeMeta = THEMES.find((item) => item.id === theme);
+  if (meta && themeMeta) meta.content = themeMeta.browserColor;
 }
 
 export function readSettings(): Settings {
   try {
     const raw = localStorage.getItem(SETTINGS_KEY);
     if (!raw) return DEFAULTS;
-    const parsed = JSON.parse(raw) as Partial<Settings>;
-    return { ...DEFAULTS, ...parsed };
+    const parsed = JSON.parse(raw) as Partial<Settings> & { theme?: string };
+    return { ...DEFAULTS, ...parsed, theme: normaliseTheme(parsed.theme) } as Settings;
   } catch {
     return DEFAULTS;
   }
@@ -71,7 +120,11 @@ export function useSettings() {
 
   const update = useCallback((patch: Partial<Settings>) => {
     setSettings((current) => {
-      const next = { ...current, ...patch };
+      const next = {
+        ...current,
+        ...patch,
+        theme: patch.theme ? normaliseTheme(patch.theme) : current.theme,
+      } as Settings;
       applySettings(next);
       try {
         localStorage.setItem(SETTINGS_KEY, JSON.stringify(next));

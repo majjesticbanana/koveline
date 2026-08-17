@@ -65,7 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "try{var s=JSON.parse(localStorage.getItem('koveline:v3:settings')||'{}');var d=document.documentElement;d.dataset.theme=s.theme||'mahogany';d.dataset.perf=s.performance?'on':'off';d.dataset.motion=s.performance?'off':(s.motion||'full');if(s.thaanaScale)d.style.setProperty('--thaana-scale',s.thaanaScale/100);}catch(e){}",
+              "try{var s=JSON.parse(localStorage.getItem('koveline:v3:settings')||'{}');var d=document.documentElement;var m={basalt:'graphite',lagoon:'moss',paper:'ivory'};var t=m[s.theme]||s.theme;var ok={mahogany:1,graphite:1,moss:1,mulberry:1,ivory:1};d.dataset.theme=ok[t]?t:'mahogany';d.dataset.perf=s.performance?'on':'off';d.dataset.motion=s.performance?'off':(s.motion||'full');if(s.thaanaScale)d.style.setProperty('--thaana-scale',s.thaanaScale/100);}catch(e){}",
           }}
         />
         <AmbientMotion />
@@ -77,7 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script
           src="https://cloud.umami.is/script.js"
           data-website-id="3a278324-ffa5-4a33-8f2b-44d2edac0ba1"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
       </body>
     </html>

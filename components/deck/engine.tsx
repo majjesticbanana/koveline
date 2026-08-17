@@ -321,7 +321,7 @@ export function DeckEngine({
               aria-pressed={selected}
               className={`lesson-choice grid w-full grid-cols-[54px_minmax(0,1fr)_72px] items-center gap-3 rounded-card border px-3 py-3 text-left transition ${
                 selected
-                  ? "border-teal bg-[rgba(198,99,64,.12)] shadow-[inset_3px_0_0_rgba(228,134,98,.78)]"
+                  ? "border-teal bg-teal/10 shadow-[inset_3px_0_0_rgb(var(--accent-bright-rgb)/.78)]"
                   : "border-line bg-surface hover:border-line-strong hover:bg-raised"
               }`}
             >
@@ -361,7 +361,7 @@ export function DeckEngine({
           const s = status[q.id];
           const isCur = i === idx;
           const cls = isCur
-            ? "question-nav-current border-ink bg-[rgba(247,232,223,.08)] text-ink"
+            ? "question-nav-current border-ink bg-ink/[.08] text-ink"
             : s === "correct"
             ? "bg-green-bg border-green-line text-green"
             : s === "wrong"

@@ -55,6 +55,29 @@ function Segment<T extends string | number | boolean>({
   );
 }
 
+function ThemePreview({ themeId }: { themeId: string }) {
+  return (
+    <span className="settings-theme-preview" data-preview-palette={themeId} aria-hidden>
+      <span className="settings-preview-shell">
+        <span className="settings-preview-topline" />
+        <span className="settings-preview-copy">
+          <i />
+          <i />
+          <i />
+        </span>
+        <span className="settings-preview-answer">
+          <i />
+          <i />
+        </span>
+        <span className="settings-preview-status">
+          <i data-status="right" />
+          <i data-status="wrong" />
+        </span>
+      </span>
+    </span>
+  );
+}
+
 export function SettingsPanel() {
   const { settings, update, reset } = useSettings();
   const [open, setOpen] = useState(false);
@@ -118,7 +141,10 @@ export function SettingsPanel() {
             className="settings-panel glass-panel"
           >
             <div className="settings-head">
-              <h2>Settings</h2>
+              <div>
+                <h2>Settings</h2>
+                <p>Make Koveline comfortable to read and study in.</p>
+              </div>
               <button
                 ref={closeRef}
                 type="button"
@@ -130,36 +156,50 @@ export function SettingsPanel() {
             </div>
 
             <div className="settings-body">
-              <div className="settings-group-label">Theme</div>
-              <div className="settings-themes">
-                {THEMES.map((t) => (
-                  <button
-                    key={t.id}
-                    type="button"
-                    onClick={() => update({ theme: t.id })}
-                    aria-pressed={settings.theme === t.id}
-                    className={`settings-theme ${settings.theme === t.id ? "is-selected" : ""}`}
-                    data-theme-preview={t.id}
-                  >
-                    <span className="settings-theme-swatch" aria-hidden>
-                      <i data-swatch="bg" />
-                      <i data-swatch="surface" />
-                      <i data-swatch="accent" />
-                    </span>
-                    <span className="settings-theme-copy">
-                      <strong>{t.name}</strong>
-                      <span>{t.note}</span>
-                    </span>
-                    {settings.theme === t.id && <Check className="h-4 w-4 settings-theme-tick" aria-hidden />}
-                  </button>
-                ))}
-              </div>
+              <section className="settings-theme-section" aria-labelledby="theme-heading">
+                <div className="settings-section-heading">
+                  <div>
+                    <div id="theme-heading" className="settings-group-label">Theme</div>
+                    <h3>Reading palette</h3>
+                  </div>
+                  <p>Five restrained palettes. Correct, wrong and muted text stay semantic in every one.</p>
+                </div>
+
+                <div className="settings-themes">
+                  {THEMES.map((t) => {
+                    const selected = settings.theme === t.id;
+                    return (
+                      <button
+                        key={t.id}
+                        type="button"
+                        onClick={() => update({ theme: t.id })}
+                        aria-pressed={selected}
+                        aria-label={`${t.name} theme — ${t.note}`}
+                        className={`settings-theme ${selected ? "is-selected" : ""}`}
+                        data-theme-preview={t.id}
+                      >
+                        <ThemePreview themeId={t.id} />
+                        <span className="settings-theme-copy">
+                          <span className="settings-theme-titleline">
+                            <strong>{t.name}</strong>
+                            <small>{t.mode}</small>
+                          </span>
+                          <span>{t.note}</span>
+                        </span>
+                        <span className="settings-theme-check" aria-hidden>
+                          {selected && <Check className="h-3.5 w-3.5" />}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </section>
 
               <div className="settings-group-label">Display</div>
 
               <Row
                 title="Performance mode"
-                note="Turns off ambient motion, blur and shadows. Best on older phones."
+                note="Cuts decorative effects and shadows. Best on older PCs and phones."
               >
                 <Segment
                   label="Performance mode"

@@ -182,7 +182,7 @@ export function Home({
                     <Link
                       key={u.key}
                       href={u.href}
-                      data-tilt="" className="unit-motion group relative overflow-hidden rounded-card border border-line bg-surface px-5 py-4 hover:border-line-strong hover:bg-hover"
+                      className="unit-motion group relative overflow-hidden rounded-card border border-line bg-surface px-5 py-4 hover:border-line-strong hover:bg-hover"
                     >
                       {/* oversized margin number, low contrast (Sol #4) */}
                       <span
