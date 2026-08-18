@@ -1,6 +1,6 @@
 /* Koveline service worker — full offline for a fully static site.
    Bump VERSION to invalidate old caches on deploy. */
-const VERSION = "koveline-v6.0.0";
+const VERSION = "koveline-v7.0.0";
 const CORE = ["/", "/islam/grade-9/mixed", "/islam/grade-10/mixed", "/manifest.webmanifest", "/icon-192.png", "/icon-512.png"];
 
 self.addEventListener("install", (e) => {
@@ -21,6 +21,10 @@ self.addEventListener("fetch", (e) => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
+  // Textbooks are tens of megabytes and are streamed page-by-page via range
+  // requests. Caching them would blow the storage quota and defeat the
+  // partial loading, so the service worker stays out of the way entirely.
+  if (url.pathname.startsWith("/textbooks/")) return;
 
   // hashed build assets + fonts: cache-first (immutable)
   if (url.pathname.startsWith("/_next/static/") || url.pathname.startsWith("/fonts/")) {

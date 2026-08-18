@@ -46,7 +46,9 @@
     "customTestBody": "Pick the units and the length.",
     "questionBanksTitle": "Question banks",
     "questionBanksBody": "Grade 9 and Grade 10 units.",
-    "startStudying": "Start studying"
+    "startStudying": "Start studying",
+    "textbooksTitle": "Textbooks",
+    "textbooksBody": "The Grade 9 and 10 curriculum books."
   },
   "customTest": {
     "metaTitle": "Custom test",

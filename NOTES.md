@@ -61,3 +61,30 @@ come from `--ambient-rgb`.
 JavaScript now only does what needs it — scroll progress and the small
 active-card tilt — and both stand down under reduced motion or performance
 mode.
+
+## Textbooks
+
+Two curriculum books at `/textbooks`, served from `public/textbooks/`.
+
+**Do not re-compress them with Ghostscript.** It reduces 28 MB → 7.8 MB but
+silently corrupts the Thaana: re-encoding drops glyphs from MVAWaheed-Bold,
+QCF2BSML (Qur'anic) and TraditionalArabic. A rendered comparison of page 30
+shows garbled character codes and missing lines. This was tested, not assumed.
+
+What is safe is `qpdf --linearize --object-streams=generate --recompress-flate`,
+which is lossless: 28 MB → 23 MB, verified with `qpdf --check`.
+
+Linearisation is the point, not the size. A linearised PDF streams via HTTP
+range requests, so the browser's viewer shows page 1 almost immediately and
+fetches the rest as the reader scrolls. Vercel serves range requests on static
+files, so no server work is needed.
+
+Three further guards against lag:
+
+- The `<iframe>` mounts only when the reader presses "Read here", so visiting
+  `/textbooks` downloads no PDF at all.
+- The service worker skips `/textbooks/` entirely (`sw.js`), so a 23 MB file
+  is never pulled into the cache and partial loading is never defeated.
+- Below 820 px the embed is replaced by a direct link, handing off to the
+  phone's native PDF viewer — faster and far more usable than an iframe,
+  especially on iOS.
