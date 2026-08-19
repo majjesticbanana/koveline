@@ -35,7 +35,7 @@ export function LoginForm({ next }: { next?: string }) {
         return;
       }
       // The navbar's session lives in a provider in the root layout, which a
-      // client-side navigation does not remount — without this it would keep
+      // client-side navigation does not remount, and without this it would keep
       // showing "Sign in" until the next full page load.
       await refresh();
       const role = data.student?.role;
@@ -55,7 +55,7 @@ export function LoginForm({ next }: { next?: string }) {
       </h1>
       <p className="mt-1 text-sm text-cocoa">
         {mode === "login"
-          ? "Welcome back — your saved decks are waiting."
+          ? "Welcome back. Your saved decks are waiting."
           : "Optional, and free: an account keeps your marks and your place across devices."}
       </p>
 
