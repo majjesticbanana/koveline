@@ -2336,3 +2336,21 @@ button:active, a[role="button"]:active { transform: scale(.985); }
   font-size: .78rem;
   text-align: center;
 }
+
+/* --- Auth / admin form controls -------------------------------------------- */
+.kv-input {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid rgb(var(--line-strong-rgb) / 0.8);
+  background: rgb(var(--bg-rgb) / 0.6);
+  color: rgb(var(--text-rgb));
+  font: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.kv-input::placeholder { color: rgb(var(--muted-rgb)); }
+.kv-input:focus {
+  outline: none;
+  border-color: rgb(var(--accent-rgb));
+  box-shadow: 0 0 0 3px rgb(var(--accent-rgb) / 0.22);
+}

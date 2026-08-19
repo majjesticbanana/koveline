@@ -1,0 +1,46 @@
+// Prisma schema for Koveline's student accounts / CMS backend.
+// Datasource is Supabase Postgres. Under Prisma 7 the connection URLs live in
+// prisma.config.ts (for the CLI) and in the driver adapter (for the runtime
+// client, see lib/prisma.ts) — not here.
+
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  STUDENT
+  ADMIN
+}
+
+/// A student (or admin) account. Credentials are owned here — `passwordHash`
+/// is a bcrypt hash, never the raw password.
+model Student {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String?
+  role         Role      @default(STUDENT)
+  disabled     Boolean   @default(false)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  sessions     Session[]
+
+  @@index([email])
+}
+
+/// A server-side session. The opaque `token` is what the browser holds in an
+/// httpOnly cookie; deleting the row (or disabling the student) logs them out.
+model Session {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  studentId String
+  student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([studentId])
+}
