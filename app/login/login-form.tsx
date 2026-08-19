@@ -3,11 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useSession } from "@/components/session-provider";
 
 type Mode = "login" | "signup";
 
 export function LoginForm({ next }: { next?: string }) {
   const router = useRouter();
+  const { refresh } = useSession();
   const [mode, setMode] = useState<Mode>("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -32,6 +34,10 @@ export function LoginForm({ next }: { next?: string }) {
         setError(data.error ?? "Something went wrong. Try again.");
         return;
       }
+      // The navbar's session lives in a provider in the root layout, which a
+      // client-side navigation does not remount — without this it would keep
+      // showing "Sign in" until the next full page load.
+      await refresh();
       const role = data.student?.role;
       router.replace(role === "ADMIN" ? "/admin" : next || "/account");
       router.refresh();

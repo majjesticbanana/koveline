@@ -54,8 +54,10 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [syncStamp, setSyncStamp] = useState(0);
   const syncedFor = useRef<string | null>(null);
+  const checkedAt = useRef(0);
 
   const refresh = useCallback(async () => {
+    checkedAt.current = Date.now();
     try {
       const res = await fetch("/api/auth/me", { cache: "no-store" });
       const data = (await res.json()) as { student: SessionStudent | null };
@@ -69,6 +71,27 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     void refresh();
+  }, [refresh]);
+
+  /**
+   * Nothing remounts this provider — not a client-side navigation, not a tab
+   * sitting open for a day — so it re-checks when a tab comes back to the
+   * front. That is what catches a sign-in or sign-out done in another tab, and
+   * a session that expired while the tab was idle. Throttled, because a
+   * student flicking between tabs should not mean a request each time.
+   */
+  useEffect(() => {
+    const recheck = () => {
+      if (document.visibilityState !== "visible") return;
+      if (Date.now() - checkedAt.current < 60_000) return;
+      void refresh();
+    };
+    document.addEventListener("visibilitychange", recheck);
+    window.addEventListener("focus", recheck);
+    return () => {
+      document.removeEventListener("visibilitychange", recheck);
+      window.removeEventListener("focus", recheck);
+    };
   }, [refresh]);
 
   // Two-way sync, once per signed-in student per page load: push what this
