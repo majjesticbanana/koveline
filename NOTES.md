@@ -88,3 +88,24 @@ Three further guards against lag:
 - Below 820 px the embed is replaced by a direct link, handing off to the
   phone's native PDF viewer — faster and far more usable than an iframe,
   especially on iOS.
+
+## Deck: mode switching no longer loses your place
+
+Reported: answering a batch then using the wrong-answer controls dropped the
+reader back at question 1. The marks survived (the progress bar kept its
+colour) — only the position was lost.
+
+Cause: `changeMode` called `resetView()` unconditionally, so every mode
+button set `idx` to 0, including pressing the mode already active. In random
+mode it also rebuilt the deck, which reshuffled it, so the old position was
+unrecoverable even in principle.
+
+Fix, in `components/deck/engine.tsx`:
+
+- pressing the active mode is a no-op;
+- `savedPos` (a ref) records `{orderIds, idx}` per mode on every switch, and
+  restores both when returning, so the shuffle is preserved too;
+- a restored order is only reused when it still covers exactly the current
+  deck, so cards newly marked wrong are never hidden from a review round.
+
+Changing lesson still resets to question 1, which is intended.

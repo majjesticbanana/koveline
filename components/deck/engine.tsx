@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Flashcard, Lesson, RichBodyT } from "@/lib/content/schema";
 import { isRtl } from "@/lib/rtl";
 import {
@@ -148,7 +148,41 @@ export function DeckEngine({
 
   const resetView = () => { setIdx(0); setShowAnswer(false); setComplete(false); };
 
-  const changeMode = (m: Mode) => { setMode(m); setDeck(buildDeck(m, lessonId, status)); resetView(); };
+  /**
+   * Where the reader was in each mode. Dipping into "Review wrong" and
+   * coming back used to drop you at question 1 of the full deck — and in
+   * random mode it reshuffled too, so the place was gone for good. We now
+   * remember the order and index per mode and restore both.
+   */
+  const savedPos = useRef<Record<string, { orderIds: string[]; idx: number }>>({});
+
+  const changeMode = (m: Mode) => {
+    // Pressing the mode you are already in should do nothing at all.
+    if (m === mode) return;
+
+    savedPos.current[mode] = { orderIds: deck.map((c) => c.id), idx };
+
+    const fresh = buildDeck(m, lessonId, status);
+    const remembered = savedPos.current[m];
+    let next = fresh;
+    if (remembered) {
+      const byId = new Map(cards.map((c) => [c.id, c]));
+      const restored = remembered.orderIds
+        .map((id) => byId.get(id))
+        .filter(Boolean) as DeckCard[];
+      // only reuse the old order if it still covers exactly this deck,
+      // so newly-wrong cards are never hidden from a review round
+      if (restored.length === remembered.orderIds.length && restored.length === fresh.length) {
+        next = restored;
+      }
+    }
+
+    setMode(m);
+    setDeck(next);
+    setIdx(next === fresh && !remembered ? 0 : Math.min(Math.max(remembered?.idx ?? 0, 0), Math.max(next.length - 1, 0)));
+    setShowAnswer(false);
+    setComplete(false);
+  };
   const changeLesson = (les: string) => { setLessonId(les); setDeck(buildDeck(mode, les, status)); resetView(); };
 
   const mark = useCallback(
