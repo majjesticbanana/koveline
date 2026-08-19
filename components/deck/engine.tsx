@@ -6,6 +6,8 @@ import { isRtl } from "@/lib/rtl";
 import {
   readJSON, writeJSON, progressKey, rememberLastStudied, migrateV2Storage,
 } from "@/lib/storage";
+import { queueProgressPush } from "@/lib/progress-sync";
+import { useSession } from "@/components/session-provider";
 import { ChevronLeft, ChevronRight, ChevronsUpDown } from "lucide-react";
 import { RichBody } from "./rich-body";
 import {
@@ -45,6 +47,8 @@ interface Saved {
   idx?: number;
   lessonId?: string;
   orderIds?: string[];
+  /** Epoch ms of the last real change — decides sync conflicts. See lib/progress-sync.ts. */
+  updatedAt?: number;
 }
 
 const ALL = "__all__";
@@ -63,6 +67,8 @@ export function DeckEngine({
   initialMode = "sequential", freshStart = false, rememberAsLastStudied = true,
 }: DeckProps) {
   const KEY = progressKey(storageKey);
+  const { student, syncStamp } = useSession();
+  const signedIn = Boolean(student);
 
   const [loaded, setLoaded] = useState(false);
   const [mode, setMode] = useState<Mode>("sequential");
@@ -85,48 +91,93 @@ export function DeckEngine({
     [cards],
   );
 
+  /** What is already saved, so a visit that changes nothing never re-stamps it. */
+  const lastSaved = useRef("");
+  /** Stamp of the blob currently on screen; older saved copies lose to it. */
+  const stamp = useRef(0);
+
+  const applySaved = useCallback(
+    (s: Saved) => {
+      const savedStatus: Status = s.status && typeof s.status === "object" ? s.status : {};
+      const savedMode: Mode =
+        s.mode && ["random", "sequential", "wrongOnly"].includes(s.mode) ? s.mode : initialMode;
+      const savedLesson =
+        typeof s.lessonId === "string" &&
+        (s.lessonId === ALL || lessons.some((l) => l.id === s.lessonId))
+          ? s.lessonId
+          : ALL;
+
+      // restore exact order (matters in random mode) — but only if it still
+      // covers the full current deck, so newly added cards are never hidden
+      let d: DeckCard[] | null = null;
+      if (Array.isArray(s.orderIds) && s.orderIds.length > 0) {
+        const byId = new Map(cards.map((c) => [c.id, c]));
+        const restored = s.orderIds.map((id) => byId.get(id)).filter(Boolean) as DeckCard[];
+        const expected = buildDeck(savedMode, savedLesson, savedStatus).length;
+        if (restored.length === s.orderIds.length && restored.length === expected) d = restored;
+      }
+      const finalDeck = d ?? buildDeck(savedMode, savedLesson, savedStatus);
+      const finalIdx = Math.min(
+        Math.max(typeof s.idx === "number" ? s.idx : 0, 0),
+        Math.max(finalDeck.length - 1, 0),
+      );
+
+      setStatus(savedStatus);
+      setMode(savedMode);
+      setLessonId(savedLesson);
+      setDeck(finalDeck);
+      setIdx(finalIdx);
+      setShowAnswer(false);
+      setComplete(false);
+
+      stamp.current = typeof s.updatedAt === "number" ? s.updatedAt : 0;
+      lastSaved.current = JSON.stringify({
+        status: savedStatus,
+        mode: savedMode,
+        idx: finalIdx,
+        lessonId: savedLesson,
+        orderIds: finalDeck.map((c) => c.id),
+      });
+    },
+    [buildDeck, cards, initialMode, lessons],
+  );
+
   // load once: migrate v2 storage, then restore
   useEffect(() => {
     migrateV2Storage(v2LessonMap);
-
-    const s = freshStart ? {} : (readJSON<Saved>(KEY) ?? {});
-    const savedStatus: Status = s.status && typeof s.status === "object" ? s.status : {};
-    const savedMode: Mode =
-      s.mode && ["random", "sequential", "wrongOnly"].includes(s.mode) ? s.mode : initialMode;
-    const savedLesson =
-      typeof s.lessonId === "string" &&
-      (s.lessonId === ALL || lessons.some((l) => l.id === s.lessonId))
-        ? s.lessonId
-        : ALL;
-
-    // restore exact order (matters in random mode) — but only if it still
-    // covers the full current deck, so newly added cards are never hidden
-    let d: DeckCard[] | null = null;
-    if (Array.isArray(s.orderIds) && s.orderIds.length > 0) {
-      const byId = new Map(cards.map((c) => [c.id, c]));
-      const restored = s.orderIds.map((id) => byId.get(id)).filter(Boolean) as DeckCard[];
-      const expected = buildDeck(savedMode, savedLesson, savedStatus).length;
-      if (restored.length === s.orderIds.length && restored.length === expected) d = restored;
-    }
-    const finalDeck = d ?? buildDeck(savedMode, savedLesson, savedStatus);
-
-    setStatus(savedStatus);
-    setMode(savedMode);
-    setLessonId(savedLesson);
-    setDeck(finalDeck);
-    setIdx(Math.min(Math.max(typeof s.idx === "number" ? s.idx : 0, 0), Math.max(finalDeck.length - 1, 0)));
+    applySaved(freshStart ? {} : (readJSON<Saved>(KEY) ?? {}));
     setLoaded(true);
     if (rememberAsLastStudied) rememberLastStudied(lastStudied);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // persist
+  /**
+   * A signed-in student may have studied this deck on another device. The
+   * session provider pulls that down into localStorage and bumps `syncStamp`;
+   * we adopt it only if it is newer than what is on screen, so a deck already
+   * being worked on is never yanked out from under the reader.
+   */
+  useEffect(() => {
+    if (!loaded || !syncStamp || freshStart) return;
+    const s = readJSON<Saved>(KEY);
+    if (!s || (s.updatedAt ?? 0) <= stamp.current) return;
+    applySaved(s);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [syncStamp, loaded]);
+
+  // persist — locally always, and to the account when there is one
   useEffect(() => {
     if (!loaded) return;
-    writeJSON(KEY, {
-      status, mode, idx, lessonId, orderIds: deck.map((c) => c.id),
-    } satisfies Saved);
-  }, [status, mode, idx, lessonId, deck, loaded, KEY]);
+    const blob = { status, mode, idx, lessonId, orderIds: deck.map((c) => c.id) };
+    const serialised = JSON.stringify(blob);
+    if (serialised === lastSaved.current) return; // nothing actually changed
+    lastSaved.current = serialised;
+
+    const updatedAt = Date.now();
+    stamp.current = updatedAt;
+    writeJSON(KEY, { ...blob, updatedAt } satisfies Saved);
+    if (signedIn) queueProgressPush(storageKey, blob, updatedAt);
+  }, [status, mode, idx, lessonId, deck, loaded, KEY, signedIn, storageKey]);
 
   const current = deck[idx];
 

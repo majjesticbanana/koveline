@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Navbar } from "@/components/navbar";
+import { SessionProvider } from "@/components/session-provider";
 import { Footer } from "@/components/footer";
 import { SwRegister } from "@/components/sw-register";
 import { AmbientMotion } from "@/components/ambient-motion";
@@ -69,9 +70,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         <AmbientMotion />
-        <Navbar />
-        <div id="main">{children}</div>
-        <Footer />
+        <SessionProvider>
+          <Navbar />
+          <div id="main">{children}</div>
+          <Footer />
+        </SessionProvider>
         <SwRegister />
         <Analytics />
         <Script

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getCurrentStudent } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 import { LogoutButton } from "./logout-button";
 
 export const metadata = { title: "Your account" };
@@ -8,6 +9,14 @@ export const metadata = { title: "Your account" };
 export default async function AccountPage() {
   const me = await getCurrentStudent();
   if (!me) redirect("/login?next=/account");
+
+  const saved = await prisma.progress.aggregate({
+    where: { studentId: me.id },
+    _count: { _all: true },
+    _max: { updatedAt: true },
+  });
+  const decks = saved._count._all;
+  const lastSaved = saved._max.updatedAt;
 
   return (
     <main id="main" className="mx-auto w-full max-w-2xl px-5 py-16">
@@ -22,6 +31,23 @@ export default async function AccountPage() {
           <dt className="text-cocoa">Role</dt>
           <dd className="text-coffee">{me.role === "ADMIN" ? "Administrator" : "Student"}</dd>
         </dl>
+
+        <div className="mt-7 rounded-card border border-line bg-raised/40 p-4">
+          <p className="text-sm font-bold text-coffee">Saved progress</p>
+          <p className="mt-1 text-sm text-cocoa">
+            {decks === 0
+              ? "Nothing saved yet. Study a deck and your marks, position and lesson filter are kept here automatically."
+              : `${decks} deck${decks === 1 ? "" : "s"} saved${
+                  lastSaved
+                    ? ` · last updated ${lastSaved.toLocaleDateString("en-GB", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}`
+                    : ""
+                }. Sign in on another device to pick up where you left off.`}
+          </p>
+        </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
           {me.role === "ADMIN" && (

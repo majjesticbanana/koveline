@@ -1,7 +1,13 @@
 # Backend — student accounts & admin CMS
 
-Prisma + Supabase Postgres layer for student login and a minimal admin panel.
-The public study site is unchanged; this adds accounts on top of it.
+Prisma + Supabase Postgres layer for student login, saved progress, and a
+minimal admin panel. The public study site is unchanged; this adds accounts on
+top of it.
+
+**Accounts are optional.** Signed-out visitors get exactly the site they always
+had — every deck, fully offline, progress in localStorage. Signing in only adds
+one thing: that progress is mirrored to the account, so a deck started on a
+phone can be finished on a laptop.
 
 ## Stack
 
@@ -20,6 +26,38 @@ The public study site is unchanged; this adds accounts on top of it.
   `ADMIN`), `disabled`, timestamps.
 - `Session` — opaque `token` (unique), `studentId`, `expiresAt`. Cascade-deletes
   with the student.
+- `Progress` — one row per (`studentId`, `resourceKey`), holding the same JSON
+  blob the browser keeps in localStorage (`status`, `mode`, `idx`, `lessonId`,
+  `orderIds`) plus the client's `updatedAt` stamp.
+
+## Progress sync
+
+The deck engine has always written its state to
+`koveline:v3:progress:<resourceKey>`. Blobs now also carry an `updatedAt` epoch
+stamp, and that stamp is the whole conflict story: **per deck, the newer stamp
+wins**, on both sides. Merging mark-by-mark was rejected — it resurrects cards a
+student deliberately reset.
+
+The flow, all in the browser:
+
+1. `SessionProvider` asks `/api/auth/me` once per page load. Reading the cookie
+   in the root layout instead would make every page in this otherwise static
+   site dynamic, so the shell renders anonymously and fills in.
+2. If someone is signed in, it `PUT`s every local deck to `/api/progress`, and
+   the response — the full merged state — is written back over any local blob
+   the server holds a newer copy of. Then `syncStamp` is bumped.
+3. `DeckEngine` watches `syncStamp` and adopts the stored blob **only** if it is
+   newer than what is on screen, so a deck already being studied is never yanked
+   out from under the reader.
+4. While studying, each real change writes localStorage and (when signed in)
+   queues a debounced push. Visits that change nothing never re-stamp a deck,
+   which is what stops a device from winning conflicts just by loading a page.
+
+Offline or signed out, every push is a no-op that fails quietly — localStorage
+is still the source of truth, and the next load re-syncs.
+
+The service worker skips `/api/*` entirely and never stores `/account`,
+`/admin` or `/login` responses, so nothing per-session lands in a shared cache.
 
 ## Files
 
@@ -30,6 +68,9 @@ The public study site is unchanged; this adds accounts on top of it.
 | `lib/auth.ts` | hashing, `createSession`, `destroySession`, `getCurrentStudent`, `getCurrentAdmin` |
 | `lib/auth-cookie.ts` | cookie name (Edge-safe, no server-only deps) |
 | `lib/validation.ts` | zod request schemas |
+| `lib/progress-sync.ts` | browser side of progress sync (list, merge, debounced push) |
+| `components/session-provider.tsx` | client session context + the once-per-load sync |
+| `components/nav-account.tsx` | the navbar sign-in link / account menu |
 | `middleware.ts` | gates `/admin` and `/account` on cookie presence |
 | `app/api/auth/*` | `login`, `logout`, `signup` |
 | `app/api/admin/students/*` | list / create / update / delete (admin only) |
@@ -44,7 +85,8 @@ The public study site is unchanged; this adds accounts on top of it.
 #    in both URLs (already done in .env).
 
 npm install                      # runs `prisma generate` (postinstall)
-npm run db:push                  # create the tables in Supabase
+npm run db:push                  # create/update the tables in Supabase
+                                 # (adds `Progress` if you are upgrading)
 npm run db:seed-admin -- you@example.com 'a-strong-password' 'Your Name'
 npm run dev                      # sign in at /login → admin lands on /admin
 ```
@@ -56,6 +98,9 @@ npm run dev                      # sign in at /login → admin lands on /admin
 | POST | `/api/auth/login` | — | `{ email, password }` |
 | POST | `/api/auth/signup` | — | `{ email, password, name? }` |
 | POST | `/api/auth/logout` | session | — |
+| GET | `/api/auth/me` | — | — (returns `{ student: … \| null }`) |
+| GET | `/api/progress` | session | — |
+| PUT | `/api/progress` | session | `{ entries: [{ key, data, updatedAt }] }` → merged state |
 | GET | `/api/admin/students` | admin | — |
 | POST | `/api/admin/students` | admin | `{ email, password, name?, role? }` |
 | PATCH | `/api/admin/students/:id` | admin | `{ name?, role?, disabled?, password? }` |

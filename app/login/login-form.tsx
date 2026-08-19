@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 type Mode = "login" | "signup";
@@ -47,7 +48,9 @@ export function LoginForm({ next }: { next?: string }) {
         {mode === "login" ? "Sign in" : "Create your account"}
       </h1>
       <p className="mt-1 text-sm text-cocoa">
-        {mode === "login" ? "Welcome back to Koveline." : "Join Koveline to track your study."}
+        {mode === "login"
+          ? "Welcome back — your saved decks are waiting."
+          : "Optional, and free: an account keeps your marks and your place across devices."}
       </p>
 
       <form onSubmit={submit} className="mt-6 space-y-4">
@@ -111,6 +114,12 @@ export function LoginForm({ next }: { next?: string }) {
         >
           {mode === "login" ? "Create one" : "Sign in"}
         </button>
+      </p>
+
+      <p className="mt-3 text-center text-[0.8rem] text-cocoa">
+        <Link href="/#subjects" className="underline-offset-2 hover:underline">
+          Keep studying without an account
+        </Link>
       </p>
     </div>
   );

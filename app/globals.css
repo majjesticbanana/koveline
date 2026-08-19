@@ -1299,8 +1299,80 @@ button:active, a[role="button"]:active { transform: scale(.985); }
 .nav-resource-row { transition: background 170ms ease, transform 170ms ease; }
 .nav-resource-row:hover { background: var(--hover); transform: translateX(1px); }
 
+/* Accounts are optional, so the control for them stays quiet: one small link
+   signed out, one initial signed in. Nothing here should compete with Explore
+   or the study CTA. */
+.nav-account-placeholder {
+  display: inline-block;
+  width: 42px;
+  height: 36px;
+}
+.nav-account-avatar {
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  border: 1px solid rgb(var(--accent-rgb) / .45);
+  border-radius: 50%;
+  background: rgb(var(--accent-rgb) / .18);
+  color: var(--accent-bright);
+  font-size: .74rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.nav-account-avatar-lg {
+  width: 34px;
+  height: 34px;
+  font-size: .95rem;
+}
+.nav-account-dropdown { width: min(300px, calc(100vw - 28px)); }
+.nav-account-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  padding: 11px 9px 12px;
+}
+.nav-account-head strong {
+  display: block;
+  overflow: hidden;
+  font-size: .85rem;
+  font-weight: 800;
+  color: var(--text);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.nav-account-head span:not(.nav-account-avatar) {
+  display: block;
+  overflow: hidden;
+  margin-top: 1px;
+  color: var(--muted);
+  font-size: .68rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.nav-account-dropdown .nav-resources-section { margin-top: 0; }
+.nav-account-dropdown .nav-resource-row span:not(.nav-dropdown-icon) {
+  display: block;
+  margin-top: 1px;
+  color: var(--muted);
+  font-size: .66rem;
+}
+
 @media (max-width: 639px) {
   .nav-actions { gap: 6px; }
+  /* Phones: the avatar carries the meaning, the word "Sign in" does not. */
+  .nav-signin {
+    padding: .48rem .55rem !important;
+    border-radius: 9px;
+  }
+  .nav-signin-label { display: none; }
+  .nav-account-placeholder { width: 34px; }
+  .nav-account-dropdown {
+    left: auto;
+    width: min(300px, calc(100vw - 24px));
+  }
+
   .nav-explore-trigger {
     padding: .48rem .6rem !important;
     border-radius: 9px;

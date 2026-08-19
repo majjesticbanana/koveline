@@ -5,6 +5,7 @@ import Link from "next/link";
 import { BookOpen, BookMarked, ChevronDown, ListChecks } from "lucide-react";
 import { KoelMark } from "./koel";
 import { SettingsPanel } from "./settings-panel";
+import { NavAccount } from "./nav-account";
 import siteCopy from "@/content/site-copy.json";
 
 type MenuName = "explore" | null;
@@ -143,6 +144,7 @@ export function Navbar() {
           >
             {siteCopy.navigation.startStudying}
           </Link>
+          <NavAccount />
           <SettingsPanel />
         </nav>
       </div>

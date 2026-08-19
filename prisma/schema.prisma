@@ -28,6 +28,7 @@ model Student {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   sessions     Session[]
+  progress     Progress[]
 
   @@index([email])
 }
@@ -42,5 +43,24 @@ model Session {
   expiresAt DateTime
   createdAt DateTime @default(now())
 
+  @@index([studentId])
+}
+
+/// One saved deck per student: the same blob the browser keeps in
+/// localStorage (marks, mode, position, lesson filter, card order), stored
+/// under the deck's resource key so it can follow the student to any device.
+/// `updatedAt` is the *client's* stamp for that blob — it is what decides the
+/// winner when the same deck was studied in two places, so it is written
+/// explicitly rather than with @updatedAt.
+model Progress {
+  id          String   @id @default(cuid())
+  studentId   String
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  resourceKey String
+  data        Json
+  updatedAt   DateTime
+  createdAt   DateTime @default(now())
+
+  @@unique([studentId, resourceKey])
   @@index([studentId])
 }

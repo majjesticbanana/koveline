@@ -29,7 +29,8 @@ function remove(key: string): void {
 
 /* ---------------- v3 keys ---------------- */
 
-export const progressKey = (resourceKey: string) => `koveline:v3:progress:${resourceKey}`;
+export const PROGRESS_PREFIX = "koveline:v3:progress:";
+export const progressKey = (resourceKey: string) => `${PROGRESS_PREFIX}${resourceKey}`;
 export const LAST_STUDIED_KEY = "koveline:v3:last-studied";
 
 export interface LastStudied {
