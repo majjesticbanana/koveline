@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getCurrentStudent } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { LogoutButton } from "./logout-button";
+import { ClearProgress } from "./clear-progress";
 
 export const metadata = { title: "Your account" };
 
@@ -47,6 +48,7 @@ export default async function AccountPage() {
                     : ""
                 }. Sign in on another device to pick up where you left off.`}
           </p>
+          <ClearProgress hasProgress={decks > 0} />
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">

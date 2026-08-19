@@ -26,6 +26,11 @@ export interface SessionStudent {
 
 interface SessionValue {
   student: SessionStudent | null;
+  /**
+   * Whose progress this browser should be reading and writing right now: the
+   * student's id, or null while signed out. Pass it to every storage helper.
+   */
+  identity: string | null;
   /** True until `/api/auth/me` answers — render a placeholder, not "Sign in". */
   loading: boolean;
   /**
@@ -39,6 +44,7 @@ interface SessionValue {
 
 const SessionContext = createContext<SessionValue>({
   student: null,
+  identity: null,
   loading: true,
   syncStamp: 0,
   refresh: async () => {},
@@ -99,7 +105,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!student || syncedFor.current === student.id) return;
     syncedFor.current = student.id;
-    void syncAllProgress()
+    void syncAllProgress(student.id)
       .then(() => setSyncStamp(Date.now()))
       .catch(() => {
         syncedFor.current = null; // let a later refresh try again
@@ -114,14 +120,14 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
     }
     syncedFor.current = null;
     setStudent(null);
-    // Progress stays in localStorage: it is this browser's copy, and the next
-    // sign-in pushes it back up.
+    // That student's progress stays under their own namespace in localStorage —
+    // invisible to whoever uses the browser next, and there for them offline.
     if (pathname.startsWith("/account") || pathname.startsWith("/admin")) router.push("/");
     router.refresh();
   }, [pathname, router]);
 
   const value = useMemo(
-    () => ({ student, loading, syncStamp, refresh, signOut }),
+    () => ({ student, identity: student?.id ?? null, loading, syncStamp, refresh, signOut }),
     [student, loading, syncStamp, refresh, signOut],
   );
 

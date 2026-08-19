@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Check, ListChecks, Shuffle, X } from "lucide-react";
 import { readJSON, writeJSON, progressKey } from "@/lib/storage";
+import { useSession } from "@/components/session-provider";
 import type { CustomTestCatalog } from "@/lib/content/loader";
 import type { DeckCard } from "@/components/deck/engine";
 import { DeckEngine } from "@/components/deck/engine";
@@ -37,6 +38,7 @@ export function TestBuilder({
   catalog: CustomTestCatalog;
   v2LessonMap: Record<string, Record<string, string>>;
 }) {
+  const { identity, syncStamp, loading: sessionLoading } = useSession();
   const [selected, setSelected] = useState<Set<string>>(new Set());
   /** null = every question in scope; otherwise the slider's value. */
   const [count, setCount] = useState<number | null>(20);
@@ -46,11 +48,13 @@ export function TestBuilder({
   const [session, setSession] = useState<Session | null>(null);
   const [restored, setRestored] = useState(false);
 
-  /* Read saved marks once, so "questions I got wrong" can span every deck. */
+  /* Saved marks, so "questions I got wrong" can span every deck. Re-read when
+     the session settles or changes: these marks belong to one student. */
   useEffect(() => {
+    if (sessionLoading) return;
     const all: Record<string, "correct" | "wrong"> = {};
     for (const unit of catalog) {
-      const saved = readJSON<{ status?: Record<string, "correct" | "wrong"> }>(progressKey(unit.key));
+      const saved = readJSON<{ status?: Record<string, "correct" | "wrong"> }>(progressKey(unit.key, identity));
       if (!saved?.status) continue;
       // progress is keyed by the unit's own card ids; the catalog prefixes them
       for (const [cardId, mark] of Object.entries(saved.status)) {
@@ -68,7 +72,7 @@ export function TestBuilder({
     }
     setRestored(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [sessionLoading, identity, syncStamp]);
 
   /* Remember the setup so the next test starts where this one left off. */
   useEffect(() => {

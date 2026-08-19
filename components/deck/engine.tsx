@@ -66,9 +66,9 @@ export function DeckEngine({
   cards, lessons, storageKey, lastStudied, v2LessonMap,
   initialMode = "sequential", freshStart = false, rememberAsLastStudied = true,
 }: DeckProps) {
-  const KEY = progressKey(storageKey);
-  const { student, syncStamp } = useSession();
-  const signedIn = Boolean(student);
+  const { identity, syncStamp, loading: sessionLoading } = useSession();
+  const KEY = progressKey(storageKey, identity);
+  const signedIn = identity !== null;
 
   const [loaded, setLoaded] = useState(false);
   const [mode, setMode] = useState<Mode>("sequential");
@@ -142,14 +142,37 @@ export function DeckEngine({
     [buildDeck, cards, initialMode, lessons],
   );
 
-  // load once: migrate v2 storage, then restore
+  /**
+   * Load once — but only after the session is known. Reading first and
+   * re-reading later would flash the previous person's marks on a shared
+   * browser, which is exactly what we are fixing.
+   */
+  const started = useRef(false);
+  const whose = useRef<string | null>(null);
   useEffect(() => {
+    if (sessionLoading || started.current) return;
+    started.current = true;
+    whose.current = identity;
     migrateV2Storage(v2LessonMap);
     applySaved(freshStart ? {} : (readJSON<Saved>(KEY) ?? {}));
     setLoaded(true);
-    if (rememberAsLastStudied) rememberLastStudied(lastStudied);
+    if (rememberAsLastStudied) rememberLastStudied(lastStudied, identity);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [sessionLoading]);
+
+  /**
+   * Signing in or out while the deck is open swaps whose progress this is, so
+   * the deck reloads from that identity's own store. A custom test is scratch
+   * space for the current sitting and is left alone.
+   */
+  useEffect(() => {
+    if (!loaded || whose.current === identity) return;
+    whose.current = identity;
+    if (freshStart) return;
+    applySaved(readJSON<Saved>(KEY) ?? {});
+    if (rememberAsLastStudied) rememberLastStudied(lastStudied, identity);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [identity, loaded]);
 
   /**
    * A signed-in student may have studied this deck on another device. The

@@ -9,13 +9,14 @@ import { RichBody } from "@/components/deck/rich-body";
 import { isRtl } from "@/lib/rtl";
 import siteCopy from "@/content/site-copy.json";
 import {
-  readJSON, progressKey, LAST_STUDIED_KEY, type LastStudied, migrateV2Storage,
+  readJSON, progressKey, lastStudiedKey, type Identity, type LastStudied, migrateV2Storage,
 } from "@/lib/storage";
+import { useSession } from "@/components/session-provider";
 
 type Mark = "correct" | "wrong";
 
-function reviewedCount(key: string, validIds: string[]): number {
-  const s = readJSON<{ status?: Record<string, Mark> }>(progressKey(key))?.status ?? {};
+function reviewedCount(key: string, validIds: string[], who: Identity): number {
+  const s = readJSON<{ status?: Record<string, Mark> }>(progressKey(key, who))?.status ?? {};
   const ok = new Set(validIds);
   return Object.keys(s).filter((id) => ok.has(id)).length;
 }
@@ -83,20 +84,25 @@ export function Home({
   v2LessonMap: Record<string, Record<string, string>>;
   qotd: DailyQuestion | null;
 }) {
+  const { identity, syncStamp, loading: sessionLoading } = useSession();
   const [reviewed, setReviewed] = useState<Record<string, number>>({});
   const [last, setLast] = useState<LastStudied | null>(null);
   const [loaded, setLoaded] = useState(false);
 
+  // Re-reads whenever the session settles, the signed-in student changes, or
+  // saved progress has just been pulled down — the home page must show *this*
+  // student's counts, never whoever used the browser before them.
   useEffect(() => {
+    if (sessionLoading) return;
     migrateV2Storage(v2LessonMap);
     const r: Record<string, number> = {};
     for (const c of summary.courses)
-      for (const u of c.units) r[u.key] = reviewedCount(u.key, cardIds[u.key] ?? []);
+      for (const u of c.units) r[u.key] = reviewedCount(u.key, cardIds[u.key] ?? [], identity);
     setReviewed(r);
-    setLast(readJSON<LastStudied>(LAST_STUDIED_KEY));
+    setLast(readJSON<LastStudied>(lastStudiedKey(identity)));
     setLoaded(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [sessionLoading, identity, syncStamp]);
 
   return (
     <main className="mx-auto max-w-[980px] px-5 pb-10">

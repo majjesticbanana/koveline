@@ -32,9 +32,33 @@ phone can be finished on a laptop.
 
 ## Progress sync
 
-The deck engine has always written its state to
-`koveline:v3:progress:<resourceKey>`. Blobs now also carry an `updatedAt` epoch
-stamp, and that stamp is the whole conflict story: **per deck, the newer stamp
+### Whose progress is it
+
+A browser is a device, not a person — two students share one localStorage. So
+every stored blob is namespaced by identity, and `progressKey()` /
+`lastStudiedKey()` take that identity as a **required** argument so no call site
+can quietly forget it:
+
+| Signed out | `koveline:v3:progress:<resourceKey>` |
+| Signed in  | `koveline:v3:u:<studentId>:progress:<resourceKey>` |
+
+Everything that reads progress — the deck, the home page's per-unit counts and
+"continue where you left off", the custom test's "questions I got wrong" — takes
+its identity from `useSession()` and re-reads when that identity changes. The
+deck waits for the session to resolve before its first read, so the previous
+person's marks never flash on screen.
+
+Signing out leaves that student's namespace on disk (theirs, and useful
+offline); the next person sees only the signed-out store. The one crossing point
+is deliberate: **the first sign-in of an account that has nothing saved anywhere
+adopts the anonymous namespace** — the "I studied for a week, then made an
+account" case. It moves rather than copies, so a second account on the same
+browser cannot claim the same work.
+
+### Conflicts and stamps
+
+The deck engine has always written its state to localStorage. Blobs now also
+carry an `updatedAt` epoch stamp, and that stamp is the whole conflict story: **per deck, the newer stamp
 wins**, on both sides. Merging mark-by-mark was rejected — it resurrects cards a
 student deliberately reset.
 
@@ -71,6 +95,7 @@ The service worker skips `/api/*` entirely and never stores `/account`,
 | `lib/progress-sync.ts` | browser side of progress sync (list, merge, debounced push) |
 | `components/session-provider.tsx` | client session context + the once-per-load sync |
 | `components/nav-account.tsx` | the navbar sign-in link / account menu |
+| `app/account/clear-progress.tsx` | "clear saved progress", server + this device |
 | `middleware.ts` | gates `/admin` and `/account` on cookie presence |
 | `app/api/auth/*` | `login`, `logout`, `signup` |
 | `app/api/admin/students/*` | list / create / update / delete (admin only) |
@@ -101,6 +126,7 @@ npm run dev                      # sign in at /login → admin lands on /admin
 | GET | `/api/auth/me` | — | — (returns `{ student: … \| null }`) |
 | GET | `/api/progress` | session | — |
 | PUT | `/api/progress` | session | `{ entries: [{ key, data, updatedAt }] }` → merged state |
+| DELETE | `/api/progress` | session | — (clears that student's saved progress) |
 | GET | `/api/admin/students` | admin | — |
 | POST | `/api/admin/students` | admin | `{ email, password, name?, role? }` |
 | PATCH | `/api/admin/students/:id` | admin | `{ name?, role?, disabled?, password? }` |

@@ -88,3 +88,12 @@ export async function PUT(req: Request) {
   });
   return NextResponse.json({ progress: toMap(rows) }, { headers: noStore });
 }
+
+/** Forget everything this student has saved. Used by "clear saved progress". */
+export async function DELETE() {
+  const me = await getCurrentStudent();
+  if (!me) return NextResponse.json({ error: "Not signed in." }, { status: 401, headers: noStore });
+
+  const { count } = await prisma.progress.deleteMany({ where: { studentId: me.id } });
+  return NextResponse.json({ cleared: count }, { headers: noStore });
+}

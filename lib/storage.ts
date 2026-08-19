@@ -19,7 +19,7 @@ export function writeJSON(key: string, value: unknown): void {
   }
 }
 
-function remove(key: string): void {
+export function removeKey(key: string): void {
   try {
     window.localStorage.removeItem(key);
   } catch {
@@ -29,9 +29,28 @@ function remove(key: string): void {
 
 /* ---------------- v3 keys ---------------- */
 
+/**
+ * Whose progress this is: a student id, or `null` for the signed-out store.
+ *
+ * localStorage belongs to the browser, not to a person — two students sharing
+ * a laptop share it. So every progress key is namespaced by identity, and the
+ * identity is a required argument: it is the one thing that must never be
+ * forgotten at a call site.
+ */
+export type Identity = string | null;
+
 export const PROGRESS_PREFIX = "koveline:v3:progress:";
-export const progressKey = (resourceKey: string) => `${PROGRESS_PREFIX}${resourceKey}`;
+const userScope = (studentId: string) => `koveline:v3:u:${studentId}:`;
+
+export const progressPrefix = (who: Identity) =>
+  who ? `${userScope(who)}progress:` : PROGRESS_PREFIX;
+
+export const progressKey = (resourceKey: string, who: Identity) =>
+  `${progressPrefix(who)}${resourceKey}`;
+
 export const LAST_STUDIED_KEY = "koveline:v3:last-studied";
+export const lastStudiedKey = (who: Identity) =>
+  who ? `${userScope(who)}last-studied` : LAST_STUDIED_KEY;
 
 export interface LastStudied {
   href: string;
@@ -39,8 +58,8 @@ export interface LastStudied {
   ts: number;
 }
 
-export function rememberLastStudied(entry: Omit<LastStudied, "ts">) {
-  writeJSON(LAST_STUDIED_KEY, { ...entry, ts: Date.now() });
+export function rememberLastStudied(entry: Omit<LastStudied, "ts">, who: Identity) {
+  writeJSON(lastStudiedKey(who), { ...entry, ts: Date.now() });
 }
 
 /* ---------------- v2 -> v3 migration ---------------- */
@@ -92,7 +111,7 @@ export function migrateV2Storage(lessonTitleToId: Record<string, Record<string, 
         if (m) lessonId = `l${m[1]}`;
         else lessonId = lessonTitleToId[newUnit]?.[old.lesson.trim()];
       }
-      writeJSON(progressKey(`islam/grade-9/${newUnit}/flashcards`), {
+      writeJSON(progressKey(`islam/grade-9/${newUnit}/flashcards`, null), {
         status,
         mode: old.mode === "random" || old.mode === "wrongOnly" ? old.mode : "sequential",
         idx: typeof old.idx === "number" ? old.idx : 0,
@@ -100,7 +119,7 @@ export function migrateV2Storage(lessonTitleToId: Record<string, Record<string, 
         orderIds: Array.isArray(old.orderIds) ? old.orderIds.map((n) => `q${n}`) : undefined,
       });
     }
-    remove(`koveline-progress-${oldUnit}`);
+    removeKey(`koveline-progress-${oldUnit}`);
   }
 
   // last-studied: rewrite the href onto the new route
@@ -115,10 +134,10 @@ export function migrateV2Storage(lessonTitleToId: Record<string, Record<string, 
       });
     }
   }
-  remove("koveline-last-studied");
+  removeKey("koveline-last-studied");
 
   // the removed definitions deck
-  remove("koveline-defs-progress");
+  removeKey("koveline-defs-progress");
 
   writeJSON(FLAG, 1);
 }

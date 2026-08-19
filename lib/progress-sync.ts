@@ -9,8 +9,15 @@
  * Every stored blob carries an `updatedAt` epoch stamp; whichever side has the
  * newer stamp for a deck wins. See app/api/progress/route.ts for the server
  * half of that rule.
+ *
+ * All of it is namespaced by identity, because a browser is a device and not a
+ * person: two students sharing a laptop must never see, or upload, each
+ * other's marks.
  */
-import { PROGRESS_PREFIX, progressKey, readJSON, writeJSON } from "./storage";
+import {
+  type Identity, type LastStudied,
+  lastStudiedKey, progressKey, progressPrefix, readJSON, removeKey, writeJSON,
+} from "./storage";
 
 export interface StoredProgress {
   status?: Record<string, "correct" | "wrong">;
@@ -48,15 +55,16 @@ function payload({ updatedAt: _stamp, ...rest }: StoredProgress): StoredProgress
   return rest;
 }
 
-/** Every deck this browser has progress for, newest first. */
-export function listLocalProgress(): ProgressEntry[] {
+/** Every deck stored for one identity on this browser, newest first. */
+export function listLocalProgress(who: Identity): ProgressEntry[] {
   if (typeof window === "undefined") return [];
+  const prefix = progressPrefix(who);
   const out: ProgressEntry[] = [];
   try {
     for (let i = 0; i < window.localStorage.length; i++) {
       const raw = window.localStorage.key(i);
-      if (!raw?.startsWith(PROGRESS_PREFIX)) continue;
-      const key = raw.slice(PROGRESS_PREFIX.length);
+      if (!raw?.startsWith(prefix)) continue;
+      const key = raw.slice(prefix.length);
       if (!isSyncable(key)) continue;
       const data = readJSON<StoredProgress>(raw);
       if (!data || typeof data !== "object") continue;
@@ -69,31 +77,85 @@ export function listLocalProgress(): ProgressEntry[] {
 }
 
 /** Write down anything the server holds a newer copy of. Returns those keys. */
-export function applyServerProgress(server: ServerProgress): string[] {
+export function applyServerProgress(server: ServerProgress, who: Identity): string[] {
   const changed: string[] = [];
   for (const [key, entry] of Object.entries(server ?? {})) {
     if (!entry || typeof entry.updatedAt !== "number" || !isSyncable(key)) continue;
-    const local = readJSON<StoredProgress>(progressKey(key));
+    const local = readJSON<StoredProgress>(progressKey(key, who));
     if (entry.updatedAt <= stampOf(local)) continue;
-    writeJSON(progressKey(key), { ...entry.data, updatedAt: entry.updatedAt });
+    writeJSON(progressKey(key, who), { ...entry.data, updatedAt: entry.updatedAt });
     changed.push(key);
   }
   return changed;
 }
 
-/**
- * Push every local deck and adopt whatever comes back newer. Run once per page
- * load for a signed-in student; resolves to the keys that changed locally.
- */
-export async function syncAllProgress(): Promise<string[]> {
+async function push(entries: ProgressEntry[]): Promise<ServerProgress> {
   const res = await fetch("/api/progress", {
     method: "PUT",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify({ entries: listLocalProgress() }),
+    body: JSON.stringify({ entries }),
   });
   if (!res.ok) throw new Error(`progress sync failed (${res.status})`);
   const { progress } = (await res.json()) as { progress: ServerProgress };
-  return applyServerProgress(progress);
+  return progress;
+}
+
+/**
+ * Hand work done before signing up over to the account that just claimed it —
+ * moved, not copied, so a second account on the same browser can never claim
+ * it as well. Only ever called for an account with nothing saved anywhere.
+ */
+function adoptAnonymousProgress(studentId: string): string[] {
+  const moved: string[] = [];
+  for (const entry of listLocalProgress(null)) {
+    writeJSON(progressKey(entry.key, studentId), { ...entry.data, updatedAt: entry.updatedAt });
+    removeKey(progressKey(entry.key, null));
+    moved.push(entry.key);
+  }
+  const last = readJSON<LastStudied>(lastStudiedKey(null));
+  if (last) {
+    writeJSON(lastStudiedKey(studentId), last);
+    removeKey(lastStudiedKey(null));
+  }
+  return moved;
+}
+
+/**
+ * Push this student's local decks and adopt whatever comes back newer. Run
+ * once per page load for a signed-in student; resolves to the keys that
+ * changed locally.
+ */
+export async function syncAllProgress(studentId: string): Promise<string[]> {
+  let merged = await push(listLocalProgress(studentId));
+
+  // A brand-new account on a browser that has been studying anonymously: this
+  // is the "I studied for a week, then signed up" case, and the only time
+  // anonymous work is allowed to enter an account.
+  const accountIsEmpty =
+    Object.keys(merged).length === 0 && listLocalProgress(studentId).length === 0;
+  if (accountIsEmpty && adoptAnonymousProgress(studentId).length > 0) {
+    merged = await push(listLocalProgress(studentId));
+  }
+
+  return applyServerProgress(merged, studentId);
+}
+
+/** Forget one identity's decks on this browser (the server half is a DELETE). */
+export function clearLocalProgress(who: Identity): number {
+  if (typeof window === "undefined") return 0;
+  const prefix = progressPrefix(who);
+  const keys: string[] = [];
+  try {
+    for (let i = 0; i < window.localStorage.length; i++) {
+      const raw = window.localStorage.key(i);
+      if (raw?.startsWith(prefix)) keys.push(raw);
+    }
+  } catch {
+    return 0;
+  }
+  keys.forEach(removeKey);
+  removeKey(lastStudiedKey(who));
+  return keys.length;
 }
 
 /* --- live pushes while studying --------------------------------------------- */
