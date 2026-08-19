@@ -4,9 +4,17 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/components/session-provider";
+import siteCopy from "@/content/site-copy.json";
+
+const copy = siteCopy.auth;
 
 type Mode = "login" | "signup";
 
+/**
+ * Sign in and sign up are the same short form behind two tabs, because the
+ * old "No account yet? Create one" line at the bottom made a second screen out
+ * of what is really one choice. Every string comes from site-copy.json.
+ */
 export function LoginForm({ next }: { next?: string }) {
   const router = useRouter();
   const { refresh } = useSession();
@@ -17,6 +25,8 @@ export function LoginForm({ next }: { next?: string }) {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
+  const signup = mode === "signup";
+
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true);
@@ -26,42 +36,55 @@ export function LoginForm({ next }: { next?: string }) {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(
-          mode === "signup" ? { name: name || undefined, email, password } : { email, password },
+          signup ? { name: name || undefined, email, password } : { email, password },
         ),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setError(data.error ?? "Something went wrong. Try again.");
+        setError(data.error ?? copy.errorGeneric);
         return;
       }
       // The navbar's session lives in a provider in the root layout, which a
       // client-side navigation does not remount, and without this it would keep
       // showing "Sign in" until the next full page load.
       await refresh();
-      const role = data.student?.role;
-      router.replace(role === "ADMIN" ? "/admin" : next || "/account");
+      // Straight back to studying: wherever they came from, or the home page,
+      // which carries the "continue" card. Never a settings screen.
+      router.replace(next || (data.student?.role === "ADMIN" ? "/admin" : "/"));
       router.refresh();
     } catch {
-      setError("Network error. Check your connection and try again.");
+      setError(copy.errorNetwork);
     } finally {
       setBusy(false);
     }
   }
 
+  function choose(next: Mode) {
+    if (next === mode) return;
+    setMode(next);
+    setError(null);
+  }
+
   return (
-    <div className="animate-rise rounded-panel border border-line bg-surface p-7 shadow-glass">
-      <h1 className="font-display text-2xl font-bold text-ink">
-        {mode === "login" ? "Sign in" : "Create your account"}
-      </h1>
-      <p className="mt-1 text-sm text-cocoa">
-        {mode === "login"
-          ? "Welcome back. Your saved decks are waiting."
-          : "Optional, and free: an account keeps your marks and your place across devices."}
+    <div className="auth-card animate-rise rounded-panel border border-line bg-surface p-6 shadow-glass sm:p-7">
+      <h1 className="sr-only">{signup ? copy.signUpTitle : copy.signInTitle}</h1>
+
+      <div className="auth-tabs" role="group" aria-label={copy.signInTitle}>
+        <button type="button" aria-pressed={!signup} onClick={() => choose("login")}>
+          {copy.signInTitle}
+        </button>
+        <button type="button" aria-pressed={signup} onClick={() => choose("signup")}>
+          {copy.signUpTitle}
+        </button>
+      </div>
+
+      <p className="mt-3 text-center text-sm text-cocoa">
+        {signup ? copy.signUpNote : copy.signInNote}
       </p>
 
-      <form onSubmit={submit} className="mt-6 space-y-4">
-        {mode === "signup" && (
-          <Field label="Name (optional)">
+      <form onSubmit={submit} className="mt-5 space-y-3.5">
+        {signup && (
+          <Field label={copy.name} note={copy.optional}>
             <input
               className="kv-input"
               type="text"
@@ -71,23 +94,27 @@ export function LoginForm({ next }: { next?: string }) {
             />
           </Field>
         )}
-        <Field label="Email">
+        <Field label={copy.email}>
           <input
             className="kv-input"
             type="email"
             required
+            inputMode="email"
             autoComplete="email"
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck={false}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </Field>
-        <Field label="Password">
+        <Field label={copy.password}>
           <input
             className="kv-input"
             type="password"
             required
-            minLength={mode === "signup" ? 8 : undefined}
-            autoComplete={mode === "login" ? "current-password" : "new-password"}
+            minLength={signup ? 8 : undefined}
+            autoComplete={signup ? "new-password" : "current-password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -99,42 +126,35 @@ export function LoginForm({ next }: { next?: string }) {
           </p>
         )}
 
-        <button
-          type="submit"
-          disabled={busy}
-          className="w-full rounded-ctl bg-teal px-4 py-2.5 font-bold text-accent-ink transition-opacity hover:opacity-90 disabled:opacity-60"
-        >
-          {busy ? "Please wait…" : mode === "login" ? "Sign in" : "Create account"}
+        <button type="submit" disabled={busy} className="auth-submit">
+          {busy ? copy.working : signup ? copy.signUpTitle : copy.signInTitle}
         </button>
       </form>
 
-      <p className="mt-5 text-center text-sm text-cocoa">
-        {mode === "login" ? "No account yet? " : "Already have an account? "}
-        <button
-          type="button"
-          className="font-semibold text-teal-deep underline-offset-2 hover:underline"
-          onClick={() => {
-            setMode(mode === "login" ? "signup" : "login");
-            setError(null);
-          }}
-        >
-          {mode === "login" ? "Create one" : "Sign in"}
-        </button>
-      </p>
-
-      <p className="mt-3 text-center text-[0.8rem] text-cocoa">
-        <Link href="/#subjects" className="underline-offset-2 hover:underline">
-          Keep studying without an account
+      <p className="mt-4 text-center">
+        <Link href="/" className="text-[0.82rem] text-cocoa underline-offset-2 hover:text-teal-deep hover:underline">
+          {copy.skip}
         </Link>
       </p>
     </div>
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  note,
+  children,
+}: {
+  label: string;
+  note?: string;
+  children: React.ReactNode;
+}) {
   return (
     <label className="block">
-      <span className="mb-1.5 block text-sm font-semibold text-coffee">{label}</span>
+      <span className="mb-1.5 flex items-baseline gap-1.5 text-sm font-semibold text-coffee">
+        {label}
+        {note && <span className="text-[0.72rem] font-medium text-cocoa">{note}</span>}
+      </span>
       {children}
     </label>
   );

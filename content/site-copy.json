@@ -37,27 +37,20 @@
     }
   },
   "navigation": {
-    "explore": "Explore",
-    "exploreAria": "Explore Koveline",
-    "subjectsLabel": "Subjects",
-    "currentSubject": "Current subject",
-    "resourcesLabel": "Resources",
+    "menu": "Study",
+    "menuAria": "Study menu",
+    "subjectsLabel": "Islam",
+    "moreLabel": "More",
     "customTestTitle": "Custom test",
-    "customTestBody": "Pick the units and the length.",
-    "questionBanksTitle": "Question banks",
-    "questionBanksBody": "Grade 9 and Grade 10 units.",
-    "startStudying": "Start studying",
+    "customTestBody": "Your units, your length.",
     "textbooksTitle": "Textbooks",
-    "textbooksBody": "The Grade 9 and 10 curriculum books.",
+    "textbooksBody": "Grade 9 and 10 books.",
     "signIn": "Sign in",
-    "signInHint": "Optional — save your progress across devices",
+    "signInHint": "Save your progress",
     "accountAria": "Your account",
-    "accountTitle": "Your account",
-    "accountBody": "Progress saved to your account.",
-    "adminTitle": "Admin panel",
-    "adminBody": "Students and accounts.",
-    "signOutTitle": "Sign out",
-    "signOutBody": "This device keeps its own progress."
+    "accountTitle": "Account",
+    "adminTitle": "Admin",
+    "signOutTitle": "Sign out"
   },
   "customTest": {
     "metaTitle": "Custom test",
@@ -100,5 +93,39 @@
   "contact": {
     "eyebrow": "Feedback",
     "body": "If a question is wrong, or there's something that would make studying easier, tell me and I'll try to fix it."
+  },
+  "auth": {
+    "signInTitle": "Sign in",
+    "signInNote": "Your decks, on any device.",
+    "signUpTitle": "Create account",
+    "signUpNote": "Free. Keeps your progress.",
+    "name": "Name",
+    "optional": "optional",
+    "email": "Email",
+    "password": "Password",
+    "working": "One moment…",
+    "skip": "Study without an account",
+    "errorGeneric": "That didn't work. Try again.",
+    "errorNetwork": "No connection. Try again."
+  },
+  "account": {
+    "signedIn": "Signed in",
+    "email": "Email",
+    "role": "Role",
+    "roleAdmin": "Admin",
+    "roleStudent": "Student",
+    "progressLabel": "Saved progress",
+    "progressNone": "Nothing saved yet. Study a deck and it lands here.",
+    "progressDeck": "deck saved",
+    "progressDecks": "decks saved",
+    "progressNote": "Sign in anywhere to pick up where you left off.",
+    "clear": "Clear saved progress",
+    "clearConfirm": "Yes, clear it",
+    "clearCancel": "Cancel",
+    "clearing": "Clearing…",
+    "clearError": "Could not clear it. Try again.",
+    "admin": "Admin panel",
+    "signOut": "Sign out",
+    "signingOut": "Signing out…"
   }
 }

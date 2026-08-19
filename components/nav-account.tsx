@@ -8,9 +8,10 @@ import { useSession } from "./session-provider";
 import siteCopy from "@/content/site-copy.json";
 
 /**
- * The one account control in the navbar. Signing in is entirely optional — it
- * exists so progress follows a student to another device — so signed out this
- * is a single quiet link, never a wall or a prompt.
+ * The one account control in the navbar. Signing in is optional: it exists so
+ * progress follows a student to another device. So signed out this is a single
+ * quiet link, never a wall or a prompt, and the menu behind it is three plain
+ * rows rather than a page of explanation.
  */
 export function NavAccount() {
   const { student, loading, signOut } = useSession();
@@ -35,7 +36,7 @@ export function NavAccount() {
   }, [open]);
 
   // Reserve the space while /api/auth/me is in flight, so the navbar doesn't
-  // twitch — and so "Sign in" never flashes at someone who is signed in.
+  // twitch, and so "Sign in" never flashes at someone who is signed in.
   if (loading) return <span className="nav-account-placeholder" aria-hidden />;
 
   if (!student) {
@@ -88,19 +89,13 @@ export function NavAccount() {
         <div className="nav-dropdown-section nav-resources-section">
           <Link href="/account" role="menuitem" className="nav-resource-row" onClick={() => setOpen(false)}>
             <span className="nav-dropdown-icon"><UserRound className="h-4 w-4" aria-hidden /></span>
-            <div>
-              <strong>{siteCopy.navigation.accountTitle}</strong>
-              <span>{siteCopy.navigation.accountBody}</span>
-            </div>
+            <strong>{siteCopy.navigation.accountTitle}</strong>
           </Link>
 
           {student.role === "ADMIN" && (
             <Link href="/admin" role="menuitem" className="nav-resource-row" onClick={() => setOpen(false)}>
               <span className="nav-dropdown-icon"><ShieldCheck className="h-4 w-4" aria-hidden /></span>
-              <div>
-                <strong>{siteCopy.navigation.adminTitle}</strong>
-                <span>{siteCopy.navigation.adminBody}</span>
-              </div>
+              <strong>{siteCopy.navigation.adminTitle}</strong>
             </Link>
           )}
 
@@ -111,10 +106,7 @@ export function NavAccount() {
             onClick={() => { setOpen(false); void signOut(); }}
           >
             <span className="nav-dropdown-icon"><LogOut className="h-4 w-4" aria-hidden /></span>
-            <div>
-              <strong>{siteCopy.navigation.signOutTitle}</strong>
-              <span>{siteCopy.navigation.signOutBody}</span>
-            </div>
+            <strong>{siteCopy.navigation.signOutTitle}</strong>
           </button>
         </div>
       </div>

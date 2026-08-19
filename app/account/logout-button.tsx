@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import siteCopy from "@/content/site-copy.json";
 
 export function LogoutButton({ className }: { className?: string }) {
   const router = useRouter();
@@ -10,7 +11,8 @@ export function LogoutButton({ className }: { className?: string }) {
   async function logout() {
     setBusy(true);
     await fetch("/api/auth/logout", { method: "POST" }).catch(() => {});
-    router.replace("/login");
+    // Home, not the sign-in page: signing out is not a reason to stop studying.
+    router.replace("/");
     router.refresh();
   }
 
@@ -24,7 +26,7 @@ export function LogoutButton({ className }: { className?: string }) {
         "rounded-ctl border border-line px-4 py-2 text-sm font-semibold text-coffee transition-colors hover:bg-hover disabled:opacity-60"
       }
     >
-      {busy ? "Signing out…" : "Sign out"}
+      {busy ? siteCopy.account.signingOut : siteCopy.account.signOut}
     </button>
   );
 }

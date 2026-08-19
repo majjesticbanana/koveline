@@ -4,6 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { clearLocalProgress } from "@/lib/progress-sync";
 import { useSession } from "@/components/session-provider";
+import siteCopy from "@/content/site-copy.json";
+
+const copy = siteCopy.account;
 
 /**
  * Start this account's saved progress over — on the server and on this device.
@@ -29,7 +32,7 @@ export function ClearProgress({ hasProgress }: { hasProgress: boolean }) {
       setArmed(false);
       router.refresh();
     } catch {
-      setError("Could not clear it. Check your connection and try again.");
+      setError(copy.clearError);
     } finally {
       setBusy(false);
     }
@@ -45,14 +48,14 @@ export function ClearProgress({ hasProgress }: { hasProgress: boolean }) {
             onClick={clear}
             className="rounded-ctl border border-red-line bg-red-bg px-3 py-1.5 text-sm font-bold text-red transition-opacity hover:opacity-90 disabled:opacity-60"
           >
-            {busy ? "Clearing…" : "Yes, clear it"}
+            {busy ? copy.clearing : copy.clearConfirm}
           </button>
           <button
             type="button"
             onClick={() => setArmed(false)}
             className="rounded-ctl border border-line px-3 py-1.5 text-sm font-semibold text-cocoa transition hover:border-line-strong"
           >
-            Cancel
+            {copy.clearCancel}
           </button>
         </div>
       ) : (
@@ -61,7 +64,7 @@ export function ClearProgress({ hasProgress }: { hasProgress: boolean }) {
           onClick={() => setArmed(true)}
           className="text-sm font-semibold text-cocoa underline-offset-2 hover:text-red hover:underline"
         >
-          Clear saved progress
+          {copy.clear}
         </button>
       )}
       {error && (

@@ -109,3 +109,39 @@ Fix, in `components/deck/engine.tsx`:
   deck, so cards newly marked wrong are never hidden from a review round.
 
 Changing lesson still resets to question 1, which is intended.
+
+## Navigation, sign-in and the phone: one menu, fewer words
+
+The bar carried four controls and two routes to the same screen: an "Explore"
+menu, a "Start studying" button pointing at `/#subjects`, and — inside the
+menu — a "Question banks" row pointing there as well. It now carries three:
+the wordmark home, one **Study** menu, the account control and settings.
+
+The Study menu lost its subject card wrapper ("Islam" / "Current subject" as a
+heading over the grade tiles). With one subject, the section label *is* the
+subject, and the two grade tiles sit directly under it. Custom test and
+Textbooks moved under a "More" label. The account menu is three plain rows;
+the second line under each ("Progress saved to your account.", "This device
+keeps its own progress.") was explanation nobody needed twice.
+
+Sign-in and sign-up are one form behind two tabs instead of a form plus a
+"No account yet? Create one" sentence, and every string on that screen —
+along with the account page and the menu — now comes from `site-copy.json`,
+under `navigation`, `auth` and `account`.
+
+Signing in no longer lands on `/account`. It goes back to whatever page you
+came from, or to the home page, which is the one with the continue card.
+Signing out goes home too, not to the sign-in screen: signing out is not a
+reason to stop studying.
+
+Phones: the three bar controls are 40px targets rather than ~30px, inputs are
+16px so iOS stops zooming the page on focus, and the account menu drops to the
+full-width sheet the Study menu already used.
+
+The real find was that every `env(safe-area-inset-*)` rule in this file — the
+bottom sheets, the mobile action bar, the question navigator — was resolving
+to zero, because the viewport never opted in. `viewportFit: "cover"` in
+`app/layout.tsx` turns them on, and the navbar now pads itself by the top
+inset so the installed app's translucent status bar has a background under it.
+**Worth a look on a real iPhone, installed and in landscape** — it is the one
+change here that cannot be checked in a desktop browser.

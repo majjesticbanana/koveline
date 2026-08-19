@@ -583,7 +583,7 @@ button:active, a[role="button"]:active { transform: scale(.985); }
 
 /* Phones are recomposed rather than merely shrinking the desktop layout. */
 @media (max-width: 639px) {
-  html { scroll-padding-top: 56px; }
+  html { scroll-padding-top: calc(56px + env(safe-area-inset-top)); }
 
   /* Reduce expensive full-screen compositing on phones. */
   body {
@@ -600,19 +600,20 @@ button:active, a[role="button"]:active { transform: scale(.985); }
   }
   .glass-control::before { display: none; }
 
-  .site-navbar { box-shadow: 0 8px 24px rgb(var(--deep-rgb) / .18); }
+  .site-navbar {
+    box-shadow: 0 8px 24px rgb(var(--deep-rgb) / .18);
+    /* Installed on iOS the status bar is translucent and sits over the page,
+       so the bar's own background has to reach up under it. */
+    padding-top: env(safe-area-inset-top);
+  }
   .site-navbar-inner {
     height: 56px;
-    padding-inline: 14px;
+    padding-left: max(14px, env(safe-area-inset-left));
+    padding-right: max(14px, env(safe-area-inset-right));
   }
   .site-brand { gap: 8px; }
   .site-brand svg { width: 26px !important; height: 26px !important; }
   .site-wordmark { font-size: 1.08rem !important; }
-  .nav-study-cta {
-    padding: .48rem .68rem !important;
-    border-radius: 9px;
-    font-size: .75rem !important;
-  }
 
   .resource-page {
     max-width: none;
@@ -1237,20 +1238,12 @@ button:active, a[role="button"]:active { transform: scale(.985); }
   letter-spacing: .15em;
   text-transform: uppercase;
 }
-.nav-subject-card {
-  padding: 10px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: rgb(var(--raised-rgb) / .52);
-}
-.nav-subject-head,
 .nav-resource-row {
   display: grid;
   grid-template-columns: auto minmax(0,1fr) auto;
   gap: 10px;
   align-items: center;
 }
-.nav-subject-head { grid-template-columns: auto minmax(0,1fr); }
 .nav-dropdown-icon {
   display: inline-flex;
   width: 30px;
@@ -1262,19 +1255,16 @@ button:active, a[role="button"]:active { transform: scale(.985); }
   color: var(--accent, var(--ember-bright));
   background: rgb(var(--deep-rgb) / .18);
 }
-.nav-subject-head strong,
 .nav-resource-row strong {
   display: block;
   font-size: .82rem;
   font-weight: 800;
   color: var(--text);
 }
-.nav-subject-head span:not(.nav-dropdown-icon),
 .nav-course-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 6px;
-  margin-top: 9px;
 }
 .nav-course-link {
   min-width: 0;
@@ -1352,39 +1342,38 @@ button:active, a[role="button"]:active { transform: scale(.985); }
   white-space: nowrap;
 }
 .nav-account-dropdown .nav-resources-section { margin-top: 0; }
-.nav-account-dropdown .nav-resource-row span:not(.nav-dropdown-icon) {
-  display: block;
-  margin-top: 1px;
-  color: var(--muted);
-  font-size: .66rem;
-}
 
 @media (max-width: 639px) {
   .nav-actions { gap: 6px; }
-  /* Phones: the avatar carries the meaning, the word "Sign in" does not. */
+
+  /* Three controls, each a real touch target: Apple and Google both put the
+     floor at 44px, and 40 plus the 6px gap gets there honestly. */
+  .nav-menu-trigger,
+  .nav-signin,
+  .nav-account-trigger {
+    min-height: 40px;
+    border-radius: 10px;
+  }
+  /* The avatar carries the meaning on a phone; the word "Sign in" does not. */
   .nav-signin {
-    padding: .48rem .55rem !important;
-    border-radius: 9px;
+    width: 40px;
+    padding: 0 !important;
+    justify-content: center;
   }
   .nav-signin-label { display: none; }
-  .nav-account-placeholder { width: 34px; }
-  .nav-account-dropdown {
-    left: auto;
-    width: min(300px, calc(100vw - 24px));
-  }
+  .nav-account-placeholder { width: 40px; }
 
-  .nav-explore-trigger {
-    padding: .48rem .6rem !important;
-    border-radius: 9px;
-    font-size: .74rem !important;
+  .nav-menu-trigger {
+    padding: 0 .7rem !important;
+    font-size: .8rem !important;
   }
   .nav-dropdown {
     position: fixed;
-    top: 64px;
-    left: 12px;
-    right: 12px;
+    top: calc(64px + env(safe-area-inset-top));
+    left: max(12px, env(safe-area-inset-left));
+    right: max(12px, env(safe-area-inset-right));
     width: auto;
-    max-height: calc(100dvh - 78px);
+    max-height: calc(100dvh - 78px - env(safe-area-inset-top));
     overflow-y: auto;
     transform-origin: top center;
   }
@@ -2410,14 +2399,56 @@ button:active, a[role="button"]:active { transform: scale(.985); }
 }
 
 /* --- Auth / admin form controls -------------------------------------------- */
+
+/* Sign in / create account, behind two tabs rather than two screens. */
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgb(var(--deep-rgb) / .18);
+}
+.auth-tabs button {
+  min-height: 40px;
+  /* transparent to start, so selecting a tab cannot shift the row by a pixel */
+  border: 1px solid transparent;
+  border-radius: 9px;
+  color: var(--muted);
+  font-size: .86rem;
+  font-weight: 700;
+  transition: background 160ms ease, color 160ms ease;
+}
+.auth-tabs button:hover { color: var(--text); }
+.auth-tabs button[aria-pressed="true"] {
+  background: rgb(var(--surface-rgb) / .96);
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+}
+.auth-submit {
+  width: 100%;
+  min-height: 46px;
+  border-radius: 11px;
+  background: var(--accent);
+  color: rgb(var(--accent-ink-rgb));
+  font-weight: 800;
+  transition: opacity 160ms ease;
+}
+.auth-submit:hover { opacity: .9; }
+.auth-submit:disabled { opacity: .6; }
+
 .kv-input {
   width: 100%;
+  min-height: 44px;
+  /* 16px is the threshold below which iOS Safari zooms the page on focus. */
+  font-size: max(16px, 1rem);
   padding: 0.55rem 0.75rem;
   border-radius: 10px;
   border: 1px solid rgb(var(--line-strong-rgb) / 0.8);
   background: rgb(var(--bg-rgb) / 0.6);
   color: rgb(var(--text-rgb));
-  font: inherit;
+  font-family: inherit;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 .kv-input::placeholder { color: rgb(var(--muted-rgb)); }

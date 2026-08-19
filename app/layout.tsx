@@ -43,6 +43,11 @@ export const viewport: Viewport = {
   themeColor: "#190c09",
   width: "device-width",
   initialScale: 1,
+  // The bottom sheets, the mobile action bar and the navbar all pad themselves
+  // with env(safe-area-inset-*). Those values only report anything real once
+  // the viewport opts into the full screen, so without this line every one of
+  // those rules quietly resolves to 0 on a notched iPhone.
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

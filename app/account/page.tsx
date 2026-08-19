@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getCurrentStudent } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import siteCopy from "@/content/site-copy.json";
 import { LogoutButton } from "./logout-button";
 import { ClearProgress } from "./clear-progress";
 
@@ -19,45 +20,57 @@ export default async function AccountPage() {
   const decks = saved._count._all;
   const lastSaved = saved._max.updatedAt;
 
+  const copy = siteCopy.account;
+
   return (
-    <main id="main" className="mx-auto w-full max-w-2xl px-5 py-16">
-      <div className="animate-rise rounded-panel border border-line bg-surface p-7 shadow-glass">
-        <p className="text-sm font-semibold uppercase tracking-wide text-cocoa">Signed in</p>
-        <h1 className="mt-1 font-display text-3xl font-bold text-ink">
+    <main id="main" className="mx-auto w-full max-w-2xl px-4 py-8 sm:px-5 sm:py-16">
+      <div className="animate-rise rounded-panel border border-line bg-surface p-6 shadow-glass sm:p-7">
+        <p className="text-[0.7rem] font-extrabold uppercase tracking-[0.14em] text-cocoa">
+          {copy.signedIn}
+        </p>
+        <h1 className="mt-1 break-words font-display text-2xl font-bold text-ink sm:text-3xl">
           {me.name ?? me.email}
         </h1>
-        <dl className="mt-6 grid grid-cols-[max-content_1fr] gap-x-6 gap-y-2 text-sm">
-          <dt className="text-cocoa">Email</dt>
-          <dd className="text-coffee">{me.email}</dd>
-          <dt className="text-cocoa">Role</dt>
-          <dd className="text-coffee">{me.role === "ADMIN" ? "Administrator" : "Student"}</dd>
+
+        <dl className="mt-5 space-y-2 text-sm sm:mt-6">
+          <div className="flex flex-wrap gap-x-4 gap-y-0.5">
+            <dt className="w-14 shrink-0 text-cocoa">{copy.email}</dt>
+            <dd className="min-w-0 break-all text-coffee">{me.email}</dd>
+          </div>
+          <div className="flex flex-wrap gap-x-4 gap-y-0.5">
+            <dt className="w-14 shrink-0 text-cocoa">{copy.role}</dt>
+            <dd className="text-coffee">{me.role === "ADMIN" ? copy.roleAdmin : copy.roleStudent}</dd>
+          </div>
         </dl>
 
-        <div className="mt-7 rounded-card border border-line bg-raised/40 p-4">
-          <p className="text-sm font-bold text-coffee">Saved progress</p>
+        <div className="mt-6 rounded-card border border-line bg-raised/40 p-4">
+          <p className="text-sm font-bold text-coffee">{copy.progressLabel}</p>
           <p className="mt-1 text-sm text-cocoa">
-            {decks === 0
-              ? "Nothing saved yet. Study a deck and your marks, position and lesson filter are kept here automatically."
-              : `${decks} deck${decks === 1 ? "" : "s"} saved${
-                  lastSaved
-                    ? ` · last updated ${lastSaved.toLocaleDateString("en-GB", {
-                        day: "numeric",
-                        month: "short",
-                        year: "numeric",
-                      })}`
-                    : ""
-                }. Sign in on another device to pick up where you left off.`}
+            {decks === 0 ? (
+              copy.progressNone
+            ) : (
+              <>
+                {decks} {decks === 1 ? copy.progressDeck : copy.progressDecks}
+                {lastSaved && (
+                  <>
+                    {" · "}
+                    {lastSaved.toLocaleDateString("en-GB", { day: "numeric", month: "short" })}
+                  </>
+                )}
+                <span className="mt-1 block">{copy.progressNote}</span>
+              </>
+            )}
           </p>
           <ClearProgress hasProgress={decks > 0} />
         </div>
 
-        <div className="mt-8 flex flex-wrap gap-3">
+        <div className="mt-6 flex flex-wrap gap-2.5">
           {me.role === "ADMIN" && (
             <Link
               href="/admin"
-              className="rounded-ctl bg-teal px-4 py-2 text-sm font-bold text-accent-ink transition-opacity hover:opacity-90"
+              className="rounded-ctl bg-teal px-4 py-2.5 text-sm font-bold text-accent-ink transition-opacity hover:opacity-90"
             >
-              Open admin panel
+              {copy.admin}
             </Link>
           )}
           <LogoutButton />
