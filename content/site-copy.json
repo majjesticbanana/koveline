@@ -50,7 +50,9 @@
     "accountAria": "Your account",
     "accountTitle": "Account",
     "adminTitle": "Admin",
-    "signOutTitle": "Sign out"
+    "signOutTitle": "Sign out",
+    "paperOneTitle": "Paper I revision",
+    "paperOneBody": "180 questions from the real papers."
   },
   "customTest": {
     "metaTitle": "Custom test",

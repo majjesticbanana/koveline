@@ -145,3 +145,31 @@ to zero, because the viewport never opted in. `viewportFit: "cover"` in
 inset so the installed app's translucent status bar has a background under it.
 **Worth a look on a real iPhone, installed and in landscape** — it is the one
 change here that cannot be checked in a desktop browser.
+
+## Paper I revision (`/paper-1`)
+
+180 image cards — the 2020 specimen plus the 2021–2025 papers, 30 questions
+each, with the marking scheme for every one. Assets in `public/paper-1/`
+(360 webp, 5.7 MB), metadata in `content/paper-1.json`.
+
+**Why it does not go through the content schema.** These questions are crops of
+the real papers, not text. `Flashcard.front` has no representation for an image,
+and inventing one would mean touching the schema, the loader, the validator and
+the deck engine for a single resource type. It is a standalone route reading its
+own JSON instead, so it cannot break the decks.
+
+**What it shares with the decks:** identity scoping. Ratings live under
+`koveline:v3:u:{studentId}:paper1` when signed in and `koveline:v3:paper1` when
+not, mirroring `lib/storage.ts`, so two students on one laptop never see each
+other's marks and signing in swaps the bucket. It re-reads on identity change.
+
+**What it does not share:** the ratings are three-way (Don't know / Unsure /
+Know) rather than the decks' correct/wrong, so they do not feed "Review wrong"
+or the custom test pool, and they are not synced to the account through
+`/api/progress`. Both are doable — the sync would need a resource key and an
+entry in `progress-sync.ts`; the pooling would need the three states collapsing
+to two. Neither is wired yet.
+
+The scans are black on white, so they render on a cream panel (`.p1-paper`)
+rather than the dark ground — the same split `/textbooks` uses, which keeps
+them readable in all four themes.

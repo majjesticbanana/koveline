@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { BookMarked, ChevronDown, ListChecks } from "lucide-react";
+import { BookMarked, ChevronDown, FileText, ListChecks } from "lucide-react";
 import { KoelMark } from "./koel";
 import { SettingsPanel } from "./settings-panel";
 import { NavAccount } from "./nav-account";
@@ -101,6 +101,13 @@ export function Navbar() {
                   <div>
                     <strong>{siteCopy.navigation.customTestTitle}</strong>
                     <span>{siteCopy.navigation.customTestBody}</span>
+                  </div>
+                </Link>
+                <Link href="/paper-1" role="menuitem" className="nav-resource-row" onClick={() => setOpen(false)}>
+                  <span className="nav-dropdown-icon"><FileText className="h-4 w-4" aria-hidden /></span>
+                  <div>
+                    <strong>{siteCopy.navigation.paperOneTitle}</strong>
+                    <span>{siteCopy.navigation.paperOneBody}</span>
                   </div>
                 </Link>
                 <Link href="/textbooks" role="menuitem" className="nav-resource-row" onClick={() => setOpen(false)}>

@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const courses = new Set(units.map((e) => `/${e.subject.id}/${e.course.id}/mixed`));
   return [
     { url: BASE, changeFrequency: "weekly", priority: 1 },
+    { url: BASE + "/paper-1", changeFrequency: "yearly", priority: 0.7 },
     { url: BASE + "/textbooks", changeFrequency: "yearly", priority: 0.6 },
     { url: BASE + "/test", changeFrequency: "monthly", priority: 0.55 },
     ...[...courses].map((p) => ({ url: BASE + p, changeFrequency: "monthly" as const, priority: 0.8 })),

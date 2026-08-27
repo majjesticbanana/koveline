@@ -1,0 +1,26 @@
+KOVELINE — PAPER I UPDATE
+
+Drag the four folders (app, components, content, public) plus NOTES.md
+into your koveline folder and choose Merge / Replace when asked.
+
+Nothing here deletes anything. node_modules, .next, .git and
+public/textbooks are untouched — they are not in this folder at all.
+
+Files that get overwritten:
+  app/globals.css          Paper I styles appended at the end
+  app/sitemap.ts           one new line
+  components/navbar.tsx    the Explore menu row
+  content/site-copy.json   two new nav strings
+  NOTES.md                 documentation
+
+Files that are new:
+  app/paper-1/page.tsx
+  components/paper-one.tsx
+  content/paper-1.json
+  public/paper-1/          360 images, 5.7 MB
+
+package-lock.json is deliberately NOT included — keep yours.
+
+Then:
+  npm run build
+  open /paper-1
