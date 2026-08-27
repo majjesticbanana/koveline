@@ -1,0 +1,21 @@
+{
+  "id": "paper-1",
+  "subjectId": "islam",
+  "title": "Paper I",
+  "titleDhivehi": "ޕޭޕަރ 1",
+  "contentLang": "dv",
+  "collection": "papers",
+  "collectionTitle": "Past papers",
+  "collectionTitleDhivehi": "ކުރީގެ ޕޭޕަރުތައް",
+  "scopeLabel": "Grade 9 & 10",
+  "targets": [
+    "paper-1"
+  ],
+  "credit": {
+    "english": "SSC Islam Paper I",
+    "dhivehi": "އެސްއެސްސީ އިސްލާމް ޕޭޕަރު 1",
+    "note": "Questions and marking schemes from the examination papers."
+  },
+  "order": 3,
+  "draft": false
+}

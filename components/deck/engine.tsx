@@ -10,6 +10,7 @@ import { queueProgressPush } from "@/lib/progress-sync";
 import { useSession } from "@/components/session-provider";
 import { ChevronLeft, ChevronRight, ChevronsUpDown } from "lucide-react";
 import { RichBody } from "./rich-body";
+import { Scan } from "./scan";
 import {
   type Mode, type Mark, type Tone,
   ModeBar, StatBar, ProgressBar, KbdHints, BottomSheet, NavLegend,
@@ -584,7 +585,16 @@ export function DeckEngine({
             lang={qRtl ? "dv" : undefined}
             className={`study-question-text ${qRtl ? "thaana" : ""} text-[1.35rem] font-semibold leading-relaxed sm:text-[1.45rem]`}
           >
-            {current?.front}
+            {current?.frontImage ? (
+              <Scan
+                src={current.frontImage.src}
+                width={current.frontImage.width}
+                height={current.frontImage.height}
+                alt={current.front}
+              />
+            ) : (
+              current?.front
+            )}
           </div>
 
           <span className={`annotate mt-3 ${showAnswer ? "swept" : ""}`} aria-hidden />

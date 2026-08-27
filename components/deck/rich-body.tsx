@@ -1,5 +1,6 @@
 import type { RichBodyT } from "@/lib/content/schema";
 import { isRtl } from "@/lib/rtl";
+import { Scan } from "./scan";
 
 /**
  * Total renderer for the RichBody union — no JSON.stringify fallback, no
@@ -22,6 +23,10 @@ export function RichBody({ body, size = "base" }: { body: RichBodyT; size?: "bas
         {body.value}
       </p>
     );
+  }
+
+  if (body.kind === "image") {
+    return <Scan src={body.src} width={body.width} height={body.height} alt={body.alt} />;
   }
 
   if (body.kind === "list") {

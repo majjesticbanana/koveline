@@ -1,0 +1,24 @@
+{
+  "id": "unit-2",
+  "number": 2,
+  "icon": "📄",
+  "title": "2021",
+  "titleEnglish": "2021",
+  "description": "30 questions from the 2021 paper.",
+  "lessons": [
+    {
+      "id": "g10",
+      "number": 1,
+      "title": "ގްރޭޑް 10"
+    },
+    {
+      "id": "g9",
+      "number": 2,
+      "title": "ގްރޭޑް 9"
+    }
+  ],
+  "targets": [
+    "paper-1"
+  ],
+  "draft": false
+}

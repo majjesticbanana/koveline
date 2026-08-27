@@ -1,0 +1,520 @@
+{
+  "type": "flashcards",
+  "id": "flashcards",
+  "title": "Flashcards",
+  "description": "30 questions with the marking scheme.",
+  "order": 0,
+  "draft": false,
+  "cards": [
+    {
+      "id": "q01",
+      "lessonId": "g10",
+      "front": "2021 · Question 1",
+      "frontImage": {
+        "src": "/paper-1/2021_q01_q.webp",
+        "width": 709,
+        "height": 162
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q01_a.webp",
+        "width": 316,
+        "height": 105,
+        "alt": "Marking scheme for question 1"
+      }
+    },
+    {
+      "id": "q02",
+      "lessonId": "g9",
+      "front": "2021 · Question 2",
+      "frontImage": {
+        "src": "/paper-1/2021_q02_q.webp",
+        "width": 710,
+        "height": 161
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q02_a.webp",
+        "width": 707,
+        "height": 172,
+        "alt": "Marking scheme for question 2"
+      }
+    },
+    {
+      "id": "q03",
+      "lessonId": "g10",
+      "front": "2021 · Question 3",
+      "frontImage": {
+        "src": "/paper-1/2021_q03_q.webp",
+        "width": 707,
+        "height": 128
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q03_a.webp",
+        "width": 652,
+        "height": 280,
+        "alt": "Marking scheme for question 3"
+      }
+    },
+    {
+      "id": "q04",
+      "lessonId": "g10",
+      "front": "2021 · Question 4",
+      "frontImage": {
+        "src": "/paper-1/2021_q04_q.webp",
+        "width": 709,
+        "height": 196
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q04_a.webp",
+        "width": 484,
+        "height": 254,
+        "alt": "Marking scheme for question 4"
+      }
+    },
+    {
+      "id": "q05",
+      "lessonId": "g9",
+      "front": "2021 · Question 5",
+      "frontImage": {
+        "src": "/paper-1/2021_q05_q.webp",
+        "width": 708,
+        "height": 230
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q05_a.webp",
+        "width": 430,
+        "height": 413,
+        "alt": "Marking scheme for question 5"
+      }
+    },
+    {
+      "id": "q06",
+      "lessonId": "g9",
+      "front": "2021 · Question 6",
+      "frontImage": {
+        "src": "/paper-1/2021_q06_q.webp",
+        "width": 687,
+        "height": 93
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q06_a.webp",
+        "width": 712,
+        "height": 835,
+        "alt": "Marking scheme for question 6"
+      }
+    },
+    {
+      "id": "q07",
+      "lessonId": "g9",
+      "front": "2021 · Question 7",
+      "frontImage": {
+        "src": "/paper-1/2021_q07_q.webp",
+        "width": 708,
+        "height": 128
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q07_a.webp",
+        "width": 709,
+        "height": 818,
+        "alt": "Marking scheme for question 7"
+      }
+    },
+    {
+      "id": "q08",
+      "lessonId": "g10",
+      "front": "2021 · Question 8",
+      "frontImage": {
+        "src": "/paper-1/2021_q08_q.webp",
+        "width": 689,
+        "height": 93
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q08_a.webp",
+        "width": 709,
+        "height": 870,
+        "alt": "Marking scheme for question 8"
+      }
+    },
+    {
+      "id": "q09",
+      "lessonId": "g10",
+      "front": "2021 · Question 9",
+      "frontImage": {
+        "src": "/paper-1/2021_q09_q.webp",
+        "width": 688,
+        "height": 93
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q09_a.webp",
+        "width": 535,
+        "height": 218,
+        "alt": "Marking scheme for question 9"
+      }
+    },
+    {
+      "id": "q10",
+      "lessonId": "g9",
+      "front": "2021 · Question 10",
+      "frontImage": {
+        "src": "/paper-1/2021_q10_q.webp",
+        "width": 709,
+        "height": 134
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q10_a.webp",
+        "width": 659,
+        "height": 479,
+        "alt": "Marking scheme for question 10"
+      }
+    },
+    {
+      "id": "q11",
+      "lessonId": "g10",
+      "front": "2021 · Question 11",
+      "frontImage": {
+        "src": "/paper-1/2021_q11_q.webp",
+        "width": 709,
+        "height": 196
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q11_a.webp",
+        "width": 437,
+        "height": 467,
+        "alt": "Marking scheme for question 11"
+      }
+    },
+    {
+      "id": "q12",
+      "lessonId": "g10",
+      "front": "2021 · Question 12",
+      "frontImage": {
+        "src": "/paper-1/2021_q12_q.webp",
+        "width": 709,
+        "height": 128
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q12_a.webp",
+        "width": 564,
+        "height": 569,
+        "alt": "Marking scheme for question 12"
+      }
+    },
+    {
+      "id": "q13",
+      "lessonId": "g9",
+      "front": "2021 · Question 13",
+      "frontImage": {
+        "src": "/paper-1/2021_q13_q.webp",
+        "width": 689,
+        "height": 93
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q13_a.webp",
+        "width": 483,
+        "height": 356,
+        "alt": "Marking scheme for question 13"
+      }
+    },
+    {
+      "id": "q14",
+      "lessonId": "g10",
+      "front": "2021 · Question 14",
+      "frontImage": {
+        "src": "/paper-1/2021_q14_q.webp",
+        "width": 708,
+        "height": 162
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q14_a.webp",
+        "width": 380,
+        "height": 262,
+        "alt": "Marking scheme for question 14"
+      }
+    },
+    {
+      "id": "q15",
+      "lessonId": "g10",
+      "front": "2021 · Question 15",
+      "frontImage": {
+        "src": "/paper-1/2021_q15_q.webp",
+        "width": 709,
+        "height": 196
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q15_a.webp",
+        "width": 418,
+        "height": 176,
+        "alt": "Marking scheme for question 15"
+      }
+    },
+    {
+      "id": "q16",
+      "lessonId": "g10",
+      "front": "2021 · Question 16",
+      "frontImage": {
+        "src": "/paper-1/2021_q16_q.webp",
+        "width": 709,
+        "height": 162
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q16_a.webp",
+        "width": 420,
+        "height": 240,
+        "alt": "Marking scheme for question 16"
+      }
+    },
+    {
+      "id": "q17",
+      "lessonId": "g9",
+      "front": "2021 · Question 17",
+      "frontImage": {
+        "src": "/paper-1/2021_q17_q.webp",
+        "width": 709,
+        "height": 162
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q17_a.webp",
+        "width": 488,
+        "height": 824,
+        "alt": "Marking scheme for question 17"
+      }
+    },
+    {
+      "id": "q18",
+      "lessonId": "g9",
+      "front": "2021 · Question 18",
+      "frontImage": {
+        "src": "/paper-1/2021_q18_q.webp",
+        "width": 707,
+        "height": 128
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q18_a.webp",
+        "width": 629,
+        "height": 743,
+        "alt": "Marking scheme for question 18"
+      }
+    },
+    {
+      "id": "q19",
+      "lessonId": "g10",
+      "front": "2021 · Question 19",
+      "frontImage": {
+        "src": "/paper-1/2021_q19_q.webp",
+        "width": 708,
+        "height": 128
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q19_a.webp",
+        "width": 709,
+        "height": 860,
+        "alt": "Marking scheme for question 19"
+      }
+    },
+    {
+      "id": "q20",
+      "lessonId": "g10",
+      "front": "2021 · Question 20",
+      "frontImage": {
+        "src": "/paper-1/2021_q20_q.webp",
+        "width": 690,
+        "height": 108
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q20_a.webp",
+        "width": 707,
+        "height": 856,
+        "alt": "Marking scheme for question 20"
+      }
+    },
+    {
+      "id": "q21",
+      "lessonId": "g10",
+      "front": "2021 · Question 21",
+      "frontImage": {
+        "src": "/paper-1/2021_q21_q.webp",
+        "width": 708,
+        "height": 183
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q21_a.webp",
+        "width": 712,
+        "height": 679,
+        "alt": "Marking scheme for question 21"
+      }
+    },
+    {
+      "id": "q22",
+      "lessonId": "g9",
+      "front": "2021 · Question 22",
+      "frontImage": {
+        "src": "/paper-1/2021_q22_q.webp",
+        "width": 708,
+        "height": 169
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q22_a.webp",
+        "width": 462,
+        "height": 286,
+        "alt": "Marking scheme for question 22"
+      }
+    },
+    {
+      "id": "q23",
+      "lessonId": "g10",
+      "front": "2021 · Question 23",
+      "frontImage": {
+        "src": "/paper-1/2021_q23_q.webp",
+        "width": 709,
+        "height": 183
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q23_a.webp",
+        "width": 455,
+        "height": 286,
+        "alt": "Marking scheme for question 23"
+      }
+    },
+    {
+      "id": "q24",
+      "lessonId": "g9",
+      "front": "2021 · Question 24",
+      "frontImage": {
+        "src": "/paper-1/2021_q24_q.webp",
+        "width": 711,
+        "height": 196
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q24_a.webp",
+        "width": 530,
+        "height": 551,
+        "alt": "Marking scheme for question 24"
+      }
+    },
+    {
+      "id": "q25",
+      "lessonId": "g10",
+      "front": "2021 · Question 25",
+      "frontImage": {
+        "src": "/paper-1/2021_q25_q.webp",
+        "width": 708,
+        "height": 134
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q25_a.webp",
+        "width": 506,
+        "height": 604,
+        "alt": "Marking scheme for question 25"
+      }
+    },
+    {
+      "id": "q26",
+      "lessonId": "g9",
+      "front": "2021 · Question 26",
+      "frontImage": {
+        "src": "/paper-1/2021_q26_q.webp",
+        "width": 709,
+        "height": 169
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q26_a.webp",
+        "width": 555,
+        "height": 234,
+        "alt": "Marking scheme for question 26"
+      }
+    },
+    {
+      "id": "q27",
+      "lessonId": "g9",
+      "front": "2021 · Question 27",
+      "frontImage": {
+        "src": "/paper-1/2021_q27_q.webp",
+        "width": 710,
+        "height": 348
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q27_a.webp",
+        "width": 636,
+        "height": 132,
+        "alt": "Marking scheme for question 27"
+      }
+    },
+    {
+      "id": "q28",
+      "lessonId": "g10",
+      "front": "2021 · Question 28",
+      "frontImage": {
+        "src": "/paper-1/2021_q28_q.webp",
+        "width": 708,
+        "height": 128
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q28_a.webp",
+        "width": 611,
+        "height": 551,
+        "alt": "Marking scheme for question 28"
+      }
+    },
+    {
+      "id": "q29",
+      "lessonId": "g9",
+      "front": "2021 · Question 29",
+      "frontImage": {
+        "src": "/paper-1/2021_q29_q.webp",
+        "width": 709,
+        "height": 252
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q29_a.webp",
+        "width": 707,
+        "height": 276,
+        "alt": "Marking scheme for question 29"
+      }
+    },
+    {
+      "id": "q30",
+      "lessonId": "g9",
+      "front": "2021 · Question 30",
+      "frontImage": {
+        "src": "/paper-1/2021_q30_q.webp",
+        "width": 701,
+        "height": 93
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2021_q30_a.webp",
+        "width": 332,
+        "height": 205,
+        "alt": "Marking scheme for question 30"
+      }
+    }
+  ]
+}

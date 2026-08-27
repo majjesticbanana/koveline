@@ -145,31 +145,29 @@ to zero, because the viewport never opted in. `viewportFit: "cover"` in
 inset so the installed app's translucent status bar has a background under it.
 **Worth a look on a real iPhone, installed and in landscape** — it is the one
 change here that cannot be checked in a desktop browser.
+## Paper I
 
-## Paper I revision (`/paper-1`)
+180 questions — the 2020 specimen plus 2021–2025 — as a normal course at
+`content/islam/paper-1/`, one unit per paper, grouped on the home page under
+the `papers` collection. Images in `public/paper-1/` (360 webp, 5.7 MB).
 
-180 image cards — the 2020 specimen plus the 2021–2025 papers, 30 questions
-each, with the marking scheme for every one. Assets in `public/paper-1/`
-(360 webp, 5.7 MB), metadata in `content/paper-1.json`.
+**It is a real deck, not a parallel system.** The first version was a
+standalone route with its own three-way rating and its own progress key, and
+it felt off precisely because it was: two marks instead of three, no
+Review-wrong, no navigator, no completion screen, no account sync. Rather
+than rebuild those, the schema gained what it was missing:
 
-**Why it does not go through the content schema.** These questions are crops of
-the real papers, not text. `Flashcard.front` has no representation for an image,
-and inventing one would mean touching the schema, the loader, the validator and
-the deck engine for a single resource type. It is a standalone route reading its
-own JSON instead, so it cannot break the decks.
+- `RichBody` has an `image` node (`src`, `width`, `height`, `alt`)
+- `Flashcard` has optional `frontImage`; `front` stays as the accessible label
 
-**What it shares with the decks:** identity scoping. Ratings live under
-`koveline:v3:u:{studentId}:paper1` when signed in and `koveline:v3:paper1` when
-not, mirroring `lib/storage.ts`, so two students on one laptop never see each
-other's marks and signing in swaps the bucket. It re-reads on identity change.
+So Paper I now inherits everything the unit decks have — In order / Random,
+Review wrong, Reset, the question navigator, keyboard shortcuts, the sticky
+mobile bar, the completion card, identity-scoped progress and account sync —
+with no deck code special-cased for it. Lessons are the grade split within
+each paper, so the lesson filter selects Grade 9 or Grade 10 questions.
 
-**What it does not share:** the ratings are three-way (Don't know / Unsure /
-Know) rather than the decks' correct/wrong, so they do not feed "Review wrong"
-or the custom test pool, and they are not synced to the account through
-`/api/progress`. Both are doable — the sync would need a resource key and an
-entry in `progress-sync.ts`; the pooling would need the three states collapsing
-to two. Neither is wired yet.
-
-The scans are black on white, so they render on a cream panel (`.p1-paper`)
-rather than the dark ground — the same split `/textbooks` uses, which keeps
-them readable in all four themes.
+**Scans on phones.** `components/deck/scan.tsx` renders them on a paper panel
+and opens a full-screen viewer on tap. The viewer sets `touch-action:
+pinch-zoom` and lets the browser do the zooming rather than a hand-rolled
+transform — more reliable, and it inherits the platform's own gestures. Esc
+closes it, captured so the deck underneath does not also act on the key.

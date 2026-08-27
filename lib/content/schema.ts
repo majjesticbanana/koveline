@@ -34,6 +34,13 @@ export const RichBody: z.ZodType<RichBodyT> = z.lazy(() =>
       lang: Lang.optional(),
     }),
     z.object({
+      kind: z.literal("image"),
+      src: z.string().min(1),
+      width: z.number().int().positive(),
+      height: z.number().int().positive(),
+      alt: z.string().min(1),
+    }),
+    z.object({
       kind: z.literal("sections"),
       sections: z
         .array(
@@ -49,6 +56,7 @@ export const RichBody: z.ZodType<RichBodyT> = z.lazy(() =>
 
 export type RichBodyT =
   | { kind: "text"; value: string; lang?: "dv" | "en" | "ar" }
+  | { kind: "image"; src: string; width: number; height: number; alt: string }
   | { kind: "list"; items: string[]; ordered: boolean; lang?: "dv" | "en" | "ar" }
   | { kind: "sections"; sections: { heading: string; body: RichBodyT }[] };
 
@@ -152,6 +160,17 @@ export const Flashcard = z.object({
    */
   context: z.string().optional(),
   front: z.string().min(1),
+  /**
+   * When the question is a scan of the real paper rather than typed text,
+   * `front` stays as the accessible label and this carries the image.
+   */
+  frontImage: z
+    .object({
+      src: z.string().min(1),
+      width: z.number().int().positive(),
+      height: z.number().int().positive(),
+    })
+    .optional(),
   back: RichBody,
   /** Optional per-card language override. */
   lang: Lang.optional(),

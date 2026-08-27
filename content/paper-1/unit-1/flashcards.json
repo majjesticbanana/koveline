@@ -1,0 +1,520 @@
+{
+  "type": "flashcards",
+  "id": "flashcards",
+  "title": "Flashcards",
+  "description": "30 questions with the marking scheme.",
+  "order": 0,
+  "draft": false,
+  "cards": [
+    {
+      "id": "q01",
+      "lessonId": "g9",
+      "front": "2020 Specimen · Question 1",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q01_q.webp",
+        "width": 708,
+        "height": 152
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q01_a.webp",
+        "width": 470,
+        "height": 102,
+        "alt": "Marking scheme for question 1"
+      }
+    },
+    {
+      "id": "q02",
+      "lessonId": "g10",
+      "front": "2020 Specimen · Question 2",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q02_q.webp",
+        "width": 708,
+        "height": 152
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q02_a.webp",
+        "width": 177,
+        "height": 102,
+        "alt": "Marking scheme for question 2"
+      }
+    },
+    {
+      "id": "q03",
+      "lessonId": "g9",
+      "front": "2020 Specimen · Question 3",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q03_q.webp",
+        "width": 708,
+        "height": 151
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q03_a.webp",
+        "width": 646,
+        "height": 132,
+        "alt": "Marking scheme for question 3"
+      }
+    },
+    {
+      "id": "q04",
+      "lessonId": "g10",
+      "front": "2020 Specimen · Question 4",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q04_q.webp",
+        "width": 708,
+        "height": 151
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q04_a.webp",
+        "width": 570,
+        "height": 102,
+        "alt": "Marking scheme for question 4"
+      }
+    },
+    {
+      "id": "q05",
+      "lessonId": "g9",
+      "front": "2020 Specimen · Question 5",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q05_q.webp",
+        "width": 708,
+        "height": 186
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q05_a.webp",
+        "width": 482,
+        "height": 102,
+        "alt": "Marking scheme for question 5"
+      }
+    },
+    {
+      "id": "q06",
+      "lessonId": "g9",
+      "front": "2020 Specimen · Question 6",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q06_q.webp",
+        "width": 708,
+        "height": 151
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q06_a.webp",
+        "width": 410,
+        "height": 102,
+        "alt": "Marking scheme for question 6"
+      }
+    },
+    {
+      "id": "q07",
+      "lessonId": "g9",
+      "front": "2020 Specimen · Question 7",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q07_q.webp",
+        "width": 708,
+        "height": 151
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q07_a.webp",
+        "width": 699,
+        "height": 132,
+        "alt": "Marking scheme for question 7"
+      }
+    },
+    {
+      "id": "q08",
+      "lessonId": "g10",
+      "front": "2020 Specimen · Question 8",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q08_q.webp",
+        "width": 708,
+        "height": 151
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q08_a.webp",
+        "width": 650,
+        "height": 136,
+        "alt": "Marking scheme for question 8"
+      }
+    },
+    {
+      "id": "q09",
+      "lessonId": "g10",
+      "front": "2020 Specimen · Question 9",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q09_q.webp",
+        "width": 708,
+        "height": 151
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q09_a.webp",
+        "width": 669,
+        "height": 136,
+        "alt": "Marking scheme for question 9"
+      }
+    },
+    {
+      "id": "q10",
+      "lessonId": "g9",
+      "front": "2020 Specimen · Question 10",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q10_q.webp",
+        "width": 708,
+        "height": 226
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q10_a.webp",
+        "width": 318,
+        "height": 102,
+        "alt": "Marking scheme for question 10"
+      }
+    },
+    {
+      "id": "q11",
+      "lessonId": "g10",
+      "front": "2020 Specimen · Question 11",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q11_q.webp",
+        "width": 708,
+        "height": 255
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q11_a.webp",
+        "width": 326,
+        "height": 101,
+        "alt": "Marking scheme for question 11"
+      }
+    },
+    {
+      "id": "q12",
+      "lessonId": "g9",
+      "front": "2020 Specimen · Question 12",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q12_q.webp",
+        "width": 708,
+        "height": 220
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q12_a.webp",
+        "width": 412,
+        "height": 102,
+        "alt": "Marking scheme for question 12"
+      }
+    },
+    {
+      "id": "q13",
+      "lessonId": "g10",
+      "front": "2020 Specimen · Question 13",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q13_q.webp",
+        "width": 708,
+        "height": 186
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q13_a.webp",
+        "width": 350,
+        "height": 102,
+        "alt": "Marking scheme for question 13"
+      }
+    },
+    {
+      "id": "q14",
+      "lessonId": "g9",
+      "front": "2020 Specimen · Question 14",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q14_q.webp",
+        "width": 708,
+        "height": 186
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q14_a.webp",
+        "width": 295,
+        "height": 102,
+        "alt": "Marking scheme for question 14"
+      }
+    },
+    {
+      "id": "q15",
+      "lessonId": "g9",
+      "front": "2020 Specimen · Question 15",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q15_q.webp",
+        "width": 708,
+        "height": 147
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q15_a.webp",
+        "width": 561,
+        "height": 103,
+        "alt": "Marking scheme for question 15"
+      }
+    },
+    {
+      "id": "q16",
+      "lessonId": "g10",
+      "front": "2020 Specimen · Question 16",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q16_q.webp",
+        "width": 708,
+        "height": 151
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q16_a.webp",
+        "width": 588,
+        "height": 102,
+        "alt": "Marking scheme for question 16"
+      }
+    },
+    {
+      "id": "q17",
+      "lessonId": "g10",
+      "front": "2020 Specimen · Question 17",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q17_q.webp",
+        "width": 708,
+        "height": 151
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q17_a.webp",
+        "width": 474,
+        "height": 102,
+        "alt": "Marking scheme for question 17"
+      }
+    },
+    {
+      "id": "q18",
+      "lessonId": "g9",
+      "front": "2020 Specimen · Question 18",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q18_q.webp",
+        "width": 708,
+        "height": 151
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q18_a.webp",
+        "width": 538,
+        "height": 102,
+        "alt": "Marking scheme for question 18"
+      }
+    },
+    {
+      "id": "q19",
+      "lessonId": "g9",
+      "front": "2020 Specimen · Question 19",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q19_q.webp",
+        "width": 708,
+        "height": 151
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q19_a.webp",
+        "width": 687,
+        "height": 102,
+        "alt": "Marking scheme for question 19"
+      }
+    },
+    {
+      "id": "q20",
+      "lessonId": "g10",
+      "front": "2020 Specimen · Question 20",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q20_q.webp",
+        "width": 708,
+        "height": 151
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q20_a.webp",
+        "width": 509,
+        "height": 102,
+        "alt": "Marking scheme for question 20"
+      }
+    },
+    {
+      "id": "q21",
+      "lessonId": "g10",
+      "front": "2020 Specimen · Question 21",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q21_q.webp",
+        "width": 708,
+        "height": 226
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q21_a.webp",
+        "width": 441,
+        "height": 102,
+        "alt": "Marking scheme for question 21"
+      }
+    },
+    {
+      "id": "q22",
+      "lessonId": "g9",
+      "front": "2020 Specimen · Question 22",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q22_q.webp",
+        "width": 711,
+        "height": 225
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q22_a.webp",
+        "width": 377,
+        "height": 102,
+        "alt": "Marking scheme for question 22"
+      }
+    },
+    {
+      "id": "q23",
+      "lessonId": "g10",
+      "front": "2020 Specimen · Question 23",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q23_q.webp",
+        "width": 709,
+        "height": 188
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q23_a.webp",
+        "width": 338,
+        "height": 102,
+        "alt": "Marking scheme for question 23"
+      }
+    },
+    {
+      "id": "q24",
+      "lessonId": "g9",
+      "front": "2020 Specimen · Question 24",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q24_q.webp",
+        "width": 709,
+        "height": 186
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q24_a.webp",
+        "width": 334,
+        "height": 102,
+        "alt": "Marking scheme for question 24"
+      }
+    },
+    {
+      "id": "q25",
+      "lessonId": "g10",
+      "front": "2020 Specimen · Question 25",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q25_q.webp",
+        "width": 709,
+        "height": 187
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q25_a.webp",
+        "width": 402,
+        "height": 102,
+        "alt": "Marking scheme for question 25"
+      }
+    },
+    {
+      "id": "q26",
+      "lessonId": "g9",
+      "front": "2020 Specimen · Question 26",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q26_q.webp",
+        "width": 708,
+        "height": 191
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q26_a.webp",
+        "width": 410,
+        "height": 102,
+        "alt": "Marking scheme for question 26"
+      }
+    },
+    {
+      "id": "q27",
+      "lessonId": "g10",
+      "front": "2020 Specimen · Question 27",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q27_q.webp",
+        "width": 708,
+        "height": 197
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q27_a.webp",
+        "width": 316,
+        "height": 102,
+        "alt": "Marking scheme for question 27"
+      }
+    },
+    {
+      "id": "q28",
+      "lessonId": "g9",
+      "front": "2020 Specimen · Question 28",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q28_q.webp",
+        "width": 708,
+        "height": 152
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q28_a.webp",
+        "width": 696,
+        "height": 134,
+        "alt": "Marking scheme for question 28"
+      }
+    },
+    {
+      "id": "q29",
+      "lessonId": "g10",
+      "front": "2020 Specimen · Question 29",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q29_q.webp",
+        "width": 708,
+        "height": 151
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q29_a.webp",
+        "width": 448,
+        "height": 102,
+        "alt": "Marking scheme for question 29"
+      }
+    },
+    {
+      "id": "q30",
+      "lessonId": "g9",
+      "front": "2020 Specimen · Question 30",
+      "frontImage": {
+        "src": "/paper-1/2020_specimen_q30_q.webp",
+        "width": 708,
+        "height": 151
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-1/2020_specimen_q30_a.webp",
+        "width": 505,
+        "height": 102,
+        "alt": "Marking scheme for question 30"
+      }
+    }
+  ]
+}
