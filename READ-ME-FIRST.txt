@@ -1,26 +1,39 @@
-KOVELINE — PAPER I UPDATE
+KOVELINE — PAPER I v3
 
-Drag the four folders (app, components, content, public) plus NOTES.md
-into your koveline folder and choose Merge / Replace when asked.
+If you installed the FIRST Paper I version, delete these — they are gone now:
+    app/paper-1/            (whole folder)
+    components/paper-one.tsx
+    content/paper-1.json
+and revert the Explore row for "/paper-1" in components/navbar.tsx and the
+"/paper-1" line in app/sitemap.ts. Both are handled automatically now.
 
-Nothing here deletes anything. node_modules, .next, .git and
-public/textbooks are untouched — they are not in this folder at all.
+IMPORTANT: paper-1 goes in content/islam/, NOT content/.
+Correct: content/islam/paper-1/
+Wrong:   content/paper-1/      <- this is what caused the subject.json error
 
-Files that get overwritten:
-  app/globals.css          Paper I styles appended at the end
-  app/sitemap.ts           one new line
-  components/navbar.tsx    the Explore menu row
-  content/site-copy.json   two new nav strings
-  NOTES.md                 documentation
+Drag these into your koveline folder and Merge/Replace:
 
-Files that are new:
-  app/paper-1/page.tsx
-  components/paper-one.tsx
-  content/paper-1.json
-  public/paper-1/          360 images, 5.7 MB
+    app/[subject]/[course]/page.tsx   <- the paper index
+    app/globals.css
+    components/deck/scan.tsx          <- NEW
+    components/deck/rich-body.tsx
+    components/deck/engine.tsx
+    components/paper-list.tsx         <- NEW
+    components/home.tsx
+    lib/content/schema.ts
+    content/islam/paper-1/
+    public/paper-1/
+    NOTES.md
 
-package-lock.json is deliberately NOT included — keep yours.
+Then:  npm run validate   (expect 907 items, 0 errors)
+       npm run build
 
-Then:
-  npm run build
-  open /paper-1
+WHAT CHANGED IN v3
+  - Papers run newest first: 2025, 2024, 2023, 2022, 2021, 2020 Specimen
+  - New paper index at /islam/paper-1 with sorting
+    (Newest first / Oldest first / Most questions)
+    The home page card now opens this instead of jumping into the mixed deck.
+  - The zoom viewer opens scrolled to the RIGHT edge, since Dhivehi starts
+    there — you no longer land on the end of the line.
+  - Syllabus courses (grade-9, grade-10) still redirect to the home page
+    exactly as before; only paper courses get an index.

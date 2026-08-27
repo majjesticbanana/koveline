@@ -2514,3 +2514,38 @@ button:active, a[role="button"]:active { transform: scale(.985); }
   position: absolute; bottom: calc(14px + env(safe-area-inset-bottom));
   left: 0; right: 0; text-align: center; color: #b19489; font-size: .76rem;
 }
+
+/* ---- Paper index ---- */
+.paper-back { display: inline-flex; align-items: center; gap: .4rem; margin-bottom: 1.2rem;
+  color: var(--muted); font-size: .84rem; font-weight: 700; }
+.paper-back:hover { color: var(--text); }
+.paper-intro { margin-bottom: 1.5rem; }
+.paper-kicker { color: var(--ember-bright); font-size: .68rem; font-weight: 800;
+  letter-spacing: .16em; text-transform: uppercase; }
+.paper-intro h1 { margin-top: .5rem; font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 800; letter-spacing: -.02em; }
+.paper-sub { margin-top: .5rem; color: var(--text-2); font-size: .95rem; }
+.paper-all { display: inline-block; margin-top: 1rem; padding: .55rem 1.1rem;
+  border: 1px solid rgba(198,99,64,.5); border-radius: 10px;
+  color: var(--ember-bright); font-size: .88rem; font-weight: 800; }
+.paper-all:hover { background: var(--ember); color: var(--ember-ink, #1a0b07); border-color: var(--ember); }
+
+.paper-sort { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 12px; }
+.paper-sort span { color: var(--muted); font-size: .62rem; font-weight: 800;
+  letter-spacing: .12em; text-transform: uppercase; margin-inline-end: 2px; }
+.paper-sort button { min-height: 34px; padding: .3rem .75rem; border: 1px solid var(--line);
+  border-radius: 8px; background: var(--surface); color: var(--text-2);
+  font-size: .78rem; font-weight: 800; transition: background 150ms ease, color 150ms ease; }
+.paper-sort button:hover { background: var(--hover); }
+.paper-sort button.is-on { border-color: rgba(198,99,64,.55);
+  background: rgba(198,99,64,.13); color: var(--ember-bright); }
+
+.paper-grid { display: grid; gap: 8px; }
+@media (min-width: 620px) { .paper-grid { grid-template-columns: 1fr 1fr; } }
+.paper-card { display: flex; align-items: center; gap: 12px;
+  border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
+  padding: 14px 16px; transition: border-color 160ms ease, background 160ms ease; }
+.paper-card:hover { border-color: var(--line-strong); background: var(--hover); }
+.paper-year { font-family: var(--font-display); font-size: 1.05rem; font-weight: 800; }
+.paper-meta { color: var(--muted); font-size: .78rem; font-variant-numeric: tabular-nums; }
+.paper-arrow { margin-inline-start: auto; flex-shrink: 0; color: var(--ember); }

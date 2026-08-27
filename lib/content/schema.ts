@@ -129,6 +129,8 @@ export const Unit = z.object({
   description: z.string().optional(),
   /** Target-Test topic tags. Declared now, consumed later. */
   targets: z.array(Slug).optional(),
+  /** Exam year, where a unit is a past paper rather than a syllabus unit. */
+  year: z.string().optional(),
   lessons: z.array(Lesson).min(1),
   draft: z.boolean().default(false),
 });

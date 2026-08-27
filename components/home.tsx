@@ -303,7 +303,7 @@ export function Home({
                   return ready ? (
                     <Link
                       key={c.courseId}
-                      href={c.mixedHref}
+                      href={`/${c.subjectId}/${c.courseId}`}
                       className="group rounded-card border border-line bg-surface px-5 py-4 transition-colors hover:border-line-strong hover:bg-hover"
                     >
                       {inner}

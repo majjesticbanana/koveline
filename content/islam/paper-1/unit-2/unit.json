@@ -2,9 +2,10 @@
   "id": "unit-2",
   "number": 2,
   "icon": "📄",
-  "title": "2021",
-  "titleEnglish": "2021",
-  "description": "30 questions from the 2021 paper.",
+  "title": "2024",
+  "titleEnglish": "2024",
+  "description": "30 questions from the 2024 paper.",
+  "year": "2024",
   "lessons": [
     {
       "id": "g10",

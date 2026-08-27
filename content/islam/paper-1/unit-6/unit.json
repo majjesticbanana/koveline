@@ -2,9 +2,10 @@
   "id": "unit-6",
   "number": 6,
   "icon": "📄",
-  "title": "2025",
-  "titleEnglish": "2025",
-  "description": "30 questions from the 2025 paper.",
+  "title": "2020 Specimen",
+  "titleEnglish": "2020 Specimen",
+  "description": "30 questions from the 2020 Specimen paper.",
+  "year": "2020",
   "lessons": [
     {
       "id": "g10",

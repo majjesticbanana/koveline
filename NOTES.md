@@ -171,3 +171,13 @@ and opens a full-screen viewer on tap. The viewer sets `touch-action:
 pinch-zoom` and lets the browser do the zooming rather than a hand-rolled
 transform — more reliable, and it inherits the platform's own gestures. Esc
 closes it, captured so the deck underneath does not also act on the key.
+
+**Order and index.** Papers are stored newest first (unit-1 = 2025), and a
+course in the `papers` collection now renders a real index at
+`/{subject}/{course}` listing every paper with Newest / Oldest / Most-questions
+sorting. Syllabus courses still redirect to the home page — that branch is
+unchanged, so grade-9 and grade-10 behave exactly as before.
+
+**Zoom starts at the right.** The viewer sets `scrollLeft = scrollWidth` on
+open, because Dhivehi begins at the right edge; opening at the left showed the
+end of the line first.

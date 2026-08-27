@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { X, ZoomIn } from "lucide-react";
 
 /**
@@ -24,9 +24,14 @@ export function Scan({
   className?: string;
 }) {
   const [open, setOpen] = useState(false);
+  const panRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!open) return;
+    /* Dhivehi starts at the right, so open the viewer scrolled there rather
+       than at the left edge, which would show the end of the line first. */
+    const el = panRef.current;
+    if (el) el.scrollLeft = el.scrollWidth;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => {
@@ -59,7 +64,7 @@ export function Scan({
           <button type="button" className="scan-close" onClick={() => setOpen(false)} aria-label="Close">
             <X className="h-5 w-5" aria-hidden />
           </button>
-          <div className="scan-viewer-inner">
+          <div className="scan-viewer-inner" ref={panRef}>
             <img src={src} width={width} height={height} alt={alt} />
           </div>
           <p className="scan-hint">Pinch or scroll to zoom · tap outside to close</p>
