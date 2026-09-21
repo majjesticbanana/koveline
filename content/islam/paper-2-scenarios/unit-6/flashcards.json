@@ -1,0 +1,112 @@
+{
+  "type": "flashcards",
+  "id": "flashcards",
+  "title": "Scenario cards",
+  "description": "Questions 20–25 with the complete original marking-scheme material.",
+  "order": 0,
+  "draft": false,
+  "cards": [
+    {
+      "id": "q20",
+      "lessonId": "scenarios",
+      "front": "2020 Specimen · Paper II scenario · Question 20",
+      "frontImage": {
+        "src": "/paper-2/2020_q20_q.webp",
+        "width": 1128,
+        "height": 510
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q20_a.webp",
+        "width": 1128,
+        "height": 1190,
+        "alt": "Marking scheme for 2020 Specimen Paper II scenario question 20"
+      }
+    },
+    {
+      "id": "q21",
+      "lessonId": "scenarios",
+      "front": "2020 Specimen · Paper II scenario · Question 21",
+      "frontImage": {
+        "src": "/paper-2/2020_q21_q.webp",
+        "width": 1128,
+        "height": 376
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q21_a.webp",
+        "width": 1128,
+        "height": 1339,
+        "alt": "Marking scheme for 2020 Specimen Paper II scenario question 21"
+      }
+    },
+    {
+      "id": "q22",
+      "lessonId": "scenarios",
+      "front": "2020 Specimen · Paper II scenario · Question 22",
+      "frontImage": {
+        "src": "/paper-2/2020_q22_q.webp",
+        "width": 1128,
+        "height": 331
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q22_a.webp",
+        "width": 1128,
+        "height": 1456,
+        "alt": "Marking scheme for 2020 Specimen Paper II scenario question 22"
+      }
+    },
+    {
+      "id": "q23",
+      "lessonId": "scenarios",
+      "front": "2020 Specimen · Paper II scenario · Question 23",
+      "frontImage": {
+        "src": "/paper-2/2020_q23_q.webp",
+        "width": 1128,
+        "height": 532
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q23_a.webp",
+        "width": 1128,
+        "height": 1274,
+        "alt": "Marking scheme for 2020 Specimen Paper II scenario question 23"
+      }
+    },
+    {
+      "id": "q24",
+      "lessonId": "scenarios",
+      "front": "2020 Specimen · Paper II scenario · Question 24",
+      "frontImage": {
+        "src": "/paper-2/2020_q24_q.webp",
+        "width": 1128,
+        "height": 634
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q24_a.webp",
+        "width": 1128,
+        "height": 1339,
+        "alt": "Marking scheme for 2020 Specimen Paper II scenario question 24"
+      }
+    },
+    {
+      "id": "q25",
+      "lessonId": "scenarios",
+      "front": "2020 Specimen · Paper II scenario · Question 25",
+      "frontImage": {
+        "src": "/paper-2/2020_q25_q.webp",
+        "width": 1128,
+        "height": 536
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q25_a.webp",
+        "width": 1128,
+        "height": 1339,
+        "alt": "Marking scheme for 2020 Specimen Paper II scenario question 25"
+      }
+    }
+  ]
+}

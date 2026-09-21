@@ -9,9 +9,9 @@
   },
   "metadata": {
     "siteTitle": "Koveline",
-    "description": "722 questions across Grade 9 and Grade 10 Islam. Reveal, mark yourself, and review what you missed.",
-    "openGraphDescription": "Grade 9 and Grade 10 Islam questions, from the Maldives.",
-    "manifestDescription": "Grade 9 and Grade 10 Islam questions, from the Maldives."
+    "description": "Grade 9 and Grade 10 Islam revision, past papers, source questions, and self-marking study decks.",
+    "openGraphDescription": "Grade 9 and Grade 10 Islam revision and past-paper practice, from the Maldives.",
+    "manifestDescription": "Grade 9 and Grade 10 Islam revision and past-paper practice, from the Maldives."
   },
   "home": {
     "hero": {
@@ -52,7 +52,13 @@
     "adminTitle": "Admin",
     "signOutTitle": "Sign out",
     "paperOneTitle": "Paper I revision",
-    "paperOneBody": "180 questions from the real papers."
+    "paperOneBody": "180 questions from the real papers.",
+    "paperTwoTitle": "Paper II revision",
+    "paperTwoBody": "150 questions from 2020–2025.",
+    "paperTwoScenariosTitle": "Paper II scenarios",
+    "paperTwoScenariosBody": "Questions 20–25 across all six papers.",
+    "deyhaRevisionTitle": "Deyha revision",
+    "deyhaRevisionBody": "Grade 9 and 10 source revision banks."
   },
   "customTest": {
     "metaTitle": "Custom test",

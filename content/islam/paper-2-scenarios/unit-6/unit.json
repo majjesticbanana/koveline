@@ -1,0 +1,22 @@
+{
+  "id": "unit-6",
+  "number": 6,
+  "icon": "🧩",
+  "title": "2020 Specimen",
+  "titleEnglish": "2020 Specimen",
+  "description": "Questions 20–25 from the 2020 Specimen Paper II paper.",
+  "year": "2020",
+  "lessons": [
+    {
+      "id": "scenarios",
+      "number": 1,
+      "title": "ސިނޭރިއޯ ސުވާލުތައް",
+      "titleEnglish": "Scenario questions"
+    }
+  ],
+  "targets": [
+    "paper-2",
+    "scenarios"
+  ],
+  "draft": false
+}

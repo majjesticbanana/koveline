@@ -1,0 +1,22 @@
+{
+  "id": "unit-3",
+  "number": 3,
+  "icon": "🧩",
+  "title": "2023",
+  "titleEnglish": "2023",
+  "description": "Questions 20–25 from the 2023 Paper II paper.",
+  "year": "2023",
+  "lessons": [
+    {
+      "id": "scenarios",
+      "number": 1,
+      "title": "ސިނޭރިއޯ ސުވާލުތައް",
+      "titleEnglish": "Scenario questions"
+    }
+  ],
+  "targets": [
+    "paper-2",
+    "scenarios"
+  ],
+  "draft": false
+}

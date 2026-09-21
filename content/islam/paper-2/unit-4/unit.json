@@ -1,0 +1,27 @@
+{
+  "id": "unit-4",
+  "number": 4,
+  "icon": "📄",
+  "title": "2022",
+  "titleEnglish": "2022",
+  "description": "25 questions from the 2022 Paper II marking scheme.",
+  "year": "2022",
+  "lessons": [
+    {
+      "id": "structured",
+      "number": 1,
+      "title": "ސްޓްރަކްޗަރޑް ސުވާލުތައް",
+      "titleEnglish": "Structured questions"
+    },
+    {
+      "id": "scenarios",
+      "number": 2,
+      "title": "ސިނޭރިއޯ ސުވާލުތައް",
+      "titleEnglish": "Scenario questions"
+    }
+  ],
+  "targets": [
+    "paper-2"
+  ],
+  "draft": false
+}

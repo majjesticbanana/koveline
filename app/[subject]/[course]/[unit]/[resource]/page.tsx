@@ -31,9 +31,10 @@ export default async function ResourcePage({ params }: { params: Params }) {
   const { subject, course, unit, resource } = await params;
   const e = getUnitEntry(subject, course, unit, resource);
   if (!e) notFound();
+  const hasScans = e.flashcards.cards.some((card) => Boolean(card.frontImage));
 
   return (
-    <main className="resource-page mx-auto max-w-[720px] px-[22px] pb-16">
+    <main className={`resource-page mx-auto ${hasScans ? "max-w-[860px]" : "max-w-[720px]"} px-[22px] pb-16`}>
       <div className="resource-breadcrumb flex items-center gap-3.5 pb-1 pt-6">
         <Link
           href="/#subjects"

@@ -103,11 +103,32 @@ export function Navbar() {
                     <span>{siteCopy.navigation.customTestBody}</span>
                   </div>
                 </Link>
-                <Link href="/paper-1" role="menuitem" className="nav-resource-row" onClick={() => setOpen(false)}>
+                <Link href="/islam/paper-1" role="menuitem" className="nav-resource-row" onClick={() => setOpen(false)}>
                   <span className="nav-dropdown-icon"><FileText className="h-4 w-4" aria-hidden /></span>
                   <div>
                     <strong>{siteCopy.navigation.paperOneTitle}</strong>
                     <span>{siteCopy.navigation.paperOneBody}</span>
+                  </div>
+                </Link>
+                <Link href="/islam/paper-2" role="menuitem" className="nav-resource-row" onClick={() => setOpen(false)}>
+                  <span className="nav-dropdown-icon"><FileText className="h-4 w-4" aria-hidden /></span>
+                  <div>
+                    <strong>{siteCopy.navigation.paperTwoTitle}</strong>
+                    <span>{siteCopy.navigation.paperTwoBody}</span>
+                  </div>
+                </Link>
+                <Link href="/islam/paper-2-scenarios" role="menuitem" className="nav-resource-row" onClick={() => setOpen(false)}>
+                  <span className="nav-dropdown-icon"><ListChecks className="h-4 w-4" aria-hidden /></span>
+                  <div>
+                    <strong>{siteCopy.navigation.paperTwoScenariosTitle}</strong>
+                    <span>{siteCopy.navigation.paperTwoScenariosBody}</span>
+                  </div>
+                </Link>
+                <Link href="/#collection-deyha-daleels" role="menuitem" className="nav-resource-row" onClick={() => setOpen(false)}>
+                  <span className="nav-dropdown-icon"><BookMarked className="h-4 w-4" aria-hidden /></span>
+                  <div>
+                    <strong>{siteCopy.navigation.deyhaRevisionTitle}</strong>
+                    <span>{siteCopy.navigation.deyhaRevisionBody}</span>
                   </div>
                 </Link>
                 <Link href="/textbooks" role="menuitem" className="nav-resource-row" onClick={() => setOpen(false)}>

@@ -1,0 +1,1472 @@
+{
+  "type": "flashcards",
+  "id": "flashcards",
+  "title": "Revision cards",
+  "description": "86 exact source questions and answer points.",
+  "order": 0,
+  "draft": false,
+  "cards": [
+    {
+      "id": "s1-q01",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 1",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q01_q.webp",
+        "width": 1060,
+        "height": 305
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q01_a.webp",
+        "width": 1060,
+        "height": 229,
+        "alt": "Answer points for Grade 10 Section 1 question 1"
+      }
+    },
+    {
+      "id": "s1-q02",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 2",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q02_q.webp",
+        "width": 1060,
+        "height": 89
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q02_a.webp",
+        "width": 1060,
+        "height": 185,
+        "alt": "Answer points for Grade 10 Section 1 question 2"
+      }
+    },
+    {
+      "id": "s1-q03",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 3",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q03_q.webp",
+        "width": 1060,
+        "height": 96
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q03_a.webp",
+        "width": 1060,
+        "height": 182,
+        "alt": "Answer points for Grade 10 Section 1 question 3"
+      }
+    },
+    {
+      "id": "s1-q04",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 4",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q04_q.webp",
+        "width": 1060,
+        "height": 135
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q04_a.webp",
+        "width": 1060,
+        "height": 373,
+        "alt": "Answer points for Grade 10 Section 1 question 4"
+      }
+    },
+    {
+      "id": "s1-q05",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 5",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q05_q.webp",
+        "width": 1060,
+        "height": 146
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q05_a.webp",
+        "width": 1060,
+        "height": 286,
+        "alt": "Answer points for Grade 10 Section 1 question 5"
+      }
+    },
+    {
+      "id": "s1-q06",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 6",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q06_q.webp",
+        "width": 1060,
+        "height": 132
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q06_a.webp",
+        "width": 1060,
+        "height": 245,
+        "alt": "Answer points for Grade 10 Section 1 question 6"
+      }
+    },
+    {
+      "id": "s1-q07",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 7",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q07_q.webp",
+        "width": 1060,
+        "height": 147
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q07_a.webp",
+        "width": 1060,
+        "height": 277,
+        "alt": "Answer points for Grade 10 Section 1 question 7"
+      }
+    },
+    {
+      "id": "s1-q08",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 8",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q08_q.webp",
+        "width": 1060,
+        "height": 99
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q08_a.webp",
+        "width": 1060,
+        "height": 286,
+        "alt": "Answer points for Grade 10 Section 1 question 8"
+      }
+    },
+    {
+      "id": "s1-q09",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 9",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q09_q.webp",
+        "width": 1060,
+        "height": 146
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q09_a.webp",
+        "width": 1060,
+        "height": 184,
+        "alt": "Answer points for Grade 10 Section 1 question 9"
+      }
+    },
+    {
+      "id": "s1-q10",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 10",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q10_q.webp",
+        "width": 1060,
+        "height": 195
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q10_a.webp",
+        "width": 1060,
+        "height": 231,
+        "alt": "Answer points for Grade 10 Section 1 question 10"
+      }
+    },
+    {
+      "id": "s1-q11",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 11",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q11_q.webp",
+        "width": 1060,
+        "height": 136
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q11_a.webp",
+        "width": 1060,
+        "height": 239,
+        "alt": "Answer points for Grade 10 Section 1 question 11"
+      }
+    },
+    {
+      "id": "s1-q12",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 12",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q12_q.webp",
+        "width": 1060,
+        "height": 146
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q12_a.webp",
+        "width": 1060,
+        "height": 182,
+        "alt": "Answer points for Grade 10 Section 1 question 12"
+      }
+    },
+    {
+      "id": "s1-q13",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 13",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q13_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q13_a.webp",
+        "width": 1060,
+        "height": 192,
+        "alt": "Answer points for Grade 10 Section 1 question 13"
+      }
+    },
+    {
+      "id": "s1-q14",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 14",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q14_q.webp",
+        "width": 1060,
+        "height": 139
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q14_a.webp",
+        "width": 1060,
+        "height": 242,
+        "alt": "Answer points for Grade 10 Section 1 question 14"
+      }
+    },
+    {
+      "id": "s1-q15",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 15",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q15_q.webp",
+        "width": 1060,
+        "height": 138
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q15_a.webp",
+        "width": 1060,
+        "height": 231,
+        "alt": "Answer points for Grade 10 Section 1 question 15"
+      }
+    },
+    {
+      "id": "s1-q16",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 16",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q16_q.webp",
+        "width": 1060,
+        "height": 192
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q16_a.webp",
+        "width": 1060,
+        "height": 192,
+        "alt": "Answer points for Grade 10 Section 1 question 16"
+      }
+    },
+    {
+      "id": "s1-q17",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 17",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q17_q.webp",
+        "width": 1060,
+        "height": 145
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q17_a.webp",
+        "width": 1060,
+        "height": 231,
+        "alt": "Answer points for Grade 10 Section 1 question 17"
+      }
+    },
+    {
+      "id": "s1-q18",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 18",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q18_q.webp",
+        "width": 1060,
+        "height": 192
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q18_a.webp",
+        "width": 1060,
+        "height": 239,
+        "alt": "Answer points for Grade 10 Section 1 question 18"
+      }
+    },
+    {
+      "id": "s1-q19",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 19",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q19_q.webp",
+        "width": 1060,
+        "height": 278
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q19_a.webp",
+        "width": 1060,
+        "height": 214,
+        "alt": "Answer points for Grade 10 Section 1 question 19"
+      }
+    },
+    {
+      "id": "s1-q20",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 20",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q20_q.webp",
+        "width": 1060,
+        "height": 421
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q20_a.webp",
+        "width": 1060,
+        "height": 183,
+        "alt": "Answer points for Grade 10 Section 1 question 20"
+      }
+    },
+    {
+      "id": "s1-q21",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 21",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q21_q.webp",
+        "width": 1060,
+        "height": 240
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q21_a.webp",
+        "width": 1060,
+        "height": 238,
+        "alt": "Answer points for Grade 10 Section 1 question 21"
+      }
+    },
+    {
+      "id": "s1-q22",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 22",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q22_q.webp",
+        "width": 1060,
+        "height": 138
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q22_a.webp",
+        "width": 1060,
+        "height": 182,
+        "alt": "Answer points for Grade 10 Section 1 question 22"
+      }
+    },
+    {
+      "id": "s1-q23",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 23",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q23_q.webp",
+        "width": 1060,
+        "height": 240
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q23_a.webp",
+        "width": 1060,
+        "height": 236,
+        "alt": "Answer points for Grade 10 Section 1 question 23"
+      }
+    },
+    {
+      "id": "s1-q24",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 24",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q24_q.webp",
+        "width": 1060,
+        "height": 99
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q24_a.webp",
+        "width": 1060,
+        "height": 192,
+        "alt": "Answer points for Grade 10 Section 1 question 24"
+      }
+    },
+    {
+      "id": "s1-q25",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 25",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q25_q.webp",
+        "width": 1060,
+        "height": 239
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q25_a.webp",
+        "width": 1060,
+        "height": 239,
+        "alt": "Answer points for Grade 10 Section 1 question 25"
+      }
+    },
+    {
+      "id": "s1-q26",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 26",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q26_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q26_a.webp",
+        "width": 1060,
+        "height": 182,
+        "alt": "Answer points for Grade 10 Section 1 question 26"
+      }
+    },
+    {
+      "id": "s1-q27",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 27",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q27_q.webp",
+        "width": 1060,
+        "height": 230
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q27_a.webp",
+        "width": 1060,
+        "height": 229,
+        "alt": "Answer points for Grade 10 Section 1 question 27"
+      }
+    },
+    {
+      "id": "s1-q28",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 28",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q28_q.webp",
+        "width": 1060,
+        "height": 144
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q28_a.webp",
+        "width": 1060,
+        "height": 182,
+        "alt": "Answer points for Grade 10 Section 1 question 28"
+      }
+    },
+    {
+      "id": "s1-q29",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 29",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q29_q.webp",
+        "width": 1060,
+        "height": 106
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q29_a.webp",
+        "width": 1060,
+        "height": 146,
+        "alt": "Answer points for Grade 10 Section 1 question 29"
+      }
+    },
+    {
+      "id": "s1-q30",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 30",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q30_q.webp",
+        "width": 1060,
+        "height": 146
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q30_a.webp",
+        "width": 1060,
+        "height": 302,
+        "alt": "Answer points for Grade 10 Section 1 question 30"
+      }
+    },
+    {
+      "id": "s1-q31",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 31",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q31_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q31_a.webp",
+        "width": 1060,
+        "height": 288,
+        "alt": "Answer points for Grade 10 Section 1 question 31"
+      }
+    },
+    {
+      "id": "s1-q32",
+      "lessonId": "section-1",
+      "front": "Grade 10 · Section 1 · Question 32",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s1_q32_q.webp",
+        "width": 1060,
+        "height": 192
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s1_q32_a.webp",
+        "width": 1060,
+        "height": 611,
+        "alt": "Answer points for Grade 10 Section 1 question 32"
+      }
+    },
+    {
+      "id": "s2-q01",
+      "lessonId": "section-2",
+      "front": "Grade 10 · Section 2 · Question 1",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s2_q01_q.webp",
+        "width": 1060,
+        "height": 253
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s2_q01_a.webp",
+        "width": 1060,
+        "height": 286,
+        "alt": "Answer points for Grade 10 Section 2 question 1"
+      }
+    },
+    {
+      "id": "s2-q02",
+      "lessonId": "section-2",
+      "front": "Grade 10 · Section 2 · Question 2",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s2_q02_q.webp",
+        "width": 1060,
+        "height": 240
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s2_q02_a.webp",
+        "width": 1060,
+        "height": 286,
+        "alt": "Answer points for Grade 10 Section 2 question 2"
+      }
+    },
+    {
+      "id": "s2-q03",
+      "lessonId": "section-2",
+      "front": "Grade 10 · Section 2 · Question 3",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s2_q03_q.webp",
+        "width": 1060,
+        "height": 145
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s2_q03_a.webp",
+        "width": 1060,
+        "height": 193,
+        "alt": "Answer points for Grade 10 Section 2 question 3"
+      }
+    },
+    {
+      "id": "s2-q04",
+      "lessonId": "section-2",
+      "front": "Grade 10 · Section 2 · Question 4",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s2_q04_q.webp",
+        "width": 1060,
+        "height": 147
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s2_q04_a.webp",
+        "width": 1060,
+        "height": 194,
+        "alt": "Answer points for Grade 10 Section 2 question 4"
+      }
+    },
+    {
+      "id": "s2-q05",
+      "lessonId": "section-2",
+      "front": "Grade 10 · Section 2 · Question 5",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s2_q05_q.webp",
+        "width": 1060,
+        "height": 288
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s2_q05_a.webp",
+        "width": 1060,
+        "height": 239,
+        "alt": "Answer points for Grade 10 Section 2 question 5"
+      }
+    },
+    {
+      "id": "s3-q01",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 1",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q01_q.webp",
+        "width": 1060,
+        "height": 458
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q01_a.webp",
+        "width": 1060,
+        "height": 333,
+        "alt": "Answer points for Grade 10 Section 3 question 1"
+      }
+    },
+    {
+      "id": "s3-q02",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 2",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q02_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q02_a.webp",
+        "width": 1060,
+        "height": 239,
+        "alt": "Answer points for Grade 10 Section 3 question 2"
+      }
+    },
+    {
+      "id": "s3-q03",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 3",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q03_q.webp",
+        "width": 1060,
+        "height": 145
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q03_a.webp",
+        "width": 1060,
+        "height": 381,
+        "alt": "Answer points for Grade 10 Section 3 question 3"
+      }
+    },
+    {
+      "id": "s3-q04",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 4",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q04_q.webp",
+        "width": 1060,
+        "height": 146
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q04_a.webp",
+        "width": 1060,
+        "height": 287,
+        "alt": "Answer points for Grade 10 Section 3 question 4"
+      }
+    },
+    {
+      "id": "s3-q05",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 5",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q05_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q05_a.webp",
+        "width": 1060,
+        "height": 192,
+        "alt": "Answer points for Grade 10 Section 3 question 5"
+      }
+    },
+    {
+      "id": "s3-q06",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 6",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q06_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q06_a.webp",
+        "width": 1060,
+        "height": 286,
+        "alt": "Answer points for Grade 10 Section 3 question 6"
+      }
+    },
+    {
+      "id": "s3-q07",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 7",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q07_q.webp",
+        "width": 1060,
+        "height": 192
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q07_a.webp",
+        "width": 1060,
+        "height": 287,
+        "alt": "Answer points for Grade 10 Section 3 question 7"
+      }
+    },
+    {
+      "id": "s3-q08",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 8",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q08_q.webp",
+        "width": 1060,
+        "height": 144
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q08_a.webp",
+        "width": 1060,
+        "height": 239,
+        "alt": "Answer points for Grade 10 Section 3 question 8"
+      }
+    },
+    {
+      "id": "s3-q09",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 9",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q09_q.webp",
+        "width": 1060,
+        "height": 145
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q09_a.webp",
+        "width": 1060,
+        "height": 193,
+        "alt": "Answer points for Grade 10 Section 3 question 9"
+      }
+    },
+    {
+      "id": "s3-q10",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 10",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q10_q.webp",
+        "width": 1060,
+        "height": 138
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q10_a.webp",
+        "width": 1060,
+        "height": 286,
+        "alt": "Answer points for Grade 10 Section 3 question 10"
+      }
+    },
+    {
+      "id": "s3-q11",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 11",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q11_q.webp",
+        "width": 1060,
+        "height": 133
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q11_a.webp",
+        "width": 1060,
+        "height": 278,
+        "alt": "Answer points for Grade 10 Section 3 question 11"
+      }
+    },
+    {
+      "id": "s3-q12",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 12",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q12_q.webp",
+        "width": 1060,
+        "height": 135
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q12_a.webp",
+        "width": 1060,
+        "height": 279,
+        "alt": "Answer points for Grade 10 Section 3 question 12"
+      }
+    },
+    {
+      "id": "s3-q13",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 13",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q13_q.webp",
+        "width": 1060,
+        "height": 135
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q13_a.webp",
+        "width": 1060,
+        "height": 334,
+        "alt": "Answer points for Grade 10 Section 3 question 13"
+      }
+    },
+    {
+      "id": "s3-q14",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 14",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q14_q.webp",
+        "width": 1060,
+        "height": 97
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q14_a.webp",
+        "width": 1060,
+        "height": 636,
+        "alt": "Answer points for Grade 10 Section 3 question 14"
+      }
+    },
+    {
+      "id": "s3-q15",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 15",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q15_q.webp",
+        "width": 1060,
+        "height": 146
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q15_a.webp",
+        "width": 1060,
+        "height": 382,
+        "alt": "Answer points for Grade 10 Section 3 question 15"
+      }
+    },
+    {
+      "id": "s3-q16",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 16",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q16_q.webp",
+        "width": 1060,
+        "height": 135
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q16_a.webp",
+        "width": 1060,
+        "height": 477,
+        "alt": "Answer points for Grade 10 Section 3 question 16"
+      }
+    },
+    {
+      "id": "s3-q17",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 17",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q17_q.webp",
+        "width": 1060,
+        "height": 135
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q17_a.webp",
+        "width": 1060,
+        "height": 334,
+        "alt": "Answer points for Grade 10 Section 3 question 17"
+      }
+    },
+    {
+      "id": "s3-q18",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 18",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q18_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q18_a.webp",
+        "width": 1060,
+        "height": 192,
+        "alt": "Answer points for Grade 10 Section 3 question 18"
+      }
+    },
+    {
+      "id": "s3-q19",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 19",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q19_q.webp",
+        "width": 1060,
+        "height": 230
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q19_a.webp",
+        "width": 1060,
+        "height": 241,
+        "alt": "Answer points for Grade 10 Section 3 question 19"
+      }
+    },
+    {
+      "id": "s3-q20",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 20",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q20_q.webp",
+        "width": 1060,
+        "height": 99
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q20_a.webp",
+        "width": 1060,
+        "height": 239,
+        "alt": "Answer points for Grade 10 Section 3 question 20"
+      }
+    },
+    {
+      "id": "s3-q21",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 21",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q21_q.webp",
+        "width": 1060,
+        "height": 193
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q21_a.webp",
+        "width": 1060,
+        "height": 574,
+        "alt": "Answer points for Grade 10 Section 3 question 21"
+      }
+    },
+    {
+      "id": "s3-q22",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 22",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q22_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q22_a.webp",
+        "width": 1060,
+        "height": 241,
+        "alt": "Answer points for Grade 10 Section 3 question 22"
+      }
+    },
+    {
+      "id": "s3-q23",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 23",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q23_q.webp",
+        "width": 1060,
+        "height": 182
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q23_a.webp",
+        "width": 1060,
+        "height": 334,
+        "alt": "Answer points for Grade 10 Section 3 question 23"
+      }
+    },
+    {
+      "id": "s3-q24",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 24",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q24_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q24_a.webp",
+        "width": 1060,
+        "height": 241,
+        "alt": "Answer points for Grade 10 Section 3 question 24"
+      }
+    },
+    {
+      "id": "s3-q25",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 25",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q25_q.webp",
+        "width": 1060,
+        "height": 146
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q25_a.webp",
+        "width": 1060,
+        "height": 335,
+        "alt": "Answer points for Grade 10 Section 3 question 25"
+      }
+    },
+    {
+      "id": "s3-q26",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 26",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q26_q.webp",
+        "width": 1060,
+        "height": 135
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q26_a.webp",
+        "width": 1060,
+        "height": 334,
+        "alt": "Answer points for Grade 10 Section 3 question 26"
+      }
+    },
+    {
+      "id": "s3-q27",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 27",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q27_q.webp",
+        "width": 1060,
+        "height": 136
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q27_a.webp",
+        "width": 1060,
+        "height": 257,
+        "alt": "Answer points for Grade 10 Section 3 question 27"
+      }
+    },
+    {
+      "id": "s3-q28",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 28",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q28_q.webp",
+        "width": 1060,
+        "height": 96
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q28_a.webp",
+        "width": 1060,
+        "height": 214,
+        "alt": "Answer points for Grade 10 Section 3 question 28"
+      }
+    },
+    {
+      "id": "s3-q29",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 29",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q29_q.webp",
+        "width": 1060,
+        "height": 191
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q29_a.webp",
+        "width": 1060,
+        "height": 468,
+        "alt": "Answer points for Grade 10 Section 3 question 29"
+      }
+    },
+    {
+      "id": "s3-q30",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 30",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q30_q.webp",
+        "width": 1060,
+        "height": 90
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q30_a.webp",
+        "width": 1060,
+        "height": 214,
+        "alt": "Answer points for Grade 10 Section 3 question 30"
+      }
+    },
+    {
+      "id": "s3-q31",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 31",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q31_q.webp",
+        "width": 1060,
+        "height": 96
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q31_a.webp",
+        "width": 1060,
+        "height": 238,
+        "alt": "Answer points for Grade 10 Section 3 question 31"
+      }
+    },
+    {
+      "id": "s3-q32",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 32",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q32_q.webp",
+        "width": 1060,
+        "height": 137
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q32_a.webp",
+        "width": 1060,
+        "height": 522,
+        "alt": "Answer points for Grade 10 Section 3 question 32"
+      }
+    },
+    {
+      "id": "s3-q33",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 33",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q33_q.webp",
+        "width": 1060,
+        "height": 100
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q33_a.webp",
+        "width": 1060,
+        "height": 192,
+        "alt": "Answer points for Grade 10 Section 3 question 33"
+      }
+    },
+    {
+      "id": "s3-q34",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 34",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q34_q.webp",
+        "width": 1060,
+        "height": 138
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q34_a.webp",
+        "width": 1060,
+        "height": 240,
+        "alt": "Answer points for Grade 10 Section 3 question 34"
+      }
+    },
+    {
+      "id": "s3-q35",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 35",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q35_q.webp",
+        "width": 1060,
+        "height": 97
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q35_a.webp",
+        "width": 1060,
+        "height": 240,
+        "alt": "Answer points for Grade 10 Section 3 question 35"
+      }
+    },
+    {
+      "id": "s3-q36",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 36",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q36_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q36_a.webp",
+        "width": 1060,
+        "height": 230,
+        "alt": "Answer points for Grade 10 Section 3 question 36"
+      }
+    },
+    {
+      "id": "s3-q37",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 37",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q37_q.webp",
+        "width": 1060,
+        "height": 137
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q37_a.webp",
+        "width": 1060,
+        "height": 240,
+        "alt": "Answer points for Grade 10 Section 3 question 37"
+      }
+    },
+    {
+      "id": "s3-q38",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 38",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q38_q.webp",
+        "width": 1060,
+        "height": 144
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q38_a.webp",
+        "width": 1060,
+        "height": 193,
+        "alt": "Answer points for Grade 10 Section 3 question 38"
+      }
+    },
+    {
+      "id": "s3-q39",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 39",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q39_q.webp",
+        "width": 1060,
+        "height": 135
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q39_a.webp",
+        "width": 1060,
+        "height": 241,
+        "alt": "Answer points for Grade 10 Section 3 question 39"
+      }
+    },
+    {
+      "id": "s3-q40",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 40",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q40_q.webp",
+        "width": 1060,
+        "height": 233
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q40_a.webp",
+        "width": 1060,
+        "height": 634,
+        "alt": "Answer points for Grade 10 Section 3 question 40"
+      }
+    },
+    {
+      "id": "s3-q41",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 41",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q41_q.webp",
+        "width": 1060,
+        "height": 91
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q41_a.webp",
+        "width": 1060,
+        "height": 173,
+        "alt": "Answer points for Grade 10 Section 3 question 41"
+      }
+    },
+    {
+      "id": "s3-q42",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 42",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q42_q.webp",
+        "width": 1060,
+        "height": 136
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q42_a.webp",
+        "width": 1060,
+        "height": 338,
+        "alt": "Answer points for Grade 10 Section 3 question 42"
+      }
+    },
+    {
+      "id": "s3-q43",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 43",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q43_q.webp",
+        "width": 1060,
+        "height": 99
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q43_a.webp",
+        "width": 1060,
+        "height": 348,
+        "alt": "Answer points for Grade 10 Section 3 question 43"
+      }
+    },
+    {
+      "id": "s3-q44",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 44",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q44_q.webp",
+        "width": 1060,
+        "height": 191
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q44_a.webp",
+        "width": 1060,
+        "height": 474,
+        "alt": "Answer points for Grade 10 Section 3 question 44"
+      }
+    },
+    {
+      "id": "s3-q45",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 45",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q45_q.webp",
+        "width": 1060,
+        "height": 138
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q45_a.webp",
+        "width": 1060,
+        "height": 286,
+        "alt": "Answer points for Grade 10 Section 3 question 45"
+      }
+    },
+    {
+      "id": "s3-q46",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 46",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q46_q.webp",
+        "width": 1060,
+        "height": 193
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q46_a.webp",
+        "width": 1060,
+        "height": 286,
+        "alt": "Answer points for Grade 10 Section 3 question 46"
+      }
+    },
+    {
+      "id": "s3-q47",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 47",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q47_q.webp",
+        "width": 1060,
+        "height": 132
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q47_a.webp",
+        "width": 1060,
+        "height": 256,
+        "alt": "Answer points for Grade 10 Section 3 question 47"
+      }
+    },
+    {
+      "id": "s3-q48",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 48",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q48_q.webp",
+        "width": 1060,
+        "height": 144
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q48_a.webp",
+        "width": 1060,
+        "height": 634,
+        "alt": "Answer points for Grade 10 Section 3 question 48"
+      }
+    },
+    {
+      "id": "s3-q49",
+      "lessonId": "section-3",
+      "front": "Grade 10 · Section 3 · Question 49",
+      "frontImage": {
+        "src": "/dheyha-revision/g10_s3_q49_q.webp",
+        "width": 1060,
+        "height": 240
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g10_s3_q49_a.webp",
+        "width": 1060,
+        "height": 285,
+        "alt": "Answer points for Grade 10 Section 3 question 49"
+      }
+    }
+  ]
+}

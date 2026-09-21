@@ -2,18 +2,32 @@
   "id": "unit-1",
   "number": 1,
   "icon": "📖",
-  "title": "އިސްލާމީ ޢަޤީދާ",
-  "titleEnglish": "Aqeedah",
-  "description": "Sample of 5 questions from the Deyha paper.",
+  "title": "ދޭހަ ރިވިޝަން",
+  "titleEnglish": "Grade 9 Revision",
+  "description": "60 source-faithful revision cards across three sections.",
   "lessons": [
     {
-      "id": "l1",
+      "id": "section-1",
       "number": 1,
-      "title": "އިސްލާމީ ޢަޤީދާ"
+      "title": "ސެކްޝަން 1",
+      "titleEnglish": "Section 1"
+    },
+    {
+      "id": "section-2",
+      "number": 2,
+      "title": "ސެކްޝަން 2",
+      "titleEnglish": "Section 2"
+    },
+    {
+      "id": "section-3",
+      "number": 3,
+      "title": "ސެކްޝަން 3",
+      "titleEnglish": "Section 3"
     }
   ],
   "targets": [
-    "deyha"
+    "deyha",
+    "grade-9"
   ],
-  "draft": true
+  "draft": false
 }

@@ -1,0 +1,27 @@
+{
+  "id": "unit-2",
+  "number": 2,
+  "icon": "📄",
+  "title": "2024",
+  "titleEnglish": "2024",
+  "description": "25 questions from the 2024 Paper II marking scheme.",
+  "year": "2024",
+  "lessons": [
+    {
+      "id": "structured",
+      "number": 1,
+      "title": "ސްޓްރަކްޗަރޑް ސުވާލުތައް",
+      "titleEnglish": "Structured questions"
+    },
+    {
+      "id": "scenarios",
+      "number": 2,
+      "title": "ސިނޭރިއޯ ސުވާލުތައް",
+      "titleEnglish": "Scenario questions"
+    }
+  ],
+  "targets": [
+    "paper-2"
+  ],
+  "draft": false
+}

@@ -199,7 +199,10 @@ export function v2LessonMap(): Record<string, Record<string, string>> {
 /** A deterministic daily question, keyed to Maldives time (UTC+5). */
 export function questionOfTheDay(now = new Date()) {
   const { units } = loadContent();
-  const pool = units.flatMap((e) => {
+  // Daily questions stay in the core syllabus decks. Image-heavy collections
+  // such as past papers and Deyha revision would otherwise surface only their
+  // accessible labels on the home card instead of the actual scanned prompt.
+  const pool = units.filter((e) => !e.course.collection).flatMap((e) => {
     const lessonById = new Map(e.unit.lessons.map((l) => [l.id, l]));
     return e.flashcards.cards.map((card) => ({
       card,

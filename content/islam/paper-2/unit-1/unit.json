@@ -1,0 +1,27 @@
+{
+  "id": "unit-1",
+  "number": 1,
+  "icon": "📄",
+  "title": "2025",
+  "titleEnglish": "2025",
+  "description": "25 questions from the 2025 Paper II marking scheme.",
+  "year": "2025",
+  "lessons": [
+    {
+      "id": "structured",
+      "number": 1,
+      "title": "ސްޓްރަކްޗަރޑް ސުވާލުތައް",
+      "titleEnglish": "Structured questions"
+    },
+    {
+      "id": "scenarios",
+      "number": 2,
+      "title": "ސިނޭރިއޯ ސުވާލުތައް",
+      "titleEnglish": "Scenario questions"
+    }
+  ],
+  "targets": [
+    "paper-2"
+  ],
+  "draft": false
+}

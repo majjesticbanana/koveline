@@ -181,3 +181,25 @@ unchanged, so grade-9 and grade-10 behave exactly as before.
 **Zoom starts at the right.** The viewer sets `scrollLeft = scrollWidth` on
 open, because Dhivehi begins at the right edge; opening at the left showed the
 end of the line first.
+
+
+## Revision bank update — Paper II + Deyha
+
+The supplied Paper II and Deyha revision libraries are integrated through the
+same content schema and `DeckEngine` as Paper I rather than as standalone HTML
+apps. This keeps marking, Review wrong, navigation, mobile controls and signed-in
+progress consistent across every quiz surface.
+
+- `content/islam/paper-2/`: 150 cards, 25 per paper for 2020 Specimen + 2021–2025.
+  Each year is a unit; Structured Q1–19 and Scenario Q20–25 are lessons.
+- `content/islam/paper-2-scenarios/`: focused 36-card Q20–25 bank using the same
+  `/public/paper-2/` source images.
+- `content/islam/dheyha-9/`: 60 source-faithful cards with Sections 1–3 as lessons.
+- `content/islam/dheyha-10/`: 86 source-faithful cards with Sections 1–3 as lessons.
+- `/public/paper-2/` and `/public/dheyha-revision/` contain the extracted WebP scans.
+  Where a source card had multiple crops, they are joined vertically without scaling.
+
+Scan-heavy deck pages use a wider desktop column (860px) while retaining the
+full-screen tap-to-enlarge viewer on phones. Question of the Day deliberately
+stays on the core Grade 9/10 syllabus decks so a scan-based card never appears
+as a label-only daily question.

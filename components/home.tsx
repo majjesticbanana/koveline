@@ -250,7 +250,7 @@ export function Home({
 
         {/* ---- collections: courses that are not a single school grade ---- */}
         {summary.collections.map((col) => (
-          <section key={col.id} className="mt-14">
+          <section key={col.id} id={`collection-${col.id}`} className="mt-14 scroll-mt-24">
             <div className="border-t border-line pt-8">
               <div className="mb-6">
                 <div className="text-[0.7rem] font-extrabold uppercase tracking-[0.16em] text-teal-deep">
@@ -303,7 +303,7 @@ export function Home({
                   return ready ? (
                     <Link
                       key={c.courseId}
-                      href={`/${c.subjectId}/${c.courseId}`}
+                      href={c.collection === "papers" ? `/${c.subjectId}/${c.courseId}` : c.units.length === 1 ? c.units[0].href : c.mixedHref}
                       className="group rounded-card border border-line bg-surface px-5 py-4 transition-colors hover:border-line-strong hover:bg-hover"
                     >
                       {inner}

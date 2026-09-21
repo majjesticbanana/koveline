@@ -1,0 +1,435 @@
+{
+  "type": "flashcards",
+  "id": "flashcards",
+  "title": "Flashcards",
+  "description": "25 questions with their original marking-scheme material.",
+  "order": 0,
+  "draft": false,
+  "cards": [
+    {
+      "id": "q01",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 1",
+      "frontImage": {
+        "src": "/paper-2/2020_q01_q.webp",
+        "width": 1128,
+        "height": 211
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q01_a.webp",
+        "width": 1128,
+        "height": 934,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 1"
+      }
+    },
+    {
+      "id": "q02",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 2",
+      "frontImage": {
+        "src": "/paper-2/2020_q02_q.webp",
+        "width": 1128,
+        "height": 211
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q02_a.webp",
+        "width": 1128,
+        "height": 1197,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 2"
+      }
+    },
+    {
+      "id": "q03",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 3",
+      "frontImage": {
+        "src": "/paper-2/2020_q03_q.webp",
+        "width": 1128,
+        "height": 345
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q03_a.webp",
+        "width": 1128,
+        "height": 1183,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 3"
+      }
+    },
+    {
+      "id": "q04",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 4",
+      "frontImage": {
+        "src": "/paper-2/2020_q04_q.webp",
+        "width": 1128,
+        "height": 256
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q04_a.webp",
+        "width": 1128,
+        "height": 1067,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 4"
+      }
+    },
+    {
+      "id": "q05",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 5",
+      "frontImage": {
+        "src": "/paper-2/2020_q05_q.webp",
+        "width": 1128,
+        "height": 256
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q05_a.webp",
+        "width": 1128,
+        "height": 473,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 5"
+      }
+    },
+    {
+      "id": "q06",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 6",
+      "frontImage": {
+        "src": "/paper-2/2020_q06_q.webp",
+        "width": 1128,
+        "height": 255
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q06_a.webp",
+        "width": 1128,
+        "height": 583,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 6"
+      }
+    },
+    {
+      "id": "q07",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 7",
+      "frontImage": {
+        "src": "/paper-2/2020_q07_q.webp",
+        "width": 1128,
+        "height": 256
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q07_a.webp",
+        "width": 1128,
+        "height": 403,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 7"
+      }
+    },
+    {
+      "id": "q08",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 8",
+      "frontImage": {
+        "src": "/paper-2/2020_q08_q.webp",
+        "width": 1128,
+        "height": 249
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q08_a.webp",
+        "width": 1128,
+        "height": 453,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 8"
+      }
+    },
+    {
+      "id": "q09",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 9",
+      "frontImage": {
+        "src": "/paper-2/2020_q09_q.webp",
+        "width": 1128,
+        "height": 256
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q09_a.webp",
+        "width": 1128,
+        "height": 403,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 9"
+      }
+    },
+    {
+      "id": "q10",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 10",
+      "frontImage": {
+        "src": "/paper-2/2020_q10_q.webp",
+        "width": 1128,
+        "height": 255
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q10_a.webp",
+        "width": 1128,
+        "height": 532,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 10"
+      }
+    },
+    {
+      "id": "q11",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 11",
+      "frontImage": {
+        "src": "/paper-2/2020_q11_q.webp",
+        "width": 1128,
+        "height": 263
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q11_a.webp",
+        "width": 1128,
+        "height": 448,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 11"
+      }
+    },
+    {
+      "id": "q12",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 12",
+      "frontImage": {
+        "src": "/paper-2/2020_q12_q.webp",
+        "width": 1128,
+        "height": 301
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q12_a.webp",
+        "width": 1128,
+        "height": 434,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 12"
+      }
+    },
+    {
+      "id": "q13",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 13",
+      "frontImage": {
+        "src": "/paper-2/2020_q13_q.webp",
+        "width": 1128,
+        "height": 370
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q13_a.webp",
+        "width": 1128,
+        "height": 1390,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 13"
+      }
+    },
+    {
+      "id": "q14",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 14",
+      "frontImage": {
+        "src": "/paper-2/2020_q14_q.webp",
+        "width": 1128,
+        "height": 389
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q14_a.webp",
+        "width": 1128,
+        "height": 702,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 14"
+      }
+    },
+    {
+      "id": "q15",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 15",
+      "frontImage": {
+        "src": "/paper-2/2020_q15_q.webp",
+        "width": 1128,
+        "height": 594
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q15_a.webp",
+        "width": 1128,
+        "height": 919,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 15"
+      }
+    },
+    {
+      "id": "q16",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 16",
+      "frontImage": {
+        "src": "/paper-2/2020_q16_q.webp",
+        "width": 1128,
+        "height": 798
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q16_a.webp",
+        "width": 1128,
+        "height": 951,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 16"
+      }
+    },
+    {
+      "id": "q17",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 17",
+      "frontImage": {
+        "src": "/paper-2/2020_q17_q.webp",
+        "width": 1128,
+        "height": 300
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q17_a.webp",
+        "width": 1128,
+        "height": 928,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 17"
+      }
+    },
+    {
+      "id": "q18",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 18",
+      "frontImage": {
+        "src": "/paper-2/2020_q18_q.webp",
+        "width": 1128,
+        "height": 352
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q18_a.webp",
+        "width": 1128,
+        "height": 907,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 18"
+      }
+    },
+    {
+      "id": "q19",
+      "lessonId": "structured",
+      "front": "2020 Specimen · Paper II · Question 19",
+      "frontImage": {
+        "src": "/paper-2/2020_q19_q.webp",
+        "width": 1128,
+        "height": 390
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q19_a.webp",
+        "width": 1128,
+        "height": 1203,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 19"
+      }
+    },
+    {
+      "id": "q20",
+      "lessonId": "scenarios",
+      "front": "2020 Specimen · Paper II · Question 20",
+      "frontImage": {
+        "src": "/paper-2/2020_q20_q.webp",
+        "width": 1128,
+        "height": 510
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q20_a.webp",
+        "width": 1128,
+        "height": 1190,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 20"
+      }
+    },
+    {
+      "id": "q21",
+      "lessonId": "scenarios",
+      "front": "2020 Specimen · Paper II · Question 21",
+      "frontImage": {
+        "src": "/paper-2/2020_q21_q.webp",
+        "width": 1128,
+        "height": 376
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q21_a.webp",
+        "width": 1128,
+        "height": 1339,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 21"
+      }
+    },
+    {
+      "id": "q22",
+      "lessonId": "scenarios",
+      "front": "2020 Specimen · Paper II · Question 22",
+      "frontImage": {
+        "src": "/paper-2/2020_q22_q.webp",
+        "width": 1128,
+        "height": 331
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q22_a.webp",
+        "width": 1128,
+        "height": 1456,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 22"
+      }
+    },
+    {
+      "id": "q23",
+      "lessonId": "scenarios",
+      "front": "2020 Specimen · Paper II · Question 23",
+      "frontImage": {
+        "src": "/paper-2/2020_q23_q.webp",
+        "width": 1128,
+        "height": 532
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q23_a.webp",
+        "width": 1128,
+        "height": 1274,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 23"
+      }
+    },
+    {
+      "id": "q24",
+      "lessonId": "scenarios",
+      "front": "2020 Specimen · Paper II · Question 24",
+      "frontImage": {
+        "src": "/paper-2/2020_q24_q.webp",
+        "width": 1128,
+        "height": 634
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q24_a.webp",
+        "width": 1128,
+        "height": 1339,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 24"
+      }
+    },
+    {
+      "id": "q25",
+      "lessonId": "scenarios",
+      "front": "2020 Specimen · Paper II · Question 25",
+      "frontImage": {
+        "src": "/paper-2/2020_q25_q.webp",
+        "width": 1128,
+        "height": 536
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2020_q25_a.webp",
+        "width": 1128,
+        "height": 1339,
+        "alt": "Marking scheme for 2020 Specimen Paper II question 25"
+      }
+    }
+  ]
+}

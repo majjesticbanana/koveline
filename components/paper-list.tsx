@@ -63,7 +63,7 @@ export function PaperList({ papers }: { papers: PaperEntry[] }) {
             <span className="paper-year">{p.title}</span>
             <span className="paper-meta">
               {p.questionCount} questions
-              {p.lessonCount > 1 ? ` · ${p.lessonCount} grades` : ""}
+              {p.lessonCount > 1 ? ` · ${p.lessonCount} groups` : ""}
             </span>
             <ArrowRight className="paper-arrow h-4 w-4" aria-hidden />
           </Link>

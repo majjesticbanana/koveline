@@ -1,114 +1,1029 @@
 {
   "type": "flashcards",
   "id": "flashcards",
-  "title": "Flashcards",
-  "description": "Sample — first 5 questions, read from the source pages.",
+  "title": "Revision cards",
+  "description": "60 exact source questions and answer points.",
   "order": 0,
-  "draft": true,
+  "draft": false,
   "cards": [
     {
-      "id": "q1",
-      "lessonId": "l1",
-      "context": "ސޫރަތުއް ނަޙްލުގެ 36 ވަނަ އާޔަތުގެ މާނައިގައި ވެއެވެ. \"ހަމަކަށަވަރުން، ތިމަންރަސްކަލާނގެ ކޮންމެ އުއްމަތަކަށް ރަސޫލަކު ފޮނުއްވީމެވެ. އެއީ، ﷲ އަށް އަޅުކަން ކުރުމަށާއި، ބާޠިލު ތަކެތި ދޫކުރުމަށް އެންގެވުމަށެވެ.\"",
-      "front": "މި މާނައިން ދޭހަވާ ކަންތައްތައް ލިޔާށެވެ!",
+      "id": "s1-q01",
+      "lessonId": "section-1",
+      "front": "Grade 9 · Section 1 · Question 1",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s1_q01_q.webp",
+        "width": 1060,
+        "height": 377
+      },
       "back": {
-        "kind": "list",
-        "ordered": false,
-        "items": [
-          "ރަސޫލަކު ނުފޮނުއްވާ އެއްވެސް ޒަމާނެއް ނުވާކަން",
-          "ރަސޫލުން ފޮނުއްވަނީ މީސްތަކުންނަށް ތެދުމަގު ދެއްކެވުމަށްކަން",
-          "ﷲ އެއްކައުވަންތަ ކުރުމުގެ މުހިއްމުކަން",
-          "އަޅުކަންކުރުން ޙައްޤުވާ ފަރާތަކީ ﷲ ކަން",
-          "ﷲ އަށް ޝަރީކުކުރުމުގެ ނުބައިކަން / ޙަރާމްކަން",
-          "ﷲ ފިޔަވައި އަޅުކަންކުރެވޭ އެންމެހައި ތަކެއްޗަކީ ބާޠިލު ތަކެތިކަން",
-          "މާތް ﷲ ގެ އެއްކައުވަންތަކަން",
-          "ރަސޫލުންގެ މާތްކަން މަތިވެރިކަން",
-          "މާތް ﷲ ގެ މަތިވެރިކަން",
-          "ރަސޫލުންނަށް ކިޔަމަންވާންޖެހޭކަން",
-          "ﷲ ގެ ކުޅަދުންވަންތަކަން",
-          "މާތް ﷲ އަށް އީމާންވުމުގެ މުހިއްމުކަން / ވާޖިބުކަން"
-        ]
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s1_q01_a.webp",
+        "width": 1060,
+        "height": 539,
+        "alt": "Answer points for Grade 9 Section 1 question 1"
       }
     },
     {
-      "id": "q2",
-      "lessonId": "l1",
-      "context": "ސޫރަތުލް ފަތްޙުގެ 29 ވަނަ އާޔަތުގެ މާނައިގައި ވެއެވެ. \"މުޙައްމަދުގެފާނީ ﷲ ގެ ރަސޫލާއެވެ.\"",
-      "front": "މި އާޔަތުން ދޭހަވާ ކަންތައްތައް ލިޔާށެވެ!",
+      "id": "s1-q02",
+      "lessonId": "section-1",
+      "front": "Grade 9 · Section 1 · Question 2",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s1_q02_q.webp",
+        "width": 1060,
+        "height": 96
+      },
       "back": {
-        "kind": "list",
-        "ordered": false,
-        "items": [
-          "މުޙައްމަދުގެފާނުގެ މާތްކަން",
-          "މުޙައްމަދުގެފާނަށް އީމާންވާންޖެހޭކަން",
-          "މުޙައްމަދުގެފާނަކީ ނަބިއްޔެއްކަން",
-          "މުޙައްމަދުގެފާނަކީ މާތް ﷲ ގެ ރަސޫލާކަން"
-        ]
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s1_q02_a.webp",
+        "width": 1060,
+        "height": 192,
+        "alt": "Answer points for Grade 9 Section 1 question 2"
       }
     },
     {
-      "id": "q3",
-      "lessonId": "l1",
-      "context": "ސޫރަތުލް އަޙްޒާބުގެ 40 ވަނަ އާޔަތުގެ މާނައިގައި ވެއެވެ. \"ތިޔަބައިމީހުންގެ ތެރެއިން އެއްވެސް ފިރިހެނެއްގެ ބަފައިކަލަކު ކަމުގައި މުޙައްމަދުގެފާނު ނުވެއެވެ. އެހެނެއްކަމަކު، އެކަލޭގެފާނީ ﷲ ގެ ރަސޫލާއެވެ. އަދި ނަބިއްޔުންގެ ސިއްކަ ޖެއްސެވި ބޭކަލެކެވެ. އަދި ﷲ އީ ކޮންމެ ކަމެއް މޮޅަށް ދެނެވޮޑިގެންވާ ކަލަކު ކަމުގައި ވޮޑިގެންވެއެވެ.\"",
-      "front": "މި މާނައިން ދޭހަވާ ކަންތައްތައް ލިޔާށެވެ!",
+      "id": "s1-q03",
+      "lessonId": "section-1",
+      "front": "Grade 9 · Section 1 · Question 3",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s1_q03_q.webp",
+        "width": 1060,
+        "height": 133
+      },
       "back": {
-        "kind": "list",
-        "ordered": false,
-        "items": [
-          "ކީރިތި ރަސޫލާގެ މާތްކަން",
-          "މުޙައްމަދުގެފާނަށް ފަހު ނަބިއްޔަކު ފޮނުއްވާފައި ނުވާކަން",
-          "މުޙައްމަދުގެފާނަށް ފަހު ރަސޫލަކު ފޮނުއްވާފައި ނުވާކަން",
-          "މުޙައްމަދުގެފާނަކީ އެންމެ ފަހު ނަބިއްޔާކަން",
-          "މުޙައްމަދުގެފާނުގެ ފިރިހެން ދަރިކަލަކު ދުނިޔޭގައި ނެތްކަން",
-          "މާތް ﷲ ގެ ޢިލްމުފުޅުގެ ފުރިހަމަކަން",
-          "މާތް ﷲ އަށް އެއްވެސް ކަމެއް ސިއްރުވެގެން ނުވާކަން",
-          "މުޙައްމަދުގެފާނަކީ ނަބިއްޔުންގެ ސިއްކަ ޖެއްސެވި ބޭކަލެއްކަން",
-          "މުޙައްމަދުގެފާނަށް ތަބާވުމުގެ މުހިއްމުކަން",
-          "މާތް ﷲ ގެ ދެނެވޮޑިގަތުމުގެ ފުރިހަމަކަން",
-          "މުޙައްމަދުގެފާނަށް އީމާންވުމުގެ މުހިއްމުކަން",
-          "ނަބިއްޔުންނަށް އީމާންވާންޖެހޭކަން",
-          "އިސްލާމްދީނަކީ އެންމެ ފަހުގެ ދީންކަން",
-          "މުޙައްމަދުގެފާނަކީ ރަސޫލުބޭކަލެއްކަން"
-        ]
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s1_q03_a.webp",
+        "width": 1060,
+        "height": 626,
+        "alt": "Answer points for Grade 9 Section 1 question 3"
       }
     },
     {
-      "id": "q4",
-      "lessonId": "l1",
-      "context": "ސޫރަތުއް ނިސާގެ 171 ވަނަ އާޔަތުގެ މާނައިގައި ވެއެވެ. \"އޭ ފޮތުގެ އަހުލުވެރިންނޭވެ! ތިޔަބައިމީހުންގެ ދީނުގައި ހައްދުފަހަނައަޅައި ނުދާށެވެ! އަދި ﷲ އާމެދު ޙައްޤު ބަހެއް ނޫނީ ނުބުނާށެވެ! މަރްޔަމްގެފާނުގެ ދަރިކަލުން މަސީޙް ޢީސާގެފާނީ ﷲ ގެ ރަސޫލާއެވެ. އަދި އެކަލާނގެ ކަލިމަފުޅެވެ.\"",
-      "front": "މި މާނައިން ދޭހަވާ ކަންތައްތައް ލިޔާށެވެ!",
+      "id": "s1-q04",
+      "lessonId": "section-1",
+      "front": "Grade 9 · Section 1 · Question 4",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s1_q04_q.webp",
+        "width": 1060,
+        "height": 215
+      },
       "back": {
-        "kind": "list",
-        "ordered": false,
-        "items": [
-          "ޢީސާގެފާނީ މާތް ﷲ ގެ އަޅެއްކަން",
-          "ޢީސާގެފާނީ ﷲ ގެ ރަސޫލެއްކަން",
-          "ޢީސާގެފާނުގެ މާތްކަން",
-          "ދީނުގައި ހައްދުފަހަނައަޅައި ދިޔުމަކީ ނަހީކުރައްވާފައިވާ ކަމެއްކަން",
-          "ﷲ އާމެދު ޙައްޤު ބަހެއް ނޫނީ ބުނުން ހުއްދަނުވާކަން",
-          "ޢީސާގެފާނަކީ މަރްޔަމްގެފާނުގެ ދަރިކަލުންކަން",
-          "ފޮތުގެ އަހުލުވެރިންނަށް ނަޞޭޙަތްތެރިވެވަޑައިގެންފައިވާކަން"
-        ]
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s1_q04_a.webp",
+        "width": 1060,
+        "height": 297,
+        "alt": "Answer points for Grade 9 Section 1 question 4"
       }
     },
     {
-      "id": "q5",
-      "lessonId": "l1",
-      "context": "ސޫރަތުއް ނިސާގެ 171 ވަނަ އާޔަތުގެ މާނައިގައި ވެއެވެ. \"ފަހެ ﷲ އާއި، އެކަލާނގެ ރަސޫލުބޭކަލުންނަށް އީމާން ވާށެވެ! އަދި ތިނެކޭ ނުބުނާށެވެ!\"",
-      "front": "މި މާނައިން ދޭހަވާ 3 ކަމެއް ލިޔާށެވެ!",
+      "id": "s1-q05",
+      "lessonId": "section-1",
+      "front": "Grade 9 · Section 1 · Question 5",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s1_q05_q.webp",
+        "width": 1060,
+        "height": 191
+      },
       "back": {
-        "kind": "list",
-        "ordered": false,
-        "items": [
-          "ﷲ އަށް އީމާންވުމަކީ ވާޖިބެއްކަން / އީމާންވާންޖެހޭކަން",
-          "ރަސޫލުބޭކަލުންނަށް އީމާންވުމަކީ ވާޖިބެއްކަން / އީމާންވާންޖެހޭކަން",
-          "މާތް ﷲ ފިޔަވައި އެހެން އިލާހަކު ނުވާކަން",
-          "މާތް ﷲ އަށް ބައިވެރިއަކު، އަނބިކަނބަލަކު އަދި ދަރިކަލަކު ނުވާކަން",
-          "މާތް ﷲ އަށް އީމާންވުމުގެ މުހިއްމުކަން",
-          "ރަސޫލުބޭކަލުންނަށް އީމާންވުމުގެ މުހިއްމުކަން",
-          "މާތް ﷲ އެއްކައުވަންތަ ކުރުމުގެ ވާޖިބުކަން",
-          "މާތް ﷲ އެއްކައުވަންތަ ކުރުމުގެ މުހިއްމުކަން"
-        ]
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s1_q05_a.webp",
+        "width": 1060,
+        "height": 784,
+        "alt": "Answer points for Grade 9 Section 1 question 5"
+      }
+    },
+    {
+      "id": "s1-q06",
+      "lessonId": "section-1",
+      "front": "Grade 9 · Section 1 · Question 6",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s1_q06_q.webp",
+        "width": 1060,
+        "height": 91
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s1_q06_a.webp",
+        "width": 1060,
+        "height": 233,
+        "alt": "Answer points for Grade 9 Section 1 question 6"
+      }
+    },
+    {
+      "id": "s1-q07",
+      "lessonId": "section-1",
+      "front": "Grade 9 · Section 1 · Question 7",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s1_q07_q.webp",
+        "width": 1060,
+        "height": 333
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s1_q07_a.webp",
+        "width": 1060,
+        "height": 335,
+        "alt": "Answer points for Grade 9 Section 1 question 7"
+      }
+    },
+    {
+      "id": "s1-q08",
+      "lessonId": "section-1",
+      "front": "Grade 9 · Section 1 · Question 8",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s1_q08_q.webp",
+        "width": 1060,
+        "height": 381
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s1_q08_a.webp",
+        "width": 1060,
+        "height": 231,
+        "alt": "Answer points for Grade 9 Section 1 question 8"
+      }
+    },
+    {
+      "id": "s1-q09",
+      "lessonId": "section-1",
+      "front": "Grade 9 · Section 1 · Question 9",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s1_q09_q.webp",
+        "width": 1060,
+        "height": 286
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s1_q09_a.webp",
+        "width": 1060,
+        "height": 232,
+        "alt": "Answer points for Grade 9 Section 1 question 9"
+      }
+    },
+    {
+      "id": "s1-q10",
+      "lessonId": "section-1",
+      "front": "Grade 9 · Section 1 · Question 10",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s1_q10_q.webp",
+        "width": 1060,
+        "height": 145
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s1_q10_a.webp",
+        "width": 1060,
+        "height": 286,
+        "alt": "Answer points for Grade 9 Section 1 question 10"
+      }
+    },
+    {
+      "id": "s1-q11",
+      "lessonId": "section-1",
+      "front": "Grade 9 · Section 1 · Question 11",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s1_q11_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s1_q11_a.webp",
+        "width": 1060,
+        "height": 185,
+        "alt": "Answer points for Grade 9 Section 1 question 11"
+      }
+    },
+    {
+      "id": "s1-q12",
+      "lessonId": "section-1",
+      "front": "Grade 9 · Section 1 · Question 12",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s1_q12_q.webp",
+        "width": 1060,
+        "height": 145
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s1_q12_a.webp",
+        "width": 1060,
+        "height": 531,
+        "alt": "Answer points for Grade 9 Section 1 question 12"
+      }
+    },
+    {
+      "id": "s1-q13",
+      "lessonId": "section-1",
+      "front": "Grade 9 · Section 1 · Question 13",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s1_q13_q.webp",
+        "width": 1060,
+        "height": 135
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s1_q13_a.webp",
+        "width": 1060,
+        "height": 239,
+        "alt": "Answer points for Grade 9 Section 1 question 13"
+      }
+    },
+    {
+      "id": "s2-q14",
+      "lessonId": "section-2",
+      "front": "Grade 9 · Section 2 · Question 14",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s2_q14_q.webp",
+        "width": 1060,
+        "height": 241
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s2_q14_a.webp",
+        "width": 1060,
+        "height": 239,
+        "alt": "Answer points for Grade 9 Section 2 question 14"
+      }
+    },
+    {
+      "id": "s2-q15",
+      "lessonId": "section-2",
+      "front": "Grade 9 · Section 2 · Question 15",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s2_q15_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s2_q15_a.webp",
+        "width": 1060,
+        "height": 277,
+        "alt": "Answer points for Grade 9 Section 2 question 15"
+      }
+    },
+    {
+      "id": "s2-q16",
+      "lessonId": "section-2",
+      "front": "Grade 9 · Section 2 · Question 16",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s2_q16_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s2_q16_a.webp",
+        "width": 1060,
+        "height": 192,
+        "alt": "Answer points for Grade 9 Section 2 question 16"
+      }
+    },
+    {
+      "id": "s2-q17",
+      "lessonId": "section-2",
+      "front": "Grade 9 · Section 2 · Question 17",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s2_q17_q.webp",
+        "width": 1060,
+        "height": 97
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s2_q17_a.webp",
+        "width": 1060,
+        "height": 570,
+        "alt": "Answer points for Grade 9 Section 2 question 17"
+      }
+    },
+    {
+      "id": "s2-q18",
+      "lessonId": "section-2",
+      "front": "Grade 9 · Section 2 · Question 18",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s2_q18_q.webp",
+        "width": 1060,
+        "height": 125
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s2_q18_a.webp",
+        "width": 1060,
+        "height": 195,
+        "alt": "Answer points for Grade 9 Section 2 question 18"
+      }
+    },
+    {
+      "id": "s2-q19",
+      "lessonId": "section-2",
+      "front": "Grade 9 · Section 2 · Question 19",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s2_q19_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s2_q19_a.webp",
+        "width": 1060,
+        "height": 691,
+        "alt": "Answer points for Grade 9 Section 2 question 19"
+      }
+    },
+    {
+      "id": "s2-q20",
+      "lessonId": "section-2",
+      "front": "Grade 9 · Section 2 · Question 20",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s2_q20_q.webp",
+        "width": 1060,
+        "height": 100
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s2_q20_a.webp",
+        "width": 1060,
+        "height": 478,
+        "alt": "Answer points for Grade 9 Section 2 question 20"
+      }
+    },
+    {
+      "id": "s2-q21",
+      "lessonId": "section-2",
+      "front": "Grade 9 · Section 2 · Question 21",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s2_q21_q.webp",
+        "width": 1060,
+        "height": 173
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s2_q21_a.webp",
+        "width": 1060,
+        "height": 197,
+        "alt": "Answer points for Grade 9 Section 2 question 21"
+      }
+    },
+    {
+      "id": "s2-q22",
+      "lessonId": "section-2",
+      "front": "Grade 9 · Section 2 · Question 22",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s2_q22_q.webp",
+        "width": 1060,
+        "height": 132
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s2_q22_a.webp",
+        "width": 1060,
+        "height": 374,
+        "alt": "Answer points for Grade 9 Section 2 question 22"
+      }
+    },
+    {
+      "id": "s2-q23",
+      "lessonId": "section-2",
+      "front": "Grade 9 · Section 2 · Question 23",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s2_q23_q.webp",
+        "width": 1060,
+        "height": 135
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s2_q23_a.webp",
+        "width": 1060,
+        "height": 381,
+        "alt": "Answer points for Grade 9 Section 2 question 23"
+      }
+    },
+    {
+      "id": "s2-q24",
+      "lessonId": "section-2",
+      "front": "Grade 9 · Section 2 · Question 24",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s2_q24_q.webp",
+        "width": 1060,
+        "height": 123
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s2_q24_a.webp",
+        "width": 1060,
+        "height": 380,
+        "alt": "Answer points for Grade 9 Section 2 question 24"
+      }
+    },
+    {
+      "id": "s2-q25",
+      "lessonId": "section-2",
+      "front": "Grade 9 · Section 2 · Question 25",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s2_q25_q.webp",
+        "width": 1060,
+        "height": 92
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s2_q25_a.webp",
+        "width": 1060,
+        "height": 257,
+        "alt": "Answer points for Grade 9 Section 2 question 25"
+      }
+    },
+    {
+      "id": "s2-q26",
+      "lessonId": "section-2",
+      "front": "Grade 9 · Section 2 · Question 26",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s2_q26_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s2_q26_a.webp",
+        "width": 1060,
+        "height": 192,
+        "alt": "Answer points for Grade 9 Section 2 question 26"
+      }
+    },
+    {
+      "id": "s3-q27",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 27",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q27_q.webp",
+        "width": 1060,
+        "height": 274
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q27_a.webp",
+        "width": 1060,
+        "height": 239,
+        "alt": "Answer points for Grade 9 Section 3 question 27"
+      }
+    },
+    {
+      "id": "s3-q28",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 28",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q28_q.webp",
+        "width": 1060,
+        "height": 144
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q28_a.webp",
+        "width": 1060,
+        "height": 239,
+        "alt": "Answer points for Grade 9 Section 3 question 28"
+      }
+    },
+    {
+      "id": "s3-q29",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 29",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q29_q.webp",
+        "width": 1060,
+        "height": 146
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q29_a.webp",
+        "width": 1060,
+        "height": 174,
+        "alt": "Answer points for Grade 9 Section 3 question 29"
+      }
+    },
+    {
+      "id": "s3-q30",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 30",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q30_q.webp",
+        "width": 1060,
+        "height": 97
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q30_a.webp",
+        "width": 1060,
+        "height": 192,
+        "alt": "Answer points for Grade 9 Section 3 question 30"
+      }
+    },
+    {
+      "id": "s3-q31",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 31",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q31_q.webp",
+        "width": 1060,
+        "height": 139
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q31_a.webp",
+        "width": 1060,
+        "height": 476,
+        "alt": "Answer points for Grade 9 Section 3 question 31"
+      }
+    },
+    {
+      "id": "s3-q32",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 32",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q32_q.webp",
+        "width": 1060,
+        "height": 145
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q32_a.webp",
+        "width": 1060,
+        "height": 382,
+        "alt": "Answer points for Grade 9 Section 3 question 32"
+      }
+    },
+    {
+      "id": "s3-q33",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 33",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q33_q.webp",
+        "width": 1060,
+        "height": 280
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q33_a.webp",
+        "width": 1060,
+        "height": 381,
+        "alt": "Answer points for Grade 9 Section 3 question 33"
+      }
+    },
+    {
+      "id": "s3-q34",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 34",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q34_q.webp",
+        "width": 1060,
+        "height": 144
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q34_a.webp",
+        "width": 1060,
+        "height": 231,
+        "alt": "Answer points for Grade 9 Section 3 question 34"
+      }
+    },
+    {
+      "id": "s3-q35",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 35",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q35_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q35_a.webp",
+        "width": 1060,
+        "height": 241,
+        "alt": "Answer points for Grade 9 Section 3 question 35"
+      }
+    },
+    {
+      "id": "s3-q36",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 36",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q36_q.webp",
+        "width": 1060,
+        "height": 183
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q36_a.webp",
+        "width": 1060,
+        "height": 336,
+        "alt": "Answer points for Grade 9 Section 3 question 36"
+      }
+    },
+    {
+      "id": "s3-q37",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 37",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q37_q.webp",
+        "width": 1060,
+        "height": 97
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q37_a.webp",
+        "width": 1060,
+        "height": 287,
+        "alt": "Answer points for Grade 9 Section 3 question 37"
+      }
+    },
+    {
+      "id": "s3-q38",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 38",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q38_q.webp",
+        "width": 1060,
+        "height": 97
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q38_a.webp",
+        "width": 1060,
+        "height": 288,
+        "alt": "Answer points for Grade 9 Section 3 question 38"
+      }
+    },
+    {
+      "id": "s3-q39",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 39",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q39_q.webp",
+        "width": 1060,
+        "height": 146
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q39_a.webp",
+        "width": 1060,
+        "height": 287,
+        "alt": "Answer points for Grade 9 Section 3 question 39"
+      }
+    },
+    {
+      "id": "s3-q40",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 40",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q40_q.webp",
+        "width": 1060,
+        "height": 144
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q40_a.webp",
+        "width": 1060,
+        "height": 193,
+        "alt": "Answer points for Grade 9 Section 3 question 40"
+      }
+    },
+    {
+      "id": "s3-q41",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 41",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q41_q.webp",
+        "width": 1060,
+        "height": 102
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q41_a.webp",
+        "width": 1060,
+        "height": 335,
+        "alt": "Answer points for Grade 9 Section 3 question 41"
+      }
+    },
+    {
+      "id": "s3-q42",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 42",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q42_q.webp",
+        "width": 1060,
+        "height": 265
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q42_a.webp",
+        "width": 1060,
+        "height": 350,
+        "alt": "Answer points for Grade 9 Section 3 question 42"
+      }
+    },
+    {
+      "id": "s3-q43",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 43",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q43_q.webp",
+        "width": 1060,
+        "height": 196
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q43_a.webp",
+        "width": 1060,
+        "height": 491,
+        "alt": "Answer points for Grade 9 Section 3 question 43"
+      }
+    },
+    {
+      "id": "s3-q44",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 44",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q44_q.webp",
+        "width": 1060,
+        "height": 137
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q44_a.webp",
+        "width": 1060,
+        "height": 286,
+        "alt": "Answer points for Grade 9 Section 3 question 44"
+      }
+    },
+    {
+      "id": "s3-q45",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 45",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q45_q.webp",
+        "width": 1060,
+        "height": 135
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q45_a.webp",
+        "width": 1060,
+        "height": 145,
+        "alt": "Answer points for Grade 9 Section 3 question 45"
+      }
+    },
+    {
+      "id": "s3-q46",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 46",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q46_q.webp",
+        "width": 1060,
+        "height": 145
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q46_a.webp",
+        "width": 1060,
+        "height": 475,
+        "alt": "Answer points for Grade 9 Section 3 question 46"
+      }
+    },
+    {
+      "id": "s3-q47",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 47",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q47_q.webp",
+        "width": 1060,
+        "height": 135
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q47_a.webp",
+        "width": 1060,
+        "height": 257,
+        "alt": "Answer points for Grade 9 Section 3 question 47"
+      }
+    },
+    {
+      "id": "s3-q48",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 48",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q48_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q48_a.webp",
+        "width": 1060,
+        "height": 239,
+        "alt": "Answer points for Grade 9 Section 3 question 48"
+      }
+    },
+    {
+      "id": "s3-q49",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 49",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q49_q.webp",
+        "width": 1060,
+        "height": 183
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q49_a.webp",
+        "width": 1060,
+        "height": 239,
+        "alt": "Answer points for Grade 9 Section 3 question 49"
+      }
+    },
+    {
+      "id": "s3-q50",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 50",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q50_q.webp",
+        "width": 1060,
+        "height": 97
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q50_a.webp",
+        "width": 1060,
+        "height": 193,
+        "alt": "Answer points for Grade 9 Section 3 question 50"
+      }
+    },
+    {
+      "id": "s3-q51",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 51",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q51_q.webp",
+        "width": 1060,
+        "height": 137
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q51_a.webp",
+        "width": 1060,
+        "height": 192,
+        "alt": "Answer points for Grade 9 Section 3 question 51"
+      }
+    },
+    {
+      "id": "s3-q52",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 52",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q52_q.webp",
+        "width": 1060,
+        "height": 230
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q52_a.webp",
+        "width": 1060,
+        "height": 240,
+        "alt": "Answer points for Grade 9 Section 3 question 52"
+      }
+    },
+    {
+      "id": "s3-ref-p21",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Reference note · Page 21",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_reference_p21_q.webp",
+        "width": 1060,
+        "height": 50
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_reference_p21_a.webp",
+        "width": 1060,
+        "height": 287,
+        "alt": "Answer/reference material for Grade 9 Section 3 reference note"
+      }
+    },
+    {
+      "id": "s3-q53",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 53",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q53_q.webp",
+        "width": 1060,
+        "height": 88
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q53_a.webp",
+        "width": 1060,
+        "height": 228,
+        "alt": "Answer points for Grade 9 Section 3 question 53"
+      }
+    },
+    {
+      "id": "s3-q54",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 54",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q54_q.webp",
+        "width": 1060,
+        "height": 286
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q54_a.webp",
+        "width": 1060,
+        "height": 381,
+        "alt": "Answer points for Grade 9 Section 3 question 54"
+      }
+    },
+    {
+      "id": "s3-q55",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 55",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q55_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q55_a.webp",
+        "width": 1060,
+        "height": 249,
+        "alt": "Answer points for Grade 9 Section 3 question 55"
+      }
+    },
+    {
+      "id": "s3-q56",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 56",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q56_q.webp",
+        "width": 1060,
+        "height": 98
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q56_a.webp",
+        "width": 1060,
+        "height": 288,
+        "alt": "Answer points for Grade 9 Section 3 question 56"
+      }
+    },
+    {
+      "id": "s3-q57",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 57",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q57_q.webp",
+        "width": 1060,
+        "height": 143
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q57_a.webp",
+        "width": 1060,
+        "height": 230,
+        "alt": "Answer points for Grade 9 Section 3 question 57"
+      }
+    },
+    {
+      "id": "s3-q58",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 58",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q58_q.webp",
+        "width": 1060,
+        "height": 183
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q58_a.webp",
+        "width": 1060,
+        "height": 286,
+        "alt": "Answer points for Grade 9 Section 3 question 58"
+      }
+    },
+    {
+      "id": "s3-q59",
+      "lessonId": "section-3",
+      "front": "Grade 9 · Section 3 · Question 59",
+      "frontImage": {
+        "src": "/dheyha-revision/g9_s3_q59_q.webp",
+        "width": 1060,
+        "height": 330
+      },
+      "back": {
+        "kind": "image",
+        "src": "/dheyha-revision/g9_s3_q59_a.webp",
+        "width": 1060,
+        "height": 430,
+        "alt": "Answer points for Grade 9 Section 3 question 59"
       }
     }
   ]

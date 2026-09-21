@@ -37,6 +37,7 @@ export default async function MixedPage({ params }: { params: Params }) {
   const units = getCourseUnits(subject, course);
   if (units.length === 0) notFound();
   const c = units[0].course;
+  const hasScans = units.some((e) => e.flashcards.cards.some((card) => Boolean(card.frontImage)));
 
   // Every card from every unit, ids prefixed so they stay unique.
   const cards: DeckCard[] = units.flatMap((e) => {
@@ -54,7 +55,7 @@ export default async function MixedPage({ params }: { params: Params }) {
   });
 
   return (
-    <main className="resource-page mx-auto max-w-[720px] px-[22px] pb-16">
+    <main className={`resource-page mx-auto ${hasScans ? "max-w-[860px]" : "max-w-[720px]"} px-[22px] pb-16`}>
       <div className="resource-breadcrumb flex items-center gap-3.5 pb-1 pt-6">
         <Link
           href="/#subjects"

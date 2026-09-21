@@ -1,0 +1,435 @@
+{
+  "type": "flashcards",
+  "id": "flashcards",
+  "title": "Flashcards",
+  "description": "25 questions with their original marking-scheme material.",
+  "order": 0,
+  "draft": false,
+  "cards": [
+    {
+      "id": "q01",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 1",
+      "frontImage": {
+        "src": "/paper-2/2024_q01_q.webp",
+        "width": 1128,
+        "height": 217
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q01_a.webp",
+        "width": 1128,
+        "height": 486,
+        "alt": "Marking scheme for 2024 Paper II question 1"
+      }
+    },
+    {
+      "id": "q02",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 2",
+      "frontImage": {
+        "src": "/paper-2/2024_q02_q.webp",
+        "width": 1128,
+        "height": 255
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q02_a.webp",
+        "width": 1128,
+        "height": 881,
+        "alt": "Marking scheme for 2024 Paper II question 2"
+      }
+    },
+    {
+      "id": "q03",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 3",
+      "frontImage": {
+        "src": "/paper-2/2024_q03_q.webp",
+        "width": 1128,
+        "height": 493
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q03_a.webp",
+        "width": 1128,
+        "height": 1150,
+        "alt": "Marking scheme for 2024 Paper II question 3"
+      }
+    },
+    {
+      "id": "q04",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 4",
+      "frontImage": {
+        "src": "/paper-2/2024_q04_q.webp",
+        "width": 1128,
+        "height": 262
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q04_a.webp",
+        "width": 1128,
+        "height": 1108,
+        "alt": "Marking scheme for 2024 Paper II question 4"
+      }
+    },
+    {
+      "id": "q05",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 5",
+      "frontImage": {
+        "src": "/paper-2/2024_q05_q.webp",
+        "width": 1128,
+        "height": 298
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q05_a.webp",
+        "width": 1128,
+        "height": 559,
+        "alt": "Marking scheme for 2024 Paper II question 5"
+      }
+    },
+    {
+      "id": "q06",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 6",
+      "frontImage": {
+        "src": "/paper-2/2024_q06_q.webp",
+        "width": 1128,
+        "height": 262
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q06_a.webp",
+        "width": 1128,
+        "height": 1316,
+        "alt": "Marking scheme for 2024 Paper II question 6"
+      }
+    },
+    {
+      "id": "q07",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 7",
+      "frontImage": {
+        "src": "/paper-2/2024_q07_q.webp",
+        "width": 1128,
+        "height": 239
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q07_a.webp",
+        "width": 1128,
+        "height": 451,
+        "alt": "Marking scheme for 2024 Paper II question 7"
+      }
+    },
+    {
+      "id": "q08",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 8",
+      "frontImage": {
+        "src": "/paper-2/2024_q08_q.webp",
+        "width": 1128,
+        "height": 262
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q08_a.webp",
+        "width": 1128,
+        "height": 441,
+        "alt": "Marking scheme for 2024 Paper II question 8"
+      }
+    },
+    {
+      "id": "q09",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 9",
+      "frontImage": {
+        "src": "/paper-2/2024_q09_q.webp",
+        "width": 1128,
+        "height": 466
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q09_a.webp",
+        "width": 1128,
+        "height": 1016,
+        "alt": "Marking scheme for 2024 Paper II question 9"
+      }
+    },
+    {
+      "id": "q10",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 10",
+      "frontImage": {
+        "src": "/paper-2/2024_q10_q.webp",
+        "width": 1128,
+        "height": 255
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q10_a.webp",
+        "width": 1128,
+        "height": 309,
+        "alt": "Marking scheme for 2024 Paper II question 10"
+      }
+    },
+    {
+      "id": "q11",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 11",
+      "frontImage": {
+        "src": "/paper-2/2024_q11_q.webp",
+        "width": 1128,
+        "height": 314
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q11_a.webp",
+        "width": 1128,
+        "height": 617,
+        "alt": "Marking scheme for 2024 Paper II question 11"
+      }
+    },
+    {
+      "id": "q12",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 12",
+      "frontImage": {
+        "src": "/paper-2/2024_q12_q.webp",
+        "width": 1128,
+        "height": 299
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q12_a.webp",
+        "width": 1128,
+        "height": 1118,
+        "alt": "Marking scheme for 2024 Paper II question 12"
+      }
+    },
+    {
+      "id": "q13",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 13",
+      "frontImage": {
+        "src": "/paper-2/2024_q13_q.webp",
+        "width": 1128,
+        "height": 255
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q13_a.webp",
+        "width": 1128,
+        "height": 1549,
+        "alt": "Marking scheme for 2024 Paper II question 13"
+      }
+    },
+    {
+      "id": "q14",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 14",
+      "frontImage": {
+        "src": "/paper-2/2024_q14_q.webp",
+        "width": 1128,
+        "height": 568
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q14_a.webp",
+        "width": 1128,
+        "height": 641,
+        "alt": "Marking scheme for 2024 Paper II question 14"
+      }
+    },
+    {
+      "id": "q15",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 15",
+      "frontImage": {
+        "src": "/paper-2/2024_q15_q.webp",
+        "width": 1128,
+        "height": 513
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q15_a.webp",
+        "width": 1128,
+        "height": 1087,
+        "alt": "Marking scheme for 2024 Paper II question 15"
+      }
+    },
+    {
+      "id": "q16",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 16",
+      "frontImage": {
+        "src": "/paper-2/2024_q16_q.webp",
+        "width": 1128,
+        "height": 563
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q16_a.webp",
+        "width": 1128,
+        "height": 2225,
+        "alt": "Marking scheme for 2024 Paper II question 16"
+      }
+    },
+    {
+      "id": "q17",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 17",
+      "frontImage": {
+        "src": "/paper-2/2024_q17_q.webp",
+        "width": 1128,
+        "height": 552
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q17_a.webp",
+        "width": 1128,
+        "height": 2107,
+        "alt": "Marking scheme for 2024 Paper II question 17"
+      }
+    },
+    {
+      "id": "q18",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 18",
+      "frontImage": {
+        "src": "/paper-2/2024_q18_q.webp",
+        "width": 1128,
+        "height": 735
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q18_a.webp",
+        "width": 1128,
+        "height": 823,
+        "alt": "Marking scheme for 2024 Paper II question 18"
+      }
+    },
+    {
+      "id": "q19",
+      "lessonId": "structured",
+      "front": "2024 · Paper II · Question 19",
+      "frontImage": {
+        "src": "/paper-2/2024_q19_q.webp",
+        "width": 1128,
+        "height": 800
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q19_a.webp",
+        "width": 1128,
+        "height": 903,
+        "alt": "Marking scheme for 2024 Paper II question 19"
+      }
+    },
+    {
+      "id": "q20",
+      "lessonId": "scenarios",
+      "front": "2024 · Paper II · Question 20",
+      "frontImage": {
+        "src": "/paper-2/2024_q20_q.webp",
+        "width": 1095,
+        "height": 411
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q20_a.webp",
+        "width": 1095,
+        "height": 1309,
+        "alt": "Marking scheme for 2024 Paper II question 20"
+      }
+    },
+    {
+      "id": "q21",
+      "lessonId": "scenarios",
+      "front": "2024 · Paper II · Question 21",
+      "frontImage": {
+        "src": "/paper-2/2024_q21_q.webp",
+        "width": 1095,
+        "height": 278
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q21_a.webp",
+        "width": 1095,
+        "height": 1457,
+        "alt": "Marking scheme for 2024 Paper II question 21"
+      }
+    },
+    {
+      "id": "q22",
+      "lessonId": "scenarios",
+      "front": "2024 · Paper II · Question 22",
+      "frontImage": {
+        "src": "/paper-2/2024_q22_q.webp",
+        "width": 1095,
+        "height": 295
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q22_a.webp",
+        "width": 1095,
+        "height": 1555,
+        "alt": "Marking scheme for 2024 Paper II question 22"
+      }
+    },
+    {
+      "id": "q23",
+      "lessonId": "scenarios",
+      "front": "2024 · Paper II · Question 23",
+      "frontImage": {
+        "src": "/paper-2/2024_q23_q.webp",
+        "width": 1095,
+        "height": 444
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q23_a.webp",
+        "width": 1095,
+        "height": 1393,
+        "alt": "Marking scheme for 2024 Paper II question 23"
+      }
+    },
+    {
+      "id": "q24",
+      "lessonId": "scenarios",
+      "front": "2024 · Paper II · Question 24",
+      "frontImage": {
+        "src": "/paper-2/2024_q24_q.webp",
+        "width": 1095,
+        "height": 498
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q24_a.webp",
+        "width": 1095,
+        "height": 1457,
+        "alt": "Marking scheme for 2024 Paper II question 24"
+      }
+    },
+    {
+      "id": "q25",
+      "lessonId": "scenarios",
+      "front": "2024 · Paper II · Question 25",
+      "frontImage": {
+        "src": "/paper-2/2024_q25_q.webp",
+        "width": 1095,
+        "height": 460
+      },
+      "back": {
+        "kind": "image",
+        "src": "/paper-2/2024_q25_a.webp",
+        "width": 1095,
+        "height": 1457,
+        "alt": "Marking scheme for 2024 Paper II question 25"
+      }
+    }
+  ]
+}

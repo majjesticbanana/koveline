@@ -13,10 +13,9 @@
     "grade-9"
   ],
   "credit": {
-    "english": "Iskandhar School — Islam Department",
-    "dhivehi": "އިސްކަންދަރު ސްކޫލް - އިސްލާމް ޑިޕާޓްމަންޓް",
-    "note": "From the school's Deyha study paper."
+    "english": "Deyha Grade 9 + 10 Revision Library",
+    "note": "Exact source questions and answer points from the supplied revision library."
   },
-  "order": 3,
-  "draft": true
+  "order": 6,
+  "draft": false
 }

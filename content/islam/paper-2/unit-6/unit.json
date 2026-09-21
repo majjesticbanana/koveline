@@ -1,0 +1,27 @@
+{
+  "id": "unit-6",
+  "number": 6,
+  "icon": "📄",
+  "title": "2020 Specimen",
+  "titleEnglish": "2020 Specimen",
+  "description": "25 questions from the 2020 Specimen Paper II marking scheme.",
+  "year": "2020",
+  "lessons": [
+    {
+      "id": "structured",
+      "number": 1,
+      "title": "ސްޓްރަކްޗަރޑް ސުވާލުތައް",
+      "titleEnglish": "Structured questions"
+    },
+    {
+      "id": "scenarios",
+      "number": 2,
+      "title": "ސިނޭރިއޯ ސުވާލުތައް",
+      "titleEnglish": "Scenario questions"
+    }
+  ],
+  "targets": [
+    "paper-2"
+  ],
+  "draft": false
+}

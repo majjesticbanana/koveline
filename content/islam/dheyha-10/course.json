@@ -1,0 +1,21 @@
+{
+  "id": "dheyha-10",
+  "subjectId": "islam",
+  "title": "Deyha — Grade 10",
+  "titleDhivehi": "ދޭހަ - ގްރޭޑް 10",
+  "contentLang": "dv",
+  "collection": "deyha-daleels",
+  "collectionTitle": "Deyha & Daleels",
+  "collectionTitleDhivehi": "ދޭހަ އަދި ދަލީލު",
+  "scopeLabel": "Grade 10",
+  "targets": [
+    "deyha",
+    "grade-10"
+  ],
+  "credit": {
+    "english": "Deyha Grade 9 + 10 Revision Library",
+    "note": "Exact source questions and answer points from the supplied revision library."
+  },
+  "order": 7,
+  "draft": false
+}

@@ -1,0 +1,33 @@
+{
+  "id": "unit-1",
+  "number": 1,
+  "icon": "📖",
+  "title": "ދޭހަ ރިވިޝަން",
+  "titleEnglish": "Grade 10 Revision",
+  "description": "86 source-faithful revision cards across three sections.",
+  "lessons": [
+    {
+      "id": "section-1",
+      "number": 1,
+      "title": "ސެކްޝަން 1",
+      "titleEnglish": "Section 1"
+    },
+    {
+      "id": "section-2",
+      "number": 2,
+      "title": "ސެކްޝަން 2",
+      "titleEnglish": "Section 2"
+    },
+    {
+      "id": "section-3",
+      "number": 3,
+      "title": "ސެކްޝަން 3",
+      "titleEnglish": "Section 3"
+    }
+  ],
+  "targets": [
+    "deyha",
+    "grade-10"
+  ],
+  "draft": false
+}
