@@ -192,7 +192,6 @@ progress consistent across every quiz surface.
 
 - `content/islam/paper-2/`: 150 cards, 25 per paper for 2020 Specimen + 2021–2025.
   Each year is a unit; Structured Q1–19 and Scenario Q20–25 are lessons.
-- `content/islam/paper-2-scenarios/`: focused 36-card Q20–25 bank using the same
   `/public/paper-2/` source images.
 - `content/islam/dheyha-9/`: 60 source-faithful cards with Sections 1–3 as lessons.
 - `content/islam/dheyha-10/`: 86 source-faithful cards with Sections 1–3 as lessons.

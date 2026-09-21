@@ -6,6 +6,7 @@
   --font-display: 'Bricolage Grotesque', sans-serif;
   --font-body: 'Hanken Grotesk', system-ui, sans-serif;
   --font-thaana: var(--font-faruma), 'Noto Sans Thaana', sans-serif;
+  --font-hand: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
   --thaana-scale: 1;
 
   /* Mahogany — default. All aliases below are semantic, not component-specific. */
@@ -404,7 +405,150 @@ button:active, a[role="button"]:active { transform: scale(.985); }
   flex-wrap: wrap;
   align-items: center;
   gap: .7rem;
-  margin-top: 1.75rem;
+  margin-top: 1.35rem;
+}
+
+/* Exam countdown — deliberately minute-only. The calm layout is intentional:
+   it should be useful on the morning of the exam without behaving like a timer bomb. */
+.exam-countdown {
+  width: min(100%, 34rem);
+  margin-top: 1.4rem;
+  padding: 1rem 1.05rem .8rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 16px;
+  background:
+    linear-gradient(120deg, rgb(var(--accent-rgb) / .10), transparent 44%),
+    rgb(var(--surface-rgb) / .78);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035), 0 12px 34px rgba(0,0,0,.14);
+}
+.exam-countdown-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .8rem;
+  padding-bottom: .65rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .66rem;
+  font-weight: 800;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.exam-countdown-topline time {
+  text-align: right;
+  letter-spacing: .03em;
+  text-transform: none;
+}
+.exam-countdown-main {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  gap: 1rem;
+  align-items: end;
+  padding-top: .85rem;
+}
+.exam-countdown-copy strong {
+  display: block;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
+.exam-countdown-copy span {
+  display: block;
+  margin-top: .12rem;
+  color: var(--muted);
+  font-size: .75rem;
+  font-weight: 650;
+}
+.exam-countdown-digits {
+  display: flex;
+  align-items: flex-end;
+  gap: .38rem;
+  font-variant-numeric: tabular-nums;
+}
+.exam-countdown-number {
+  display: grid;
+  min-width: 3.65rem;
+  justify-items: center;
+}
+.exam-countdown-number b {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 2.05rem;
+  font-weight: 800;
+  line-height: .95;
+  letter-spacing: -.055em;
+}
+.exam-countdown-number small {
+  margin-top: .24rem;
+  color: var(--muted);
+  font-size: .58rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.exam-countdown-colon {
+  padding-bottom: 1.05rem;
+  color: var(--accent-bright);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+.exam-good-luck {
+  margin: .72rem 0 0;
+  color: var(--text-2);
+  font-size: .78rem;
+  font-style: italic;
+  line-height: 1.35;
+  text-transform: lowercase;
+}
+.exam-good-luck span { color: var(--accent-bright); font-style: normal; }
+.exam-countdown-finished {
+  padding: .95rem 0 .15rem;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.home-update-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.1rem;
+  margin: -1.25rem 0 3.1rem;
+  padding: 0 .15rem;
+}
+.home-update-handwritten {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  color: var(--accent-bright);
+  font-family: var(--font-hand);
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.05;
+  transform: rotate(-1.2deg);
+  transition: color 160ms ease, transform 160ms ease;
+}
+.home-update-handwritten:hover {
+  color: var(--text);
+  transform: rotate(-.3deg) translateY(-1px);
+}
+.home-update-arrow {
+  display: inline-block;
+  font-size: 1.45rem;
+  line-height: 1;
+  transform: translateY(.1rem) rotate(5deg);
+}
+.home-work-note {
+  max-width: 31rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: .72rem;
+  line-height: 1.45;
+  text-align: right;
 }
 .home-hero-art {
   position: relative;
@@ -505,12 +649,80 @@ button:active, a[role="button"]:active { transform: scale(.985); }
   .home-hero-stat { right: 8%; bottom: 0; }
 }
 
-@media (max-width: 560px) {
-  .home-hero { padding: 3.5rem 0 3.25rem; }
-  .home-hero-title { font-size: clamp(3rem, 15vw, 4rem); }
-  .home-hero-actions > * { flex: 1 1 auto; justify-content: center; }
+@media (max-width: 639px) {
+  .home-shell {
+    padding-left: max(14px, env(safe-area-inset-left)) !important;
+    padding-right: max(14px, env(safe-area-inset-right)) !important;
+  }
+  .home-hero {
+    padding: 2.45rem 0 2.35rem;
+    gap: 0;
+  }
+  .home-hero-kicker { font-size: .63rem; letter-spacing: .15em; }
+  .home-hero-kicker::before { width: 1.35rem; }
+  .home-hero-title {
+    max-width: 9.8ch;
+    margin: .85rem 0 1rem;
+    font-size: clamp(2.55rem, 12.5vw, 3.35rem);
+    line-height: .96;
+  }
+  .home-hero-actions { gap: .55rem; margin-top: 1rem; }
+  .home-hero-actions > * {
+    flex: 1 1 calc(50% - .3rem);
+    min-height: 46px;
+    padding: .72rem .85rem !important;
+    justify-content: center;
+    text-align: center;
+  }
   /* Keep phones focused and cheap to render; the mark is already present in the navbar. */
   .home-hero-art { display: none; }
+
+  .exam-countdown {
+    margin-top: 1rem;
+    padding: .88rem .9rem .72rem;
+    border-radius: 14px;
+    box-shadow: none;
+  }
+  .exam-countdown-topline {
+    align-items: flex-start;
+    gap: .55rem;
+    font-size: .59rem;
+  }
+  .exam-countdown-topline time { max-width: 52%; }
+  .exam-countdown-main {
+    grid-template-columns: minmax(0,1fr) auto;
+    gap: .65rem;
+    padding-top: .75rem;
+  }
+  .exam-countdown-copy strong { font-size: .9rem; }
+  .exam-countdown-copy span { font-size: .7rem; }
+  .exam-countdown-number { min-width: 3rem; }
+  .exam-countdown-number b { font-size: 1.72rem; }
+  .exam-countdown-number small { font-size: .52rem; }
+  .exam-countdown-colon { padding-bottom: .93rem; font-size: 1.05rem; }
+  .exam-good-luck { margin-top: .62rem; font-size: .74rem; }
+
+  .home-update-row {
+    display: block;
+    margin: -.45rem 0 2.4rem;
+    padding: 0 .1rem;
+  }
+  .home-update-handwritten {
+    font-size: 1.14rem;
+    line-height: 1.02;
+  }
+  .home-work-note {
+    max-width: 33rem;
+    margin-top: .65rem;
+    padding-left: .1rem;
+    font-size: .69rem;
+    text-align: left;
+  }
+
+  /* Home lists are the primary phone workflow: keep information dense but tappable. */
+  #subjects .border-t.border-line.pt-8 { padding-top: 1.55rem; }
+  #subjects .mb-6 { margin-bottom: 1rem; }
+  #subjects .rounded-card { border-radius: 13px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1825,7 +2037,7 @@ button:active, a[role="button"]:active { transform: scale(.985); }
 .test-session-head .test-kicker { margin-bottom: .4rem; }
 
 @media (max-width: 640px) {
-  .qotd-section { margin-bottom: 3.5rem; }
+  .qotd-section { margin-bottom: 2.8rem; }
   .qotd-meta-row { align-items: center; }
   .qotd-heading { font-size: 1.28rem; }
   .qotd-card { padding: 1.05rem .95rem .85rem; border-radius: 14px; }

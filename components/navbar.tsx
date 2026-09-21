@@ -117,13 +117,6 @@ export function Navbar() {
                     <span>{siteCopy.navigation.paperTwoBody}</span>
                   </div>
                 </Link>
-                <Link href="/islam/paper-2-scenarios" role="menuitem" className="nav-resource-row" onClick={() => setOpen(false)}>
-                  <span className="nav-dropdown-icon"><ListChecks className="h-4 w-4" aria-hidden /></span>
-                  <div>
-                    <strong>{siteCopy.navigation.paperTwoScenariosTitle}</strong>
-                    <span>{siteCopy.navigation.paperTwoScenariosBody}</span>
-                  </div>
-                </Link>
                 <Link href="/#collection-deyha-daleels" role="menuitem" className="nav-resource-row" onClick={() => setOpen(false)}>
                   <span className="nav-dropdown-icon"><BookMarked className="h-4 w-4" aria-hidden /></span>
                   <div>

@@ -21,6 +21,74 @@ function reviewedCount(key: string, validIds: string[], who: Identity): number {
   return Object.keys(s).filter((id) => ok.has(id)).length;
 }
 
+const SSC_EXAMS = [
+  {
+    paper: "Paper I",
+    label: "SSC Islam Paper I",
+    iso: "2026-09-22T09:30:00+05:00",
+    date: "22 Sep · 9:30 AM",
+  },
+  {
+    paper: "Paper II",
+    label: "SSC Islam Paper II",
+    iso: "2026-09-23T09:30:00+05:00",
+    date: "23 Sep · 9:30 AM",
+  },
+] as const;
+
+function ExamCountdown() {
+  const [now, setNow] = useState<number | null>(null);
+
+  useEffect(() => {
+    const tick = () => setNow(Date.now());
+    tick();
+    // No seconds on purpose: frequent visual changes add pressure without helping.
+    const id = window.setInterval(tick, 15_000);
+    return () => window.clearInterval(id);
+  }, []);
+
+  const paperOne = new Date(SSC_EXAMS[0].iso).getTime();
+  const paperTwo = new Date(SSC_EXAMS[1].iso).getTime();
+  const active = now !== null && now >= paperOne ? SSC_EXAMS[1] : SSC_EXAMS[0];
+  const target = active === SSC_EXAMS[1] ? paperTwo : paperOne;
+  const finished = now !== null && now >= paperTwo;
+  const ready = now !== null;
+  const minutesLeft = now === null ? null : Math.max(0, Math.ceil((target - now) / 60_000));
+  const hours = minutesLeft === null ? null : Math.floor(minutesLeft / 60);
+  const minutes = minutesLeft === null ? null : minutesLeft % 60;
+
+  return (
+    <section className="exam-countdown" aria-label="SSC Islam exam countdown">
+      <div className="exam-countdown-topline">
+        <span>{!ready || finished ? "SSC Islam" : `Next · ${active.paper}`}</span>
+        {ready ? <time dateTime={active.iso}>{active.date} · Maldives time</time> : <span>Maldives time</span>}
+      </div>
+      {finished ? (
+        <div className="exam-countdown-finished">Paper II has started. All the best.</div>
+      ) : (
+        <div className="exam-countdown-main">
+          <div className="exam-countdown-copy">
+            <strong>{ready ? active.label : "SSC Islam"}</strong>
+            <span>{ready ? "starts in" : "countdown"}</span>
+          </div>
+          <div className="exam-countdown-digits" aria-label={minutesLeft === null ? "Countdown loading" : `${hours} hours ${minutes} minutes remaining`}>
+            <span className="exam-countdown-number">
+              <b>{hours === null ? "—" : hours}</b>
+              <small>hours</small>
+            </span>
+            <span className="exam-countdown-colon" aria-hidden>:</span>
+            <span className="exam-countdown-number">
+              <b>{minutes === null ? "—" : String(minutes).padStart(2, "0")}</b>
+              <small>minutes</small>
+            </span>
+          </div>
+        </div>
+      )}
+      <p className="exam-good-luck"><span aria-hidden>*</span> good luck to everyone! hope this helps</p>
+    </section>
+  );
+}
+
 function QuestionOfTheDay({ qotd }: { qotd: DailyQuestion }) {
   const [revealed, setRevealed] = useState(false);
   const rtl = qotd.card.lang ? qotd.card.lang !== "en" : isRtl(qotd.card.front);
@@ -105,11 +173,12 @@ export function Home({
   }, [sessionLoading, identity, syncStamp]);
 
   return (
-    <main className="mx-auto max-w-[980px] px-5 pb-10">
+    <main className="home-shell mx-auto max-w-[980px] px-5 pb-10">
       <section className="home-hero">
         <div className="home-hero-copy">
           <p className="home-hero-kicker">{siteCopy.home.hero.kicker}</p>
           <h1 className="home-hero-title">{siteCopy.home.hero.title}</h1>
+          <ExamCountdown />
           <div className="home-hero-actions">
             {loaded && last ? (
               <Link
@@ -149,12 +218,20 @@ export function Home({
         </div>
       </section>
 
+      <div className="home-update-row" aria-label="Koveline update note">
+        <a href="#collection-papers" className="home-update-handwritten">
+          <span>new update: Paper II + Deyha revision are live</span>
+          <span className="home-update-arrow" aria-hidden>↘</span>
+        </a>
+        <p className="home-work-note">still polishing things — some parts are a work in progress and may be imperfect.</p>
+      </div>
+
       {qotd && <QuestionOfTheDay qotd={qotd} />}
 
       {/* ---- grade chapters (Sol #5): rules + whitespace, not cards-in-cards ---- */}
       <div id="subjects" className="scroll-mt-20">
         {summary.grades.map((c, ci) => (
-          <section key={`${c.subjectId}/${c.courseId}`} className={ci > 0 ? "mt-14" : ""}>
+          <section key={`${c.subjectId}/${c.courseId}`} className={ci > 0 ? "mt-10 sm:mt-14" : ""}>
             <div className="border-t border-line pt-8">
               <div className="mb-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
                 <div>
@@ -188,7 +265,7 @@ export function Home({
                     <Link
                       key={u.key}
                       href={u.href}
-                      className="unit-motion group relative overflow-hidden rounded-card border border-line bg-surface px-5 py-4 hover:border-line-strong hover:bg-hover"
+                      className="unit-motion group relative overflow-hidden rounded-card border border-line bg-surface px-4 py-3.5 hover:border-line-strong hover:bg-hover sm:px-5 sm:py-4"
                     >
                       {/* oversized margin number, low contrast (Sol #4) */}
                       <span
@@ -250,7 +327,7 @@ export function Home({
 
         {/* ---- collections: courses that are not a single school grade ---- */}
         {summary.collections.map((col) => (
-          <section key={col.id} id={`collection-${col.id}`} className="mt-14 scroll-mt-24">
+          <section key={col.id} id={`collection-${col.id}`} className="mt-10 scroll-mt-24 sm:mt-14">
             <div className="border-t border-line pt-8">
               <div className="mb-6">
                 <div className="text-[0.7rem] font-extrabold uppercase tracking-[0.16em] text-teal-deep">
@@ -304,14 +381,14 @@ export function Home({
                     <Link
                       key={c.courseId}
                       href={c.collection === "papers" ? `/${c.subjectId}/${c.courseId}` : c.units.length === 1 ? c.units[0].href : c.mixedHref}
-                      className="group rounded-card border border-line bg-surface px-5 py-4 transition-colors hover:border-line-strong hover:bg-hover"
+                      className="group rounded-card border border-line bg-surface px-4 py-3.5 transition-colors hover:border-line-strong hover:bg-hover sm:px-5 sm:py-4"
                     >
                       {inner}
                     </Link>
                   ) : (
                     <div
                       key={c.courseId}
-                      className="rounded-card border border-dashed border-line bg-surface/50 px-5 py-4 opacity-70"
+                      className="rounded-card border border-dashed border-line bg-surface/50 px-4 py-3.5 opacity-70 sm:px-5 sm:py-4"
                     >
                       {inner}
                     </div>
@@ -324,7 +401,7 @@ export function Home({
       </div>
 
       {/* ---- provenance, quiet (Sol #17); no personal note (owner ruling) ---- */}
-      <section className="mt-14 border-l-2 border-line-strong py-1 pl-5">
+      <section className="mt-10 border-l-2 border-line-strong py-1 pl-4 sm:mt-14 sm:pl-5">
         <div className="text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-cocoa">
           {siteCopy.home.sourceMaterial.label}
         </div>
