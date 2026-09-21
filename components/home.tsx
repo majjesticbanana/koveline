@@ -84,7 +84,7 @@ function ExamCountdown() {
           </div>
         </div>
       )}
-      <p className="exam-good-luck"><span aria-hidden>*</span> good luck to everyone! hope this helps</p>
+      <p className="exam-good-luck"><span aria-hidden>*</span> good luck to everyone! hope this site helps</p>
     </section>
   );
 }
@@ -220,7 +220,7 @@ export function Home({
 
       <div className="home-update-row" aria-label="Koveline update note">
         <a href="#collection-papers" className="home-update-handwritten">
-          <span>new update: Paper II + Deyha revision are live</span>
+          <span>new update: paper II + deyha revision are live</span>
           <span className="home-update-arrow" aria-hidden>↘</span>
         </a>
         <p className="home-work-note">still polishing things — some parts are a work in progress and may be imperfect.</p>
