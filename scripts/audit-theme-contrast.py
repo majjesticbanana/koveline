@@ -33,6 +33,11 @@ THEMES = {
         "accent":"#8c553f","accent_bright":"#714330","accent_ink":"#fffaf4",
         "positive":"#3f6547","positive_bg":"#e7efe6","negative":"#984b45","negative_bg":"#f4e4e1",
     },
+    "haim": {
+        "bg":"#08090b","surface":"#111317","text":"#f4f5f7","text2":"#cbd0d8","muted":"#9da5b0",
+        "accent":"#a9b2bf","accent_bright":"#dce2e9","accent_ink":"#090b0e",
+        "positive":"#9bc6a6","positive_bg":"#111c15","negative":"#f09a92","negative_bg":"#251315",
+    },
 }
 
 

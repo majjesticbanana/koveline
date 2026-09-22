@@ -32,6 +32,7 @@ export default async function ResourcePage({ params }: { params: Params }) {
   const e = getUnitEntry(subject, course, unit, resource);
   if (!e) notFound();
   const hasScans = e.flashcards.cards.some((card) => Boolean(card.frontImage));
+  const isPaper2 = subject === "islam" && course === "paper-2";
 
   return (
     <main className={`resource-page mx-auto ${hasScans ? "max-w-[860px]" : "max-w-[720px]"} px-[22px] pb-16`}>
@@ -53,6 +54,11 @@ export default async function ResourcePage({ params }: { params: Params }) {
         <div className="resource-meta mt-0.5 text-[0.84rem] font-semibold text-cocoa">
           {e.course.title} · Unit {e.unit.number} · {e.flashcards.cards.length} questions
         </div>
+        {isPaper2 && (
+          <p className="resource-extract-note">
+            * quick heads up: a few paper II questions didn&apos;t extract properly, so some bits might look weird or be missing. i&apos;m still fixing them.
+          </p>
+        )}
       </div>
 
       <DeckEngine

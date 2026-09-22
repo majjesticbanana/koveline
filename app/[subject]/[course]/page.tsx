@@ -54,6 +54,7 @@ export default async function CoursePage(
     lessonCount: e.unit.lessons.length,
   }));
   const total = papers.reduce((n, p) => n + p.questionCount, 0);
+  const isPaper2 = subject === "islam" && course === "paper-2";
 
   return (
     <main className="mx-auto max-w-[820px] px-5 pb-16 pt-6">
@@ -67,6 +68,11 @@ export default async function CoursePage(
         <p className="paper-sub">
           {total} questions across {papers.length} papers, each with its marking scheme.
         </p>
+        {isPaper2 && (
+          <p className="paper-extract-note">
+            * quick heads up: a few paper II questions didn&apos;t extract properly, so some bits might look weird or be missing. i&apos;m still fixing them.
+          </p>
+        )}
         <Link href={`/${subject}/${course}/mixed`} className="paper-all">
           Study everything · {total}
         </Link>

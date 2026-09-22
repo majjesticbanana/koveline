@@ -162,7 +162,7 @@ export function SettingsPanel() {
                     <div id="theme-heading" className="settings-group-label">Theme</div>
                     <h3>Reading palette</h3>
                   </div>
-                  <p>Five restrained palettes. Correct, wrong and muted text stay semantic in every one.</p>
+                  <p>Six restrained palettes. Correct, wrong and muted text stay semantic in every one.</p>
                 </div>
 
                 <div className="settings-themes">

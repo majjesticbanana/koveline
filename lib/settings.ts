@@ -44,6 +44,13 @@ export const THEMES = [
     mode: "Light",
     browserColor: "#f3efe7",
   },
+  {
+    id: "haim",
+    name: "Haim",
+    note: "Almost black, soft white, no nonsense. Made especially for Haim.",
+    mode: "Dark",
+    browserColor: "#08090b",
+  },
 ] as const;
 
 export type ThemeId = (typeof THEMES)[number]["id"];

@@ -38,6 +38,7 @@ export default async function MixedPage({ params }: { params: Params }) {
   if (units.length === 0) notFound();
   const c = units[0].course;
   const hasScans = units.some((e) => e.flashcards.cards.some((card) => Boolean(card.frontImage)));
+  const isPaper2 = subject === "islam" && course === "paper-2";
 
   // Every card from every unit, ids prefixed so they stay unique.
   const cards: DeckCard[] = units.flatMap((e) => {
@@ -71,6 +72,11 @@ export default async function MixedPage({ params }: { params: Params }) {
         <div className="resource-meta mt-0.5 text-[0.84rem] font-semibold text-cocoa">
           {c.title} · {siteCopy.study.everyUnit} · {cards.length} questions
         </div>
+        {isPaper2 && (
+          <p className="resource-extract-note">
+            * quick heads up: a few paper II questions didn&apos;t extract properly, so some bits might look weird or be missing. i&apos;m still fixing them.
+          </p>
+        )}
       </div>
 
       <DeckEngine
